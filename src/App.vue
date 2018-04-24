@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <app-header></app-header>
-    <app-footer></app-footer>
-  </div>
+        <app-header></app-header>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+        <app-footer></app-footer>
+    </div>
 </template>
 
 <script>
@@ -13,6 +16,8 @@ export default {
   components: {
     AppHeader,
     AppFooter
+  },
+  methods: {
   }
 }
 </script>
@@ -56,7 +61,7 @@ input{
 	font-family: inherit;
 }
 body{
-	background: #f3f3f3;;
+	/* background: #f3f3f3; */
 	font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
 }
 </style>
