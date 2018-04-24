@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header">
+  <div class="app-body">
     <h1>this is body</h1>
   </div>
 </template>
