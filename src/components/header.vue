@@ -46,30 +46,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="side-nav nav-square">
-                        <a href="//www.bilibili.com/square" class="side-link">
-                            <i class="square"></i>
-                            <span>广场</span>
+                    <li class="side-nav nav-square" v-for="item in slidenav">
+                        <a :href="item.href" class="side-link" :class="item.class">
+                            <i :class="item.icon"></i>
+                            <span>{{ item.name }}</span>
                         </a>
-                        <div class="sub-nav square-wrap">
+                        <div class="sub-nav" v-if="item.fieldClass!=''" :class="item.fieldClass">
                             <ul>
-                                <li><a href="//show.bilibili.com/platform/home.html"><i class="icon-prim icon-vip-buy"></i><span>会员购</span></a></li>
+                                <li v-for="itemnav in item.fields">
+                                    <a :href="itemnav.href">
+                                        <i :class="itemnav.icon" v-if="itemnav.icon"></i>
+                                        <span>{{ itemnav.name }}</span>
+                                    </a>
+                                </li>
                             </ul>
-                            <div class="square-field">
-                                <div>
-                                    <a href="//www.bilibili.com/blackboard/activity_list.html" target="_blank" title="bilibili 活动">
-                                    <div class="lazy-img">
-                                        <img alt="" src="//i0.hdslb.com/bfs/square/6830d0e479eee8cc9a42c3e375ca99a5147390cd.jpg@240w_84h.webp">
-                                    </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="//www.bilibili.com/blackboard/topic_list.html" target="_blank" title="话题列表">
-                                    <div class="lazy-img">
-                                        <img alt="" src="//i0.hdslb.com/bfs/square/b1b00a0c3ce8570b48277ae07a2e55603a4a4ddf.jpg@240w_84h.webp">
-                                    </div>
-                                    </a>
-                                </div>
+                            <div :class="item.fieldClass">
+                                <a v-for="itemnavImg in item.fieldImg" :href="itemnavImg.href" target="_blank" :title="itemnavImg.title">
+                                    <img :alt="itemnavImg.title" :src="itemnavImg.src">
+                                </a>
                             </div>
                         </div>
                     </li>
@@ -477,8 +471,8 @@ export default {
                     class: 'zl',
                     icon: 'zhuanlan',
                     href: '/',
-                    itemclass: '',
-                    items: [
+                    fieldClass: '',
+                    fields: [
                     ]
                 },
                 {
@@ -486,8 +480,8 @@ export default {
                     class: 'nav-square',
                     icon: 'square',
                     href: '/',
-                    itemClass: 'square-wrap',
-                    items: [
+                    fieldClass: 'square-wrap',
+                    fields: [
                         {
                             name: '会员购',
                             icon: 'icon-vip-buy',
@@ -538,8 +532,8 @@ export default {
                     class: '',
                     icon: 'live',
                     href: '/',
-                    itemClass: 'nav-live',
-                    items: [
+                    fieldClass: 'nav-live',
+                    fields: [
                         {
                             name: '推荐主播',
                             href: ''
@@ -590,7 +584,16 @@ export default {
                             src: require('../assets/live_02.png')
                         }
                     ]
-                }
+                },
+                {
+                    name: '小黑屋',
+                    class: '',
+                    icon: 'blackroom',
+                    href: '/',
+                    fieldClass: '',
+                    fields: [
+                    ]
+                },
             ]
         }
     },
