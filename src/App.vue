@@ -32,9 +32,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   font: inherit;
   vertical-align: baseline;
   outline: none;
-  -webkit-box-sizing: border-box;
+  /* -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  box-sizing: border-box; */
   color: #333;
 }
 html { height: 100%; }
@@ -62,7 +62,11 @@ input{
 }
 body{
 	/* background: #f3f3f3; */
-	font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
+	font-family: PingFang SC,Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
+}
+.bili-wrapper {
+    margin: 0 auto;
+    width: 1160px;
 }
 /* app-header */
 .app-header{
@@ -359,7 +363,7 @@ body{
     color: #222;
     font-size: 12px;
     height: 40px;
-    padding-top: 8px;
+    padding-top: 10px;
     line-height: 50px;
 }
 .primary-menu .nav-menu li.home {
@@ -367,7 +371,7 @@ body{
 }
 .primary-menu .nav-menu li.home>a {
     width: auto;
-    background: url(//static.hdslb.com/images/base/icons.png) -660px -1170px no-repeat;
+    background: url(assets/icons.png) -660px -1170px no-repeat;
 }
 .primary-menu .nav-menu li.home>a .nav-name {
     position: relative;
@@ -406,7 +410,7 @@ body{
     display: block;
     padding: 5px 15px 5px 25px;
     margin-right: 10px;
-    background: url(//s1.hdslb.com/bfs/static/jinkela/home/images/icons2.png) no-repeat 12px -1613px;
+    background: url(assets/icons2.png) no-repeat 12px -1613px;
     white-space: nowrap;
     left: 0;
     color: #222;
@@ -422,7 +426,7 @@ body{
 }
 .primary-menu .nav-menu .sub-nav li>a span:after {
     content: "";
-    background: url(//s1.hdslb.com/bfs/static/jinkela/home/images/icons2.png) no-repeat 0 -1581px;
+    background: url(assets/icons2.png) no-repeat 0 -1581px;
     width: 15px;
     height: 18px;
     display: block;
@@ -437,6 +441,166 @@ body{
 .primary-menu .nav-menu .sub-nav:not(.square-wrap) li:hover>a span:after {
     right: -21px;
     opacity: 1;
+}
+.primary-menu .nav-menu .side-nav {
+    margin: 0 6px;
+    width: 40px;
+    text-align: center;
+}
+.primary-menu .nav-menu .side-nav .side-link {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+}
+.primary-menu .nav-menu .side-nav .side-link:hover span {
+	color: #00a1d6
+}
+.primary-menu .nav-menu .side-nav .side-link i {
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin: 3px auto 2px;
+    background: url(assets/icons.png) no-repeat;
+}
+.primary-menu .nav-menu .side-nav .side-link i {
+	display: block;
+	width: 18px;
+	height: 18px;
+    margin: 5px auto 6px;
+	background: url(assets/icons.png) no-repeat
+}
+.primary-menu .nav-menu .side-nav .side-link i.square {
+	background-position: -87px -2006px
+}
+.primary-menu .nav-menu .side-nav .side-link i.live {
+	background-position: -87px -1878px
+}
+.primary-menu .nav-menu .side-nav .side-link i.blackroom {
+	background-position: -87px -1942px
+}
+
+.primary-menu .nav-menu .side-nav .side-link i.zhuanlan {
+	background-position: -87px -1814px
+}
+
+.primary-menu .nav-menu .side-nav .side-link span {
+	display: block;
+	color: #222;
+	margin: 0;
+	font-size: 12px
+}
+.primary-menu .nav-menu .side-nav .square-wrap {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	white-space: nowrap;
+	width: 387px;
+	height: 188px
+}
+.primary-menu .nav-menu .side-nav .square-wrap ul {
+	width: 107px;
+	margin-top: -6px
+}
+.primary-menu .nav-menu .side-nav .square-wrap ul>li {
+	min-width: 107px;
+	margin-top: 8px
+}
+.primary-menu .nav-menu .side-nav .square-wrap ul>li:first-child {
+	margin-top: 0
+}
+.primary-menu .nav-menu .side-nav .square-wrap ul>li a {
+	background: none;
+	padding: 2px 10px 2px 18px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .square-field {
+	position: absolute;
+	top: 20px;
+	right: 0;
+	display: block;
+	width: 240px;
+	height: 188px;
+	padding: 0 20px 0 19px;
+	border-left: 1px solid #e5e9ef
+}
+.primary-menu .nav-menu .side-nav .square-wrap .square-field>a {
+	margin-top: 20px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .square-field>a:first-child {
+	margin-top: 0
+}
+.primary-menu .nav-menu .side-nav .square-wrap .square-field a {
+	color: #222;
+	line-height: normal;
+	display: block
+}
+.primary-menu .nav-menu .side-nav .square-wrap .square-field img {
+	width: 240px;
+	height: 84px;
+	border-radius: 4px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .icon-prim {
+	width: 16px;
+	height: 13px;
+	margin-right: 4px;
+	margin-top: 4px;
+	vertical-align: top;
+	display: inline-block;
+	background-image: url(assets/icons.png)
+}
+.primary-menu .nav-menu .side-nav .square-wrap .icon-activity {
+	background-position: -280px -1179px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .icon-game {
+	background-position: -279px -1241px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .icon-news {
+	background-position: -344px -1178px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .icon-hy {
+	background-position: -280px -1370px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .icon-mango {
+	background-position: -280px -1433px
+}
+.primary-menu .nav-menu .side-nav .square-wrap .icon-vip-buy {
+	display: inline-block;
+	width: 16px;
+	height: 13px;
+	margin-top: 0;
+	vertical-align: inherit;
+	background-repeat: no-repeat;
+	background-image: url(assets/vipbuy.png);
+    background-position: 50%
+}
+.primary-menu .nav-menu>li .nav-live {
+	width: 350px;
+	padding: 10px 0
+}
+
+.primary-menu .nav-menu>li .nav-live ul {
+	float: left
+}
+
+.primary-menu .nav-menu>li .nav-live ul>li {
+	min-width: 100px
+}
+
+.primary-menu .nav-menu>li .nav-live .live-field {
+    float: left;
+	padding-left: 20px;
+	width: 210px;
+	height: 250px;
+	border-left: 1px solid #e5e9ef;
+	margin: 10px 0
+}
+
+.primary-menu .nav-menu>li .nav-live .live-field .pic {
+	display: inline-block;
+	margin-bottom: 20px
+}
+/* app-body */
+.app-body{
+    overflow: hidden;
 }
 /* app-footer */
 .app-footer{
@@ -511,14 +675,14 @@ body{
     height: 60px;
 }
 .app-footer .block .phone .pic {
-    background: url(//static.hdslb.com/images/base/icons.png) no-repeat -1024px -194px;
+    background: url(assets/icons.png) no-repeat -1024px -194px;
 }
 .app-footer .block .weibo .pic {
-    background: url(//static.hdslb.com/images/base/icons.png) no-repeat -1024px -322px;
+    background: url(assets/icons.png) no-repeat -1024px -322px;
 }
 .app-footer .block .weixin .pic {
     color: #222;
-    background: url(//static.hdslb.com/images/base/icons.png) no-repeat -1024px -66px;
+    background: url(assets/icons.png) no-repeat -1024px -66px;
 }
 .app-footer .block em {
     position: absolute;

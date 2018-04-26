@@ -3,9 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import Axios from 'axios'
 import Indexpage from './pages/index'
 
 Vue.use(VueRouter)
+Vue.prototype.$axios = Axios;
 Vue.config.productionTip = false
 
 const router = new VueRouter({

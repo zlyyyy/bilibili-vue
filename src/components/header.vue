@@ -55,13 +55,13 @@
                             <ul>
                                 <li v-for="itemnav in item.fields">
                                     <a :href="itemnav.href">
-                                        <i :class="itemnav.icon" v-if="itemnav.icon"></i>
+                                        <i class="icon-prim" :class="itemnav.icon" v-if="itemnav.icon"></i>
                                         <span>{{ itemnav.name }}</span>
                                     </a>
                                 </li>
                             </ul>
-                            <div :class="item.fieldClass">
-                                <a v-for="itemnavImg in item.fieldImg" :href="itemnavImg.href" target="_blank" :title="itemnavImg.title">
+                            <div :class="item.fieldImgClass">
+                                <a v-for="itemnavImg in item.fieldImg" :href="itemnavImg.href" target="_blank" :title="itemnavImg.title" :class="itemnavImg.imgclass">
                                     <img :alt="itemnavImg.title" :src="itemnavImg.src">
                                 </a>
                             </div>
@@ -513,7 +513,7 @@ export default {
                             href: ''
                         }
                     ],
-                    fieldClass: 'square-field',
+                    fieldImgClass: 'square-field',
                     fieldImg: [
                         {
                             title: 'bilibili 活动',
@@ -571,16 +571,18 @@ export default {
                             href: ''
                         }
                     ],
-                    fieldClass: 'live-field',
+                    fieldImgClass: 'live-field',
                     fieldImg: [
                         {
                             title: '有文画',
                             href: '',
+                            imgclass: 'pic',
                             src: require('../assets/live_01.png')
                         },
                         {
                             title: '小视频',
                             href: '',
+                            imgclass: 'pic',
                             src: require('../assets/live_02.png')
                         }
                     ]
