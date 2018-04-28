@@ -1,27 +1,67 @@
 <template>
     <div class="recommend-module">
-        <div class="groom-module home-card">
-            <a href="/video/av22582031/" target="_blank" title="【OVERLORD】异世界最强战力白金龙王，其隐藏着可怕的实力">
-                <img src="//i1.hdslb.com/bfs/archive/0f67905673955ea3223ff2285baa8cc2e7906e38.jpg" alt="【OVERLORD】异世界最强战力白金龙王，其隐藏着可怕的实力" width="160" height="100" class="pic">
+        <div class="groom-module home-card" v-for="(item,index) in nowRecdata">
+            <a :href="'/video/av'+item.aid" target="_blank" :title=item.title>
+                <img :src=item.pic alt=item.title width="160" height="100" class="pic">
                 <div class="card-mark">
-                    <p class="title">【OVERLORD】异世界最强战力白金龙王，其隐藏着可怕的实力</p>
-                    <p class="author">up主：雪和风</p>
-                    <p class="play">播放：6929</p>
+                    <p class="title">{{ item.title }}</p>
+                    <p class="author">up主：{{ item.author }}</p>
+                    <p class="play">播放：{{ item.play }}</p>
                 </div>
             </a>
             <div class="watch-later-trigger w-later"></div>
         </div>
+        <template v-if="this.recLeft === '一周'">
+            <span class="rec-btn rec-left" @click="weekdays()">{{ recLeft }}</span>
+            <span class="rec-btn rec-right" @click="threedays()">{{ recRight }}</span>
+        </template>
+        <template v-else-if="this.recLeft === '昨日'">
+            <span class="rec-btn rec-left" @click="yesterday()">{{ recLeft }}</span>
+            <span class="rec-btn rec-right" @click="weekdays()">{{ recRight }}</span>
+        </template>
+        <template v-else-if="this.recLeft === '三日'">
+            <span class="rec-btn rec-left" @click="threedays()">{{ recLeft }}</span>
+            <span class="rec-btn rec-right" @click="yesterday()">{{ recRight }}</span>
+        </template>
     </div>
 </template>
 
 <script>
 export default {
+    created() {
+        this.$axios.get('/static/recommend.json')
+            .then((res)=>{
+                this.recdata = res.data
+                this.yesterday()
+            }).catch((error)=>{
+                console.log(error)
+            })
+    },
     data () {
         return {
+            recdata:[],
+            nowRecdata:[],
+            recLeft: '一周',
+            recRight: '三日'
         }
     },
     methods: {
-    }
+        yesterday(){
+            this.nowRecdata = this.recdata.yesterday
+            this.recLeft = "一周"
+            this.recRight = "三日"
+        },
+        threedays(){
+            this.nowRecdata = this.recdata.threedays
+            this.recLeft = "昨日"
+            this.recRight = "一周"
+        },
+        weekdays(){
+            this.nowRecdata = this.recdata.week
+            this.recLeft = "三日"
+            this.recRight = "昨日"
+        }
+    }  
 }
 </script>
 
@@ -114,5 +154,37 @@ export default {
 }
 .groom-module:hover .w-later {
 	display: block
+}
+.rec-btn{
+    opacity: 0;
+    position: absolute;
+    background-color: rgba(0,0,0,.6);
+    background-image: url(../../assets/icons2.png);
+    background-repeat: no-repeat;
+    width: 20px;
+    top: calc(50% - 28px);
+    cursor: pointer;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    line-height: 1.3;
+}
+.recommend-module:hover .rec-btn {
+    opacity: 1;
+}
+.rec-left{
+    left: 20px;
+    border-radius: 0 4px 4px 0;
+    padding: 13px 5px 13px 10px;
+    background-position: 6px -1211px;
+}
+.rec-right{
+    right: 0;
+    border-radius: 4px 0 0 4px;
+    padding: 13px 10px 13px 5px;
+    background-position: 25px -1262px;
 }
 </style>

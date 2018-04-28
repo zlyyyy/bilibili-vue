@@ -5,7 +5,7 @@
             <div class="bili-wrapper head-content">
                 <div class="search">
                     <div class="searchform">
-                        <input type="text" autocomplete="off" accesskey="s" x-webkit-speech="" x-webkit-grammar="builtin:translate" placeholder="2017有哪些好看的日本电影？" value="" class="search-keyword">
+                        <input type="text" autocomplete="off" accesskey="s" x-webkit-speech="" x-webkit-grammar="builtin:translate" :placeholder=SearchWord value="" class="search-keyword">
                         <button type="submit" class="search-submit"></button>
                     </div><!---->
                     <ul class="bilibili-suggest" v-show="suggestShow">
@@ -76,13 +76,17 @@
 <script>
 import NavMenu from '../components/common/navMenu'
 export default {
+    created() {
+        this.getSearchDefaultWords()
+    },
     components:{
-        NavMenu,
+        NavMenu
     },
     data () {
         return {
             headbannersrc: require('../assets/nav-bg.png'),
             headlogo: require('../assets/head-logo.png'),
+            SearchWord:'',
             suggestShow:false,
             wrapperdata: [
                 {
@@ -600,6 +604,14 @@ export default {
         }
     },
     methods: {
+        getSearchDefaultWords(){
+            this.$axios.get('/api/widget/getSearchDefaultWords')
+            .then((res)=>{
+				this.SearchWord = res.data["0"].show
+            }).catch((error)=>{
+                console.log(error)
+			})
+        }
     }
 }
 </script>

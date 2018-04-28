@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
         <app-header></app-header>
         <keep-alive>
             <router-view></router-view>
@@ -62,7 +62,18 @@ input{
 }
 body{
 	/* background: #f3f3f3; */
-	font-family: PingFang SC,Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
+    height: 100%;
+	font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
+}
+.bili-icon, .icon {
+    display: inline-block;
+    background: url(assets/icons.png);
+}
+.app{
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 242px;
+    box-sizing: border-box;
 }
 .bili-wrapper {
     margin: 0 auto;
@@ -76,10 +87,6 @@ body{
 .app-header .bili-wrapper {
     margin: 0 auto;
     width: 1160px;
-}
-.app-header .bili-icon {
-    display: inline-block;
-    background: url(assets/icons.png);
 }
 .app-header .nav-menu {
     position: relative;
@@ -601,9 +608,12 @@ body{
 /* app-body */
 .app-body{
     overflow: hidden;
+    margin-bottom: 40px;
 }
 /* app-footer */
 .app-footer{
+    position: absolute;
+    bottom: 0;
     width: 100%;
     padding: 60px 0 10px 0;
     text-align: center;
@@ -715,4 +725,5 @@ body{
     line-height: 30px;
     color: #99a2aa;
 }
+
 </style>
