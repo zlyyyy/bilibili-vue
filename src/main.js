@@ -5,6 +5,7 @@ import App from './App'
 import VueRouter from 'vue-router'
 import Axios from 'axios'
 import Indexpage from './pages/index'
+import Videopage from './pages/video'
 
 Vue.use(VueRouter)
 Vue.prototype.$axios = Axios;
@@ -16,6 +17,10 @@ const router = new VueRouter({
         {
             path: '/',
             component: Indexpage
+        },
+        {
+            path: '/video',
+            component: Videopage
         }
     ]
 })

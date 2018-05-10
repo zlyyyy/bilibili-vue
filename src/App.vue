@@ -203,7 +203,7 @@ body{
     overflow: hidden;
     height: 32px;
     line-height: 32px;
-    padding: 0 12px;
+    padding: 0 60px 0 12px;
     border: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -221,6 +221,9 @@ body{
     margin: 0;
     padding: 0;
     border: 0;
+}
+.app-header .search button.search-submit:hover {
+    background-position: -718px -720px;
 }
 .app-header .bilibili-suggest {
     position: relative;
@@ -607,6 +610,7 @@ body{
 }
 /* app-body */
 .app-body{
+    position: relative;
     overflow: hidden;
     margin-bottom: 40px;
 }

@@ -2,7 +2,7 @@
     <div class="recommend-module">
         <div class="groom-module home-card" v-for="(item,index) in nowRecdata">
             <a :href="'/video/av'+item.aid" target="_blank" :title=item.title>
-                <img :src=item.pic alt=item.title width="160" height="100" class="pic">
+                <img :src=item.pic :alt=item.title width="160" height="100" class="pic">
                 <div class="card-mark">
                     <p class="title">{{ item.title }}</p>
                     <p class="author">up主：{{ item.author }}</p>

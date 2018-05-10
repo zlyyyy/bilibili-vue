@@ -1,5 +1,5 @@
 <template>
-    <div class="popularize-module">
+    <div id="popularize_module" class="popularize-module">
         <div class="l-con">
             <div class="headline clearfix">
                 <i class="icon icon_t icon-promote"></i><span class="name">推广</span>
@@ -79,11 +79,12 @@ export default {
 		},
 		count(num){
 			if(num<60){
-				return num ="00:"+num
+                return num ="00:"+num
 			}else if(num>=60 && num<3600){
 				let m
-				Math.floor(num/60)<10? m="0"+Math.floor(num/60) : m=Math.floor(num/60)
-				return num = m+":"+num%60
+                Math.floor(num/60)<10? m="0"+Math.floor(num/60) : m=Math.floor(num/60)
+                num%60<10? num= m+":0"+ num%60 : num = m+":"+num%60
+				return num
 			}else{
 				let h,m
 				Math.floor(num%3600/60)<10? m="0"+Math.floor(num%3600/60) : m=Math.floor(num%3600/60)
@@ -97,6 +98,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .popularize-module {
+	overflow: hidden;
     padding-bottom: 15px;
 }
 .bili-wrapper .l-con {
@@ -104,7 +106,7 @@ export default {
 	width: 900px
 }
 .popularize-module .headline {
-	padding: 0 0 15px;
+	padding: 10px 0 15px;
     height: 30px;
 }
 .popularize-module .headline .icon_t {
@@ -125,39 +127,9 @@ export default {
 	margin-right: 20px;
 	float: left
 }
-.popularize-module .headline .fire {
-	margin-top: 7px;
-	margin-left: 12px;
-	padding-right: 12px;
-	color: #6d757a;
-	float: left;
-	position: relative
-}
-.popularize-module .headline .fire .pmt-icon {
-	display: inline-block;
-	vertical-align: top;
-	background-position: -665px -1113px;
-	width: 14px;
-	height: 14px;
-	margin-top: 1px
-}
-.popularize-module .headline .fire:hover {
-	color: #00a1d6
-}
-.popularize-module .headline .fire:after {
-	content: "";
-	position: absolute;
-	height: 15px;
-	right: 0;
-	top: 2px;
-	border-right: 1px solid #ccc
-}
-.popularize-module .headline .fire:last-child:after {
-	display: none
-}
 .popularize-module .storey-box {
 	height: 168px;
-	overflow: hidden
+	overflow: hidden;
 }
 .popularize-module .storey-box .spread-module {
 	float: left;
@@ -185,6 +157,78 @@ export default {
 .spread-module .pic img {
 	margin: 0 auto;
 	outline: 0
+}
+.cover-preview-module {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s;
+}
+.cover-preview-module .cover {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    height: 98px;
+    width: 100%;
+    margin-top: 2px;
+}
+.cover-preview-module .progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 10px;
+    border-width: 4px 8px;
+    border-style: solid;
+    border-color: #000;
+    background: #444;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.cover-preview-module .progress-bar span {
+    display: block;
+    background: #fff;
+    height: 2px;
+}
+.spread-module .pic .mask-video {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.2);
+    -webkit-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s;
+}
+.danmu-module {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    pointer-events: none;
+}
+.danmu-module .dm {
+    position: absolute;
+    color: #fff;
+    left: 100%;
+    top: 8px;
+    white-space: pre;
+    text-shadow: 1px 1px 2px #001;
+}
+.danmu-module .dm.row2 {
+    top: 25px;
 }
 .spread-module .pic .gg-pic {
 	position: absolute;
@@ -215,18 +259,6 @@ export default {
 	height: 20px;
 	background-color: rgba(0,0,0,.4);
 	line-height: 20px
-}
-.spread-module .pic .mask-video {
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,.2);
-	-webkit-transition: opacity .3s;
-	-o-transition: opacity .3s;
-	transition: opacity .3s
 }
 .spread-module .pic .medal {
 	position: absolute;
