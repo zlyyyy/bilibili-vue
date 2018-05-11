@@ -1,28 +1,29 @@
 <template>
-    <div id="bili_donghua" class="zone-wrap-module">
+    <div>
+    <div id="bili_donghua" class="zone-wrap-module" v-for="(item,index) in maindataModule" :id="item.id">
         <div class="zone-module">
             <div class="new-comers-module l-con">
                 <div class="zone-title">
                     <div class="headline">
-                        <i class="icon icon_t icon-donghua"></i>
-                        <a href="/v/douga" class="name">动画</a>
+                        <i class="icon icon_t" :class="item.icon"></i>
+                        <a :href=item.moreUrl class="name">{{ item.title }}</a>
                         <div class="bili-tab bili-tab">
-                            <div class="bili-tab-item" v-for="(item,index) in tab" :class="{'on' : index === nowtab }" @click="tabclick(index)">{{ item.name }}</div>
+                            <div class="bili-tab-item" v-for="(item,index) in item.tab" :class="{'on' : index === nowtab }" @click="nowtabclick(index)">{{ item.name }}</div>
                         </div>
-                        <a href="/v/douga" target="_blank" class="link-more">
+                        <a :href=item.moreUrl target="_blank" class="link-more">
                             更多
                             <i class="icon"></i>
                         </a>
                         <div class="read-push">
                             <i class="icon icon_read"></i>
                             <span class="info">
-                                <b>292</b>条新动态
+                                <b>{{ item.dynamic }}</b>条新动态
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="storey-box">
-                    <div class="spread-module" v-for="item in trends.archives" v-if="nowtab===0">
+                    <div class="spread-module" v-for="item in item.newTrends.archives" v-if="nowtab===0">
                         <a :href="'/video/av'+item.aid+'/'" target="_blank" :title=item.title>
                             <div class="pic">
                                 <div class="lazy-img">
@@ -55,7 +56,7 @@
                             </p>
                         </a>
                     </div>
-                    <div class="spread-module" v-for="(item,index) in newsub.archives" v-if="index<10&&nowtab===1">
+                    <div class="spread-module" v-for="(item,index) in item.newSub.archives" v-if="index<10&&nowtab===1">
                         <a :href="'/video/av'+item.aid+'/'" target="_blank" :title=item.title>
                             <div class="pic">
                                 <div class="lazy-img">
@@ -94,21 +95,19 @@
                 <div class="rank-head">
                     <h3>排行</h3>
                     <div class="bili-tab rank-tab">
-                        <div class="bili-tab-item on">全部</div>
-                        <div class="bili-tab-item">原创</div>
+                        <div class="bili-tab-item" v-for="(item,index) in item.ranktab" :class="{'on' : index===ranknowtab}" @mousemove="ranknowtabclick(index)">{{item.name }}</div>
                     </div>
                     <div class="bili-dropdown rank-dropdown">
-                        <span class="selected">三日</span>
+                        <span class="selected">{{ item.rankdropdown[rankselect].name }}</span>
                         <i class="icon icon-arrow-down"></i>
                         <ul class="dropdown-list">
-                            <li class="dropdown-item" style="display: none;">三日</li>
-                            <li class="dropdown-item">一周</li>
+                            <li class="dropdown-item" v-for="(item,index) in item.rankdropdown" @click="selectclick(index)">{{ item.name }}</li>
                         </ul>
                     </div>
                 </div>
-                <div class="rank-list-wrap show-origin">
+                <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===0">
                     <ul class="rank-list hot-list">
-                        <li class="rank-item" v-for="(item,index) in rankAlllist" :class="[{ highlight: index<3 }, {'show-detail first':index===0}]" v-if="index<7">
+                        <li class="rank-item" v-for="(item,index) in item.rankThreeAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0}]" v-if="index<7" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                             <i class="ri-num">{{ index+1 }}</i>
                             <a href="/video/av23119126/" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                                 <div class="lazy-img ri-preview" v-if="index<1">
@@ -120,56 +119,138 @@
                                 </div>
                                 <div class="watch-later-trigger w-later" v-if="index<1"></div>
                             </a>
-                        </li>                        
+                        </li>             
+                    </ul>
+                    <ul class="rank-list origin-list">
+                        <li class="rank-item" v-for="(item,index) in item.rankThreeOriginalList" :class="[{ highlight: index<3 }, {'show-detail first':index===0}]" v-if="index<7" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                            <i class="ri-num">{{ index+1 }}</i>
+                            <a href="/video/av23119126/" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
+                                <div class="lazy-img ri-preview" v-if="index<1">
+                                    <img :alt="item.title" :src="item.pic">
+                                </div>
+                                <div class="ri-detail">
+                                    <p class="ri-title">{{ item.title }}</p>
+                                    <p class="ri-point">综合评分：{{ count2(item.pts) }}</p>
+                                </div>
+                                <div class="watch-later-trigger w-later" v-if="index<1"></div>
+                            </a>
+                        </li>   
                     </ul>
                 </div>
-                <a href="/ranking/all/1/1/7/" target="_blank" class="more-link">查看更多<i class="icon icon-arrow-r"></i></a>
+                <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===1">
+                    <ul class="rank-list hot-list">
+                        <li class="rank-item" v-for="(item,index) in item.rankSevenAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0}]" v-if="index<7" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                            <i class="ri-num">{{ index+1 }}</i>
+                            <a href="/video/av23119126/" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
+                                <div class="lazy-img ri-preview" v-if="index<1">
+                                    <img :alt="item.title" :src="item.pic">
+                                </div>
+                                <div class="ri-detail">
+                                    <p class="ri-title">{{ item.title }}</p>
+                                    <p class="ri-point">综合评分：{{ count2(item.pts) }}</p>
+                                </div>
+                                <div class="watch-later-trigger w-later" v-if="index<1"></div>
+                            </a>
+                        </li>             
+                    </ul>
+                    <ul class="rank-list origin-list">
+                        <li class="rank-item" v-for="(item,index) in item.rankSevenOriginalList" :class="[{ highlight: index<3 }, {'show-detail first':index===0}]" v-if="index<7" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                            <i class="ri-num">{{ index+1 }}</i>
+                            <a href="/video/av23119126/" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
+                                <div class="lazy-img ri-preview" v-if="index<1">
+                                    <img :alt="item.title" :src="item.pic">
+                                </div>
+                                <div class="ri-detail">
+                                    <p class="ri-title">{{ item.title }}</p>
+                                    <p class="ri-point">综合评分：{{ count2(item.pts) }}</p>
+                                </div>
+                                <div class="watch-later-trigger w-later" v-if="index<1"></div>
+                            </a>
+                        </li>   
+                    </ul>
+                </div>
+                <a :href="item.rankThreeAllMoreUrl" target="_blank" class="more-link" v-if="ranknowtab===0&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
+                <a :href="item.rankThreeOriginalMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===1&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
+                <a :href="item.rankSevenAllMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===0&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
+                <a :href="item.rankSevenOriginalMoreUrl" target="_blank" class="more-link" v-else="ranknowtab===1&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
 <script>
 export default {
     created() {
-        this.$axios.get('/static/donghua.json')
-            .then((res)=>{
-                this.trends = res.data.data
-            }).catch((error)=>{
-                console.log(error)
-            })
-        this.$axios.get('/static/dh_newlist.json')
-            .then((res)=>{
-                this.newsub = res.data.data
-            }).catch((error)=>{
-                console.log(error)
-            })
-        this.$axios.get('/static/dh_rank_alllist.json')
-            .then((res)=>{
-                this.rankAlllist = res.data.data
-            }).catch((error)=>{''
-                console.log(error)
-            })
+        
+    },
+    props: {
+        maindataModule: {
+            type: Array,
+            default: []
+        }
     },
     data () {
         return {
             nowtab: 0,
-            tab:[
-                {
-                    name: '有新动态'
-                },
-                {
-                    name: '最新投稿'
-                }
-            ],
+            ranknowtab: 0,
+            rankselect: 0,
             trends: [],
             newsub: [],
-            rankAlllist: []
+            rankAlllist: [],
+            leftnum:'',
+            topnum:'',
+            videoinforShow: false,
+            mouseindex: ''
         }
     },
     methods: {
-        tabclick(index) {
+        nowtabclick(index) {
             this.nowtab =index
+        },
+        ranknowtabclick(index){
+            this.ranknowtab = index
+        },
+        selectclick(index){
+            this.rankselect = index
+        },
+        videoInfo(index,e){
+            var c = e.currentTarget
+            this.leftnum = c.getBoundingClientRect().left
+            this.topnum = c.offsetTop+550
+            this.mouseindex = index
+            setTimeout(()=>{
+                this.videoinforShow = true
+            this.$emit('videoInfoxy',{
+                'leftnum' : this.leftnum, 
+                'topnum': this.topnum, 
+                'videoinforShow': this.videoinforShow, 
+                'mouseindex' : this.mouseindex , 
+                'ranknowtab' : this.ranknowtab,
+                'rankselect' : this.rankselect
+                })
+            },2000)
+        },
+        videoInfoshow() {
+            this.videoinforShow = false
+            this.$emit('videoInfoxy',{
+                'leftnum' : this.leftnum, 
+                'topnum': this.topnum, 
+                'videoinforShow': this.videoinforShow, 
+                'mouseindex' : this.mouseindex , 
+                'ranknowtab' : this.ranknowtab,
+                'rankselect' : this.rankselect
+            })
+        },
+        //时间戳转换
+        time(date){
+            Y = date.getFullYear() + '-';
+            M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+            D = date.getDate() + ' ';
+            h = date.getHours() + ':';
+            m = date.getMinutes() + ':';
+            s = date.getSeconds(); 
+            console.log(Y+M+D+h+m+s);
         },
         // 视频时间计算
         count(num){
@@ -358,6 +439,7 @@ export default {
     float: right;
     width: 260px;
     min-height: 360px;
+    overflow: hidden;
 }
 .sec-rank .rank-head {
     height: 24px;
@@ -593,5 +675,8 @@ export default {
 .sec-rank .more-link:hover {
     background-color: #ccd0d7;
     border-color: #ccd0d7;
+}
+.sec-rank .rank-list-wrap.show-origin {
+    margin-left: -100%;
 }
 </style>

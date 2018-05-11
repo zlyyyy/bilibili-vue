@@ -62,7 +62,7 @@ input{
 }
 body{
 	/* background: #f3f3f3; */
-    height: 100%;
+    min-height: 100%;
 	font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
 }
 .bili-icon, .icon {
@@ -610,9 +610,112 @@ body{
 }
 /* app-body */
 .app-body{
-    position: relative;
     overflow: hidden;
     margin-bottom: 40px;
+}
+.video-info-module {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 320px;
+	border: 1px solid #ccd0d7;
+	border-radius: 4px;
+	-webkit-box-shadow: rgba(0,0,0,.16) 0 2px 4px;
+	box-shadow: 0 2px 4px rgba(0,0,0,.16);
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	z-index: 10020;
+	overflow: hidden;
+	background-color: #fff;
+	padding: 12px
+}
+.video-info-module .v-title {
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 20px;
+	line-height: 12px
+}
+.video-info-module .v-info {
+	color: #99a2aa;
+	padding: 4px 0 6px
+}
+.video-info-module .v-info span {
+	display: inline-block;
+	vertical-align: top;
+	height: 16px;
+	line-height: 12px
+}
+.video-info-module .v-info .name {
+	white-space: nowrap;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	max-width: 150px
+}
+.video-info-module .v-info .line {
+	display: inline-block;
+	border-left: 1px solid #99a2aa;
+	height: 12px;
+	margin: 1px 10px 0
+}
+.video-info-module .v-preview {
+	padding: 8px 0 12px;
+	border-top: 1px solid #e5e9ef;
+	height: 64px
+}
+.video-info-module .v-preview .lazy-img {
+	width: auto;
+	float: left;
+	margin-right: 8px;
+	margin-top: 4px;
+	height: auto;
+	border-radius: 4px;
+	overflow: hidden;
+	width: 96px;
+	height: 60px
+}
+.video-info-module .v-preview .txt {
+	height: 60px;
+	overflow: hidden;
+	line-height: 21px;
+	word-wrap: break-word;
+	word-break: break-all;
+	color: #99a2aa
+}
+.video-info-module .v-data {
+	border-top: 1px solid #e5e9ef;
+	padding-top: 10px
+}
+.video-info-module .v-data span {
+	white-space: nowrap;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 70px;
+	color: #99a2aa;
+	line-height: 12px
+}
+.video-info-module .v-data span .icon {
+	margin-right: 4px;
+	vertical-align: top;
+	display: inline-block;
+	width: 12px;
+	height: 12px
+}
+.video-info-module .v-data .play .icon {
+	background-position: -282px -90px
+}
+.video-info-module .v-data .danmu .icon {
+	background-position: -282px -218px
+}
+.video-info-module .v-data .star .icon {
+	background-position: -282px -346px
+}
+.video-info-module .v-data .coin .icon {
+	background-position: -282px -410px
 }
 /* app-footer */
 .app-footer{

@@ -10,25 +10,26 @@
         <!-- 推广模块 -->
         <popularize :popularizeOnline="onlineData"></popularize>
         <!--  动画 -->
-        <donghua></donghua>
-        <div class="video-info-module" style="left: 932.5px;top: 577px;">
+        <donghua :maindataModule="mainData" @videoInfoxy='videoinforevent'>
+            <slot></slot>
+        </donghua>
+         <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
-                【新番咋了30】大国女王裸奔上阵！性感歌姬在线换妈！
+                {{ videoinforitem[videodata.mouseindex].title }}
             </div>
             <div class="v-info">
-                <span class="name">凉风Kaze</span><span class="line"></span><span class="time">2018-05-04 18:05</span>
+                <span class="name">{{videoinforitem[videodata.mouseindex].author}}</span><span class="line"></span><span class="time">{{ videoinforitem[videodata.mouseindex].create }}</span>
             </div>
             <div class="v-preview clearfix">
                 <div class="lazy-img">
-                    <img alt="" src="//i1.hdslb.com/bfs/archive/fd131ece4ad49f24a2576cb3ff9f208bea821abe.jpg@96w_60h.webp">
+                    <img :alt="videoinforitem[videodata.mouseindex].title" :src=videoinforitem[videodata.mouseindex].pic>
                 </div>
                 <p class="txt">
-                    视频类型: 动漫杂谈
-        简介: 动画区萌新UP第一稿，请多多支持~
+                    {{ videoinforitem[videodata.mouseindex].description }}
                 </p>
             </div>
             <div class="v-data">
-                <span class="play"><i class="icon"></i>64.9万</span><span class="danmu"><i class="icon"></i>7072</span><span class="star"><i class="icon"></i>1.6万</span><span class="coin"><i class="icon"></i>9.8万</span>
+                <span class="play"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].play) }}</span><span class="danmu"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].video_review) }}</span><span class="star"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].favorites) }}</span><span class="coin"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].coins) }}</span>
             </div>
         </div>
     </div>
@@ -42,7 +43,7 @@ import Donghua from '../components/common/bilidonghua'
 export default {
     created() {
         this.online()
-        this.ding()
+        this.mainDataGet()
     },
     components:{
         Slide,
@@ -82,11 +83,57 @@ export default {
             ],
             recdata: [],
             onlineData: [],
-            mainData: []            
+            mainData: [
+                {
+                    id: 'bili_donghua',//模型id
+                    title: '动画', //模型名称
+                    icon: 'icon-donghua',//模型图标
+                    tab:[
+                        {
+                            name: '有新动态'
+                        },
+                        {
+                            name: '最新投稿'
+                        }
+                    ],
+                    dynamic: 27989,//模型新动态数
+                    moreUrl: '/v/donghua',//模型更多链接
+                    newTrends: [],//最新动态
+                    newSub: [],//最新投稿
+                    ranktab: [
+                        {
+                            name: '全部'
+                        },
+                        {
+                            name: '原创'
+                        }
+                    ],
+                    rankdropdown:[
+                        {
+                            name: '三日'
+                        },
+                        {
+                            name: '一周'
+                        }
+                    ],
+                    rankThreeAllList: [],//三日全部排行
+                    rankThreeAllMoreUrl: '/ranking/all/1/1/3/',//三日全部排行更多链接
+                    rankThreeOriginalList: [],//三日原创排行
+                    rankThreeOriginalMoreUrl: '/ranking/origin/1/1/3/',//三日原创更多链接
+                    rankSevenAllList: [],//一周全部排行
+                    rankSevenAllMoreUrl: '/ranking/all/1/1/7/',//一周全部排行更多链接
+                    rankSevenOriginalList: [],//一周原创排行
+                    rankSevenOriginalMoreUrl: '/ranking/origin/1/1/7/'//一周原创排行链接
+                }
+            ],    
+            videodata: [],
+            videoinforShow: false,
+            videoinforitem: []
         }
     },
     methods: {
-        online(){
+        //当前在线数
+        online() {
             this.$axios.get('/static/online.json')
             .then((res)=>{
                 this.onlineData = res.data
@@ -94,13 +141,48 @@ export default {
                 console.log(error)
             })
         },
-        ding(){
-            this.$axios.get('/api/index/ding.json')
-            .then((res)=>{
-                this.mainData = res.data
-            }).catch((error)=>{
-                console.log(error)
-            })
+        mainDataGet() {
+            //并发处理
+                this.$axios.all([
+                    this.$axios.get('/static/maindata/dh_newTrends.json'),
+                    this.$axios.get('/static/maindata/dh_newSub.json'),
+                    this.$axios.get('/static/maindata/dh_rankThreeAllList.json'),
+                    this.$axios.get('/static/maindata/dh_rankThreeOriginalList.json'),
+                    this.$axios.get('/static/maindata/dh_rankSevenAllList.json'),
+                    this.$axios.get('/static/maindata/dh_rankSevenOriginalList.json')
+                ])
+                .then(this.$axios.spread(( newTrends,newSub,rankThreeAllList,rankThreeOriginalList,rankSevenAllList,rankSevenOriginalList ) => {
+                    this.mainData[0].newTrends = newTrends.data.data
+                    this.mainData[0].newSub = newSub.data.data
+                    this.mainData[0].rankThreeAllList = rankThreeAllList.data.data
+                    this.mainData[0].rankThreeOriginalList = rankThreeOriginalList.data.data
+                    this.mainData[0].rankSevenAllList = rankSevenAllList.data.data
+                    this.mainData[0].rankSevenOriginalList = rankSevenOriginalList.data.data
+                }))
+        },
+        videotest()  {
+            if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===0){
+                this.videoinforitem = this.mainData[0].rankThreeAllList
+            }else if(this.videodata.ranknowtab === 1 && this.videodata.rankselect ===0){
+                this.videoinforitem = this.mainData[0].rankThreeOriginalList
+            }else if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===1){
+                this.videoinforitem = this.mainData[0].rankSevenAllList
+            }else if(this.videodata.ranknowtab === 1 && this.videodata.rankselect ===1){
+                this.videoinforitem = this.mainData[0].rankSevenOriginalList
+            }
+        },
+        videoinforevent(data){
+            this.videodata = data
+            this.videoinforShow = data.videoinforShow
+            this.videotest()
+        },
+        // 视频播放量弹幕数计算
+        count2(num){
+            if(num>10000){
+                return (Math.round(num/1e3)/10).toFixed(1)+'万'
+            }else{
+                return num
+            }
         }
     }
 }
@@ -110,109 +192,5 @@ export default {
 <style>
 .chief-recommend-module{
     padding-bottom: 30px;
-}
-.video-info-module {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 320px;
-	border: 1px solid #ccd0d7;
-	border-radius: 4px;
-	-webkit-box-shadow: rgba(0,0,0,.16) 0 2px 4px;
-	box-shadow: 0 2px 4px rgba(0,0,0,.16);
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	z-index: 10020;
-	overflow: hidden;
-	background-color: #fff;
-	padding: 12px
-}
-.video-info-module .v-title {
-	overflow: hidden;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	height: 20px;
-	line-height: 12px
-}
-.video-info-module .v-info {
-	color: #99a2aa;
-	padding: 4px 0 6px
-}
-.video-info-module .v-info span {
-	display: inline-block;
-	vertical-align: top;
-	height: 16px;
-	line-height: 12px
-}
-.video-info-module .v-info .name {
-	white-space: nowrap;
-	overflow: hidden;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-	max-width: 150px
-}
-.video-info-module .v-info .line {
-	display: inline-block;
-	border-left: 1px solid #99a2aa;
-	height: 12px;
-	margin: 1px 10px 0
-}
-.video-info-module .v-preview {
-	padding: 8px 0 12px;
-	border-top: 1px solid #e5e9ef;
-	height: 64px
-}
-.video-info-module .v-preview .lazy-img {
-	width: auto;
-	float: left;
-	margin-right: 8px;
-	margin-top: 4px;
-	height: auto;
-	border-radius: 4px;
-	overflow: hidden;
-	width: 96px;
-	height: 60px
-}
-.video-info-module .v-preview .txt {
-	height: 60px;
-	overflow: hidden;
-	line-height: 21px;
-	word-wrap: break-word;
-	word-break: break-all;
-	color: #99a2aa
-}
-.video-info-module .v-data {
-	border-top: 1px solid #e5e9ef;
-	padding-top: 10px
-}
-.video-info-module .v-data span {
-	white-space: nowrap;
-	overflow: hidden;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-	display: inline-block;
-	width: 70px;
-	color: #99a2aa;
-	line-height: 12px
-}
-.video-info-module .v-data span .icon {
-	margin-right: 4px;
-	vertical-align: top;
-	display: inline-block;
-	width: 12px;
-	height: 12px
-}
-.video-info-module .v-data .play .icon {
-	background-position: -282px -90px
-}
-.video-info-module .v-data .danmu .icon {
-	background-position: -282px -218px
-}
-.video-info-module .v-data .star .icon {
-	background-position: -282px -346px
-}
-.video-info-module .v-data .coin .icon {
-	background-position: -282px -410px
 }
 </style>
