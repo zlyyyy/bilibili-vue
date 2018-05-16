@@ -1,7 +1,6 @@
 <template>
-    <div>
-    <div id="bili_donghua" class="zone-wrap-module" v-for="(item,index) in maindataModule" :id="item.id">
-        <div class="zone-module">
+    <div class="zone-wrap-module">
+        <div class="zone-module" v-for="(item,index) in maindataModule">
             <div class="new-comers-module l-con">
                 <div class="zone-title">
                     <div class="headline">
@@ -97,13 +96,7 @@
                     <div class="bili-tab rank-tab">
                         <div class="bili-tab-item" v-for="(item,index) in item.ranktab" :class="{'on' : index===ranknowtab}" @mousemove="ranknowtabclick(index)">{{item.name }}</div>
                     </div>
-                    <div class="bili-dropdown rank-dropdown">
-                        <span class="selected">{{ item.rankdropdown[rankselect].name }}</span>
-                        <i class="icon icon-arrow-down"></i>
-                        <ul class="dropdown-list">
-                            <li class="dropdown-item" v-for="(item,index) in item.rankdropdown" @click="selectclick(index)">{{ item.name }}</li>
-                        </ul>
-                    </div>
+                    <dropdown :dropdownData="item.rankdropdown" :selected="rankselect" @dropselected='rankSelect'></dropdown>
                 </div>
                 <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===0">
                     <ul class="rank-list hot-list">
@@ -176,13 +169,16 @@
             </div>
         </div>
     </div>
-    </div>
 </template>
 
 <script>
+import Dropdown from '../base/dropdown'
 export default {
     created() {
         
+    },
+    components: {
+        Dropdown
     },
     props: {
         maindataModule: {
@@ -192,6 +188,7 @@ export default {
     },
     data () {
         return {
+            dropdownData:[],
             nowtab: 0,
             ranknowtab: 0,
             rankselect: 0,
@@ -211,7 +208,7 @@ export default {
         ranknowtabclick(index){
             this.ranknowtab = index
         },
-        selectclick(index){
+        rankSelect(index){
             this.rankselect = index
         },
         videoInfo(index,e){
@@ -219,8 +216,8 @@ export default {
             this.leftnum = c.getBoundingClientRect().left
             this.topnum = c.offsetTop+550
             this.mouseindex = index
+            this.videoinforShow = true
             setTimeout(()=>{
-                this.videoinforShow = true
             this.$emit('videoInfoxy',{
                 'leftnum' : this.leftnum, 
                 'topnum': this.topnum, 
@@ -229,14 +226,14 @@ export default {
                 'ranknowtab' : this.ranknowtab,
                 'rankselect' : this.rankselect
                 })
-            },2000)
+            },1500)
         },
         videoInfoshow() {
             this.videoinforShow = false
             this.$emit('videoInfoxy',{
                 'leftnum' : this.leftnum, 
                 'topnum': this.topnum, 
-                'videoinforShow': this.videoinforShow, 
+                'videoinforShow': false, 
                 'mouseindex' : this.mouseindex , 
                 'ranknowtab' : this.ranknowtab,
                 'rankselect' : this.rankselect
@@ -500,59 +497,7 @@ export default {
 .bili-tab .bili-tab-item.on:before {
     display: block;
 }
-.bili-dropdown {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    background-color: #fff;
-    cursor: default;
-    padding: 0 7px;
-    height: 22px;
-    line-height: 22px;
-    border: 1px solid #ccd0d7;
-    border-radius: 4px;
-}
-.bili-dropdown:hover {
-    border-radius: 4px 4px 0 0;
-    -webkit-box-shadow: rgba(0,0,0,.16) 0 2px 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,.16);
-}
-.bili-dropdown:hover .dropdown-list {
-    display: block;
-}
-.sec-rank .rank-head .rank-dropdown {
-    float: right;
-}
-.bili-dropdown .selected {
-    display: inline-block;
-    vertical-align: top;
-}
-.bili-dropdown .icon-arrow-down {
-    background-position: -475px -157px;
-    display: inline-block;
-    vertical-align: middle;
-    width: 12px;
-    height: 6px;
-    margin-left: 5px;
-    margin-top: -1px;
-}
-.bili-dropdown .dropdown-list {
-    position: absolute;
-    width: 100%;
-    background: #fff;
-    border: 1px solid #ccd0d7;
-    border-top: 0;
-    left: -1px;
-    top: 22px;
-    z-index: 10;
-    display: none;
-    border-radius: 0 0 4px 4px;
-}
-.bili-dropdown .dropdown-list .dropdown-item {
-    cursor: pointer;
-    margin: 0;
-    padding: 3px 7px;
-}
+
 .sec-rank .rank-list-wrap {
     width: 200%;
     overflow: hidden;

@@ -19,9 +19,9 @@
                             <div class="cancel"></div>
                         </li>
                     </ul>
-                    <a href="//www.bilibili.com/ranking" target="_blank" class="link-ranking">
+                    <router-link :to="{ path: '/ranking' }"  target="_blank" class="link-ranking">
                         <span>排行榜</span>
-                    </a>
+                    </router-link>
                 </div>
                 <a class="head-logo" :style="{background:'url('+headlogo+')'}"></a>
             </div>

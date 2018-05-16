@@ -16,7 +16,7 @@
         <ul class="slide-page">
             <li v-for="(item,index) in slidedata" :class="{on: index === nowIndex}" @click="goto(index)"></li>
         </ul>
-        <div class="slide-button">
+        <div class="slide-button" v-if="pagation">
             <div class="slide-prev-button" @click="goto(prevIndex)">上一页</div>
             <div class="slide-next-button" @click="goto(nextIndex)">下一页</div>
         </div>
@@ -33,6 +33,9 @@ export default {
         slidetimedata: {
             type: Number,
             default: 2000
+        },
+        pagation: {
+            default: false
         }
     },
     computed: {

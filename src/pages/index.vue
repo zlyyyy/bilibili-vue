@@ -1,7 +1,7 @@
 <template>
     <div class="app-body bili-wrapper">
         <div id="chief_recommend" class="chief-recommend-module">
-            <slide :slidedata="slides" :slidetimedata="slidetime"></slide>
+            <slide :slidedata="slidedata" :slidetimedata="slidetime" :pagation="pagation"></slide>
             <!-- 轮播图  昨日 三日 一周 推荐 -->
             <keep-alive>
                 <recommend></recommend>
@@ -10,8 +10,7 @@
         <!-- 推广模块 -->
         <popularize :popularizeOnline="onlineData"></popularize>
         <!--  动画 -->
-        <donghua :maindataModule="mainData" @videoInfoxy='videoinforevent'>
-            <slot></slot>
+        <donghua :maindataModule="mainData" @videoInfoxy='videoinforevent' v-for="(item,index) in mainData" :id="item.id" :key="item.id">
         </donghua>
          <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
@@ -54,7 +53,8 @@ export default {
     data () {
         return {
             slidetime:2000,
-            slides: [
+            pagation: true,
+            slidedata: [
                 {
                     src: require('../assets/1.jpg'),
                     title: '要不要穿越回去再看一遍？',
