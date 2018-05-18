@@ -59,7 +59,7 @@
         </div>
         <div class="player-box">
             <div class="bofangqi bili-wrapper">
-                <iframe src="https://www.bilibili.com/blackboard/html5player.html?cid=5082031&aid=3222375" width="100%" height="585"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+                <iframe src="https://secure.bilibili.com/secure,cid=279786&aid=170001" width="100%" height="585"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <div class="rank-body">
         <div class="rank-tab-wrap">
             <ul class="rank-tab">
-                <router-link v-for="item in RankTabWrap" active-class="active" :to="{ path: item.path }" tag="li" :key="item.id">
+                <router-link v-for="item in RankTabWrap" active-class="active" :to="{ path: item.path + '/'+$route.params.rankselect+'/'+$route.params.rankselect2 }" tag="li" :key="item.id">
                     {{ item.name }}
                 </router-link>
             </ul>
@@ -19,7 +19,7 @@
         </div>
         <div class="rank-list-wrap">
             <keep-alive>
-                <router-view></router-view>
+                <router-view @rankdata='rankdata' :key='key'></router-view>
             </keep-alive>
         </div>
     </div>
@@ -33,6 +33,16 @@ export default {
     },
     components:{
         Dropdown
+    },
+    watch: {
+        // '$route.params.rankselect2':function (to, from) { 
+        //     this.test()
+        // }
+    },
+    computed: {
+        key() {
+            return this.$route.name !== undefined? this.$route.name +new Date(): this.$route +new Date()
+        }
     },
     data () {
         return {
@@ -86,7 +96,7 @@ export default {
                     path: '/ranking/all/181'
                 }
             ],
-            RankTips: '统计所有投稿在 2018年05月13日 - 2018年05月16日 的数据综合得分，每日更新一次',
+            RankTips: '',
             rankdropdown: [
                 {
                     name: '全部投稿'
@@ -116,10 +126,18 @@ export default {
     methods: {
         rankSelect(index) {
             this.rankselect = index
+            this.$route.params.rankselect = index
         },
         rankSelect2(index) {
             this.rankselect2 = index
+            this.$route.params.rankselect2 = index
+        },
+        rankdata(data) {
+            this.RankTips = data
         }
+        // test() {
+        //     this.$route.push({path:'/'+rankselect+'/'+rankselect2})
+        // }
     }
 }
 </script>
@@ -183,6 +201,10 @@ export default {
     border-bottom: 1px solid #e5e9ef;
     position: relative;
 }
+.rank-item:hover {
+    -webkit-box-shadow: 0 2px 5px #ccc;
+    box-shadow: 0 2px 5px #ccc;
+}
 .rank-item .num {
     width: 70px;
     height: 70px;
@@ -221,6 +243,9 @@ export default {
     cursor: pointer;
     background-image: url(../../assets/play.png);
 }
+.rank-item .content .img:hover .w-later {
+    display: block;
+}
 .rank-item .content .info {
     padding-bottom: 20px;
     margin-left: 130px;
@@ -237,6 +262,9 @@ export default {
 .rank-item .content .info .detail {
     margin-top: 20px;
     color: #99a2aa;
+}
+.rank-item .content .info .detail a:hover span{
+    color:#00a1d6;
 }
 .rank-item .content .info .detail .data-box {
     width: 80px;

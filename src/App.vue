@@ -52,6 +52,12 @@ a{
 	-webkit-transition: background 0.2s, color 0.2s;
     	transition: background 0.2s, color 0.2s;
     }
+a:hover {
+    outline: 0;
+    color: #00a1d6!important;
+    text-decoration: none;
+    cursor: pointer;
+}
 button{outline:none;}
 button,input,select,textarea{
 	font-family:inherit;
@@ -60,9 +66,18 @@ input{
 	outline: none;
 	font-family: inherit;
 }
+img {
+    display: block;
+    margin: 0 auto;
+    border: none;
+    vertical-align: middle;
+}
 body{
 	/* background: #f3f3f3; */
+    position: relative;
     min-height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 242px;
 	font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
 }
 .bili-icon, .icon {
@@ -70,10 +85,10 @@ body{
     background: url(assets/icons.png);
 }
 .app{
-    min-height: 100%;
-    position: relative;
-    padding-bottom: 242px;
+    /* position: relative;
+    min-height: calc(100%);
     box-sizing: border-box;
+    padding-bottom: 242px; */
 }
 .bili-wrapper {
     margin: 0 auto;
