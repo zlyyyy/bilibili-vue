@@ -76,20 +76,6 @@ export default {
             }).catch((error)=>{
                 console.log(error)
 			})
-		},
-		count(num){
-			if(num<60){
-                return num ="00:"+num
-			}else if(num>=60 && num<3600){
-				let m
-                Math.floor(num/60)<10? m="0"+Math.floor(num/60) : m=Math.floor(num/60)
-                num%60<10? num= m+":0"+ num%60 : num = m+":"+num%60
-				return num
-			}else{
-				let h,m
-				Math.floor(num%3600/60)<10? m="0"+Math.floor(num%3600/60) : m=Math.floor(num%3600/60)
-				return num = Math.floor(num/3600)+":"+ m +":"+ Math.floor(num%3600%60)
-			}
 		}
     }  
 }

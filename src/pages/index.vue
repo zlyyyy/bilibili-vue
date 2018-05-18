@@ -175,14 +175,6 @@ export default {
             this.videodata = data
             this.videoinforShow = data.videoinforShow
             this.videotest()
-        },
-        // 视频播放量弹幕数计算
-        count2(num){
-            if(num>10000){
-                return (Math.round(num/1e3)/10).toFixed(1)+'万'
-            }else{
-                return num
-            }
         }
     }
 }

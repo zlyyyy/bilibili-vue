@@ -177,4 +177,20 @@ export default {
     background: url(//s1.hdslb.com/bfs/static/jinkela/videoplay/images/anim-coin-small.png);
     background-position: -2340px -60px;
 }
+.video-info-m .number .fav i {
+    background: url(//s1.hdslb.com/bfs/static/jinkela/videoplay/images/anim-collect.png);
+    background-position: 0px 0px;
+}
+.up-info-m {
+    width: 315px;
+    margin: 15px 0;
+    float: right;
+    background: #fff;
+    position: relative;
+}
+.up-info-m .u-face {
+    width: 68px;
+    height: 68px;
+    position: relative;
+}
 </style>

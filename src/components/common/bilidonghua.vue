@@ -238,39 +238,6 @@ export default {
                 'ranknowtab' : this.ranknowtab,
                 'rankselect' : this.rankselect
             })
-        },
-        //时间戳转换
-        time(date){
-            Y = date.getFullYear() + '-';
-            M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-            D = date.getDate() + ' ';
-            h = date.getHours() + ':';
-            m = date.getMinutes() + ':';
-            s = date.getSeconds(); 
-            console.log(Y+M+D+h+m+s);
-        },
-        // 视频时间计算
-        count(num){
-			if(num<60){
-                return num ="00:"+num
-			}else if(num>=60 && num<3600){
-				let m
-                Math.floor(num/60)<10? m="0"+Math.floor(num/60) : m=Math.floor(num/60)
-                num%60<10? num= m+":0"+ num%60 : num = m+":"+num%60
-				return num
-			}else{
-				let h,m
-				Math.floor(num%3600/60)<10? m="0"+Math.floor(num%3600/60) : m=Math.floor(num%3600/60)
-				return num = Math.floor(num/3600)+":"+ m +":"+ Math.floor(num%3600%60)
-			}
-        },
-        // 视频播放量弹幕数计算
-        count2(num){
-            if(num>10000){
-                return (Math.round(num/1e3)/10).toFixed(1)+'万'
-            }else{
-                return num
-            }
         }
     }
 }

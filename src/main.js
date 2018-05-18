@@ -5,23 +5,13 @@ import App from './App'
 import VueRouter from 'vue-router'
 import VueLazyload from 'vue-lazyload'
 import Axios from 'axios'
+import Base from './base/base'
 import Indexpage from './pages/index'
 import Ranking from './pages/ranking'
 // ranking page
 import RankingAll from './pages/ranking/all'
 //all page
 import RankingAllAll from './pages/ranking/all/all'
-import RankingAllDonghua from './pages/ranking/all/donghua'
-import RankingAllGuochuang from './pages/ranking/all/guochuang'
-import RankingAllMusic from './pages/ranking/all/music'
-import RankingAllDance from './pages/ranking/all/dance'
-import RankingAllGame from './pages/ranking/all/game'
-import RankingAllScience from './pages/ranking/all/science'
-import RankingAllLife from './pages/ranking/all/life'
-import RankingAllGuichu from './pages/ranking/all/guichu'
-import RankingAllFashion from './pages/ranking/all/fashion'
-import RankingAllEnt from './pages/ranking/all/ent'
-import RankingAllMovies from './pages/ranking/all/movies'
 
 
 import RankingOrigin from './pages/ranking/origin'
@@ -39,6 +29,7 @@ Vue.use(VueLazyload, {
     attempt: 1
   })
 Vue.prototype.$axios = Axios;
+Vue.use(Base)
 Vue.config.productionTip = false
 
 const router = new VueRouter({
@@ -49,6 +40,7 @@ const router = new VueRouter({
             component: Indexpage
         },
         {
+            name:'Ranking',
             path: '/ranking',
             component: Ranking,
             redirect: '/ranking/all',
@@ -59,52 +51,9 @@ const router = new VueRouter({
                     redirect: '/ranking/all/0/0/0',
                     children: [
                         {
-                            path: '0/:rankselect/:rankselect2',
+                            name: 'All',
+                            path: ':rid/:rankselect/:rankselect2',
                             component: RankingAllAll
-                        },
-                        {
-                            path: '1/:rankselect/:rankselect2',
-                            component: RankingAllDonghua
-                        },
-                        {
-                            path: '168/:rankselect/:rankselect2',
-                            component: RankingAllGuochuang
-                        },
-                        {
-                            path: '3/:rankselect/:rankselect2',
-                            component: RankingAllMusic
-                        },
-                        {
-                            path: '129/:rankselect/:rankselect2',
-                            component: RankingAllDance
-                        },
-                        {
-                            path: '4/:rankselect/:rankselect2',
-                            component: RankingAllGame
-                        },
-                        {
-                            path: '36/:rankselect/:rankselect2',
-                            component: RankingAllScience
-                        },
-                        {
-                            path: '160/:rankselect/:rankselect2',
-                            component: RankingAllLife
-                        },
-                        {
-                            path: '119/:rankselect/:rankselect2',
-                            component: RankingAllGuichu
-                        },
-                        {
-                            path: '155/:rankselect/:rankselect2',
-                            component: RankingAllFashion
-                        },
-                        {
-                            path: '5/:rankselect/:rankselect2',
-                            component: RankingAllEnt
-                        },
-                        {
-                            path: '181/:rankselect/:rankselect2',
-                            component: RankingAllMovies
                         }
                     ]
                 },

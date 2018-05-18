@@ -20,11 +20,9 @@
 
 <script>
 export default {
-    created() {
-        
+    created() { 
     },
     components:{
-        
     },
     data () {
         return {
