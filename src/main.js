@@ -11,7 +11,7 @@ import Ranking from './pages/ranking'
 // ranking page
 import RankingAll from './pages/ranking/all'
 //all page
-import RankingAllAll from './pages/ranking/all/all'
+import RankingAllList from './pages/ranking/all/allList'
 
 
 import RankingOrigin from './pages/ranking/origin'
@@ -53,7 +53,7 @@ const router = new VueRouter({
                         {
                             name: 'All',
                             path: ':rid/:rankselect/:rankselect2',
-                            component: RankingAllAll
+                            component: RankingAllList
                         }
                     ]
                 },

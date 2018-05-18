@@ -36,23 +36,37 @@
             </div>
             <div class="up-info-m">
                 <div class="u-face fl">
-                    <a href="//space.bilibili.com/23340150" target="_blank" class="a">
-                        <img src="//i2.hdslb.com/bfs/face/d3722ba723a860c3e436a2191000d82291d2a2e2.jpg@68w_68h.jpg" width="68" height="68" class="up-face">
+                    <a href="https://live.bilibili.com/11365" target="_blank" class="live-online">
+                        <span>轮播中</span>
+                    </a>
+                    <a href="//space.bilibili.com/777536" target="_blank" report-id="head" class="a">
+                        <img src="//i0.hdslb.com/bfs/face/2996e22a24eed2d7767e452627a9130207defe6a.jpg@68w_68h.jpg" width="68" height="68" class="up-face">
+                        <i title="个人认证" class="auth p-auth"></i>
                     </a>
                 </div>
                 <div class="info">
                     <div class="user clearfix">
-                        <a href="//space.bilibili.com/23340150" target="_blank" class="name">ProjectMili</a>
-                        <a href="//message.bilibili.com/#whisper/mid23340150" target="_blank" class="message icon">发消息</a>
+                        <a href="//space.bilibili.com/777536" target="_blank" class="name is-vip">LexBurner</a>
+                        <a href="//message.bilibili.com/#whisper/mid777536" target="_blank" class="message icon">发消息</a>
                     </div>
                     <div class="sign static">
-                        <span>这里是Mili的官方号。用于发表Mili的歌曲。管理人是momocashew。</span><!---->
+                        <span>
+                            新浪微博：http://weibo.com/lexburner
+                        </span>
                     </div>
                     <div class="number clearfix">
-                        <span title="投稿数16">投稿：16</span><span title="粉丝数33332">粉丝：3.3万</span>
+                        <span title="投稿数233">投稿：233</span>
+                        <span title="粉丝数3067073">粉丝：306.7万</span>
                     </div>
                     <div class="btn followe">
-                        <a report-id="follow1" class="bi-btn b-gz"><span class="gz">+ 关注</span><span class="ygz">已关注</span><span class="qxgz">取消关注</span></a><!---->
+                        <a report-id="follow1" class="bi-btn b-gz">
+                            <span class="gz">+ 关注</span>
+                            <span class="ygz">已关注</span>
+                            <span class="qxgz">取消关注</span>
+                        </a>
+                        <a report-id="charge" class="bi-btn b-cd elecrank-btn">
+                            <span class="wtcd">为TA充电</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -139,7 +153,7 @@ export default {
     height: 28px;
     margin-top: -3px;
     margin-right: 3px;
-    background: url(//static.hdslb.com/images/base/icons.png);
+    background: url('../assets/icons.png');
 }
 .video-info-m .number .play:before {
     background-position: -659px -210px;
@@ -171,14 +185,14 @@ export default {
     margin-right: 3px;
 }
 .video-info-m .number .coin i {
-    background: url(//s1.hdslb.com/bfs/static/jinkela/videoplay/images/anim-coin-small.png);
+    background: url('../assets/anim-coin-small.png');
 }
 .video-info-m .number .coin b {
-    background: url(//s1.hdslb.com/bfs/static/jinkela/videoplay/images/anim-coin-small.png);
+    background: url('../assets/anim-coin-small.png');
     background-position: -2340px -60px;
 }
 .video-info-m .number .fav i {
-    background: url(//s1.hdslb.com/bfs/static/jinkela/videoplay/images/anim-collect.png);
+    background: url('../assets/anim-collect.png');
     background-position: 0px 0px;
 }
 .up-info-m {
@@ -192,5 +206,155 @@ export default {
     width: 68px;
     height: 68px;
     position: relative;
+}
+.up-info-m .u-face .live-online {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: -84px;
+    width: 77px;
+    height: 24px;
+    white-space: nowrap;
+    color: #f25d8e;
+    background-image: url('../assets/lb.gif');
+    background-repeat: no-repeat;
+}
+.up-info-m .u-face .live-online span {
+    margin-left: 22px;
+    height: 24px;
+    line-height: 24px;
+}
+.up-info-m .u-face .a {
+    display: block;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.up-info-m .u-face .up-face {
+    background: #f9f9f9;
+}
+.up-info-m .u-face .auth {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 50px;
+    background: url('../assets/user-auth.png');
+    background-repeat: no-repeat;
+    z-index: 3;
+}
+.up-info-m .u-face .p-auth {
+    background-position: -38px -53px;
+}
+.up-info-m .info {
+    width: 226px;
+    margin-left: 89px;
+}
+.up-info-m .info .user {
+    height: 22px;
+}
+.up-info-m .info .user .name {
+    display: inline-block;
+    float: left;
+    max-width: 150px;
+    font-size: 14px;
+    word-wrap: break-word;
+    overflow: hidden;
+    word-break: break-all;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    height: 20px;
+    color: #00a1d6;
+    white-space: nowrap;
+}
+.up-info-m .info .user .name.is-vip, .up-info-m .info .user .name:hover {
+    color: #fb7299;
+}
+.up-info-m .info .user .message {
+    float: right;
+    color: #6d757a;
+    background-repeat: no-repeat;
+    background-position: -272px -2007px;
+    padding-left: 30px;
+    line-height: 21px;
+}
+.up-info-m .sign {
+    word-break: break-all;
+    line-height: 20px;
+    min-height: 40px;
+    -webkit-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
+    position: relative;
+}
+.up-info-m .sign.static {
+    height: 40px;
+    overflow: hidden;
+}
+.up-info-m .number {
+    color: #99a2aa;
+    margin: 3px 0;
+}
+.up-info-m .number span {
+    float: left;
+    width: 100px;
+    line-height: 23px;
+}
+.up-info-m .btn {
+    margin-top: 10px;
+    white-space: nowrap;
+}
+.bi-btn {
+    display: inline-block;
+    background: #00a1d6;
+    color: #fff;
+    font-size: 14px;
+    padding: 4px 18px;
+    border-radius: 4px;
+    transition: all .3s;
+    user-select: none;
+    border: 1px solid #00a1d6;
+    text-align: center;
+    cursor: pointer;
+}
+.up-info-m .btn .b-gz {
+    padding: 4px 53px;
+    height: 20px;
+    line-height: 20px;
+}
+.up-info-m .btn .b-gz .gz {
+    display: block;
+}
+.up-info-m .btn .b-gz .qxgz, .up-info-m .btn .b-gz .ygz {
+    display: none;
+}
+.up-info-m .btn .b-cd {
+    margin-left: 12px;
+    padding: 4px;
+    width: 52px;
+    height: 20px;
+    line-height: 20px;
+    background: #fff;
+    border-color: #f25d8e;
+    color: #f25d8e;
+}
+.up-info-m .btn .b-cd .cd {
+    display: block;
+}
+.up-info-m .btn .b-cd .wtcd {
+    display: none;
+}
+.player-box {
+    position: relative;
+    border-top: 1px solid #e5e9ef;
+    border-bottom: 1px solid #e5e9ef;
+    background-color: #f6f9fa;
+    padding: 22px 0;
+    text-align: center;
+}
+.bofangqi {
+    min-height: 688px;
 }
 </style>

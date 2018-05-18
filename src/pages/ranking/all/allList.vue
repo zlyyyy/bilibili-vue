@@ -65,7 +65,6 @@ export default {
         }
     },
     methods: {
-        // 视频播放量弹幕数计算
 
     }
 }

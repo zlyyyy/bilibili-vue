@@ -4,6 +4,10 @@
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
+        <div class="go-top-m" v-show="gotop" @click="goTop()">
+            <div title="返回顶部" class="go-top icon">
+            </div>
+        </div>
         <app-footer></app-footer>
     </div>
 </template>
@@ -13,12 +17,32 @@ import AppHeader from './components/header'
 import AppFooter from './components/footer'
 
 export default {
-  components: {
-    AppHeader,
-    AppFooter
-  },
-  methods: {
-  }
+    components: {
+        AppHeader,
+        AppFooter
+    },
+    data () {
+        return {
+            gotop: false,
+            step: 100
+        }
+    },
+    methods: {
+        goTop(){
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
+        }
+    },
+    created() {
+        let vm = this
+        window.onscroll=function(){
+                if (document.documentElement.scrollTop>60) {
+                    vm.gotop=true;
+                }else {
+                    vm.gotop=false;
+                }
+            }
+    },
 }
 </script>
 
@@ -37,7 +61,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   box-sizing: border-box; */
   color: #333;
 }
-html { height: 100%; }
 body { font-size: 62.5%; line-height: 1; font-family: Arial, Tahoma, sans-serif; }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 ol, ul { list-style: none; }
@@ -71,6 +94,12 @@ img {
     margin: 0 auto;
     border: none;
     vertical-align: middle;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
 }
 body{
 	/* background: #f3f3f3; */
@@ -1028,8 +1057,28 @@ body{
     bottom: 2px;
     left: 2px;
 }
-/*  动画module */
-
+/*  返回顶部 */
+.go-top-m {
+    bottom: 50px;
+    width: 48px;
+    position: fixed;
+    left: 50%;
+    margin-left: 590px;
+    -webkit-transition: top .3s;
+    -o-transition: top .3s;
+    transition: top .3s;
+}
+.go-top-m .go-top {
+    cursor: pointer;
+    width: 46px;
+    height: 48px;
+    background-color: #f6f9fa;
+    background-position: -648px -72px;
+    background-repeat: no-repeat;
+    border: 1px solid #e5e9ef;
+    overflow: hidden;
+    border-radius: 4px;
+}
 /* app-footer */
 .app-footer{
     position: absolute;

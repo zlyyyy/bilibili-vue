@@ -114,16 +114,20 @@ export default {
             rankselect: 0,
             rankdropdown2: [
                 {
-                    name: '日排行'
+                    name: '日排行',
+                    num: 1
                 },
                 {
-                    name: '三日排行'
+                    name: '三日排行',
+                    num: 3
                 },
                 {
-                    name: '周排行'
+                    name: '周排行',
+                    num: 7
                 },
                 {
-                    name: '月排行'
+                    name: '月排行',
+                    num: 30
                 }
             ],
             rankselect2: 0          
@@ -136,8 +140,8 @@ export default {
             this.RouterPush()
         },
         rankSelect2(index) {
-            this.rankselect2 = index
-            this.$route.params.rankselect2 = index
+            this.rankselect2 = this.rankdropdown2[index].num
+            this.$route.params.rankselect2 = this.rankdropdown2[index].num
             this.RouterPush()
         },
         RouterPush() {
