@@ -9,11 +9,9 @@
                     <a target="_blank" :href=item.url>
                         <div class="pic">
                             <div class="lazy-img">
-                                <img :alt=item.name :src=item.pic>
+                                <img :alt=item.name v-lazy=item.pic>
                             </div>
-                            <!---->
                             <div class="cover-preview-module">
-                                <!---->
                                 <div class="progress-bar">
                                     <span style="width: 0%;"></span>
                                 </div>
@@ -64,8 +62,7 @@ export default {
 	},
     data () {
         return {
-			spreads: [],
-			online: []
+			spreads: []
         }
     },
     methods: {
@@ -81,6 +78,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

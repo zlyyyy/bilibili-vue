@@ -5,9 +5,9 @@
             <div class="bili-wrapper head-content">
                 <div class="search">
                     <div class="searchform">
-                        <input type="text" autocomplete="off" accesskey="s" x-webkit-speech="" x-webkit-grammar="builtin:translate" :placeholder=SearchWord value="" class="search-keyword">
-                        <button type="submit" class="search-submit"></button>
-                    </div><!---->
+                        <input v-model="searchValue" type="text" :placeholder=SearchWord.show @keyup.enter="searchALL()" class="search-keyword">
+                        <button type="submit" class="search-submit" @click="searchALL()"></button>
+                    </div>
                     <ul class="bilibili-suggest" v-show="suggestShow">
                         <li class="kw">
                             <div class="b-line">
@@ -25,6 +25,7 @@
                 </div>
                 <a class="head-logo" :style="{background:'url('+headlogo+')'}"></a>
             </div>
+            <a href="" target="_blank" class="banner-link"></a>
         </div>
         <div class="bili-wrapper">
             <div class="primary-menu">
@@ -68,6 +69,11 @@
                         </div>
                     </li>
                 </ul>
+                <div class="gif-menu nav-gif" v-if="menuIcon.links">
+                    <a :href="menuIcon.links[0]" target="_blank" :title="menuIcon.title" class="random-p">
+                        <img :src="menuIcon.icon" alt="">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -78,6 +84,7 @@ import NavMenu from '../components/common/navMenu'
 export default {
     created() {
         this.getSearchDefaultWords()
+        this.getMenuIcon()
     },
     components:{
         NavMenu
@@ -86,7 +93,9 @@ export default {
         return {
             headbannersrc: require('../assets/nav-bg.png'),
             headlogo: require('../assets/head-logo.png'),
-            SearchWord:'',
+            menuIcon: [],
+            searchValue:'',
+            SearchWord:[],
             suggestShow:false,
             wrapperdata: [
                 {
@@ -604,13 +613,37 @@ export default {
         }
     },
     methods: {
-        getSearchDefaultWords(){
-            this.$axios.get('/api/widget/getSearchDefaultWords')
+        getHeadBanner(){
+            this.$axios.get('/static/headbanner.json')
             .then((res)=>{
-				this.SearchWord = res.data["0"].show
+				this.headbannersrc = res.data["0"]
             }).catch((error)=>{
                 console.log(error)
 			})
+        },
+        getSearchDefaultWords(){
+            this.$axios.get('/api/widget/getSearchDefaultWords')
+            .then((res)=>{
+				this.SearchWord = res.data["0"]
+            }).catch((error)=>{
+                console.log(error)
+			})
+        },
+        getMenuIcon(){
+            this.$axios.get('/static/menuicon.json')
+            .then((res)=>{
+				this.menuIcon = res.data.data
+            }).catch((error)=>{
+                console.log(error)
+			})
+        },
+        searchALL() {
+            if(this.searchValue === ''){
+                window.open('http://search.bilibili.com/all?keyword='+this.SearchWord.word)
+            }else{
+                window.open('http://search.bilibili.com/all?keyword='+this.searchValue)
+            }
+            
         }
     }
 }

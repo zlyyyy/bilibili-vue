@@ -73,7 +73,8 @@
         </div>
         <div class="player-box">
             <div class="bofangqi bili-wrapper">
-                <iframe src="https://secure.bilibili.com/secure,cid=279786&aid=170001" width="100%" height="585"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+               <iframe src="//player.bilibili.com/player.html?aid=23562529&cid=39326841&page=1
+                " width="100%" height="585"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
             </div>
         </div>
     </div>
@@ -257,7 +258,7 @@ export default {
 }
 .up-info-m .info .user .name {
     display: inline-block;
-    float: left;
+    /* float: left; */
     max-width: 150px;
     font-size: 14px;
     word-wrap: break-word;

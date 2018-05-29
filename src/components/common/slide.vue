@@ -1,17 +1,17 @@
 <template>
     <div class="slide" @mouseover="clearInv" @mouseout="runInv">
-        <div class="slide-img">
-            <a :href=slidedata[nowIndex].href>
+        <div class="slide-img" v-if="slidedata[nowIndex]">
+            <a :href=slidedata[nowIndex].url target="_blank" :title=slidedata[nowIndex].name>
                 <transition name="slide-trans">
-                    <img v-if="isShow" :src=slidedata[nowIndex].src>
+                    <img v-if="isShow" :src=slidedata[nowIndex].pic>
                 </transition>
                 <transition name="slide-trans-old">
-                    <img v-if="!isShow" :src=slidedata[nowIndex].src>
+                    <img v-if="!isShow" :src=slidedata[nowIndex].pic>
                 </transition>
             </a>
         </div>
-        <div class="slide-title">
-            <a>{{ slidedata[nowIndex].title }}</a>
+        <div class="slide-title" v-if="slidedata[nowIndex]">
+            <a :href=slidedata[nowIndex].url target="_blank" :title=slidedata[nowIndex].name>{{ slidedata[nowIndex].name }}</a>
         </div>
         <ul class="slide-page">
             <li v-for="(item,index) in slidedata" :class="{on: index === nowIndex}" @click="goto(index)"></li>

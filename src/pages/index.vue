@@ -9,9 +9,11 @@
         </div>
         <!-- 推广模块 -->
         <popularize :popularizeOnline="onlineData"></popularize>
-        <!--  动画 -->
-        <donghua :maindataModule="mainData" @videoInfoxy='videoinforevent' v-for="(item,index) in mainData" :id="item.id" :key="item.id">
-        </donghua>
+        <!--  动画 --> 
+        <zone-module :maindataModule="mainData" @videoInfoxy='videoinforevent'>
+        </zone-module>
+         <!-- 更新
+        <dh-update></dh-update> -->
          <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
                 {{ videoinforitem[videodata.mouseindex].title }}
@@ -38,50 +40,26 @@
 import Slide from '../components/common/slide'
 import Recommend from '../components/common/recommend'
 import Popularize from '../components/common/popularize'
-import Donghua from '../components/common/bilidonghua'
+import ZoneModule from '../components/common/zoneModule'
+import DhUpdate from '../components/common/dhUpdate'
 export default {
     created() {
         this.online()
         this.mainDataGet()
+        this.slide()
     },
     components:{
         Slide,
         Recommend,
         Popularize,
-        Donghua
+        ZoneModule,
+        DhUpdate
     },
     data () {
         return {
             slidetime:2000,
             pagation: true,
-            slidedata: [
-                {
-                    src: require('../assets/1.jpg'),
-                    title: '要不要穿越回去再看一遍？',
-                    href: '1'
-                },
-                {
-                    src: require('../assets/2.jpg'),
-                    title: '悄咪咪出发去玩（chi），来不来！',
-                    href: '2'
-                },
-                {
-                    src: require('../assets/3.jpg'),
-                    title: '樱花妆有奖大比拼',
-                    href: '3'
-                },
-                {
-                    src: require('../assets/4.jpg'),
-                    title: '魔法少女做错了什么',
-                    href: '4'
-                },
-                {
-                    src: require('../assets/5.jpg'),
-                    title: '你都听过了吗？',
-                    href: '5'
-                },
-            ],
-            recdata: [],
+            slidedata: [],
             onlineData: [],
             mainData: [
                 {
@@ -108,6 +86,7 @@ export default {
                             name: '原创'
                         }
                     ],
+                    timeline: false,
                     rankdropdown:[
                         {
                             name: '三日'
@@ -124,14 +103,73 @@ export default {
                     rankSevenAllMoreUrl: '/ranking/all/1/1/7/',//一周全部排行更多链接
                     rankSevenOriginalList: [],//一周原创排行
                     rankSevenOriginalMoreUrl: '/ranking/origin/1/1/7/'//一周原创排行链接
+                },
+                {
+                    id: 'bili_bangumi',//模型id
+                    title: '番剧', //模型名称
+                    icon: 'icon-bangumi',//模型图标
+                    tab:[
+                        {
+                            name: '最新'
+                        },
+                        {
+                            name: '一'
+                        },
+                        {
+                            name: '二'
+                        },
+                        {
+                            name: '三'
+                        },
+                        {
+                            name: '四'
+                        },
+                        {
+                            name: '五'
+                        },
+                        {
+                            name: '六'
+                        },
+                        {
+                            name: '日'
+                        }
+                    ],
+                    dynamic: 1514,//模型新动态数
+                    moreUrl: '/v/bangumi',//模型更多链接
+                    newTrends: [],//最新动态
+                    newSub: [],//最新投稿
+                    ranktab: [],
+                    timeline: true,
+                    timelineData: [],
+                    rankdropdown:[
+                        {
+                            name: '三日'
+                        },
+                        {
+                            name: '一周'
+                        }
+                    ],
+                    rankThreeAllList: [],//三日全部排行
+                    rankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
+                    rankSevenAllList: [],//一周全部排行
+                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/'//一周全部排行更多链接
                 }
-            ],    
+            ],
+            timelineCn:[],   
             videodata: [],
             videoinforShow: false,
             videoinforitem: []
         }
     },
     methods: {
+        slide() {
+            this.$axios.get('/static/popularize.json')
+            .then((res)=>{
+                this.slidedata = res.data.data["23"]
+            }).catch((error)=>{
+                console.log(error)
+            })
+        },
         //当前在线数
         online() {
             this.$axios.get('/static/online.json')
@@ -149,15 +187,19 @@ export default {
                     this.$axios.get('/static/maindata/dh_rankThreeAllList.json'),
                     this.$axios.get('/static/maindata/dh_rankThreeOriginalList.json'),
                     this.$axios.get('/static/maindata/dh_rankSevenAllList.json'),
-                    this.$axios.get('/static/maindata/dh_rankSevenOriginalList.json')
+                    this.$axios.get('/static/maindata/dh_rankSevenOriginalList.json'),
+                    this.$axios.get('/static/timeline_global.json'),
+                    this.$axios.get('/static/timeline_cn.json'),
                 ])
-                .then(this.$axios.spread(( newTrends,newSub,rankThreeAllList,rankThreeOriginalList,rankSevenAllList,rankSevenOriginalList ) => {
+                .then(this.$axios.spread(( newTrends,newSub,rankThreeAllList,rankThreeOriginalList,rankSevenAllList,rankSevenOriginalList,timelineGlobal,timelineCn ) => {
                     this.mainData[0].newTrends = newTrends.data.data
                     this.mainData[0].newSub = newSub.data.data
                     this.mainData[0].rankThreeAllList = rankThreeAllList.data.data
                     this.mainData[0].rankThreeOriginalList = rankThreeOriginalList.data.data
                     this.mainData[0].rankSevenAllList = rankSevenAllList.data.data
                     this.mainData[0].rankSevenOriginalList = rankSevenOriginalList.data.data
+                    this.mainData[1].timelineData = timelineGlobal.data.result
+                    this.timelineCn = timelineCn.data.result
                 }))
         },
         videotest()  {
@@ -181,8 +223,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-.chief-recommend-module{
-    padding-bottom: 30px;
-}
+<style scoped>
 </style>

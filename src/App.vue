@@ -93,7 +93,7 @@ img {
     display: block;
     margin: 0 auto;
     border: none;
-    vertical-align: middle;
+    /* vertical-align: middle; */
 }
 .fl{
     float: left;
@@ -113,12 +113,12 @@ body{
     display: inline-block;
     background: url(assets/icons.png);
 }
-.app{
-    /* position: relative;
+/* .app{
+    position: relative;
     min-height: calc(100%);
     box-sizing: border-box;
-    padding-bottom: 242px; */
-}
+    padding-bottom: 242px;
+} */
 .bili-wrapper {
     margin: 0 auto;
     width: 1160px;
@@ -216,6 +216,13 @@ body{
 .app-header .head-banner .head-content {
     position: relative;
     height: 170px;
+}
+.app-header .head-banner .banner-link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
 }
 .app-header .search {
     position: absolute;
@@ -376,7 +383,7 @@ body{
     float: left;
     display: block;
     position: relative;
-    margin-right: 0;
+    margin-right:11px;
 }
 .primary-menu .nav-menu>li>a:not(.side-link) {
     width: 48px;
@@ -652,7 +659,31 @@ body{
 	display: inline-block;
 	margin-bottom: 20px
 }
+.nav-gif {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 50px;
+    padding: 4px 0;
+}
+.gif-menu .random-p {
+    width: 69px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 0;
+    overflow: hidden;
+}
+.gif-menu .random-p img {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    border-radius: 3px;
+}
 /* app-body */
+.chief-recommend-module{
+    padding-bottom: 30px;
+}
 .app-body{
     overflow: hidden;
     margin-bottom: 40px;
@@ -1067,6 +1098,7 @@ body{
     -webkit-transition: top .3s;
     -o-transition: top .3s;
     transition: top .3s;
+    z-index: 999;
 }
 .go-top-m .go-top {
     cursor: pointer;

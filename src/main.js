@@ -37,7 +37,10 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: Indexpage
+            component: Indexpage,
+            meta: {
+                title: 'VUE哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+            },
         },
         {
             name:'Ranking',
@@ -53,7 +56,10 @@ const router = new VueRouter({
                         {
                             name: 'All',
                             path: ':rid/:rankselect/:rankselect2',
-                            component: RankingAllList
+                            component: RankingAllList,
+                            meta: {
+                                title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                            }
                         }
                     ]
                 },
@@ -77,10 +83,18 @@ const router = new VueRouter({
         },
         {
             path: '/video',
-            component: Videopage
+            component: Videopage,
+            meta: {
+                title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+            }
         }
     ]
 })
+router.beforeEach((to, from, next) => {
+    /* 路由发生变化修改页面title */
+    document.title = to.meta.title
+    next()
+  })
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
