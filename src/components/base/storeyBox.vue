@@ -1,9 +1,12 @@
 <template>
     <div class="new-comers-module l-con">
         <div class="zone-title">
-            <div class="headline">
-                <i class="icon icon_t" :class="storeydata.icon"></i>
-                <a :href=storeydata.moreUrl class="name">{{ storeydata.title }}</a>
+            <div class="headline" :class="{'fj' : storeydata.rankPic == false}">
+                <template v-if="storeydata.rankPic == true">
+                    <i class="icon icon_t" :class="storeydata.icon"></i>
+                    <a :href=storeydata.moreUrl class="name">{{ storeydata.title }}</a>
+                </template>
+                <a :href=storeydata.moreUrl class="name" v-else>{{ storeydata.title2 }}</a>
                 <div class="bili-tab">
                     <div class="bili-tab-item" v-for="(item,index) in storeydata.tab" :class="{'on' : index === nowtab }" @click="nowtabclick(index)">{{ item.name }}</div>
                 </div>

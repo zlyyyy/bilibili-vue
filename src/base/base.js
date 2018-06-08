@@ -19,9 +19,10 @@ exports.install =function(Vue,options){
             num%60<10? num= m+":0"+ num%60 : num = m+":"+num%60
             return num
         }else{
-            let h,m
+            let h,m,s
             Math.floor(num%3600/60)<10? m="0"+Math.floor(num%3600/60) : m=Math.floor(num%3600/60)
-            return num = Math.floor(num/3600)+":"+ m +":"+ Math.floor(num%3600%60)
+            Math.floor(num%3600%60)<10? s="0"+Math.floor(num%3600%60) : s=Math.floor(num%3600%60)
+            return num = Math.floor(num/3600)+":"+ m +":"+ s
         }
     }
     Vue.prototype.time = function(date){

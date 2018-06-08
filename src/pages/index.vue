@@ -95,6 +95,8 @@ export default {
                             name: '一周'
                         }
                     ],
+                    rankPic: true,
+                    rankLists: 7,
                     rankThreeAllList: [],//三日全部排行
                     rankThreeAllMoreUrl: '/ranking/all/1/1/3/',//三日全部排行更多链接
                     rankThreeOriginalList: [],//三日原创排行
@@ -107,8 +109,17 @@ export default {
                 {
                     id: 'bili_bangumi',//模型id
                     title: '番剧', //模型名称
+                    title2: '番剧动态',
                     icon: 'icon-bangumi',//模型图标
                     tab:[
+                        {
+                            name: '有新动态'
+                        },
+                        {
+                            name: '最新投稿'
+                        }
+                    ],
+                    tab2:[
                         {
                             name: '最新'
                         },
@@ -149,10 +160,13 @@ export default {
                             name: '一周'
                         }
                     ],
+                    rankPic: false,
+                    rankLists: 10,
                     rankThreeAllList: [],//三日全部排行
                     rankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
                     rankSevenAllList: [],//一周全部排行
-                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/'//一周全部排行更多链接
+                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
+                    AdData: []
                 }
             ],
             timelineCn:[],   
@@ -189,9 +203,28 @@ export default {
                     this.$axios.get('/static/maindata/dh_rankSevenAllList.json'),
                     this.$axios.get('/static/maindata/dh_rankSevenOriginalList.json'),
                     this.$axios.get('/static/timeline_global.json'),
+                    this.$axios.get('/static/ranking/timeline_global_3.json'),
+                    this.$axios.get('/static/ranking/timeline_global_7.json'),
+                    this.$axios.get('/static/maindata/fj_newTrends.json'),
+                    this.$axios.get('/static/maindata/fj_newSub.json'),
+                    this.$axios.get('/static/fj_ad_slide.json'),
                     this.$axios.get('/static/timeline_cn.json'),
                 ])
-                .then(this.$axios.spread(( newTrends,newSub,rankThreeAllList,rankThreeOriginalList,rankSevenAllList,rankSevenOriginalList,timelineGlobal,timelineCn ) => {
+                .then(this.$axios.spread(( 
+                    newTrends,
+                    newSub,
+                    rankThreeAllList,
+                    rankThreeOriginalList,
+                    rankSevenAllList,
+                    rankSevenOriginalList,
+                    timelineGlobal,
+                    timelineGlobalThree,
+                    timelineGlobalSeven,
+                    fjnewTrends,
+                    fjnewSub,
+                    fjadSlide,
+                    timelineCn 
+                ) => {
                     this.mainData[0].newTrends = newTrends.data.data
                     this.mainData[0].newSub = newSub.data.data
                     this.mainData[0].rankThreeAllList = rankThreeAllList.data.data
@@ -199,6 +232,11 @@ export default {
                     this.mainData[0].rankSevenAllList = rankSevenAllList.data.data
                     this.mainData[0].rankSevenOriginalList = rankSevenOriginalList.data.data
                     this.mainData[1].timelineData = timelineGlobal.data.result
+                    this.mainData[1].rankThreeAllList = timelineGlobalThree.data.result.list
+                    this.mainData[1].rankSevenAllList = timelineGlobalSeven.data.result.list
+                    this.mainData[1].newTrends = fjnewTrends.data.data
+                    this.mainData[1].newSub = fjnewSub.data.data
+                    this.mainData[1].AdData = fjadSlide.data.data
                     this.timelineCn = timelineCn.data.result
                 }))
         },

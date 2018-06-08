@@ -5,6 +5,8 @@
                 <bangumi-module v-if="item.timeline" :storeydata="item"></bangumi-module>
                 <storey-box v-else :storeydata="item"></storey-box>
                 <zone-rank :zoneRankdata="item" @videoInfoxy='videoinforevent'></zone-rank>
+                <storey-box v-if="item.rankPic==false" :storeydata="item"></storey-box>
+                <ad-slide></ad-slide>
             </div>
         </div>
     </div>
@@ -14,6 +16,7 @@
 import BangumiModule from '../base/bangumiModule'
 import StoreyBox from '../base/storeyBox'
 import ZoneRank from '../base/zoneRank'
+import AdSlide from '../common/slide'
 export default {
     created() {
         
@@ -21,12 +24,18 @@ export default {
     components: {
         BangumiModule,
         StoreyBox,
-        ZoneRank
+        ZoneRank,
+        AdSlide
     },
     props: {
         maindataModule: {
             type: [Object,Array],
             default: () => []
+        }
+    },
+    computed: {
+        AdData(){
+            return this.maindataModule.AdData
         }
     },
     data () {
@@ -76,6 +85,9 @@ export default {
     margin-right: 20px;
     float: left;
     color: #222;
+}
+.new-comers-module .zone-title .fj .name {
+    font-size: 18px;
 }
 .new-comers-module .zone-title .headline .name:hover {
     color: #00a1d6;
@@ -288,6 +300,7 @@ export default {
 }
 .new-comers-module .zone-title .headline .link-more:hover {
     background-color: #ccd0d7;
+    color: #555 !important;
 }
 .new-comers-module .zone-title .headline .link-more:hover i {
     margin-left: 5px;
@@ -497,6 +510,25 @@ export default {
     overflow: hidden;
     color: #222;
 }
+.bangumi-rank-list .rank-item .ri-title {
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    max-width: 144px;
+    line-height: 18px;
+    vertical-align: top;
+    color: #222;
+    display: inline-block;
+    overflow: hidden;
+}
+.bangumi-rank-list .rank-item .ri-total {
+    display: inline-block;
+    vertical-align: top;
+    color: #99a2aa;
+    margin-left: 10px;
+    line-height: 18px;
+    height: 18px;
+}
 .rank-list .rank-item:hover .ri-title {
     color: #00a1d6;
 }
@@ -524,6 +556,7 @@ export default {
 .sec-rank .more-link:hover {
     background-color: #ccd0d7;
     border-color: #ccd0d7;
+    color: #222 !important;
 }
 .sec-rank .rank-list-wrap.show-origin {
     margin-left: -100%;

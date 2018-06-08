@@ -27,8 +27,8 @@
 export default {
     props: {
         slidedata: {
-            type: Array,
-            default: []
+            type: [Object,Array],
+            default: () => []
         },
         slidetimedata: {
             type: Number,

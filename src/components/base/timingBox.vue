@@ -26,11 +26,24 @@
                 </p>
             </div>
         </div>
+        <div class="card-timing-module clearfix card-timing" v-for="(item,index) in timelineSort" v-if="item.weekday==0&&nowtab==7">
+            <a :href="'https://www.bilibili.com/bangumi/play/ss'+item.season_id+'/'" target="_blank" :title="item.title" class="pic">
+            <div class="lazy-img">
+                <img :alt="item.title" v-lazy="item.square_cover">
+            </div>
+            </a>
+            <div class="r-text">
+                <a :href="'https://www.bilibili.com/bangumi/play/ss'+item.season_id+'/'" target="_blank" :title="item.title" class="t">{{ item.title+item.weekday }}</a>
+                <p class="update" :class="{'on': item.new}">
+                    <span>更新至<a :href="'htttps://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank">{{ item.bgmcount }}话</a></span><!---->
+                </p>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-// import TimingBox from '../base/timingBox'
+
 export default {
     props: {
         timelineData: {
