@@ -1,5 +1,7 @@
-# myvue
+# myvue-bilibili
 
+>Author: zlang
+>Url: zlang.top
 > my home vue_project
 
 ## Build Setup
