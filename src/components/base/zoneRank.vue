@@ -20,7 +20,7 @@
                             <p class="ri-point" v-if="rankPic">综合评分：{{ count2(item.pts) }}</p>
                             <span class="ri-total" v-else>更新至第{{ item.newest_ep_index }}话</span>
                         </div>
-                        <div class="watch-later-trigger w-later" v-if="rankPic"></div>
+                        <div class="watch-later-trigger w-later" v-if="rankPic&&index===0"></div>
                     </a>
                 </li>             
             </ul>
@@ -36,13 +36,13 @@
                             <p class="ri-point" v-if="rankPic">综合评分：{{ count2(item.pts) }}</p>
                             <span class="ri-total" v-else>更新至第{{ item.newest_ep_index }}话</span>
                         </div>
-                        <div class="watch-later-trigger w-later" v-if="rankPic"></div>
+                        <div class="watch-later-trigger w-later" v-if="rankPic&&index===0"></div>
                     </a>
                 </li>   
             </ul>
         </div>
         <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===1">
-            <ul class="rank-list" :class="'hot-list'">
+            <ul class="rank-list" :class="rankClass">
                 <li class="rank-item" v-for="(item,index) in zoneRankdata.rankSevenAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                     <i class="ri-num">{{ index+1 }}</i>
                     <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
@@ -54,7 +54,7 @@
                             <p class="ri-point" v-if="rankPic">综合评分：{{ count2(item.pts) }}</p>
                             <span class="ri-total" v-else>更新至第{{ item.newest_ep_index }}话</span>
                         </div>
-                        <div class="watch-later-trigger w-later" v-if="rankPic"></div>
+                        <div class="watch-later-trigger w-later" v-if="rankPic&&index===0"></div>
                     </a>
                 </li>             
             </ul>
@@ -70,7 +70,7 @@
                             <p class="ri-point" v-if="rankPic">综合评分：{{ count2(item.pts) }}</p>
                             <span class="ri-total" v-else>更新至第{{ item.newest_ep_index }}话</span>
                         </div>
-                        <div class="watch-later-trigger w-later" v-if="rankPic"></div>
+                        <div class="watch-later-trigger w-later" v-if="rankPic&&index===0"></div>
                     </a>
                 </li>   
             </ul>
