@@ -84,7 +84,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .slide-trans-enter-active {
   transition: all .5s;
 }
@@ -124,7 +124,7 @@ export default {
     width: 100%;
     height: 36px;
     line-height: 36px;
-    background: rgba(0,0,0,.5);
+    background: -webkit-linear-gradient(transparent,rgba(0,0,0,.5));
     font-size: 14px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px; 

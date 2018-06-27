@@ -13,7 +13,7 @@
         <zone-module :maindataModule="mainData" @videoInfoxy='videoinforevent'>
         </zone-module>
         <!--  动画 --> 
-        <bangumi-module :bangumiData="bangumiData">
+        <bangumi-module v-for="(item,index) in bangumiData" :id="item.id" :key="item.id" :bangumiData="item">
         </bangumi-module>
          <!-- 更新
         <dh-update></dh-update> -->
@@ -172,13 +172,83 @@ export default {
                     rankThreeAllList: [],//三日全部排行
                     rankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
                     rankSevenAllList: [],//一周全部排行
-                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',
-                    AdShow: true,//一周全部排行更多链接
+                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
                     AdData: [
+                    ],
+                    Adpagation: false,
+                    AdTime: 3000
+                },
+                {
+                    id: 'bili_guochuang',//模型id
+                    title: '国创', //模型名称
+                    title2: '国产原创相关',
+                    icon: 'icon-guochuang',//模型图标
+                    tab:[
                         {
-
+                            name: '有新动态'
+                        },
+                        {
+                            name: '最新投稿'
                         }
-                    ]
+                    ],
+                    tab2:[
+                        {
+                            name: '最新'
+                        },
+                        {
+                            name: '一'
+                        },
+                        {
+                            name: '二'
+                        },
+                        {
+                            name: '三'
+                        },
+                        {
+                            name: '四'
+                        },
+                        {
+                            name: '五'
+                        },
+                        {
+                            name: '六'
+                        },
+                        {
+                            name: '日'
+                        }
+                    ],
+                    dynamic: 1514,//模型新动态数
+                    moreUrl: '/v/bangumi',//模型更多链接
+                    newTrends: [],//最新动态
+                    newSub: [],//最新投稿
+                    ranktab: [
+                        {
+                            name: '全部'
+                        },
+                        {
+                            name: '原创'
+                        }
+                    ],
+                    timeline: true,
+                    timelineData: [],
+                    rankdropdown:[
+                        {
+                            name: '三日'
+                        },
+                        {
+                            name: '一周'
+                        }
+                    ],
+                    rankPic: false,
+                    rankLists: 10,
+                    rankThreeAllList: [],//三日全部排行
+                    rankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
+                    rankSevenAllList: [],//一周全部排行
+                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
+                    AdData: [
+                    ],
+                    Adpagation: false,
+                    AdTime: 3000
                 }
             ],
             timelineCn:[],   
@@ -214,13 +284,13 @@ export default {
                     this.$axios.get('/static/maindata/dh_rankThreeOriginalList.json'),
                     this.$axios.get('/static/maindata/dh_rankSevenAllList.json'),
                     this.$axios.get('/static/maindata/dh_rankSevenOriginalList.json'),
-                    this.$axios.get('/static/timeline_global.json'),
+                    this.$axios.get('/static/bangumiData/timeline_global.json'),
                     this.$axios.get('/static/ranking/timeline_global_3.json'),
                     this.$axios.get('/static/ranking/timeline_global_7.json'),
-                    this.$axios.get('/static/maindata/fj_newTrends.json'),
-                    this.$axios.get('/static/maindata/fj_newSub.json'),
+                    this.$axios.get('/static/bangumiData/fj_newTrends.json'),
+                    this.$axios.get('/static/bangumiData/fj_newSub.json'),
                     this.$axios.get('/static/fj_ad_slide.json'),
-                    this.$axios.get('/static/timeline_cn.json'),
+                    this.$axios.get('/static/bangumiData/timeline_cn.json'),
                 ])
                 .then(this.$axios.spread(( 
                     newTrends,
@@ -248,8 +318,8 @@ export default {
                     this.bangumiData[0].rankSevenAllList = timelineGlobalSeven.data.result.list
                     this.bangumiData[0].newTrends = fjnewTrends.data.data
                     this.bangumiData[0].newSub = fjnewSub.data.data
-                    this.bangumiData[0].AdData = fjadSlide.data.data
-                    this.timelineCn = timelineCn.data.result
+                    this.bangumiData[0].AdData = fjadSlide.data.result
+                    this.bangumiData[1].timelineData = timelineCn.data.result
                 }))
         },
         videotest()  {
@@ -279,10 +349,11 @@ export default {
     padding-bottom: 30px;
 }
 .new-comers-module .zone-title {
-    padding: 10px 20px 30px 0;
+    padding: 0 20px 0 0;
 }
 .new-comers-module .zone-title .headline {
-    padding: 0 0 15px;
+    padding: 10px 0 16px;
+    overflow: hidden;
 }
 .new-comers-module .zone-title .headline .icon_t,
 .bangumi-timing-module .headline .icon_t {
@@ -371,7 +442,7 @@ export default {
 }
 .bangumi-timing-module .timing-box {
     position: relative;
-    margin: 0 20px 40px 0;
+    margin: 0 20px 20px 0;
     height: 398px;
     overflow-y: auto;
 }
@@ -571,7 +642,8 @@ export default {
     float: left;
     margin: 0 20px 20px 0;
 }
-.zone-module .zone-rank {
+.zone-module .zone-rank,
+.bangumi-module .zone-rank {
     float: right;
     width: 260px;
     min-height: 360px;
@@ -731,25 +803,6 @@ export default {
     height: 18px;
     overflow: hidden;
     color: #222;
-}
-.bangumi-rank-list .rank-item .ri-title {
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    max-width: 144px;
-    line-height: 18px;
-    vertical-align: top;
-    color: #222;
-    display: inline-block;
-    overflow: hidden;
-}
-.bangumi-rank-list .rank-item .ri-total {
-    display: inline-block;
-    vertical-align: top;
-    color: #99a2aa;
-    margin-left: 10px;
-    line-height: 18px;
-    height: 18px;
 }
 .rank-list .rank-item:hover .ri-title {
     color: #00a1d6;

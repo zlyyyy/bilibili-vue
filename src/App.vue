@@ -801,6 +801,10 @@ body{
 	float: left;
 	width: 900px
 }
+.bili-wrapper .r-con {
+    width: 260px;
+    float: right;
+}
 .popularize-module .headline {
 	padding: 10px 0 15px;
     height: 30px;
