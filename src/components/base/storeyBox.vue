@@ -2,7 +2,7 @@
     <div class="new-comers-module l-con">
         <div class="zone-title">
             <div class="headline" :class="{'fj' : storeydata.rankPic == false}">
-                <template v-if="storeydata.rankPic == true">
+                <template v-if="storeydata.doubletitle == false">
                     <i class="icon icon_t" :class="storeydata.icon"></i>
                     <a :href=storeydata.moreUrl class="name">{{ storeydata.title }}</a>
                 </template>

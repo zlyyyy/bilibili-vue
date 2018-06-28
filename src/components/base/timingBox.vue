@@ -12,6 +12,7 @@
                     <span>
                         {{ item.bgmcount==-1? '尚未更新' : '更新至'}}
                         <a :href="'htttps://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank" v-if="item.bgmcount>0">{{ item.bgmcount +'话'}}</a>
+                        <a :href="'htttps://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank" v-else>{{ item.bgmcount }}</a>
                     </span>
                 </p>
             </div>
@@ -28,6 +29,7 @@
                     <span>
                         {{ item.bgmcount==-1? '尚未更新' : '更新至'}}
                         <a :href="'htttps://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank" v-if="item.bgmcount>0">{{ item.bgmcount +'话'}}</a>
+                        <a :href="'htttps://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank" v-else>{{ item.bgmcount }}</a>
                     </span>
                 </p>
             </div>
@@ -44,6 +46,7 @@
                     <span>
                         {{ item.bgmcount==-1? '尚未更新' : '更新至'}}
                         <a :href="'htttps://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank" v-if="item.bgmcount>0">{{ item.bgmcount +'话'}}</a>
+                        <a :href="'htttps://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank" v-else>{{ item.bgmcount }}</a>
                     </span>
                 </p>
             </div>
@@ -65,7 +68,6 @@ export default {
         }
     },
     components: {
-        // TimingBox
     },
     computed:{
         //根据今天的日期排序返回数组，取本周今日前包括今日的数据
@@ -82,7 +84,15 @@ export default {
         },
         //根据favorites排序返回数组
         timelineSort(){
-            return this.sortBynum(this.timelineData,'favorites')
+            let now = this.nowtab
+            if(now>6){
+                now = 0
+            }
+            let first = this.timelineData.filter(function(item){
+                    return item.weekday==now
+            }
+            )
+            return this.sortBynum(first,'favorites')
         },
         timelineNew(){
             //根据是否更新返回数组
@@ -121,7 +131,7 @@ export default {
                 var y = b[num]
                 return y-x //降序，反之升序
             })
-        },
+        }
     }
 }
 </script>

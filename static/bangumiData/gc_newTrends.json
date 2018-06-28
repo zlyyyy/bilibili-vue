@@ -1,0 +1,510 @@
+{
+    "code": 0,
+    "message": "0",
+    "ttl": 1,
+    "data": {
+        "archives": [
+            {
+                "aid": 25685121,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/7cad60c87d5235dcbe392e5411ffaadf957647c9.jpg",
+                "title": "《剑网3·侠肝义胆沈剑心》OP首曝！来者何人?在下沈剑心是也！",
+                "pubdate": 1530149400,
+                "ctime": 1530149400,
+                "desc": "",
+                "state": 0,
+                "attribute": 93056,
+                "duration": 61,
+                "redirect_url": "http://www.bilibili.com/bangumi/play/ep231215/",
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 1,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 326309575,
+                    "name": "西山映画",
+                    "face": "http://i2.hdslb.com/bfs/face/361110347644dacdc2470214a4af06fef8bf5483.jpg"
+                },
+                "stat": {
+                    "aid": 25685121,
+                    "view": 3247,
+                    "danmaku": 142,
+                    "reply": 214,
+                    "favorite": 9,
+                    "coin": 98,
+                    "share": 156,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 32,
+                    "dislike": 0
+                },
+                "dynamic": "#剑网3·侠肝义胆沈剑心#OP如约而至，在下沈剑心，参上！",
+                "cid": 43820482,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25720450,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i1.hdslb.com/bfs/archive/e24c28cdf8c09e39f866694124f17846d61402ee.jpg",
+                "title": "「阴阳师手书」荒的前生",
+                "pubdate": 1530148895,
+                "ctime": 1530148895,
+                "desc": "bgm ゼロ",
+                "state": 0,
+                "attribute": 16768,
+                "duration": 107,
+                "mission_id": 10564,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 1,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 33547061,
+                    "name": "白少言_",
+                    "face": "http://i2.hdslb.com/bfs/face/df512d4e38e5b658a602ccbb907ef9c0acef7bb9.jpg"
+                },
+                "stat": {
+                    "aid": 25720450,
+                    "view": 7,
+                    "danmaku": 0,
+                    "reply": 0,
+                    "favorite": 0,
+                    "coin": 0,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 0,
+                    "dislike": 0
+                },
+                "dynamic": "#ゼロ##阴阳师##阴阳师•平安物语 同人创作大赛#",
+                "cid": 43892756,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25722195,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/5b58f2db59f169c4c2dc30014cc401c1b09aad86.jpg",
+                "title": "【一个瞎聊】看似是一个儿童玩具动画的吐槽，实则是一个应援视频",
+                "pubdate": 1530148866,
+                "ctime": 1530148866,
+                "desc": "bgm：Various Artists - We No Speak Americano [mqms320]\n素材：炫击勇者之炫击战卡\n这看似是一个儿童玩具动画的吐槽，实则是一个应援视频，虽然是给十八线角色应援的视频_(:з)∠)_但是只要能够让他不拿本日倒数第一就行，这个心愿应该还是不难的吧……",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 380,
+                "mission_id": 10566,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 1559540,
+                    "name": "黄金个个",
+                    "face": "http://i0.hdslb.com/bfs/face/d3a27c44c1363f46db9c2a7c4878235604bfd61e.jpg"
+                },
+                "stat": {
+                    "aid": 25722195,
+                    "view": 26,
+                    "danmaku": 0,
+                    "reply": 2,
+                    "favorite": 3,
+                    "coin": 4,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 6,
+                    "dislike": 0
+                },
+                "dynamic": "这看似是一个儿童玩具动画的吐槽，实则是一个应援视频，虽然是给十八线角色应援的视频_(:з)∠)_但是只要能够让他不拿本日倒数第一就行，这个心愿应该还是不难的吧……#炫击勇者之炫击战卡#",
+                "cid": 43897190,
+                "dimension": {
+                    "width": 1280,
+                    "height": 720,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25722398,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i2.hdslb.com/bfs/archive/94d109b0e0a745af3b6fd8fc7baa06b546542968.png",
+                "title": "【雄兵连/AWV】2018国漫应援，超燃混剪、’慈悲已经来过这世界，正义也会留下‘！",
+                "pubdate": 1530148857,
+                "ctime": 1530148857,
+                "desc": "开局有点烂，不过中间真的超然。\r\n素材出自【雄兵连】\r\nBGM：Angels Will Rise\r\n这是第二次剪辑燃向系列，哪里做的不好的，欢迎大佬们给我提建议。",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 176,
+                "mission_id": 10566,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 209748089,
+                    "name": "陨星丨",
+                    "face": "http://i0.hdslb.com/bfs/face/3dbadc5818fdb913ec77fd65e1fe889743e8e18c.jpg"
+                },
+                "stat": {
+                    "aid": 25722398,
+                    "view": 11,
+                    "danmaku": 2,
+                    "reply": 1,
+                    "favorite": 0,
+                    "coin": 0,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 2,
+                    "dislike": 0
+                },
+                "dynamic": "",
+                "cid": 43897509,
+                "dimension": {
+                    "width": 720,
+                    "height": 576,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25722737,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i2.hdslb.com/bfs/archive/b31f708ece16078f2e8f1946fb20202498f7d367.png",
+                "title": "【B萌应援】疯妹二人转 BY 七濑胡桃/司空琪",
+                "pubdate": 1530148808,
+                "ctime": 1530148808,
+                "desc": "当表情包遇到日常抽风的小姐姐会发生什么呢？\r\n\r\nCV:\r\nMenhera（七濑胡桃） -伯纳\r\n司空琪 -小绿子\r\n2B -伯纳\r\n\r\n鬼畜调教&PV: \r\n欧文丽贝卡\r\n\r\n“脑洞配音社”",
+                "state": 0,
+                "attribute": 16768,
+                "duration": 88,
+                "mission_id": 10566,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 1,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 28625337,
+                    "name": "欧文丽贝卡",
+                    "face": "http://i1.hdslb.com/bfs/face/4719a9dc96cb96b04710b0f6776faa2e62d985e0.jpg"
+                },
+                "stat": {
+                    "aid": 25722737,
+                    "view": 5,
+                    "danmaku": 0,
+                    "reply": 0,
+                    "favorite": 0,
+                    "coin": 1,
+                    "share": 2,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 2,
+                    "dislike": 0
+                },
+                "dynamic": "",
+                "cid": 43898323,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25725739,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i1.hdslb.com/bfs/archive/c548f942d255ec49c35d676255c69ab77206e066.jpg",
+                "title": "【中抓】吕天逸原著‖个人现代纯爱广播剧《妈的zhi障》下期",
+                "pubdate": 1530148648,
+                "ctime": 1530148648,
+                "desc": "-",
+                "state": 0,
+                "attribute": 16578,
+                "duration": 1931,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 13896585,
+                    "name": "珍版悠柠",
+                    "face": "http://i0.hdslb.com/bfs/face/b24a32dd4a28fb9aeaccbef6ac45453e007a73cd.jpg"
+                },
+                "stat": {
+                    "aid": 25725739,
+                    "view": 18,
+                    "danmaku": 0,
+                    "reply": 2,
+                    "favorite": 3,
+                    "coin": 0,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 0,
+                    "dislike": 0
+                },
+                "dynamic": "#吕天逸##广播剧#",
+                "cid": 43905474,
+                "dimension": {
+                    "width": 1280,
+                    "height": 720,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25715900,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i1.hdslb.com/bfs/archive/43e887d61698a9194e8f0f4bc5a99c6a1f79d940.png",
+                "title": "【韩非个人】山有木兮木有枝，心悦君兮君不知",
+                "pubdate": 1530147654,
+                "ctime": 1530121475,
+                "desc": "歌词即告白\n\n今天也是爱非女孩=￣ω￣=",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 167,
+                "mission_id": 10566,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 14850841,
+                    "name": "无以君安",
+                    "face": "http://i1.hdslb.com/bfs/face/f30f7a2325f4374e8440cdb08699bed6a4031bb2.jpg"
+                },
+                "stat": {
+                    "aid": 25715900,
+                    "view": 3,
+                    "danmaku": 0,
+                    "reply": 0,
+                    "favorite": 0,
+                    "coin": 0,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 1,
+                    "dislike": 0
+                },
+                "dynamic": "#国产场应援2018##天行九歌##韩非#",
+                "cid": 43883252,
+                "dimension": {
+                    "width": 1280,
+                    "height": 720,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25715553,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i2.hdslb.com/bfs/archive/721677c153f752aed3d53c4f933af4bc088046a4.jpg",
+                "title": "「萌娘日记——涂山苏苏」《狐妖小红娘》中的呆萌迷糊小狐狸",
+                "pubdate": 1530146514,
+                "ctime": 1530146514,
+                "desc": "",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 139,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 58937,
+                    "name": "黑鼠鼠",
+                    "face": "http://i1.hdslb.com/bfs/face/543a3f2d38eaab77d3a2cbef1a86145cad20088a.jpg"
+                },
+                "stat": {
+                    "aid": 25715553,
+                    "view": 38,
+                    "danmaku": 0,
+                    "reply": 2,
+                    "favorite": 3,
+                    "coin": 0,
+                    "share": 2,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 10,
+                    "dislike": 0
+                },
+                "dynamic": "#狐妖小红娘##涂山苏苏#",
+                "cid": 43882938,
+                "dimension": {
+                    "width": 1280,
+                    "height": 720,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25724453,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/1543ed117df03384db81ce663239919c6b9bda6e.jpg",
+                "title": "『凹凸搞事团日常』1.嘉德罗斯女装",
+                "pubdate": 1530145355,
+                "ctime": 1530145355,
+                "desc": "-",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 109,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 298725607,
+                    "name": "卿未白",
+                    "face": "http://i0.hdslb.com/bfs/face/1513608e3ff1686d70e4f804e458b8812be7f1d3.jpg"
+                },
+                "stat": {
+                    "aid": 25724453,
+                    "view": 17,
+                    "danmaku": 0,
+                    "reply": 0,
+                    "favorite": 0,
+                    "coin": 2,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 2,
+                    "dislike": 0
+                },
+                "dynamic": "#新人向##自制##凹凸世界#以后会继续推出这种类型，突然喜欢这个\n就当作是另类的文吧\n封面的话……更加害怕侵权了啊",
+                "cid": 43902381,
+                "dimension": {
+                    "width": 720,
+                    "height": 1280,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25723945,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/93a95d9444b41c50a63729a5324f16e16de01722.jpg",
+                "title": "小伙子用无人机航拍广西农村，画面让当地人都不敢相信",
+                "pubdate": 1530145090,
+                "ctime": 1530145090,
+                "desc": "小伙子用无人机航拍广西农村，画面让当地人都不敢相信",
+                "state": 0,
+                "attribute": 16384,
+                "duration": 105,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 0
+                },
+                "owner": {
+                    "mid": 303562308,
+                    "name": "创意航拍联盟",
+                    "face": "http://i0.hdslb.com/bfs/face/c66da7e7eeb2f6ebb93802ffc24a4ff4cec6a064.jpg"
+                },
+                "stat": {
+                    "aid": 25723945,
+                    "view": 5,
+                    "danmaku": 0,
+                    "reply": 0,
+                    "favorite": 0,
+                    "coin": 0,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 0,
+                    "dislike": 0
+                },
+                "dynamic": "",
+                "cid": 43901055,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            }
+        ],
+        "page": {
+            "count": 52477,
+            "num": 1,
+            "size": 10
+        }
+    }
+}

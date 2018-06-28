@@ -1,0 +1,504 @@
+{
+    "code": 0,
+    "message": "0",
+    "ttl": 1,
+    "data": {
+        "page": {
+            "num": 1,
+            "size": 10,
+            "count": 165
+        },
+        "archives": [
+            {
+                "aid": 23882411,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 2,
+                "pic": "http://i0.hdslb.com/bfs/archive/9b02d2a3047f1b7d042e78b7ba963f8de2919299.jpg",
+                "title": "【灵契2】黄泉之契 最终话 kiss",
+                "pubdate": 1527214413,
+                "ctime": 1527214413,
+                "desc": "youtube\n重新上传一遍\n大家低调",
+                "state": 0,
+                "attribute": 16640,
+                "duration": 151,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 1,
+                    "no_reprint": 0
+                },
+                "owner": {
+                    "mid": 2134311,
+                    "name": "besty墨墨",
+                    "face": "http://i2.hdslb.com/bfs/face/75704192993395d5051de33df388a2e2e80e7aea.jpg"
+                },
+                "stat": {
+                    "aid": 23882411,
+                    "view": 55660,
+                    "danmaku": 108,
+                    "reply": 34,
+                    "favorite": 723,
+                    "coin": 25,
+                    "share": 80,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 196,
+                    "dislike": 1
+                },
+                "dynamic": "#灵契##国产动画##国漫#",
+                "cid": 39950470,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 24162163,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/297fdfc4051f031931636759373646b3c69bef3f.png",
+                "title": "【第十一弹】那些年我们错过或是忘却的国漫神曲",
+                "pubdate": 1527739265,
+                "ctime": 1527734612,
+                "desc": "素材：梦的光点、再飞行、不怕、龙娃、太阳石、Next World、东方神娃、斗龙战士、Try Try Try",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 926,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 17239959,
+                    "name": "巽岚丶",
+                    "face": "http://i0.hdslb.com/bfs/face/7b4926cb07e01cde0e609b1a722a819fa72cc642.jpg"
+                },
+                "stat": {
+                    "aid": 24162163,
+                    "view": 61712,
+                    "danmaku": 2714,
+                    "reply": 777,
+                    "favorite": 1519,
+                    "coin": 1763,
+                    "share": 134,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 734,
+                    "dislike": 6
+                },
+                "dynamic": "",
+                "cid": 40496011,
+                "dimension": {
+                    "width": 0,
+                    "height": 0,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25717133,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/0b994999bb37fcee6d3231af71a485432e8938bc.jpg",
+                "title": "看胡歌如何在电视剧中完成九杀超神！粉到深处带点黑~哈哈哈，不笑算我输！",
+                "pubdate": 1530127888,
+                "ctime": 1530127888,
+                "desc": "盘点各大胡歌主演的电视剧中女主各种姿势死在胡歌怀里，如果这是一场LOL，胡歌肯定超神啊！哈哈哈……胡歌果然是自带BGM的男人！\n素材来自胡歌过的各种电视剧。\nUP主诚意制作，欢迎点赞、收藏、转发、评论、充电……当然最重要的要【关注】一波啊！",
+                "state": 0,
+                "attribute": 16768,
+                "duration": 207,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 1,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 21060939,
+                    "name": "琉璃浮云",
+                    "face": "http://i2.hdslb.com/bfs/face/6ba9dc17370f591bd258a3ad2d2f66c52128245c.jpg"
+                },
+                "stat": {
+                    "aid": 25717133,
+                    "view": 94,
+                    "danmaku": 1,
+                    "reply": 1,
+                    "favorite": 2,
+                    "coin": 0,
+                    "share": 0,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 4,
+                    "dislike": 0
+                },
+                "dynamic": "#胡歌##英雄联盟##搞笑#",
+                "cid": 43885232,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25421791,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 2,
+                "pic": "http://i1.hdslb.com/bfs/archive/4c157494eda098e95893491d4a44270d7cf4d4f8.png",
+                "title": "【斗罗大陆】25集预告 唐三遭遇人面魔蛛及蛇婆 性命岌岌可危 回忆起前世往事",
+                "pubdate": 1529721807,
+                "ctime": 1529721807,
+                "desc": "【搬运】\nUP主其他视频同样精彩",
+                "state": 0,
+                "attribute": 16384,
+                "duration": 27,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 0
+                },
+                "owner": {
+                    "mid": 3079413,
+                    "name": "小x文",
+                    "face": "http://i1.hdslb.com/bfs/face/2cb54d89e4229f987697fac7a539dddb3f024727.jpg"
+                },
+                "stat": {
+                    "aid": 25421791,
+                    "view": 10577,
+                    "danmaku": 0,
+                    "reply": 41,
+                    "favorite": 17,
+                    "coin": 9,
+                    "share": 2,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 40,
+                    "dislike": 2
+                },
+                "dynamic": "",
+                "cid": 43210327,
+                "dimension": {
+                    "width": 1280,
+                    "height": 720,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 10235147,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/828647e7f8660ad7946a32601b8f40fa0d213354.png",
+                "title": "【黄少天】垃圾话语速测试",
+                "pubdate": 1493625109,
+                "ctime": 1497432154,
+                "desc": "大爱黄少天  想试着在保证语速的情况下把情感表达出来  最后好像有一丢丢的口胡  不要介意哈~",
+                "state": 0,
+                "attribute": 49152,
+                "duration": 40,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 0
+                },
+                "owner": {
+                    "mid": 12134682,
+                    "name": "何时才能到六级",
+                    "face": "http://i2.hdslb.com/bfs/face/d8a6f856aa78d3bfbc92cccb4dca283e29b157f8.jpg"
+                },
+                "stat": {
+                    "aid": 10235147,
+                    "view": 119503,
+                    "danmaku": 206,
+                    "reply": 334,
+                    "favorite": 1677,
+                    "coin": 254,
+                    "share": 176,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 125,
+                    "dislike": 0
+                },
+                "dynamic": "",
+                "cid": 16909338,
+                "dimension": {
+                    "width": 0,
+                    "height": 0,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 20385028,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i1.hdslb.com/bfs/archive/15f8a8d5c577da5947db74cc1b301b5da9973e2b.jpg",
+                "title": "【杀破狼】【苏尚卿】曹·以身相许·害羞·花痴· 颜控·大姑娘·变形双，了解一下",
+                "pubdate": 1520222437,
+                "ctime": 1520207808,
+                "desc": "双儿变形记，了解一下\n曹·以身相许·害羞·花痴· 颜控·大姑娘·变形双，了解一下\n第一次氪金！！！沉迷杀破狼，不能自拨，听到曹娘子的声音，不敢相信是双儿配的，据说配的时候变形了？？？2333333\n\n素材来源：\n杀破狼广播剧第一季1-12，第二季1-10",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 225,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 7381887,
+                    "name": "宫木十二",
+                    "face": "http://i0.hdslb.com/bfs/face/f1a423d9203e10666ac1cd7dc7c4e3ada9e3cc8b.jpg"
+                },
+                "stat": {
+                    "aid": 20385028,
+                    "view": 34536,
+                    "danmaku": 486,
+                    "reply": 163,
+                    "favorite": 3381,
+                    "coin": 735,
+                    "share": 929,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 800,
+                    "dislike": 1
+                },
+                "dynamic": "双儿变形记，了解一下\n曹·以身相许·害羞·花痴· 颜控·大姑娘·变形双，了解一下\n第一次氪金！！！沉迷杀破狼，不能自拨，听到曹娘子的声音，不敢相信是双儿配的，据说配的时候变形了？？？2333333\n\n素材来源：\n杀破狼广播剧第一季1-12，第二季1-10",
+                "cid": 33315276,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 14976748,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i0.hdslb.com/bfs/archive/287cec03b44c9aa5ed4166f913050000037ce2c7.jpg",
+                "title": "【狐妖小红娘 竹业篇】一生所爱",
+                "pubdate": 1506884470,
+                "ctime": 1506884474,
+                "desc": "支持国漫更好的走下去！\nbgm：一生所爱-(电影《大话西游》主题曲)",
+                "state": 0,
+                "attribute": 49280,
+                "duration": 276,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 17501866,
+                    "name": "千面者",
+                    "face": "http://i0.hdslb.com/bfs/face/0d01ca12069807b5ecde31f32868e9753155528b.jpg"
+                },
+                "stat": {
+                    "aid": 14976748,
+                    "view": 190742,
+                    "danmaku": 827,
+                    "reply": 558,
+                    "favorite": 2336,
+                    "coin": 824,
+                    "share": 500,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 567,
+                    "dislike": 3
+                },
+                "dynamic": "",
+                "cid": 24398375,
+                "dimension": {
+                    "width": 0,
+                    "height": 0,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 22406926,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i2.hdslb.com/bfs/archive/11321afabb879dbb43ea6fe2c1f9845eea6bcb99.jpg",
+                "title": "谁说国漫无神曲第四期（一定要看到最后哦）",
+                "pubdate": 1524341884,
+                "ctime": 1524341885,
+                "desc": "素材：秦时明月—月光，超神学院—坠落，大英雄狄青OP，奇奇颗颗历险记OP，恐龙宝贝OP—爱不会绝迹，弹珠传说OP,东方少年OP,缇可春季篇OP，战龙四驱OP，飓风战魂第二季OP，雷速登闪电冲线OP，火力少年王续集OP，果宝特攻第二季OP，机甲兽神OP，御兽王者OP，象棋王OP，中华小子OP，迷域行者OP，一人之下诸葛青和王也角色歌—听风吟，丹歌惊鸿，七色战记OP，蓝猫龙骑团之炫迪传奇ED，魔角侦探第一季OP，宋代足球小将OP，我家大师兄脑子有坑主题曲",
+                "state": 0,
+                "attribute": 16512,
+                "duration": 2919,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 0,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 15486316,
+                    "name": "572の涂山铃铛",
+                    "face": "http://i0.hdslb.com/bfs/face/5f81790fe6ba5c051fa9df7c3640e37dd99b9c44.jpg"
+                },
+                "stat": {
+                    "aid": 22406926,
+                    "view": 145454,
+                    "danmaku": 15938,
+                    "reply": 1522,
+                    "favorite": 7039,
+                    "coin": 5366,
+                    "share": 668,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 2050,
+                    "dislike": 2
+                },
+                "dynamic": "新鲜出炉的视频，不过来看看吗",
+                "cid": 37114510,
+                "dimension": {
+                    "width": 720,
+                    "height": 404,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25573486,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i1.hdslb.com/bfs/archive/7296a8acab83cf2a6c51a8e8e9167e654e049d77.jpg",
+                "title": "【国创咋了01】这是一部看处男干破苍穹的动画",
+                "pubdate": 1529921032,
+                "ctime": 1529921032,
+                "desc": "裤衩子们看这里~支持UP主，记得特别关注呀~还有硬币收藏啥的~非常重要的说~",
+                "state": 0,
+                "attribute": 16768,
+                "duration": 711,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 1,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 14110780,
+                    "name": "凉风Kaze",
+                    "face": "http://i2.hdslb.com/bfs/face/e0cc906bb531195e9ee9f3b575effdd2b056eaea.jpg"
+                },
+                "stat": {
+                    "aid": 25573486,
+                    "view": 417684,
+                    "danmaku": 4339,
+                    "reply": 3570,
+                    "favorite": 8997,
+                    "coin": 47455,
+                    "share": 1086,
+                    "now_rank": 0,
+                    "his_rank": 3,
+                    "like": 21333,
+                    "dislike": 138
+                },
+                "dynamic": "开个新系列坑，大家好，我是国创区新人UP凉风",
+                "cid": 43564791,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            },
+            {
+                "aid": 25120392,
+                "videos": 1,
+                "tid": 168,
+                "tname": "国产原创相关",
+                "copyright": 1,
+                "pic": "http://i2.hdslb.com/bfs/archive/639bd3aecbb1246dd8799d2de1fcb7457d7002f0.jpg",
+                "title": "当初看《喜羊羊与灰太狼》这一集，发现喜羊羊简直太可怕了",
+                "pubdate": 1529321456,
+                "ctime": 1529321457,
+                "desc": "欢迎各位收看都说，每天下午五点头条号【都说】准时更新，五点半B站更新！",
+                "state": 0,
+                "attribute": 16768,
+                "duration": 158,
+                "rights": {
+                    "bp": 0,
+                    "elec": 0,
+                    "download": 0,
+                    "movie": 0,
+                    "pay": 0,
+                    "hd5": 1,
+                    "no_reprint": 1
+                },
+                "owner": {
+                    "mid": 15877140,
+                    "name": "都说先生",
+                    "face": "http://i0.hdslb.com/bfs/face/ea12f78c8394a959767fbc1855f04fc603535a13.jpg"
+                },
+                "stat": {
+                    "aid": 25120392,
+                    "view": 79924,
+                    "danmaku": 162,
+                    "reply": 1149,
+                    "favorite": 163,
+                    "coin": 145,
+                    "share": 28,
+                    "now_rank": 0,
+                    "his_rank": 0,
+                    "like": 489,
+                    "dislike": 31
+                },
+                "dynamic": "#动漫##动画##动漫杂谈#",
+                "cid": 42537164,
+                "dimension": {
+                    "width": 1920,
+                    "height": 1080,
+                    "rotate": 0
+                }
+            }
+        ]
+    }
+}

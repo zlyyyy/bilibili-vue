@@ -75,12 +75,12 @@ a{
 	-webkit-transition: background 0.2s, color 0.2s;
     	transition: background 0.2s, color 0.2s;
     }
-a:hover {
+/* a:hover {
     outline: 0;
-    color: #00a1d6!important;
+    color: #00a1d6;
     text-decoration: none;
     cursor: pointer;
-}
+} */
 button{outline:none;}
 button,input,select,textarea{
 	font-family:inherit;
@@ -89,12 +89,12 @@ input{
 	outline: none;
 	font-family: inherit;
 }
-img {
+/* img {
     display: block;
     margin: 0 auto;
     border: none;
-    /* vertical-align: middle; */
-}
+    vertical-align: middle;
+} */
 .fl{
     float: left;
 }
@@ -159,7 +159,7 @@ body{
     -webkit-box-shadow: rgba(0,0,0,.1) 0 1px 2px;
     box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
-.nav-menu .nav-con .nav-item {
+.app-header .nav-menu .nav-con .nav-item {
     float: left;
     text-align: center;
     line-height: 42px;
@@ -170,23 +170,23 @@ body{
     -o-transition: all .3s;
     transition: all .3s;
 }
-.nav-menu .nav-con .nav-item:hover {
+.app-header .nav-menu .nav-con .nav-item:hover {
     background-color: hsla(0,0%,100%,.3);
 }
-.nav-menu .nav-con .nav-item a {
+.app-header .nav-menu .nav-con .nav-item a {
     color: #222;
     height: 100%;
     display: block;
     padding: 0 11px;
 }
-.nav-menu .nav-con .nav-item.home {
+.app-header .nav-menu .nav-con .nav-item.home {
     margin-left: -10px;
     padding-left: 12px;
 }
-.nav-menu .nav-con .nav-item.home a {
+.app-header .nav-menu .nav-con .nav-item.home a {
     padding-left: 20px;
 }
-.nav-menu .nav-con .nav-item.home i {
+.app-header .nav-menu .nav-con .nav-item.home i {
     position: absolute;
     width: 17px;
     height: 14px;
@@ -197,13 +197,162 @@ body{
 /* .nav-menu .nav-con .nav-item.mobile {
     padding: 0 10px;
 } */
-.nav-menu .nav-con .nav-item.mobile i {
+.app-header .nav-menu .nav-con .nav-item.mobile i {
     display: inline-block;
     vertical-align: middle;
     background-position: -1367px -1175px;
     width: 21px;
     height: 21px;
 }
+/*  右侧 */
+.app-header .profile-info {
+    width: 58px;
+}
+.app-header .profile-info .i-face {
+    position: absolute;
+    z-index: 20;
+    width: 36px;
+    height: 36px;
+    left: 11px;
+    top: 0;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.app-header .profile-info .i-face .face {
+    border: 0 solid #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.app-header img {
+    border: none;
+    vertical-align: middle;
+}
+.app-header .nav-menu .nav-con .nav-item .t {
+    color: #222;
+    height: 100%;
+    display: block;
+    padding: 0 10px;
+}
+.app-header .i_menu_login {
+    opacity: 0;
+    display: none;
+    background: #fff;
+    left: 50%;
+    margin-left: -130px;
+    width: 260px;
+    padding-bottom: 0;
+    padding-top: 50px;
+    border-top: none;
+    width: 320px;
+    margin-left: -160px;
+    padding: 12px;
+    text-align: left;
+    line-height: normal;
+    border: 1px solid #e5e9ef;
+    transition: all .3s;
+}
+.app-header .profile-info:hover .i_menu_login {
+    display: block;
+    opacity: 1;
+    transition: all .3s;
+}
+.app-header .i_menu_login .tip {
+    font-size: 14px;
+    color: #666;
+}
+.app-header .i_menu_login .img {
+    width: 320px;
+    height: 200px;
+    margin: 12px 0;
+    overflow: hidden;
+    position: relative;
+    background: url(assets//danmu_bg.png) no-repeat 50%;
+}
+.app-header .i_menu_login .img img:first-child{
+    width: 320px;
+    height: 200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: one 5s linear infinite;
+}
+.app-header .i_menu_login .img img:last-child{
+    width: 320px;
+    height: 200px;
+    position: absolute;
+    left: 320px;
+    top: 0;
+    animation: two 5s linear infinite;
+}
+@keyframes one {
+            0% {
+                left: 0;
+            }
+
+            100% {
+                left: -320px;
+            }
+        }
+@keyframes two {
+    0% {
+        left: 320px;
+    }
+
+    100% {
+        left: 0px;
+    }
+}
+.app-header .nav-menu .nav-con .nav-item .login-btn {
+    display: block;
+    height: 43px;
+    line-height: 43px;
+    text-align: center;
+    background: #00a1d6;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #fff;
+}
+.app-header .i_menu_login .reg {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 12px;
+    color: #282828;
+}
+.app-header .nav-menu .nav-con .nav-item .reg a {
+    display: initial;
+    padding: 0;
+    color: #00a1d6;
+}
+.app-header .nav-menu .up-load {
+    position: relative;
+    width: 58px;
+    height: 42px;
+}
+.app-header .nav-menu .up-load .u-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 48px;
+    line-height: 42px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    z-index: 0;
+}
+.app-header .nav-menu .up-load .u-link:after{
+    position: absolute;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: #DF5584;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: -1;
+}
+/* heaer-banner */
 .app-header .head-banner {
     position: relative;
     z-index: 199;

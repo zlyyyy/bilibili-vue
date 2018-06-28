@@ -16,14 +16,15 @@
                     </div>
                     <timing-box :timelineData="bangumiData.timelineData" :nowtab="nowtab"></timing-box>
                 </div>
-                <zone-rank :zoneRankdata="bangumiData"></zone-rank>
+                <zone-rank :zoneRankdata="bangumiData" :tag="1"> 
+                </zone-rank>
             </div>
             <storey-box :storeydata="bangumiData"></storey-box>
             <div class="r-con">
                 <div class="ad-title">
-                    <h3>特别推荐</h3>
+                    <h3>排行</h3>
                 </div>
-                <ad-slide :slidedata="bangumiData.AdData" :slidetimedata="bangumiData.AdTime" :pagation="bangumiData.Adpagation"></ad-slide>
+                 <ad-slide :slidedata="bangumiData.AdData" :slidetimedata="bangumiData.AdTime" :pagation="bangumiData.Adpagation"></ad-slide>
             </div>
         </div>
     </div>
@@ -40,6 +41,7 @@ export default {
             type: [Object,Array],
             default: () => []
         }
+        
     },
     components: {
         TimingBox,

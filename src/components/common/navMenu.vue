@@ -13,7 +13,40 @@
                     </li>
                 </ul>
             </div>
-            <div class="nav-con fr"></div>
+            <div class="up-load fr">
+                <a href="//member.bilibili.com/v/video/submit.html" target="_blank" class="u-link">
+                    投 稿
+                </a>
+            </div>
+            <div class="nav-con fr">
+                <ul>
+                    <li class="nav-item profile-info">
+                        <a href="//passport.bilibili.com/login" class="t">
+                            <div class="i-face">
+                                <img src="../../assets/akari.jpg" class="face">
+                            </div>
+                        </a>
+                        <div class="i_menu i_menu_login">
+                            <p class="tip">
+                                登录后你可以：
+                            </p>
+                            <div class="img">
+                                <img src="../../assets/danmu.png" >
+                                <img src="../../assets/danmu.png" >
+                            </div>
+                            <a href="//passport.bilibili.com/login" class="login-btn">登录</a>
+                            <p class="reg">
+                                首次使用？<a href="//passport.bilibili.com/register/phone.html">点我去注册</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="//www.bilibili.com/account/history" target="_blank" class="t">
+                        历史
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -60,7 +93,8 @@ export default {
                     icon: 'bili-icon',
                     href: '/'
                 }
-            ]
+            ],
+            navLogin: false
         }
     },
     methods: {

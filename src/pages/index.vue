@@ -13,10 +13,64 @@
         <zone-module :maindataModule="mainData" @videoInfoxy='videoinforevent'>
         </zone-module>
         <!--  动画 --> 
-        <bangumi-module v-for="(item,index) in bangumiData" :id="item.id" :key="item.id" :bangumiData="item">
-        </bangumi-module>
-         <!-- 更新
-        <dh-update></dh-update> -->
+        <!-- <bangumi-module :bangumiData="bangumiData[0]">
+        </bangumi-module> -->
+        <div class="zone-wrap-module">
+            <div class="bangumi-module">
+                <div class="up">
+                    <div class="bangumi-timing-module l-con">
+                        <div class="headline">
+                            <i class="icon icon_t" :class="bangumiData[0].icon"></i>
+                            <a :href=bangumiData.moreUrl class="name">{{ bangumiData[0].title }}</a>
+                            <div class="bili-tab">
+                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[0].tab2" :class="{'on' : index === nowtab }" @click="nowtabclick(index)">{{ index>0 && index===nowtab? "周"+item.name : item.name}}</div>
+                            </div>
+                            <a :href=bangumiData[0].moreUrl target="_blank" class="c-clink">
+                                新番时间表
+                                <i class="icon"></i>
+                            </a>   
+                        </div>
+                        <timing-box :timelineData="bangumiData[0].timelineData" :nowtab="nowtab"></timing-box>
+                    </div>
+                    <zone-rank :zoneRankdata="bangumiData[0]" :tag="1"> 
+                    </zone-rank>
+                </div>
+                <storey-box :storeydata="bangumiData[0]"></storey-box>
+                <div class="r-con">
+                    <div class="ad-title">
+                        <h3>排行</h3>
+                    </div>
+                    <ad-slide :slidedata="bangumiData[0].AdData" :slidetimedata="bangumiData[0].AdTime" :pagation="bangumiData[0].Adpagation"></ad-slide>
+                </div>
+            </div>
+        </div>
+        <div class="zone-wrap-module">
+            <div class="bangumi-module">
+                <div class="up">
+                    <div class="bangumi-timing-module l-con">
+                        <div class="headline">
+                            <i class="icon icon_t" :class="bangumiData[1].icon"></i>
+                            <a :href=bangumiData[1].moreUrl class="name">{{ bangumiData[1].title }}</a>
+                            <div class="bili-tab">
+                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[1].tab2" :class="{'on' : index === nowtab }" @click="nowtabclick(index)">{{ index>0 && index===nowtab? "周"+item.name : item.name}}</div>
+                            </div>
+                            <a :href=bangumiData[1].moreUrl target="_blank" class="c-clink">
+                                新番时间表
+                                <i class="icon"></i>
+                            </a>   
+                        </div>
+                        <timing-box :timelineData="bangumiData[1].timelineData" :nowtab="nowtab" class="gc"></timing-box>
+                    </div>
+                    <zone-rank :zoneRankdata="bangumiData[1]" :tag="1" :bangumiRankLists="5" class="sec-gc">
+                        <ad-slide slot="ad" :slidedata="bangumiData[1].AdData" :slidetimedata="bangumiData[1].AdTime" :pagation="bangumiData[1].Adpagation"></ad-slide>
+                    </zone-rank>
+                </div>
+                <storey-box :storeydata="bangumiData[1]"></storey-box>
+                <div class="r-con">
+                    <zone-rank :zoneRankdata="bangumiData[1]" :tag="0"></zone-rank>
+                </div>
+            </div>
+        </div>
          <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
                 {{ videoinforitem[videodata.mouseindex].title }}
@@ -45,7 +99,10 @@ import Recommend from '../components/common/recommend'
 import Popularize from '../components/common/popularize'
 import ZoneModule from '../components/common/zoneModule'
 import BangumiModule from '../components/base/bangumiModule'
-import DhUpdate from '../components/common/dhUpdate'
+import TimingBox from '../components/base/timingBox'
+import ZoneRank from '../components/base/zoneRank'
+import StoreyBox from '../components/base/storeyBox'
+import AdSlide from '../components/ad/adSlide'
 export default {
     created() {
         this.online()
@@ -58,7 +115,10 @@ export default {
         Popularize,
         ZoneModule,
         BangumiModule,
-        DhUpdate
+        TimingBox,
+        ZoneRank,
+        StoreyBox,
+        AdSlide
     },
     data () {
         return {
@@ -70,6 +130,7 @@ export default {
                 {
                     id: 'bili_donghua',//模型id
                     title: '动画', //模型名称
+                    doubletitle: false,
                     icon: 'icon-donghua',//模型图标
                     tab:[
                         {
@@ -112,11 +173,14 @@ export default {
                     rankSevenOriginalMoreUrl: '/ranking/origin/1/1/7/'//一周原创排行链接
                 }
             ],
+            nowtab: 0,//更新时间轴
             bangumiData: [
                 {
+                    num: '0',
                     id: 'bili_bangumi',//模型id
                     title: '番剧', //模型名称
                     title2: '番剧动态',
+                    doubletitle: true,
                     icon: 'icon-bangumi',//模型图标
                     tab:[
                         {
@@ -169,19 +233,21 @@ export default {
                     ],
                     rankPic: false,
                     rankLists: 10,
-                    rankThreeAllList: [],//三日全部排行
-                    rankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
-                    rankSevenAllList: [],//一周全部排行
-                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
+                    BrankThreeAllList: [],//三日全部排行
+                    BrankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
+                    BrankSevenAllList: [],//一周全部排行
+                    BrankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
                     AdData: [
                     ],
                     Adpagation: false,
                     AdTime: 3000
                 },
                 {
+                    num: '1',
                     id: 'bili_guochuang',//模型id
                     title: '国创', //模型名称
                     title2: '国产原创相关',
+                    doubletitle: true,
                     icon: 'icon-guochuang',//模型图标
                     tab:[
                         {
@@ -239,12 +305,20 @@ export default {
                             name: '一周'
                         }
                     ],
-                    rankPic: false,
-                    rankLists: 10,
-                    rankThreeAllList: [],//三日全部排行
-                    rankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
-                    rankSevenAllList: [],//一周全部排行
-                    rankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
+                    rankPic: true,
+                    rankLists: 7,
+                    BrankThreeAllList: [],//三日全部排行
+                    BrankThreeAllMoreUrl: '/ranking/bangumi/167/0/3/',//三日全部排行更多链接
+                    BrankSevenAllList: [],//一周全部排行
+                    BrankSevenAllMoreUrl: '/ranking/bangumi/167/0/7/',//一周全部排行更多链接
+                    rankThreeAllList: [],//三日相关全部排行
+                    rankThreeAllMoreUrl: '/ranking/all/168/1/3/',//三日全部排行更多链接
+                    rankThreeOriginalList: [],//三日原创全部排行
+                    rankThreeOriginalMoreUrl: '/ranking/origin/168/1/3/',//三日原创全部排行更多链接
+                    rankSevenAllList: [],//七日相关全部排行
+                    rankSevenAllMoreUrl: '/ranking/all/168/1/7/',//七日全部排行更多链接
+                    rankSevenOriginalList: [],//七日原创全部排行
+                    rankSevenOriginalMoreUrl: '/ranking/origin/168/1/7/',//七日原创全部排行更多链接
                     AdData: [
                     ],
                     Adpagation: false,
@@ -280,32 +354,50 @@ export default {
                 this.$axios.all([
                     this.$axios.get('/static/maindata/dh_newTrends.json'),
                     this.$axios.get('/static/maindata/dh_newSub.json'),
-                    this.$axios.get('/static/maindata/dh_rankThreeAllList.json'),
-                    this.$axios.get('/static/maindata/dh_rankThreeOriginalList.json'),
-                    this.$axios.get('/static/maindata/dh_rankSevenAllList.json'),
-                    this.$axios.get('/static/maindata/dh_rankSevenOriginalList.json'),
+                    this.$axios.get('/static/maindata/ranking/dh_rankThreeAllList.json'),
+                    this.$axios.get('/static/maindata/ranking/dh_rankThreeOriginalList.json'),
+                    this.$axios.get('/static/maindata/ranking/dh_rankSevenAllList.json'),
+                    this.$axios.get('/static/maindata/ranking/dh_rankSevenOriginalList.json'),
                     this.$axios.get('/static/bangumiData/timeline_global.json'),
-                    this.$axios.get('/static/ranking/timeline_global_3.json'),
-                    this.$axios.get('/static/ranking/timeline_global_7.json'),
+                    this.$axios.get('/static/bangumiData/ranking/timeline_global_3.json'),
+                    this.$axios.get('/static/bangumiData/ranking/timeline_global_7.json'),
                     this.$axios.get('/static/bangumiData/fj_newTrends.json'),
                     this.$axios.get('/static/bangumiData/fj_newSub.json'),
                     this.$axios.get('/static/fj_ad_slide.json'),
                     this.$axios.get('/static/bangumiData/timeline_cn.json'),
+                    this.$axios.get('/static/bangumiData/ranking/timeline_cn_3.json'),
+                    this.$axios.get('/static/bangumiData/ranking/timeline_cn_7.json'),
+                    this.$axios.get('/static/bangumiData/gc_newTrends.json'),
+                    this.$axios.get('/static/bangumiData/gc_newSub.json'),
+                    this.$axios.get('/static/bangumiData/ranking/gc_rankThreeAllList.json'),
+                    this.$axios.get('/static/bangumiData/ranking/gc_rankThreeOriginalList.json'),
+                    this.$axios.get('/static/bangumiData/ranking/gc_rankSevenAllList.json'),
+                    this.$axios.get('/static/bangumiData/ranking/gc_rankSevenOriginalList.json'),
+                    this.$axios.get('/static/gc_ad_slide.json')
                 ])
                 .then(this.$axios.spread(( 
-                    newTrends,
-                    newSub,
-                    rankThreeAllList,
-                    rankThreeOriginalList,
-                    rankSevenAllList,
-                    rankSevenOriginalList,
-                    timelineGlobal,
-                    timelineGlobalThree,
-                    timelineGlobalSeven,
-                    fjnewTrends,
-                    fjnewSub,
-                    fjadSlide,
-                    timelineCn 
+                    newTrends,//动画新投稿
+                    newSub,//动画新动态
+                    rankThreeAllList,//动画三日全部排行
+                    rankThreeOriginalList,//动画三日原创排行
+                    rankSevenAllList,//动画七日全部排行
+                    rankSevenOriginalList,//动画七日原创排行
+                    timelineGlobal,//番剧更新表
+                    timelineGlobalThree,//番剧三日排行
+                    timelineGlobalSeven,//番剧七日排行
+                    fjnewTrends,//番剧相关新动态
+                    fjnewSub,//番剧相关新投稿
+                    fjadSlide,//番剧广告位
+                    timelineCn,//国创更新表
+                    timelineCnThree,//国创三日排行
+                    timelineCnSeven,//国创七日排行
+                    gcnewTrends,//国创相关新动态
+                    gcnewSub,//国创相关新投稿
+                    gcRankThreeAllList,//国创三日全部排行
+                    gcRankThreeOriginalList,//国创三日原创排行
+                    gcRankSevenAllList,//国创七日全部排行
+                    gcRankSevenOriginalList,//国创七日原创排行
+                    gcAdData
                 ) => {
                     this.mainData[0].newTrends = newTrends.data.data
                     this.mainData[0].newSub = newSub.data.data
@@ -314,12 +406,22 @@ export default {
                     this.mainData[0].rankSevenAllList = rankSevenAllList.data.data
                     this.mainData[0].rankSevenOriginalList = rankSevenOriginalList.data.data
                     this.bangumiData[0].timelineData = timelineGlobal.data.result
-                    this.bangumiData[0].rankThreeAllList = timelineGlobalThree.data.result.list
-                    this.bangumiData[0].rankSevenAllList = timelineGlobalSeven.data.result.list
+                    this.bangumiData[0].BrankThreeAllList = timelineGlobalThree.data.result.list
+                    this.bangumiData[0].BrankSevenAllList = timelineGlobalSeven.data.result.list
                     this.bangumiData[0].newTrends = fjnewTrends.data.data
                     this.bangumiData[0].newSub = fjnewSub.data.data
                     this.bangumiData[0].AdData = fjadSlide.data.result
                     this.bangumiData[1].timelineData = timelineCn.data.result
+                    this.bangumiData[1].timelineData = timelineGlobal.data.result
+                    this.bangumiData[1].BrankThreeAllList = timelineCnThree.data.result.list
+                    this.bangumiData[1].BrankSevenAllList = timelineCnSeven.data.result.list
+                    this.bangumiData[1].newTrends = gcnewTrends.data.data
+                    this.bangumiData[1].newSub = gcnewSub.data.data
+                    this.bangumiData[1].rankThreeAllList = gcRankThreeAllList.data.data
+                    this.bangumiData[1].rankThreeOriginalList = gcRankThreeOriginalList.data.data
+                    this.bangumiData[1].rankSevenAllList = gcRankSevenAllList.data.data
+                    this.bangumiData[1].rankSevenOriginalList = gcRankSevenOriginalList.data.data
+                    this.bangumiData[1].AdData = gcAdData.data.result
                 }))
         },
         videotest()  {
@@ -646,7 +748,7 @@ export default {
 .bangumi-module .zone-rank {
     float: right;
     width: 260px;
-    min-height: 360px;
+    /* min-height: 360px; */
     overflow: hidden;
 }
 .sec-rank .rank-head {
@@ -719,7 +821,7 @@ export default {
 }
 .sec-rank .rank-list-wrap .rank-list {
     padding-bottom: 15px;
-    min-height: 278px;
+    /* min-height: 278px; */
     width: 50%;
     float: left;
     padding-top: 20px;
@@ -835,5 +937,58 @@ export default {
 }
 .sec-rank .rank-list-wrap.show-origin {
     margin-left: -100%;
+}
+.bangumi-module .up {
+    overflow: hidden;
+    padding-bottom: 15px;
+}
+.bangumi-rank-list .rank-item:first-child{
+    margin-top: 0;
+}
+.bangumi-rank-list .rank-item .ri-title {
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    max-width: 144px;
+    line-height: 18px;
+    vertical-align: top;
+    color: #222;
+    display: inline-block;
+    overflow: hidden;
+}
+.bangumi-rank-list .rank-item .ri-total {
+    display: inline-block;
+    vertical-align: top;
+    color: #99a2aa;
+    margin-left: 10px;
+    line-height: 18px;
+    height: 18px;
+}
+.bangumi-module .r-con .ad-title {
+    line-height: 50px;
+    height: 50px;
+}
+.bangumi-module .r-con .ad-title h3 {
+    font-size: 18px;
+    font-weight: 400;
+}
+.bangumi-module .slide{
+    overflow: hidden;
+    height: 268px;
+    width: 100%;
+    border-radius: 4px;
+}
+.bangumi-timing-module .headline .icon_t.icon-guochuang {
+    background-position: -141px -1614px;
+}
+.bangumi-timing-module .timing-box.gc {
+    height: 288px;
+}
+.sec-gc .slide {
+    overflow: hidden;
+    margin-top: 15px;
+    height: 90px;
+    width: 100%;
+    border-radius: 4px;
 }
 </style>
