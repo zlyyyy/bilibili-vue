@@ -113,9 +113,6 @@ export default {
         }
     },
     methods: {
-        nowtabclick(index) {
-            this.nowtab =index
-        },
         //根据favorites排序
         sortBynum(array,num){
             return array.sort(function(a,b){

@@ -9,20 +9,24 @@
             </div>
         </div>
         <app-footer></app-footer>
+        <login v-if="isShow"></login>
     </div>
 </template>
 
 <script>
 import AppHeader from './components/header'
 import AppFooter from './components/footer'
+import Login from './components/login'
 
 export default {
     components: {
         AppHeader,
-        AppFooter
+        AppFooter,
+        Login
     },
     data () {
         return {
+            isShow: false,
             gotop: false,
             step: 100
         }

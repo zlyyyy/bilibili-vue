@@ -23,14 +23,14 @@
                             <i class="icon icon_t" :class="bangumiData[0].icon"></i>
                             <a :href=bangumiData.moreUrl class="name">{{ bangumiData[0].title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[0].tab2" :class="{'on' : index === nowtab }" @click="nowtabclick(index)">{{ index>0 && index===nowtab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[0].tab2" :class="{'on' : index === fjnowtab }" @click="fjnowtabclick(index)">{{ index>0 && index===fjnowtab? "周"+item.name : item.name}}</div>
                             </div>
                             <a :href=bangumiData[0].moreUrl target="_blank" class="c-clink">
                                 新番时间表
                                 <i class="icon"></i>
                             </a>   
                         </div>
-                        <timing-box :timelineData="bangumiData[0].timelineData" :nowtab="nowtab"></timing-box>
+                        <timing-box :timelineData="bangumiData[0].timelineData" :nowtab="fjnowtab"></timing-box>
                     </div>
                     <zone-rank :zoneRankdata="bangumiData[0]" :tag="1"> 
                     </zone-rank>
@@ -52,14 +52,14 @@
                             <i class="icon icon_t" :class="bangumiData[1].icon"></i>
                             <a :href=bangumiData[1].moreUrl class="name">{{ bangumiData[1].title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[1].tab2" :class="{'on' : index === nowtab }" @click="nowtabclick(index)">{{ index>0 && index===nowtab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[1].tab2" :class="{'on' : index === gcnowtab }" @click="gcnowtabclick(index)">{{ index>0 && index===gcnowtab? "周"+item.name : item.name}}</div>
                             </div>
                             <a :href=bangumiData[1].moreUrl target="_blank" class="c-clink">
                                 新番时间表
                                 <i class="icon"></i>
                             </a>   
                         </div>
-                        <timing-box :timelineData="bangumiData[1].timelineData" :nowtab="nowtab" class="gc"></timing-box>
+                        <timing-box :timelineData="bangumiData[1].timelineData" :nowtab="gcnowtab" class="gc"></timing-box>
                     </div>
                     <zone-rank :zoneRankdata="bangumiData[1]" :tag="1" :bangumiRankLists="5" class="sec-gc">
                         <ad-slide slot="ad" :slidedata="bangumiData[1].AdData" :slidetimedata="bangumiData[1].AdTime" :pagation="bangumiData[1].Adpagation"></ad-slide>
@@ -173,7 +173,8 @@ export default {
                     rankSevenOriginalMoreUrl: '/ranking/origin/1/1/7/'//一周原创排行链接
                 }
             ],
-            nowtab: 0,//更新时间轴
+            fjnowtab: 0,//更新时间轴
+            gcnowtab: 0,//更新时间轴
             bangumiData: [
                 {
                     num: '0',
@@ -412,7 +413,6 @@ export default {
                     this.bangumiData[0].newSub = fjnewSub.data.data
                     this.bangumiData[0].AdData = fjadSlide.data.result
                     this.bangumiData[1].timelineData = timelineCn.data.result
-                    this.bangumiData[1].timelineData = timelineGlobal.data.result
                     this.bangumiData[1].BrankThreeAllList = timelineCnThree.data.result.list
                     this.bangumiData[1].BrankSevenAllList = timelineCnSeven.data.result.list
                     this.bangumiData[1].newTrends = gcnewTrends.data.data
@@ -423,6 +423,12 @@ export default {
                     this.bangumiData[1].rankSevenOriginalList = gcRankSevenOriginalList.data.data
                     this.bangumiData[1].AdData = gcAdData.data.result
                 }))
+        },
+        fjnowtabclick(index) {
+            this.fjnowtab =index
+        },
+        gcnowtabclick(index) {
+            this.gcnowtab =index
         },
         videotest()  {
             if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===0){
