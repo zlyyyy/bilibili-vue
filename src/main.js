@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import store from './store/store'
 import VueLazyload from 'vue-lazyload'
 import Axios from 'axios'
 import Base from './base/base'
@@ -98,6 +99,7 @@ router.beforeEach((to, from, next) => {
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
+    store,
     router,
     components: { App },
     template: '<App/>'

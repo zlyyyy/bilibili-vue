@@ -9,7 +9,7 @@
             </div>
         </div>
         <app-footer></app-footer>
-        <login v-if="isShow"></login>
+        <login v-if="loginShow"></login>
     </div>
 </template>
 
@@ -26,9 +26,13 @@ export default {
     },
     data () {
         return {
-            isShow: false,
             gotop: false,
             step: 100
+        }
+    },
+    computed: {
+        loginShow() {
+           return this.$store.state.loginShow
         }
     },
     methods: {

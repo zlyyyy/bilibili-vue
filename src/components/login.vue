@@ -1,32 +1,54 @@
 <template>
-    <div class="complain-mask">
+    <div class="login">
+        <div class="complain-mask" @click="loginShow()">
+        </div>
         <div class="login-form">
-            <div class="login-close">
+            <div class="login-close" @click="loginShow">
                 <i class="iconfont icon-close"></i>
             </div>
             <div class="login-logo"></div>
             <div class="login-title">
-                <a class="active" href="#">登录</a>
-                <a href="#">注册</a>
+                <a v-for="(item,index) in tab" :class="{active: index == nowindex}" href="#" @click="tabClick(index)">{{ item.name }}</a>
             </div>
-            <div class="login-content">
-                <div class="user">
-                    <input type="text" value="" placeholder="你的手机号/邮箱" maxlength="50" autocomplete="off" class="username">
+            <div class="login-user" v-if="nowindex == 0 ">
+                <div class="login-content">
+                    <div class="user" :class="{on: user!==''}">
+                        <input v-model="user" type="text" value="" placeholder="你的手机号/邮箱" maxlength="50" autocomplete="off" class="username">
+                        <p class="error">{{ userError.errorText }}</p>
+                    </div>
+                    <div class="password" :class="{on: password!==''}">
+                        <input v-model="password" type="password" placeholder="密码" id="login-passwd" class="userpassword">
+                        <p class="error">{{ passError.errorText }}</p>
+                    </div>
                 </div>
-                <div class="password">
-                    <input type="password" placeholder="密码" id="login-passwd" class="userpassword">
+                <div class="login-forget">
+                    <div class="lf-password">
+                        <input type="checkbox" name="name" id="radioa" checked="">
+                        <label for="radioa"></label>
+                        <span>记住密码</span>
+                    </div>
+                    <a href="javascript:;" class="lff-password">忘记密码？</a>
                 </div>
+                <div class="login-btn" :class="{on: user!==''&&password!==''}" @click="onLogin()">
+                    登录
+                </div>
+                <div class="btn-error">{{ btnErrorText }}</div>
             </div>
-            <div class="login-forget">
-                <div class="lf-password">
-                    <input type="checkbox" name="name" id="radioa" checked="">
-                    <label for="radioa"></label>
-                    <span>记住密码</span>
+            <div class="register-user" v-else>
+                <div class="register-content">
+                    <div class="user" :class="{on: user!==''}">
+                        <input v-model="reguser" type="text" value="" placeholder="昵称（例：哔哩哔哩）" maxlength="50" autocomplete="off" class="username">
+                    </div>
+                    <div class="password" :class="{on: password!==''}">
+                        <input v-model="regpassword" type="password" placeholder="密码（6-16个字符组成，区分大小写）" class="userpassword">
+                    </div>
                 </div>
-			    <a href="javascript:;" class="lff-password">忘记密码？</a>
-            </div>
-            <div class="login-btn">
-                登录
+                <div class="register-btn" :class="{on: reguser!==''&&regpassword!==''}">
+                    立即注册
+                </div>
+                 <div class="register-login">
+                    <a href="javascript:;">已有账号，直接登录>></a>
+                </div>
             </div>
         </div>
     </div>
@@ -34,22 +56,96 @@
 
 <script>
 export default {
-  data () {
-    return {
-        
+    data () {
+        return {
+            tab: [
+                {
+                    name: '登录'
+                },
+                {
+                    name: '注册'
+                }
+            ],
+            nowindex: 0,
+            user: '',
+            password: '',
+            reguser: '',
+            regpassword: '',
+            btnErrorText: ''
+        }
+    },
+    computed: {
+        userError(){
+            let status,//是否过验证
+                errorText//报错信息
+            if(!/^\d{6,}$/g.test(this.user)){
+                status = false
+                errorText = '用户名不足六位'
+            }else{
+                status = true
+                errorText = ''
+            }
+            if(!this.userFlag){
+                this.userFlag = true
+                errorText = ''
+            }
+            return{
+                status,
+                errorText
+            }
+        },
+        passError(){
+            let status,//是否过验证
+                errorText//报错信息
+            if(!/^\w{1,6}$/g.test(this.password)){
+                status = false
+                errorText = '密码不足六位'
+            }else{
+                status = true
+                errorText = ''
+            }
+            if(!this.passFlag){
+                this.passFlag = true
+                errorText = ''
+            }
+            return{
+                status,
+                errorText
+            }
+        }
+    },
+    methods: {
+        tabClick(num){
+            this.nowindex = num
+        },
+        loginShow(){
+            this.$store.commit('loginShow')
+        },
+        onLogin(){
+            if(!this.userError.status || !this.passError.status){
+                this.btnErrorText = '部分选项未通过'
+            }else{
+                this.loginShow()
+            }
+        }
     }
-  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.login{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
 .complain-mask{
     background: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100%;
     position: fixed;
-    z-index: 9998;
+    z-index: 999;
     display: block;
     top: 0px;
     left: 0px;
@@ -63,6 +159,8 @@ export default {
     padding: 30px 50px 30px;
     background: #fff;
     border-radius: 5px;
+    z-index: 9999;
+    overflow: hidden;
 }
 .login-form .login-close{
     position: absolute;
@@ -99,27 +197,60 @@ export default {
     color: #00a1d6;
     border-bottom: 2px solid #00a1d6;
 }
-.login-form .login-content{
+.login-user,
+.register-user{
+    float: left;
+    width: 100%;
+}
+.login-user .login-content,
+.register-user .register-content{
     margin-top: 20px;
     box-sizing: border-box;
     width: 100%;
 }
-.login-form .login-content input{
+.login-form .user,
+.login-form .password{
+    position: relative;
+}
+.login-form .error{
+    position: absolute;
+    font-size: 14px;
+    bottom: 15px;
+    right: 0;
+    color: #f45d90;
+}
+.login-form .btn-error{
+    margin-top: 10px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: right;
+    color: #f45d90;
+}
+.login-user .login-content input,
+.register-user .register-content input{
     box-sizing: border-box;
     border: none;
-    border-bottom: 1px solid rgba(0,0,0,0.12);;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
     padding: 10px 10px 0;
     margin: 10px 0 0 0;
     height: 50px;
     width: 100%;
+    font-size: 14px;
+}
+.login-user .login-content .on input,
+.login-user .login-content input:focus,
+.register-user .register-content .on input,
+.register-user .register-content input:focus{
+    border-bottom: 1px solid #00a1d6;
 }
 /* 记住密码 */
-.login-form .login-forget{
+.login-user .login-forget{
 	margin-top: 5px;
 	height: 40px;
 	line-height: 40px;
 }
-.login-form .login-forget .lf-password{
+.login-user .login-forget .lf-password{
 	position: relative;
 	float: left;
 }
@@ -155,21 +286,35 @@ export default {
 	top: 2px;
 	left: 2px;
 }
-.login-form .login-forget .lff-password{
+.login-user .login-forget .lff-password,
+.register-user .register-login a{
 	float: right;
 	font-size: 12px;
 	color: #999;
 }
-.login-form .login-forget .lff-password:hover{
+.register-user .register-login a,
+.login-user .login-forget .lff-password:hover{
 	color: #00a1d6;
 }
-.login-form .login-btn{
-    margin-top: 10px;
-    background: #00a1d6;
+.register-user .register-login a{
+    margin-top: 20px;
+}
+.login-user .login-btn,
+.register-user .register-btn{
+    cursor: pointer;
+    margin-top: 20px;
+    background: #d1d1d1;
     color: #fff;
     font-size: 16px;
     line-height: 40px;
     text-align: center;
     border-radius: 20px;
+}
+.register-user .register-btn{
+    margin-top: 20px;
+}
+.login-user .login-btn.on,
+.register-user .register-btn.on{
+    background: #00a1d6;
 }
 </style>

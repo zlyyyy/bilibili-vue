@@ -21,7 +21,7 @@
             <div class="nav-con fr">
                 <ul>
                     <li class="nav-item profile-info">
-                        <a href="//passport.bilibili.com/login" class="t">
+                        <a class="t" @click="loginShow()">
                             <div class="i-face">
                                 <img src="../../assets/akari.jpg" class="face">
                             </div>
@@ -34,7 +34,7 @@
                                 <img src="../../assets/danmu.png" >
                                 <img src="../../assets/danmu.png" >
                             </div>
-                            <a href="//passport.bilibili.com/login" class="login-btn">登录</a>
+                            <a class="login-btn" @click="loginShow()">登录</a>
                             <p class="reg">
                                 首次使用？<a href="//passport.bilibili.com/register/phone.html">点我去注册</a>
                             </p>
@@ -98,6 +98,9 @@ export default {
         }
     },
     methods: {
+        loginShow(){
+            this.$store.commit('loginShow')
+        }
     }
 }
 </script>
