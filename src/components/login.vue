@@ -71,7 +71,9 @@ export default {
             password: '',
             reguser: '',
             regpassword: '',
-            btnErrorText: ''
+            btnErrorText: '',
+            signIn: false,
+            navData: []
         }
     },
     computed: {
@@ -99,7 +101,7 @@ export default {
                 errorText//报错信息
             if(!/^\w{1,6}$/g.test(this.password)){
                 status = false
-                errorText = '密码不足六位'
+                errorText = '密码超过六位'
             }else{
                 status = true
                 errorText = ''
@@ -119,13 +121,26 @@ export default {
             this.nowindex = num
         },
         loginShow(){
-            this.$store.commit('loginShow')
+            this.$store.dispatch('loginShow',{
+                user: this.user,
+                password: this.password,
+                signIn: this.signIn,
+                navData: this.navData
+            })
         },
         onLogin(){
+            sessionStorage.setItem("signIn", false);
             if(!this.userError.status || !this.passError.status){
                 this.btnErrorText = '部分选项未通过'
             }else{
-                this.loginShow()
+                this.$axios.get('/static/login.json')
+                .then((res)=>{
+                    this.navData = res.data.data
+                    this.signIn = true
+                    this.loginShow()
+                }).catch((error)=>{
+                    console.log(error)
+                })
             }
         }
     }
