@@ -11,12 +11,16 @@ export default new Vuex.Store({
 				password: '',//密码
 				signIn: '',//0为未登录，1为已登录
 				proInfo: [],//个人信息
-				topInfo: []//会员土建信息
+				topInfo: [],//会员推荐信息
+				nowindex: 0//登录框tab
 			},
 			mutations: {
 				//登录弹窗显示隐藏
 				loginShow(state) {
 					state.loginShow = state.loginShow? false : true
+			   },
+			   regShow(state,nowindex){
+					state.nowindex = nowindex
 			   },
 			   //登录状态
 			   signIn(state,msg){
@@ -49,9 +53,9 @@ export default new Vuex.Store({
 			   	proInfo({commit,state},msg){
 					commit('proInfo',msg)
 		   		},
-			   topInfo({commit,state},msg){
+			   	topInfo({commit,state},msg){
 					commit('topInfo',msg)
-			   }
+				}
 			}
     	}
   }

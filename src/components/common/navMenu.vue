@@ -21,50 +21,69 @@
             <div class="nav-con fr">
                 <ul>
                     <li class="nav-item profile-info" :class="{on: signIn==1}" @mouseover="profileFadeIn" @mouseout="profileFadeOut">
-                        <a class="t">
+                        <a class="t" v-if="signIn==1" :href="'https://space.bilibili.com/'+proInfo.mid" target="_blank">
                             <div class="i-face">
-                                <template v-if="signIn==1">
-                                    <img v-if="proInfo" :src="proInfo.face" class="face">
-                                    <img class="pendant">
-                                </template>
-                                <img @click="loginShow()" v-else src="../../assets/akari.jpg" class="face">
+                                <img v-if="proInfo" :src="proInfo.face" class="face">
+                                <img class="pendant">
                             </div>
                         </a>
+                        <a class="t" v-else @click="loginShow()">
+                            <div class="i-face">
+                                <img src="../../assets/akari.jpg" class="face">
+                            </div>
+                        </a>
+                        <transition name="nav-trans">
                         <div class="profile-m dd-bubble" v-if="signIn==1" v-show="profileShow">
-                            <div class="header-u-info">
+                            <div class="header-u-info" v-if="proInfo">
                                 <div class="header-uname">
-                                    <b class="">丨旧丶城</b><!---->
+                                    <b class="">{{ proInfo.uname }}</b>
                                 </div>
                                 <div class="btns-profile clearfix">
                                     <div class="coin fl">
-                                        <a href="#" target="_blank" title="硬币"><i class="bili-icon bi"></i><i class="bili-icon jia"></i><span class="num">616</span><span class="num-move">616.58</span><span title="" class="num-tip">登录奖励</span></a>
+                                        <a href="https://account.bilibili.com/site/coin" target="_blank" title="硬币">
+                                            <i class="bili-icon bi"></i>
+                                            <i class="bili-icon jia"></i>
+                                            <span class="num">{{ Math.ceil(proInfo.money) }}</span>
+                                            <span class="num-move">{{ proInfo.money }}</span>
+                                            <span title="" class="num-tip">登录奖励</span>
+                                        </a>
                                     </div>
                                     <div class="currency fl">
-                                        <a href="#" target="_blank" title="B币"><i class="bili-icon"></i><span class="num">0</span></a>
+                                        <a href="https://pay.bilibili.com/bb_balance.html" target="_blank" title="B币">
+                                            <i class="bili-icon"></i>
+                                            <span class="num">0</span>
+                                        </a>
                                     </div>
                                     <div class="ver phone fr verified">
-                                        <a href="#" target="_blank"><i class="bili-icon"></i><span class="tips">已绑定</span></a>
+                                        <a href="https://passport.bilibili.com/site/site.html" target="_blank">
+                                            <i class="bili-icon"></i>
+                                            <span class="tips">已绑定</span>
+                                        </a>
                                     </div>
                                     <div class="ver email fr verified">
-                                        <a href="#" target="_blank"><i class="bili-icon"></i><span class="tips">已绑定</span></a>
+                                        <a href="https://passport.bilibili.com/site/site.html" target="_blank">
+                                            <i class="bili-icon"></i>
+                                            <span class="tips">已绑定</span>
+                                        </a>
                                     </div>
                                     <div class="link-to-bind-mobile">
                                     </div>
                                 </div>
                                 <div class="grade clearfix">
-                                    <span class="hd fl">等级</span><a href="#" target="_blank">
-                                    <div class="bar fr">
-                                        <div class="lt lv4">
-                                        </div>
-                                        <div class="rate" style="width: 70%;">
-                                        </div>
-                                        <div class="num">
-                                            <div>
-                                7567
-                                                <span>/10800</span>
+                                    <span class="hd fl">等级</span>
+                                    <a href="https://account.bilibili.com/site/record.html" target="_blank">
+                                        <div class="bar fr">
+                                            <div class="lt" :class="level">
+                                            </div>
+                                            <div class="rate" :style="{ width : proInfo.moral+'%' }">
+                                            </div>
+                                            <div class="num">
+                                                <div v-if="proInfo.level_info">
+                                                    {{ proInfo.level_info.current_exp }}
+                                                    <span>{{ '/'+proInfo.level_info.next_exp }}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </a>
                                     <div class="desc-tips">
                                         <span class="arrow-left"></span>
@@ -82,23 +101,44 @@
                             </div>
                             <div class="member-menu">
                                 <ul class="clearfix">
-                                    <li><a href="#" target="_blank" class="account"><i class="bili-icon b-icon-p-account"></i>个人中心
-                                    </a></li>
-                                    <li><a href="#" target="_blank" class="member"><i class="bili-icon b-icon-p-member"></i>投稿管理
-                                    </a></li>
-                                    <li><a href="#" target="_blank" class="wallet"><i class="bili-icon b-icon-p-wallet"></i>B币钱包
-                                    </a></li>
-                                    <li><a href="#" target="_blank" class="live"><i class="bili-icon b-icon-p-live"></i>直播中心
-                                    </a></li>
-                                    <li><a href="#" target="_blank" class="bml"><i class="bili-icon b-icon-p-ticket"></i>订单中心
-                                    </a></li>
-                                    <li><!----></li>
+                                    <li>
+                                        <a href="https://account.bilibili.com/account/home" target="_blank" class="account">
+                                            <i class="bili-icon b-icon-p-account"></i>
+                                            个人中心
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://member.bilibili.com/v2#/home" target="_blank" class="member">
+                                            <i class="bili-icon b-icon-p-member"></i>
+                                            投稿管理
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://pay.bilibili.com/paywallet-fe/bb_balance.html" target="_blank" class="wallet">
+                                            <i class="bili-icon b-icon-p-wallet"></i>
+                                            B币钱包
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://link.bilibili.com/p/center/index#/user-center/my-info/operation" target="_blank" class="live">
+                                            <i class="bili-icon b-icon-p-live"></i>
+                                            直播中心
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://show.bilibili.com/orderlist" target="_blank" class="bml">
+                                            <i class="bili-icon b-icon-p-ticket"></i>
+                                            订单中心
+                                        </a>
+                                    </li>
+                                    <li></li>
                                 </ul>
                             </div>
                             <div class="member-bottom">
-                                <a href="#" class="logout">退出</a>
+                                <a href="#" class="logout" @click="signOut()">退出</a>
                             </div>
                         </div>
+                        </transition>
                         <div class="i_menu i_menu_login" v-if="signIn==0">
                             <p class="tip">
                                 登录后你可以：
@@ -109,7 +149,7 @@
                             </div>
                             <a class="login-btn" @click="loginShow()">登录</a>
                             <p class="reg">
-                                首次使用？<a href="//passport.bilibili.com/register/phone.html">点我去注册</a>
+                                首次使用？<a @click="regShow()">点我去注册</a>
                             </p>
                         </div>
                     </li>
@@ -118,6 +158,7 @@
                             <a href="#" target="_blank" class="t">
                                 大会员
                             </a>
+                            <transition name="nav-trans">
                             <div class="app-header vip-m dd-bubble" v-show="vipShow">
                                 <div class="bubble-traditional">
                                     <div class="recommand">
@@ -138,6 +179,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </transition>
                         </li>
                         <li class="nav-item" @mouseover="messageFadeIn" @mouseout="messageFadeOut">
                             <a href="#" target="_blank" title="消息" class="t">
@@ -146,6 +188,7 @@
                                 </div>
                                 消息
                             </a>
+                            <transition name="nav-trans">
                             <div class="im-list-box" v-show="messageShow">
                                 <a class="im-list" target="_blank" href="#">
                                     回复我的
@@ -178,6 +221,7 @@
                                     </div>
                                 </a>
                             </div>
+                            </transition>
                         </li>
                         <li class="nav-item">
                             <a href="#" target="_blank" class="t">
@@ -262,12 +306,27 @@ export default {
             signIn: state => state.login.signIn,//登录状态获取
             proInfo: state => state.login.proInfo,//个人信息获取
             topInfo: state => state.login.topInfo//会员推荐信息获取
-        })
+        }),
+        //个人等级
+        level(){
+            if(this.proInfo.level_info){
+                return 'lv'+this.proInfo.level_info.current_level
+            }
+        }
     },
     methods: {
         loginShow(){
             //登录弹窗显示隐藏
             this.$store.dispatch('loginShow')
+        },
+        regShow(){
+            this.$store.dispatch('loginShow')
+            this.$store.commit('regShow',1)
+        },
+        //退出登录
+        signOut(){
+            localStorage.setItem('signIn',0);
+            window.location.reload();
         },
         //个人信息显示隐藏
         profileFadeIn(){
@@ -344,11 +403,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+/*  菜单偏移，透明度过渡效果 */
+.nav-trans-enter,.nav-trans-leave-to{
+    transform: translateY(5px);
+    opacity: 0;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
+.nav-trans-enter-to,.nav-trans-leave{
+    transform: translateY(0px);
+    opacity: 1;
+}
+.nav-trans-enter-active,.nav-trans-leave-active {
+    transition: all .3s ease;
 }
 /* app-header */
 .app-header{
@@ -604,6 +669,18 @@ export default {
     background-color: #fff;
     color: #222;
     z-index: 10;
+}
+.app-header .profile-m .btns-profile .ver .tips:after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: url(../../assets/horn.png);
+    right: -8px;
+    top: 6px;
+}
+.app-header .profile-m .btns-profile .ver:hover .tips {
+    display: block;
 }
 .app-header .profile-m .btns-profile .email {
     margin-right: 10px;
@@ -1001,6 +1078,7 @@ export default {
 }
 .app-header .nav-menu .nav-con .nav-item .reg a {
     display: initial;
+    cursor: pointer;
     padding: 0;
     color: #00a1d6;
 }

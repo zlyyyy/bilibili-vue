@@ -66,14 +66,15 @@ export default {
                     name: '注册'
                 }
             ],
-            nowindex: 0,
             reguser: '',
             regpassword: '',
             btnErrorText: '',
-            // signIn: false,
         }
     },
     computed: {
+        nowindex(){
+            return this.$store.state.login.nowindex
+        },
         user: {
             get() {
                 return this.$store.state.login.userName
