@@ -20,17 +20,17 @@
             </div>
             <div class="nav-con fr">
                 <ul>
-                    <li class="nav-item profile-info" :class="{on: signIn==true}" @mouseover="profileFadeIn" @mouseout="profileFadeOut">
+                    <li class="nav-item profile-info" :class="{on: signIn==1}" @mouseover="profileFadeIn" @mouseout="profileFadeOut">
                         <a class="t">
                             <div class="i-face">
-                                <template v-if="signIn==true">
-                                    <img v-if="navData" :src="navData.face" class="face">
+                                <template v-if="signIn==1">
+                                    <img v-if="proInfo" :src="proInfo.face" class="face">
                                     <img class="pendant">
                                 </template>
                                 <img @click="loginShow()" v-else src="../../assets/akari.jpg" class="face">
                             </div>
                         </a>
-                        <div class="profile-m dd-bubble" v-if="signIn==true" v-show="profileShow">
+                        <div class="profile-m dd-bubble" v-if="signIn==1" v-show="profileShow">
                             <div class="header-u-info">
                                 <div class="header-uname">
                                     <b class="">丨旧丶城</b><!---->
@@ -99,7 +99,7 @@
                                 <a href="#" class="logout">退出</a>
                             </div>
                         </div>
-                        <div class="i_menu i_menu_login" v-if="!signIn">
+                        <div class="i_menu i_menu_login" v-if="signIn==0">
                             <p class="tip">
                                 登录后你可以：
                             </p>
@@ -113,7 +113,7 @@
                             </p>
                         </div>
                     </li>
-                    <template v-if="signIn==true">
+                    <template v-if="signIn==1">
                         <li class="nav-item" @mouseover="vipFadeIn" @mouseout="vipFadeOut">
                             <a href="#" target="_blank" class="t">
                                 大会员
@@ -126,13 +126,13 @@
                                             <a href="#" target="_blank" class="more">更多<i class="b-icon b-icon-arrow-r"></i></a>
                                         </div>
                                         <div class="bubble-col bubble-col-1 bubble-col-3">
-                                            <div class="item" v-for="item in vipRec">
-                                                <a target="_blank" :href="item.url" class="pic">
+                                            <div class="item" v-for="(item,index) in topInfo.picAndWords" v-if="index<3">
+                                                <a target="_blank" :href="item.linkUrl" class="pic">
                                                     <div class="lazy-img">
-                                                        <img :alt="item.name" v-lazy=item.img>
+                                                        <img :alt="item.content" v-lazy=item.image1Url>
                                                     </div>
                                                 </a>
-                                                <a target="_blank" :href="item.url" class="recommand-link">{{item.name}}</a>
+                                                <a target="_blank" :href="item.linkUrl" class="recommand-link">{{item.content}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -251,46 +251,94 @@ export default {
                     href: '/'
                 }
             ],
-            profileShow: false,
-            vipShow: false,
-            messageShow: false
+            profileShow: false,//个人信息默认隐藏
+            vipShow: false,//会员推荐默认隐藏
+            messageShow: false//消息通知默认隐藏
         }
     },
     computed: {
         // 使用对象展开运算符将此对象混入到外部对象中
-        ...mapState({
-            signIn: state => state.login.signIn,//命名空间获取state
-            navData: state => state.login.navData,
-            vipRec: state => state.login.vipRec
+        ...mapState({//命名空间获取state
+            signIn: state => state.login.signIn,//登录状态获取
+            proInfo: state => state.login.proInfo,//个人信息获取
+            topInfo: state => state.login.topInfo//会员推荐信息获取
         })
     },
     methods: {
         loginShow(){
-            this.$store.dispatch('loginShow',{
-                user: this.user,
-                password: this.password,
-                signIn: sessionStorage.getItem('signIn'),
-            })
+            //登录弹窗显示隐藏
+            this.$store.dispatch('loginShow')
         },
+        //个人信息显示隐藏
         profileFadeIn(){
             this.profileShow = true
         },
         profileFadeOut(){
             this.profileShow = false
         },
+        //会员推荐显示隐藏
         vipFadeIn(){
             this.vipShow = true
         },
         vipFadeOut(){
             this.vipShow = false
         },
+        //消息通知显示隐藏
         messageFadeIn(){
             this.messageShow = true
         },
         messageFadeOut(){
             this.messageShow = false
         }
+    },
+    created: function(){
+        let login = localStorage.getItem('signIn')//读取缓存登录状态
+        if(!login){
+            //无状态即未登录状态，修改state值
+            this.$store.dispatch('signIn',{
+                signIn: localStorage.setItem('signIn',0),
+            })
+        }else{
+            //已登录状态
+            //读取缓存状态
+            this.$store.dispatch('signIn',{
+                signIn: localStorage.getItem('signIn')
+            })
+            // //读取缓存个人信息
+            // this.$store.dispatch('proInfo',{
+            //     proInfo: JSON.parse(localStorage.getItem('proInfo'))//state传入用户信息
+            // })
+            //获取个人信息
+            this.$axios.get('../static/login.json')
+            .then((res)=>{
+                this.$store.dispatch('proInfo', {
+                    proInfo: res.data.data//state传入个人信息
+                })
+            }).catch((error)=>{
+                console.log(error)
+            })
+            //获取大会员推荐信息
+            this.$axios.get('../static/topInfo.json')
+            .then((res)=>{
+                this.$store.dispatch('topInfo', {
+                    topInfo: res.data.data//state传入大会员推荐信息
+                })
+            }).catch((error)=>{
+                console.log(error)
+            })
+        }
     }
+    // mounted: function(){
+    //         this.$axios.get('https://bird.ioliu.cn/v2',{
+    //             params:{
+    //                 url: 'https://big.bilibili.com/web/bubble/topInfo',
+    //             }
+    //         }).then((res)=>{
+    //             console.log(res)
+    //         }).catch((error)=>{
+    //             console.log(error)
+    //         })
+    //     }
 }
 </script>
 
@@ -810,6 +858,9 @@ export default {
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
+.app-header .bubble-traditional .recommand .bubble-col .item .recommand-link:hover {
+    color: #fb7299;
+}
 /*  大会员结束 */
 /* 动态开始 */
 .app-header .nav-menu .nav-con .nav-item .im-list-box {
@@ -829,6 +880,10 @@ export default {
     position: relative;
     line-height: 42px;
     height: 42px;
+}
+.im-list:hover {
+    color: #00a1d6;
+    background-color: #e5e9ef;
 }
 .im-notify {
     position: absolute;

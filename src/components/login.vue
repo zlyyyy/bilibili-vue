@@ -12,11 +12,11 @@
             </div>
             <div class="login-user" v-if="nowindex == 0 ">
                 <div class="login-content">
-                    <div class="user" :class="{on: user!==''}">
+                    <div class="user" :class="{on: user !== ''}">
                         <input v-model="user" type="text" value="" placeholder="你的手机号/邮箱" maxlength="50" autocomplete="off" class="username">
                         <p class="error">{{ userError.errorText }}</p>
                     </div>
-                    <div class="password" :class="{on: password!==''}">
+                    <div class="password" :class="{on: password !== ''}">
                         <input v-model="password" type="password" placeholder="密码" id="login-passwd" class="userpassword">
                         <p class="error">{{ passError.errorText }}</p>
                     </div>
@@ -67,16 +67,29 @@ export default {
                 }
             ],
             nowindex: 0,
-            user: '',
-            password: '',
             reguser: '',
             regpassword: '',
             btnErrorText: '',
-            signIn: false,
-            navData: []
+            // signIn: false,
         }
     },
     computed: {
+        user: {
+            get() {
+                return this.$store.state.login.userName
+            },
+            set(value) {
+                this.$store.commit('updateUserName',value)
+            }
+        },
+        password: {
+            get() {
+                return this.$store.state.login.password
+            },
+            set(value) {
+                this.$store.commit('updatePassword',value)
+            }
+        },
         userError(){
             let status,//是否过验证
                 errorText//报错信息
@@ -121,27 +134,43 @@ export default {
             this.nowindex = num
         },
         loginShow(){
-            this.$store.dispatch('loginShow',{
-                user: this.user,
-                password: this.password,
-                signIn: this.signIn,
-                navData: this.navData
-            })
+            //登录弹窗显示隐藏
+            this.$store.dispatch('loginShow')
         },
         onLogin(){
-            sessionStorage.setItem("signIn", false);
+            sessionStorage.setItem("signIn", 0);
             if(!this.userError.status || !this.passError.status){
                 this.btnErrorText = '部分选项未通过'
             }else{
                 this.$axios.get('/static/login.json')
                 .then((res)=>{
-                    this.navData = res.data.data
-                    this.signIn = true
-                    this.loginShow()
+                    localStorage.setItem('userName',this.user);//浏览器存入用户名--测试用
+                    localStorage.setItem('password',this.password);//浏览器存入密码--测试用
+                    localStorage.setItem('signIn',1);//浏览器存入登录状态，0为未登录，1为已登录
+                    // localStorage.setItem('proInfo',JSON.stringify(res.data.data));//浏览器存入个人信息
+                    this.$store.dispatch('signIn',{
+                        signIn: localStorage.getItem('signIn'),//更改state中的登录状态
+                    })
+                    this.$store.dispatch('proInfo',{
+                        proInfo: res.data.data//state传入用户信息
+                    })
+                    this.loginShow()//关闭登录框
+                    this.topInfo()//获取大会员推荐信息
                 }).catch((error)=>{
                     console.log(error)
                 })
             }
+        },
+        topInfo(){
+            //获取大会员推荐信息
+            this.$axios.get('../static/topInfo.json')
+            .then((res)=>{
+                this.$store.dispatch('topInfo', {
+                    topInfo: res.data.data//state传入大会员推荐信息
+                })
+            }).catch((error)=>{
+                console.log(error)
+            })
         }
     }
 }

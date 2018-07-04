@@ -6,48 +6,51 @@ export default new Vuex.Store({
   	modules: {
     	login: {
       		state:{
-    			loginShow: false,
-				userName: '',
-				password: '',
-				signIn: false,
-				navData: [],
-				vipRec: [
-					{
-						name: '7月新番来袭，大会员年费半价',
-						img: require('../assets/vip_01.jpg'),
-						url: 'https://www.bilibili.com/blackboard/activity-9th-big-discount.html'
-					},
-					{
-						name: '玛丽与魔女之花 B站首播',
-						img: require('../assets/vip_02.jpg'),
-						url: 'https://www.bilibili.com/bangumi/play/ss12732'
-					},
-					{
-						name: '正版音乐专辑 第二弹',
-						img: require('../assets/vip_03.jpg'),
-						url: 'https://www.bilibili.com/blackboard/topic/activity-SJtRyUcZ7.html'
-					},
-				]
+				loginShow: false,//登录弹窗，默认隐藏
+				userName: '',//用户名
+				password: '',//密码
+				signIn: '',//0为未登录，1为已登录
+				proInfo: [],//个人信息
+				topInfo: []//会员土建信息
 			},
 			mutations: {
-				loginShow(state,payload) {
+				//登录弹窗显示隐藏
+				loginShow(state) {
 					state.loginShow = state.loginShow? false : true
-					sessionStorage.setItem("userName", payload.user);  //添加到sessionStorage
-					sessionStorage.setItem("password", payload.password);
-					sessionStorage.setItem("signIn", payload.signIn);
-					// state.userName = sessionStorage.getItem('userName')//用户名
-					// state.password = sessionStorage.getItem('password')//用户密码
-					// state.signIn = sessionStorage.getItem('signIn')//判断是否登录
-					// state.navData = payload.navData//用户信息
-					state.userName = payload.user//用户名
-					state.password = payload.password//用户密码
-					state.signIn = payload.signIn//判断是否登录
-					state.navData = payload.navData//用户信息
 			   },
+			   //登录状态
+			   signIn(state,msg){
+					state.signIn = msg.signIn
+			   },
+			   //个人信息
+			   proInfo(state,msg){
+					state.proInfo = msg.proInfo
+				},
+				//会员推荐信息
+			   topInfo(state,msg){
+				   state.topInfo = msg.topInfo
+			   },
+			   //用户名
+			   updateUserName(state,msg){
+				   state.userName = msg
+			   },
+			   //用户密码
+			   updatePassword(state,msg){
+				state.password = msg
+			}
 			},
 			actions: {
 				loginShow({commit,state},msg) {
 					commit('loginShow',msg)
+			   	},
+			   	signIn({commit,state},msg){
+					commit('signIn',msg)
+			   	},
+			   	proInfo({commit,state},msg){
+					commit('proInfo',msg)
+		   		},
+			   topInfo({commit,state},msg){
+					commit('topInfo',msg)
 			   }
 			}
     	}
