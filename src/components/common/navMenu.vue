@@ -27,7 +27,7 @@
                                 <img class="pendant">
                             </div>
                         </a>
-                        <a class="t" v-else @click="loginShow()">
+                        <a class="t" v-else @click="loginShow();regShow(0)">
                             <div class="i-face">
                                 <img src="../../assets/akari.jpg" class="face">
                             </div>
@@ -147,9 +147,9 @@
                                 <img src="../../assets/danmu.png" >
                                 <img src="../../assets/danmu.png" >
                             </div>
-                            <a class="login-btn" @click="loginShow()">登录</a>
+                            <a class="login-btn" @click="loginShow();regShow(0)">登录</a>
                             <p class="reg">
-                                首次使用？<a @click="regShow()">点我去注册</a>
+                                首次使用？<a @click="loginShow();regShow(1)">点我去注册</a>
                             </p>
                         </div>
                     </li>
@@ -251,7 +251,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('login')
 
 export default {
     data () {
@@ -303,9 +304,9 @@ export default {
     computed: {
         // 使用对象展开运算符将此对象混入到外部对象中
         ...mapState({//命名空间获取state
-            signIn: state => state.login.signIn,//登录状态获取
-            proInfo: state => state.login.proInfo,//个人信息获取
-            topInfo: state => state.login.topInfo//会员推荐信息获取
+            signIn: state => state.signIn,//登录状态获取
+            proInfo: state => state.proInfo,//个人信息获取
+            topInfo: state => state.topInfo//会员推荐信息获取
         }),
         //个人等级
         level(){
@@ -315,18 +316,29 @@ export default {
         }
     },
     methods: {
-        loginShow(){
-            //登录弹窗显示隐藏
-            this.$store.dispatch('loginShow')
-        },
-        regShow(){
-            this.$store.dispatch('loginShow')
-            this.$store.commit('regShow',1)
-        },
+        ...mapActions([
+            'loginShow',//登录弹窗显示隐藏
+            'regShow'//注册登录tab状态
+        ]),
+        ...mapActions({
+            mosignIn: 'signIn',//命名重名修改
+            moproInfo: 'proInfo',
+            motopInfo: 'topInfo'
+        }),
+        // regShow(){
+        //     this.loginShow()
+        //     this.moregShow(1)
+        // },
         //退出登录
         signOut(){
             localStorage.setItem('signIn',0);
             window.location.reload();
+            this.moproInfo({
+                proInfo: []//state传入个人信息
+            });
+            this.motopInfo({
+                topInfo: []
+            });
         },
         //个人信息显示隐藏
         profileFadeIn(){
@@ -354,13 +366,13 @@ export default {
         let login = localStorage.getItem('signIn')//读取缓存登录状态
         if(!login){
             //无状态即未登录状态，修改state值
-            this.$store.dispatch('signIn',{
+            this.mosignIn({
                 signIn: localStorage.setItem('signIn',0),
             })
         }else{
             //已登录状态
             //读取缓存状态
-            this.$store.dispatch('signIn',{
+            this.mosignIn({
                 signIn: localStorage.getItem('signIn')
             })
             // //读取缓存个人信息
@@ -370,7 +382,7 @@ export default {
             //获取个人信息
             this.$axios.get('../static/login.json')
             .then((res)=>{
-                this.$store.dispatch('proInfo', {
+                this.moproInfo({
                     proInfo: res.data.data//state传入个人信息
                 })
             }).catch((error)=>{
@@ -379,7 +391,7 @@ export default {
             //获取大会员推荐信息
             this.$axios.get('../static/topInfo.json')
             .then((res)=>{
-                this.$store.dispatch('topInfo', {
+                this.motopInfo({
                     topInfo: res.data.data//state传入大会员推荐信息
                 })
             }).catch((error)=>{
@@ -1069,6 +1081,7 @@ export default {
     border-radius: 4px;
     font-size: 14px;
     color: #fff;
+    cursor: pointer;
 }
 .app-header .i_menu_login .reg {
     margin-top: 8px;

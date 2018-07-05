@@ -4,7 +4,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   	modules: {
+		header: {
+			namespaced: true,//注册header空间模块
+			state: {
+				headBanner: [],
+			},
+			mutations: {
+				headBanner(state,data){
+					state.headBanner = data
+				}
+			},
+			actions: {
+				headBanner({commit,state},data){
+					commit('headBanner',data)
+				}
+			}
+		},
     	login: {
+			namespaced: true,//注册login空间模块
       		state:{
 				loginShow: false,//登录弹窗，默认隐藏
 				userName: '',//用户名
@@ -46,6 +63,9 @@ export default new Vuex.Store({
 			actions: {
 				loginShow({commit,state},msg) {
 					commit('loginShow',msg)
+				   },
+				regShow({commit,state},msg){
+					commit('regShow',msg)
 			   	},
 			   	signIn({commit,state},msg){
 					commit('signIn',msg)

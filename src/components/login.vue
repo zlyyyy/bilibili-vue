@@ -8,7 +8,7 @@
             </div>
             <div class="login-logo"></div>
             <div class="login-title">
-                <a v-for="(item,index) in tab" :class="{active: index == nowindex}" href="#" @click="tabClick(index)">{{ item.name }}</a>
+                <a v-for="(item,index) in tab" :class="{active: index == nowindex}" href="#" @click="regShow(index)">{{ item.name }}</a>
             </div>
             <div class="login-user" v-if="nowindex == 0 ">
                 <div class="login-content">
@@ -37,17 +37,17 @@
             <div class="register-user" v-else>
                 <div class="register-content">
                     <div class="user" :class="{on: user!==''}">
-                        <input v-model="reguser" type="text" value="" placeholder="昵称（例：哔哩哔哩）" maxlength="50" autocomplete="off" class="username">
+                        <input v-model="user" type="text" value="" placeholder="昵称（例：哔哩哔哩）" maxlength="50" autocomplete="off" class="username">
                     </div>
                     <div class="password" :class="{on: password!==''}">
-                        <input v-model="regpassword" type="password" placeholder="密码（6-16个字符组成，区分大小写）" class="userpassword">
+                        <input v-model="password" type="password" placeholder="密码（6-16个字符组成，区分大小写）" class="userpassword">
                     </div>
                 </div>
-                <div class="register-btn" :class="{on: reguser!==''&&regpassword!==''}">
+                <div class="register-btn" :class="{on: reguser!==''&&regpassword!==''}" @click="onLogin()">
                     立即注册
                 </div>
                  <div class="register-login">
-                    <a href="javascript:;">已有账号，直接登录>></a>
+                    <a href="javascript:;" @click="regShow(0)">已有账号，直接登录>></a>
                 </div>
             </div>
         </div>
@@ -55,6 +55,9 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('login')
+
 export default {
     data () {
         return {
@@ -72,15 +75,15 @@ export default {
         }
     },
     computed: {
-        nowindex(){
-            return this.$store.state.login.nowindex
-        },
+        ...mapState({//命名空间获取state
+            nowindex: state => state.nowindex,//tab状态
+        }),
         user: {
             get() {
                 return this.$store.state.login.userName
             },
             set(value) {
-                this.$store.commit('updateUserName',value)
+                this.updateUserName(value)
             }
         },
         password: {
@@ -88,7 +91,7 @@ export default {
                 return this.$store.state.login.password
             },
             set(value) {
-                this.$store.commit('updatePassword',value)
+                this.updatePassword(value)
             }
         },
         userError(){
@@ -131,13 +134,23 @@ export default {
         }
     },
     methods: {
-        tabClick(num){
-            this.nowindex = num
-        },
-        loginShow(){
-            //登录弹窗显示隐藏
-            this.$store.dispatch('loginShow')
-        },
+        ...mapMutations([
+            'updateUserName',
+            'updatePassword'
+        ]),
+        ...mapActions([
+            'loginShow',//登录弹窗显示隐藏
+            'regShow'
+        ]),
+        ...mapActions({
+            mosignIn: 'signIn',
+            moproInfo: 'proInfo',
+            motopInfo: 'topInfo'
+        }),
+        // loginShow(){
+        //     //登录弹窗显示隐藏
+        //     this.mologinShow()
+        // },
         onLogin(){
             sessionStorage.setItem("signIn", 0);
             if(!this.userError.status || !this.passError.status){
@@ -149,10 +162,10 @@ export default {
                     localStorage.setItem('password',this.password);//浏览器存入密码--测试用
                     localStorage.setItem('signIn',1);//浏览器存入登录状态，0为未登录，1为已登录
                     // localStorage.setItem('proInfo',JSON.stringify(res.data.data));//浏览器存入个人信息
-                    this.$store.dispatch('signIn',{
+                    this.mosignIn({
                         signIn: localStorage.getItem('signIn'),//更改state中的登录状态
                     })
-                    this.$store.dispatch('proInfo',{
+                    this.moproInfo({
                         proInfo: res.data.data//state传入用户信息
                     })
                     this.loginShow()//关闭登录框
@@ -166,7 +179,7 @@ export default {
             //获取大会员推荐信息
             this.$axios.get('../static/topInfo.json')
             .then((res)=>{
-                this.$store.dispatch('topInfo', {
+                this.motopInfo({
                     topInfo: res.data.data//state传入大会员推荐信息
                 })
             }).catch((error)=>{

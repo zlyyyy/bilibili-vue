@@ -81,10 +81,15 @@
 
 <script>
 import NavMenu from '../components/common/navMenu'
+//创建基于header辅助函数,返回一个对象,对象里有新的绑定在给定命名空间值上的组件绑定辅助函数
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('header')
+
 export default {
     created() {
         this.getSearchDefaultWords()
         this.getMenuIcon()
+        this.getHeadBanner()
     },
     components:{
         NavMenu
@@ -612,11 +617,28 @@ export default {
             ]
         }
     },
+    computed: {
+        // 使用对象展开运算符将此对象混入到外部对象中
+        ...mapState({//命名空间获取state
+            headBanner: state => state.headBanner,//登录状态获取
+        })
+    },
     methods: {
+        ...mapActions({
+            moHeadBanner: 'headBanner'// 将 `this.moHeadBanner(amount)` 映射为 `this.$store.dispatch('headBanner', amount)`
+        }),
         getHeadBanner(){
-            this.$axios.get('/static/headbanner.json')
-            .then((res)=>{
-				this.headbannersrc = res.data["0"]
+            this.$axios({
+                method: "GET",
+                url: '/static/headbanner.json'
+                //根据不同页面修改参数
+                // params : {
+                //     pf: 0,
+                //     id: 142,
+                // },
+            }).then((res)=>{
+                // console.log(res.data.data)
+                this.moHeadBanner(res.data.data)//header模块state修改
             }).catch((error)=>{
                 console.log(error)
 			})
