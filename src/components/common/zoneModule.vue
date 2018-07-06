@@ -2,8 +2,8 @@
     <div class="zone-wrap-module" id="bili_donghua">
         <!-- v-for="(item,index) in maindataModule" :id="item.id" :key="item.id" -->
         <div class="zone-module">
-            <storey-box :storeydata="maindataModule[0]"></storey-box>
-            <zone-rank :zoneRankdata="maindataModule[0]" @videoInfoxy='videoinforevent'></zone-rank>
+            <storey-box :storeydata="moduledata"></storey-box>
+            <zone-rank :zoneRankdata="moduledata" @videoInfoxy='videoinforevent'></zone-rank>
         </div>
     </div>
 </template>
@@ -20,7 +20,7 @@ export default {
         ZoneRank
     },
     props: {
-        maindataModule: {
+        moduledata: {
             type: [Object,Array],
             default: () => []
         }

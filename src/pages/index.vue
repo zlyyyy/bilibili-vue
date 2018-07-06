@@ -1,46 +1,46 @@
 <template>
     <div class="app-body bili-wrapper">
         <div id="chief_recommend" class="chief-recommend-module">
-            <slide :slidedata="slidedata" :slidetimedata="slidetime" :pagation="pagation"></slide>
-            <!-- 轮播图  昨日 三日 一周 推荐 -->
+            <!-- 轮播图数据、时间、翻页 -->
+            <slide :slidedata="slide.data" :slidetimedata="slide.time" :pagation="slide.pagation"></slide>
+            <!-- 推荐模块 昨日 三日 一周  -->
             <keep-alive>
-                <recommend></recommend>
+                <recommend :recommend="recommend"></recommend>
             </keep-alive>
         </div>
         <!-- 推广模块 -->
-        <popularize :popularizeOnline="onlineData"></popularize>
+        <!--  推广数据、在线数据 -->
+        <popularize :popularize="popularize" :online="online"></popularize>
         <!--  动画 --> 
-        <zone-module :maindataModule="mainData" @videoInfoxy='videoinforevent'>
+        <zone-module :moduledata="donghua" @videoInfoxy='videoinforevent'>
         </zone-module>
-        <!--  动画 --> 
-        <!-- <bangumi-module :bangumiData="bangumiData[0]">
-        </bangumi-module> -->
+        <!--  番剧 --> 
         <div class="zone-wrap-module">
             <div class="bangumi-module">
                 <div class="up">
                     <div class="bangumi-timing-module l-con">
                         <div class="headline">
-                            <i class="icon icon_t" :class="bangumiData[0].icon"></i>
-                            <a :href=bangumiData.moreUrl class="name">{{ bangumiData[0].title }}</a>
+                            <i class="icon icon_t" :class="bangumi.icon"></i>
+                            <a :href=bangumiData.moreUrl class="name">{{ bangumi.title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[0].tab2" :class="{'on' : index === fjnowtab }" @click="fjnowtabclick(index)">{{ index>0 && index===fjnowtab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in bangumi.tab2" :class="{'on' : index === fjnowtab }" @click="fjnowtabclick(index)">{{ index>0 && index===fjnowtab? "周"+item.name : item.name}}</div>
                             </div>
-                            <a :href=bangumiData[0].moreUrl target="_blank" class="c-clink">
+                            <a :href=bangumi.moreUrl target="_blank" class="c-clink">
                                 新番时间表
                                 <i class="icon"></i>
                             </a>   
                         </div>
-                        <timing-box :timelineData="bangumiData[0].timelineData" :nowtab="fjnowtab"></timing-box>
+                        <timing-box :timelineData="bangumi.timeline" :nowtab="fjnowtab"></timing-box>
                     </div>
-                    <zone-rank :zoneRankdata="bangumiData[0]" :tag="1"> 
+                    <zone-rank :zoneRankdata="bangumi" :tag="1"> 
                     </zone-rank>
                 </div>
-                <storey-box :storeydata="bangumiData[0]"></storey-box>
+                <storey-box :storeydata="bangumi"></storey-box>
                 <div class="r-con">
                     <div class="ad-title">
                         <h3>排行</h3>
                     </div>
-                    <ad-slide :slidedata="bangumiData[0].AdData" :slidetimedata="bangumiData[0].AdTime" :pagation="bangumiData[0].Adpagation"></ad-slide>
+                    <ad-slide :slidedata="bangumi.Ad.ata" :slidetimedata="bangumi.Ad.time" :pagation="bangumi.Ad.pagation"></ad-slide>
                 </div>
             </div>
         </div>
@@ -49,25 +49,25 @@
                 <div class="up">
                     <div class="bangumi-timing-module l-con">
                         <div class="headline">
-                            <i class="icon icon_t" :class="bangumiData[1].icon"></i>
-                            <a :href=bangumiData[1].moreUrl class="name">{{ bangumiData[1].title }}</a>
+                            <i class="icon icon_t" :class="guochuang.icon"></i>
+                            <a :href=guochuang.moreUrl class="name">{{ guochuang.title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in bangumiData[1].tab2" :class="{'on' : index === gcnowtab }" @click="gcnowtabclick(index)">{{ index>0 && index===gcnowtab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in guochuang.tab2" :class="{'on' : index === gcnowtab }" @click="gcnowtabclick(index)">{{ index>0 && index===gcnowtab? "周"+item.name : item.name}}</div>
                             </div>
-                            <a :href=bangumiData[1].moreUrl target="_blank" class="c-clink">
+                            <a :href=guochuang.moreUrl target="_blank" class="c-clink">
                                 新番时间表
                                 <i class="icon"></i>
                             </a>   
                         </div>
-                        <timing-box :timelineData="bangumiData[1].timelineData" :nowtab="gcnowtab" class="gc"></timing-box>
+                        <timing-box :timelineData="guochuang.timelineData" :nowtab="gcnowtab" class="gc"></timing-box>
                     </div>
-                    <zone-rank :zoneRankdata="bangumiData[1]" :tag="1" :bangumiRankLists="5" class="sec-gc">
-                        <ad-slide slot="ad" :slidedata="bangumiData[1].AdData" :slidetimedata="bangumiData[1].AdTime" :pagation="bangumiData[1].Adpagation"></ad-slide>
+                    <zone-rank :zoneRankdata="guochuang" :tag="1" :bangumiRankLists="5" class="sec-gc">
+                        <ad-slide slot="ad" :slidedata="guochuang.AdData" :slidetimedata="guochuang.AdTime" :pagation="guochuang.Adpagation"></ad-slide>
                     </zone-rank>
                 </div>
-                <storey-box :storeydata="bangumiData[1]"></storey-box>
+                <storey-box :storeydata="guochuang"></storey-box>
                 <div class="r-con">
-                    <zone-rank :zoneRankdata="bangumiData[1]" :tag="0"></zone-rank>
+                    <zone-rank :zoneRankdata="guochuang" :tag="0"></zone-rank>
                 </div>
             </div>
         </div>
@@ -103,11 +103,14 @@ import TimingBox from '../components/base/timingBox'
 import ZoneRank from '../components/base/zoneRank'
 import StoreyBox from '../components/base/storeyBox'
 import AdSlide from '../components/ad/adSlide'
+import { mapState, mapMutations, mapActions } from 'vuex'
+
 export default {
     created() {
-        this.online()
         this.mainDataGet()
-        this.slide()
+        this.Mslide()
+        this.Mrecommend()
+        this.Monline()
     },
     components:{
         Slide,
@@ -120,12 +123,25 @@ export default {
         StoreyBox,
         AdSlide
     },
+    computed: {
+        ...mapState('home',[
+            'slide',//轮播图
+            'recommend',//推荐模块
+            'popularize',//推广模块
+            'online',//当前在线
+        ]),
+        ...mapState('home/donghua',{
+            donghua : state => state
+        }),
+        ...mapState('home/bangumi',{
+            bangumi : state => state
+        }),
+        ...mapState('home/guochuang',{
+            guochuang : state => state
+        })
+    },
     data () {
         return {
-            slidetime:2000,
-            pagation: true,
-            slidedata: [],
-            onlineData: [],
             mainData: [
                 {
                     id: 'bili_donghua',//模型id
@@ -333,19 +349,72 @@ export default {
         }
     },
     methods: {
-        slide() {
+        ...mapActions('home',[
+            'getSlide',
+            'getRec',
+            'getNowrec',
+            'getPopularize',
+            'getOnline'
+        ]),
+        ...mapActions('home/donghua',{
+            dhgetNewTrends: 'getNewTrends',
+            dhgetNewSub: 'getNewSub',
+            dhgetRankThreeAllList: 'getRankThreeAllList',
+            dhgetRankThreeOriginalList: 'getRankThreeOriginalList',
+            dhgetRankSevenAllList: 'getRankSevenAllList',
+            dhgetRankSevenOriginalList: 'getRankSevenOriginalList'
+        }),
+        ...mapActions('home/bangumi',{
+            fjgetTimeline: 'getTimeline',
+            fjgetNewTrends: 'getNewTrends',
+            fjgetNewSub: 'getNewSub',
+            fjgetRankThreeAllList: 'getRankThreeAllList',
+            fjgetRankSevenAllList: 'getRankSevenAllList',
+            fjgetAd: 'getAd'
+        }),
+        ...mapActions('home/guochuang',{
+            gcgetTimeline: 'getTimeline',
+            gcgetBrankThreeAllList: 'getBrankThreeAllList',
+            gcgetBrankSevenAllList: 'getBrankSevenAllList',
+            gcgetNewTrends: 'getNewTrends',
+            gcgetNewSub: 'getNewSub',
+            gcgetRankThreeAllList: 'getRankThreeAllList',
+            gcgetRankThreeOriginalList: 'getRankThreeOriginalList',
+            gcgetRankSevenAllList: 'getRankSevenAllList',
+            gcgetRankSevenOriginalList: 'getRankSevenOriginalList',
+            gcgetAd: 'getAd',
+        }),
+        //轮播图
+        //推荐模块
+        Mslide() {
             this.$axios.get('/static/popularize.json')
             .then((res)=>{
-                this.slidedata = res.data.data["23"]
+                this.getSlide(res.data.data["23"])
+                this.getPopularize(res.data.data["34"])
+            }).catch((error)=>{
+                console.log(error)
+            })
+        },
+        //推荐模块
+        Mrecommend() {
+            this.$axios.get('/static/recommend.json')
+            .then((res)=>{
+                this.getRec(res.data)//推荐模块set值
+                //推荐模块初始配置
+                this.getNowrec({
+                    now: this.recommend.rec.yesterday,
+                    nowLeft: '一周',
+                    nowRight: '三日'
+                })
             }).catch((error)=>{
                 console.log(error)
             })
         },
         //当前在线数
-        online() {
+        Monline() {
             this.$axios.get('/static/online.json')
             .then((res)=>{
-                this.onlineData = res.data
+                this.getOnline(res.data)
             }).catch((error)=>{
                 console.log(error)
             })
@@ -400,28 +469,29 @@ export default {
                     gcRankSevenOriginalList,//国创七日原创排行
                     gcAdData
                 ) => {
-                    this.mainData[0].newTrends = newTrends.data.data
-                    this.mainData[0].newSub = newSub.data.data
-                    this.mainData[0].rankThreeAllList = rankThreeAllList.data.data
-                    this.mainData[0].rankThreeOriginalList = rankThreeOriginalList.data.data
-                    this.mainData[0].rankSevenAllList = rankSevenAllList.data.data
-                    this.mainData[0].rankSevenOriginalList = rankSevenOriginalList.data.data
-                    this.bangumiData[0].timelineData = timelineGlobal.data.result
-                    this.bangumiData[0].BrankThreeAllList = timelineGlobalThree.data.result.list
-                    this.bangumiData[0].BrankSevenAllList = timelineGlobalSeven.data.result.list
-                    this.bangumiData[0].newTrends = fjnewTrends.data.data
-                    this.bangumiData[0].newSub = fjnewSub.data.data
-                    this.bangumiData[0].AdData = fjadSlide.data.result
-                    this.bangumiData[1].timelineData = timelineCn.data.result
-                    this.bangumiData[1].BrankThreeAllList = timelineCnThree.data.result.list
-                    this.bangumiData[1].BrankSevenAllList = timelineCnSeven.data.result.list
-                    this.bangumiData[1].newTrends = gcnewTrends.data.data
-                    this.bangumiData[1].newSub = gcnewSub.data.data
-                    this.bangumiData[1].rankThreeAllList = gcRankThreeAllList.data.data
-                    this.bangumiData[1].rankThreeOriginalList = gcRankThreeOriginalList.data.data
-                    this.bangumiData[1].rankSevenAllList = gcRankSevenAllList.data.data
-                    this.bangumiData[1].rankSevenOriginalList = gcRankSevenOriginalList.data.data
-                    this.bangumiData[1].AdData = gcAdData.data.result
+                    this.dhgetNewTrends(newTrends.data.data)
+                    this.dhgetNewSub(newSub.data.data) 
+                    this.dhgetRankThreeAllList(rankThreeAllList.data.data)
+                    this.dhgetRankThreeOriginalList(rankThreeOriginalList.data.data)
+                    this.dhgetRankSevenAllList(rankSevenAllList.data.data)
+                    this.dhgetRankSevenOriginalList(rankSevenOriginalList.data.data)
+                    this.fjgetTimeline(timelineGlobal.data.result)
+                    this.fjgetRankThreeAllList(timelineGlobalThree.data.result.list)
+                    this.fjgetRankSevenAllList(timelineGlobalSeven.data.result.list)
+                    this.fjgetNewTrends(fjnewTrends.data.data)
+                    this.fjgetNewSub(fjnewSub.data.data)
+                    this.fjgetAd(fjadSlide.data.result)
+                    
+                    this.gcgetTimeline(timelineCn.data.result)
+                    this.gcgetBrankThreeAllList(timelineCnThree.data.result.list)
+                    this.gcgetBrankSevenAllList(timelineCnSeven.data.result.list)
+                    this.gcgetNewTrends(gcnewTrends.data.data)
+                    this.gcgetNewSub(gcnewSub.data.data)
+                    this.gcgetRankThreeAllList(gcRankThreeAllList.data.data)
+                    this.gcgetRankThreeOriginalList(gcRankThreeOriginalList.data.data)
+                    this.gcgetRankSevenAllList(gcRankSevenAllList.data.data)
+                    this.gcgetRankSevenOriginalList(gcRankSevenOriginalList.data.data)
+                    this.gcgetAd(gcAdData.data.result)
                 }))
         },
         fjnowtabclick(index) {

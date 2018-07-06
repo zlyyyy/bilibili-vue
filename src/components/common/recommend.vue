@@ -1,6 +1,6 @@
 <template>
     <div class="recommend-module">
-        <div class="groom-module home-card" v-for="(item,index) in nowRecdata">
+        <div class="groom-module home-card" v-for="(item,index) in recommend.nowRec">
             <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title=item.title>
                 <img v-lazy=item.pic :alt=item.title width="160" height="100" class="pic">
                 <div class="card-mark">
@@ -11,57 +11,62 @@
             </a>
             <div class="watch-later-trigger w-later"></div>
         </div>
-        <template v-if="this.recLeft === '一周'">
-            <span class="rec-btn rec-left" @click="weekdays()">{{ recLeft }}</span>
-            <span class="rec-btn rec-right" @click="threedays()">{{ recRight }}</span>
+        <template v-if="this.recommend.nowLeft === '一周'">
+            <span class="rec-btn rec-left" @click="weekdays()">{{ recommend.nowLeft }}</span>
+            <span class="rec-btn rec-right" @click="threedays()">{{ recommend.nowRight }}</span>
         </template>
-        <template v-else-if="this.recLeft === '昨日'">
-            <span class="rec-btn rec-left" @click="yesterday()">{{ recLeft }}</span>
-            <span class="rec-btn rec-right" @click="weekdays()">{{ recRight }}</span>
+        <template v-else-if="this.recommend.nowLeft === '昨日'">
+            <span class="rec-btn rec-left" @click="yesterday()">{{ recommend.nowLeft }}</span>
+            <span class="rec-btn rec-right" @click="weekdays()">{{ recommend.nowRight }}</span>
         </template>
-        <template v-else-if="this.recLeft === '三日'">
-            <span class="rec-btn rec-left" @click="threedays()">{{ recLeft }}</span>
-            <span class="rec-btn rec-right" @click="yesterday()">{{ recRight }}</span>
+        <template v-else-if="this.recommend.nowLeft === '三日'">
+            <span class="rec-btn rec-left" @click="threedays()">{{ recommend.nowLeft }}</span>
+            <span class="rec-btn rec-right" @click="yesterday()">{{ recommend.nowRight }}</span>
         </template>
     </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('home')
+
 export default {
-    created() {
-        this.$axios.get('/static/recommend.json')
-            .then((res)=>{
-                this.recdata = res.data
-                this.yesterday()
-            }).catch((error)=>{
-                console.log(error)
-            })
+    props: {
+        recommend: {
+			default: []
+		} 
     },
     data () {
         return {
-            recdata:[],
-            nowRecdata:[],
-            recLeft: '一周',
-            recRight: '三日'
+
         }
     },
     methods: {
+        ...mapActions([
+            'getNowrec'
+        ]),
         yesterday(){
-            this.nowRecdata = this.recdata.yesterday
-            this.recLeft = "一周"
-            this.recRight = "三日"
+            this.getNowrec({
+                now: this.recommend.rec.yesterday,
+                nowLeft: '一周',
+                nowRight: '三日'
+            })
         },
         threedays(){
-            this.nowRecdata = this.recdata.threedays
-            this.recLeft = "昨日"
-            this.recRight = "一周"
+            this.getNowrec({
+                now: this.recommend.rec.threedays,
+                nowLeft: '昨日',
+                nowRight: '一周'
+            })
         },
         weekdays(){
-            this.nowRecdata = this.recdata.week
-            this.recLeft = "三日"
-            this.recRight = "昨日"
+            this.getNowrec({
+                now: this.recommend.rec.week,
+                nowLeft: '三日',
+                nowRight: '昨日'
+            })
         }
-    }  
+    } 
 }
 </script>
 
