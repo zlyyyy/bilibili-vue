@@ -52,7 +52,7 @@ const state = {
 		}
 	],
 	// timeline: true,
-	timelineData: [],
+	timeline: [],
 	rankdropdown:[
 		{
 			name: '三日'
@@ -86,34 +86,34 @@ const getters = {}
 
 const mutations = {
 	setTimeline(state,data){
-		state.timeline = data
+		state.timeline = Object.assign([],data)
 	},
 	setBrankThreeAllList(state,data){
-		state.BrankThreeAllList = data
+		state.BrankThreeAllList = Object.assign([],data)
 	},
 	setBrankSevenAllList(state,data){
-		state.BrankSevenAllList = data
+		state.BrankSevenAllList = Object.assign([],data)
 	},
 	setNewTrends(state,data){
-		state.newTrends = data
+		state.newTrends = Object.assign([],data)
 	},
 	setNewSub(state,data){
-		state.newSub = data
+		state.newSub = Object.assign([],data)
 	},
 	setRankThreeAllList(state,data){
-		state.rankThreeAllList = data
+		state.rankThreeAllList = Object.assign([],data)
 	},
 	setRankThreeOriginalList(state,data){
-		state.rankThreeOriginalList = data
+		state.rankThreeOriginalList = Object.assign([],data)
 	},
 	setRankSevenAllList(state,data){
-		state.rankSevenAllList = data
+		state.rankSevenAllList = Object.assign([],data)
 	},
 	setRankSevenOriginalList(state,data){
-		state.rankSevenOriginalList = data
+		state.rankSevenOriginalList = Object.assign([],data)
 	},
 	setAd(state,data){
-		state.Ad.data = data
+		state.Ad.data = Object.assign([],data)
 	}
 }
 

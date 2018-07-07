@@ -37,10 +37,10 @@ const getters = {}
 const mutations = {
 	//登录弹窗显示隐藏
     setSlide(state,data) {
-        state.slide.data = data
+        state.slide.data = Object.assign([],data)
     },
     setRec(state,data) {
-        state.recommend.rec = data
+        state.recommend.rec = Object.assign([],data)
     },
     setNowrec(state,data) {
         state.recommend.nowRec = data.now
@@ -48,10 +48,10 @@ const mutations = {
         state.recommend.nowRight = data.nowRight
     },
     setPopularize(state,data){
-        state.popularize = data
+        state.popularize = Object.assign([],data)
     },
     setOnline(state,data) {
-        state.online = data
+        state.online = Object.assign([],data)
     },
 }
 

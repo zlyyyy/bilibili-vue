@@ -70,22 +70,22 @@ const getters = {}
 
 const mutations = {
 	setTimeline(state,data){
-		state.timeline = data
+		state.timeline = Object.assign([],data)
 	},
 	setNewTrends(state,data){
-		state.newTrends = data
+		state.newTrends = Object.assign([],data)
 	},
 	setNewSub(state,data){
-		state.newSub = data
+		state.newSub = Object.assign([],data)
 	},
 	setRankThreeAllList(state,data){
-		state.BrankThreeAllList = data
+		state.BrankThreeAllList = Object.assign([],data)
 	},
 	setRankSevenAllList(state,data){
-		state.BrankSevenAllList = data
+		state.BrankSevenAllList = Object.assign([],data)
 	},
 	setAd(state,data){
-		state.Ad.data = data
+		state.Ad.data = Object.assign([],data)
 	}
 }
 

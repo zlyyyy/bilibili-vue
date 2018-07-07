@@ -48,22 +48,22 @@ const getters = {}
 
 const mutations = {
 	setNewTrends(state,data){
-		state.newTrends = data
+		state.newTrends = Object.assign([],data)
 	},
 	setNewSub(state,data){
-		state.newSub = data
+		state.newSub = Object.assign([],data)
 	},
 	setRankThreeAllList(state,data){
-		state.rankThreeAllList = data
+		state.rankThreeAllList = Object.assign([],data)
 	},
 	setRankThreeOriginalList(state,data){
-		state.rankThreeOriginalList = data
+		state.rankThreeOriginalList = Object.assign([],data)
 	},
 	setRankSevenAllList(state,data){
-		state.rankSevenAllList = data
+		state.rankSevenAllList = Object.assign([],data)
 	},
 	setRankSevenOriginalList(state,data){
-		state.rankSevenOriginalList = data
+		state.rankSevenOriginalList = Object.assign([],data)
 	}
 }
 

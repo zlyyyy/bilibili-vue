@@ -43,17 +43,17 @@ const mutations = {
 const actions = {
 	loginShow({commit,state},msg) {
         commit('loginShow',msg)
-       },
+    },
     regShow({commit,state},msg){
         commit('regShow',msg)
-       },
-       signIn({commit,state},msg){
+    },
+    signIn({commit,state},msg){
         commit('signIn',msg)
-       },
-       proInfo({commit,state},msg){
+    },
+    proInfo({commit,state},msg){
         commit('proInfo',msg)
-       },
-       topInfo({commit,state},msg){
+    },
+    topInfo({commit,state},msg){
         commit('topInfo',msg)
     }
 }

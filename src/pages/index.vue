@@ -21,7 +21,7 @@
                     <div class="bangumi-timing-module l-con">
                         <div class="headline">
                             <i class="icon icon_t" :class="bangumi.icon"></i>
-                            <a :href=bangumiData.moreUrl class="name">{{ bangumi.title }}</a>
+                            <a :href=bangumi.moreUrl class="name">{{ bangumi.title }}</a>
                             <div class="bili-tab">
                                 <div class="bili-tab-item" v-for="(item,index) in bangumi.tab2" :class="{'on' : index === fjnowtab }" @click="fjnowtabclick(index)">{{ index>0 && index===fjnowtab? "周"+item.name : item.name}}</div>
                             </div>
@@ -32,7 +32,7 @@
                         </div>
                         <timing-box :timelineData="bangumi.timeline" :nowtab="fjnowtab"></timing-box>
                     </div>
-                    <zone-rank :zoneRankdata="bangumi" :tag="1"> 
+                    <zone-rank :zoneRank="bangumi" :tag="1"> 
                     </zone-rank>
                 </div>
                 <storey-box :storeydata="bangumi"></storey-box>
@@ -40,7 +40,7 @@
                     <div class="ad-title">
                         <h3>排行</h3>
                     </div>
-                    <ad-slide :slidedata="bangumi.Ad.ata" :slidetimedata="bangumi.Ad.time" :pagation="bangumi.Ad.pagation"></ad-slide>
+                    <ad-slide :slidedata="bangumi.Ad.data" :slidetimedata="bangumi.Ad.time" :pagation="bangumi.Ad.pagation"></ad-slide>
                 </div>
             </div>
         </div>
@@ -59,15 +59,15 @@
                                 <i class="icon"></i>
                             </a>   
                         </div>
-                        <timing-box :timelineData="guochuang.timelineData" :nowtab="gcnowtab" class="gc"></timing-box>
+                        <timing-box :timelineData="guochuang.timeline" :nowtab="gcnowtab" class="gc"></timing-box>
                     </div>
-                    <zone-rank :zoneRankdata="guochuang" :tag="1" :bangumiRankLists="5" class="sec-gc">
-                        <ad-slide slot="ad" :slidedata="guochuang.AdData" :slidetimedata="guochuang.AdTime" :pagation="guochuang.Adpagation"></ad-slide>
+                    <zone-rank :zoneRank="guochuang" :tag="1" :bangumiRankLists="5" class="sec-gc">
+                        <!-- <ad-slide :slidedata="guochuang.Ad.data" :slidetimedata="guochuang.Ad.time" :pagation="guochuang.Ad.pagation"></ad-slide> -->
                     </zone-rank>
                 </div>
                 <storey-box :storeydata="guochuang"></storey-box>
                 <div class="r-con">
-                    <zone-rank :zoneRankdata="guochuang" :tag="0"></zone-rank>
+                    <zone-rank :zoneRank="guochuang" :tag="0"></zone-rank>
                 </div>
             </div>
         </div>
@@ -142,206 +142,8 @@ export default {
     },
     data () {
         return {
-            mainData: [
-                {
-                    id: 'bili_donghua',//模型id
-                    title: '动画', //模型名称
-                    doubletitle: false,
-                    icon: 'icon-donghua',//模型图标
-                    tab:[
-                        {
-                            name: '有新动态'
-                        },
-                        {
-                            name: '最新投稿'
-                        }
-                    ],
-                    dynamic: 27989,//模型新动态数
-                    moreUrl: '/v/donghua',//模型更多链接
-                    newTrends: [],//最新动态
-                    newSub: [],//最新投稿
-                    ranktab: [
-                        {
-                            name: '全部'
-                        },
-                        {
-                            name: '原创'
-                        }
-                    ],
-                    timeline: false,
-                    rankdropdown:[
-                        {
-                            name: '三日'
-                        },
-                        {
-                            name: '一周'
-                        }
-                    ],
-                    rankPic: true,
-                    rankLists: 7,
-                    rankThreeAllList: [],//三日全部排行
-                    rankThreeAllMoreUrl: '/ranking/all/1/1/3/',//三日全部排行更多链接
-                    rankThreeOriginalList: [],//三日原创排行
-                    rankThreeOriginalMoreUrl: '/ranking/origin/1/1/3/',//三日原创更多链接
-                    rankSevenAllList: [],//一周全部排行
-                    rankSevenAllMoreUrl: '/ranking/all/1/1/7/',//一周全部排行更多链接
-                    rankSevenOriginalList: [],//一周原创排行
-                    rankSevenOriginalMoreUrl: '/ranking/origin/1/1/7/'//一周原创排行链接
-                }
-            ],
             fjnowtab: 0,//更新时间轴
             gcnowtab: 0,//更新时间轴
-            bangumiData: [
-                {
-                    num: '0',
-                    id: 'bili_bangumi',//模型id
-                    title: '番剧', //模型名称
-                    title2: '番剧动态',
-                    doubletitle: true,
-                    icon: 'icon-bangumi',//模型图标
-                    tab:[
-                        {
-                            name: '有新动态'
-                        },
-                        {
-                            name: '最新投稿'
-                        }
-                    ],
-                    tab2:[
-                        {
-                            name: '最新'
-                        },
-                        {
-                            name: '一'
-                        },
-                        {
-                            name: '二'
-                        },
-                        {
-                            name: '三'
-                        },
-                        {
-                            name: '四'
-                        },
-                        {
-                            name: '五'
-                        },
-                        {
-                            name: '六'
-                        },
-                        {
-                            name: '日'
-                        }
-                    ],
-                    dynamic: 1514,//模型新动态数
-                    moreUrl: '/v/bangumi',//模型更多链接
-                    newTrends: [],//最新动态
-                    newSub: [],//最新投稿
-                    ranktab: [],
-                    timeline: true,
-                    timelineData: [],
-                    rankdropdown:[
-                        {
-                            name: '三日'
-                        },
-                        {
-                            name: '一周'
-                        }
-                    ],
-                    rankPic: false,
-                    rankLists: 10,
-                    BrankThreeAllList: [],//三日全部排行
-                    BrankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
-                    BrankSevenAllList: [],//一周全部排行
-                    BrankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
-                    AdData: [
-                    ],
-                    Adpagation: false,
-                    AdTime: 3000
-                },
-                {
-                    num: '1',
-                    id: 'bili_guochuang',//模型id
-                    title: '国创', //模型名称
-                    title2: '国产原创相关',
-                    doubletitle: true,
-                    icon: 'icon-guochuang',//模型图标
-                    tab:[
-                        {
-                            name: '有新动态'
-                        },
-                        {
-                            name: '最新投稿'
-                        }
-                    ],
-                    tab2:[
-                        {
-                            name: '最新'
-                        },
-                        {
-                            name: '一'
-                        },
-                        {
-                            name: '二'
-                        },
-                        {
-                            name: '三'
-                        },
-                        {
-                            name: '四'
-                        },
-                        {
-                            name: '五'
-                        },
-                        {
-                            name: '六'
-                        },
-                        {
-                            name: '日'
-                        }
-                    ],
-                    dynamic: 1514,//模型新动态数
-                    moreUrl: '/v/bangumi',//模型更多链接
-                    newTrends: [],//最新动态
-                    newSub: [],//最新投稿
-                    ranktab: [
-                        {
-                            name: '全部'
-                        },
-                        {
-                            name: '原创'
-                        }
-                    ],
-                    timeline: true,
-                    timelineData: [],
-                    rankdropdown:[
-                        {
-                            name: '三日'
-                        },
-                        {
-                            name: '一周'
-                        }
-                    ],
-                    rankPic: true,
-                    rankLists: 7,
-                    BrankThreeAllList: [],//三日全部排行
-                    BrankThreeAllMoreUrl: '/ranking/bangumi/167/0/3/',//三日全部排行更多链接
-                    BrankSevenAllList: [],//一周全部排行
-                    BrankSevenAllMoreUrl: '/ranking/bangumi/167/0/7/',//一周全部排行更多链接
-                    rankThreeAllList: [],//三日相关全部排行
-                    rankThreeAllMoreUrl: '/ranking/all/168/1/3/',//三日全部排行更多链接
-                    rankThreeOriginalList: [],//三日原创全部排行
-                    rankThreeOriginalMoreUrl: '/ranking/origin/168/1/3/',//三日原创全部排行更多链接
-                    rankSevenAllList: [],//七日相关全部排行
-                    rankSevenAllMoreUrl: '/ranking/all/168/1/7/',//七日全部排行更多链接
-                    rankSevenOriginalList: [],//七日原创全部排行
-                    rankSevenOriginalMoreUrl: '/ranking/origin/168/1/7/',//七日原创全部排行更多链接
-                    AdData: [
-                    ],
-                    Adpagation: false,
-                    AdTime: 3000
-                }
-            ],
             timelineCn:[],   
             videodata: [],
             videoinforShow: false,

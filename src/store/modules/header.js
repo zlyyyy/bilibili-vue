@@ -6,7 +6,7 @@ const getters = {}
 
 const mutations = {
 	headBanner(state,data){
-		state.headBanner = data
+		state.headBanner = Object.assign([],data)
 	}
 }
 

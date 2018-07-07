@@ -4,13 +4,13 @@
             <div class="rank-head">
                 <h3>排行</h3>
                 <div class="bili-tab rank-tab">
-                    <div class="bili-tab-item" v-for="(item,index) in zoneRankdata.ranktab" :class="{'on' : index===ranknowtab}" @mousemove="ranknowtabclick(index)">{{item.name }}</div>
+                    <div class="bili-tab-item" v-for="(item,index) in zoneRank.ranktab" :class="{'on' : index===ranknowtab}" @mousemove="ranknowtabclick(index)">{{item.name }}</div>
                 </div>
-                <dropdown :dropdownData="zoneRankdata.rankdropdown" :selected="rankselect" @dropselected='rankSelect'></dropdown>
+                <dropdown :dropdownData="zoneRank.rankdropdown" :selected="rankselect" @dropselected='rankSelect'></dropdown>
             </div>
             <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===0">
                 <ul class="rank-list hot-lists">
-                    <li class="rank-item" v-for="(item,index) in zoneRankdata.rankThreeAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.rankThreeAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
@@ -26,7 +26,7 @@
                     </li>             
                 </ul>
                 <ul class="rank-list" :class="'origin-list'" v-if="rankPic==true">
-                    <li class="rank-item" v-for="(item,index) in zoneRankdata.rankThreeOriginalList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.rankThreeOriginalList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
@@ -44,7 +44,7 @@
             </div>
             <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===1">
                 <ul class="rank-list hot-lists">
-                    <li class="rank-item" v-for="(item,index) in zoneRankdata.rankSevenAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.rankSevenAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
@@ -60,7 +60,7 @@
                     </li>             
                 </ul>
                 <ul class="rank-list" :class="'origin-list'" v-if="rankPic==true">
-                    <li class="rank-item" v-for="(item,index) in zoneRankdata.rankSevenOriginalList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.rankSevenOriginalList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
@@ -76,19 +76,19 @@
                     </li>   
                 </ul>
             </div>
-            <a :href="zoneRankdata.rankThreeAllMoreUrl" target="_blank" class="more-link" v-if="ranknowtab===0&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
-            <a :href="zoneRankdata.rankThreeOriginalMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===1&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
-            <a :href="zoneRankdata.rankSevenAllMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===0&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
-            <a :href="zoneRankdata.rankSevenOriginalMoreUrl" target="_blank" class="more-link" v-else="ranknowtab===1&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
+            <a :href="zoneRank.rankThreeAllMoreUrl" target="_blank" class="more-link" v-if="ranknowtab===0&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
+            <a :href="zoneRank.rankThreeOriginalMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===1&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
+            <a :href="zoneRank.rankSevenAllMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===0&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
+            <a :href="zoneRank.rankSevenOriginalMoreUrl" target="_blank" class="more-link" v-else="ranknowtab===1&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
          </template>
         <template v-else="tag===1">
             <div class="rank-head">
                 <h3>排行</h3>
-                <dropdown :dropdownData="zoneRankdata.rankdropdown" :selected="rankselect" @dropselected='rankSelect'></dropdown>
+                <dropdown :dropdownData="zoneRank.rankdropdown" :selected="rankselect" @dropselected='rankSelect'></dropdown>
             </div>
             <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===0">
                 <ul class="rank-list bangumi-rank-list">
-                    <li class="rank-item" v-for="(item,index) in zoneRankdata.BrankThreeAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&tag===0}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.BrankThreeAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&tag===0}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="tag===0">
@@ -106,7 +106,7 @@
             </div>
             <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}" v-if="rankselect===1">
                 <ul class="rank-list bangumi-rank-list" >
-                    <li class="rank-item" v-for="(item,index) in zoneRankdata.BrankSevenAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&tag===0}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.BrankSevenAllList" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&tag===0}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="tag===0">
@@ -122,18 +122,20 @@
                     </li>             
                 </ul>
             </div>
-            <a :href="zoneRankdata.BrankThreeAllMoreUrl" target="_blank" class="more-link" v-if="ranknowtab===0&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
-            <a :href="zoneRankdata.BrankSevenAllMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===0&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
+            <a :href="zoneRank.BrankThreeAllMoreUrl" target="_blank" class="more-link" v-if="ranknowtab===0&&rankselect===0">查看更多<i class="icon icon-arrow-r"></i></a>
+            <a :href="zoneRank.BrankSevenAllMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===0&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
+            <ad-slide v-if="zoneRank.num==1" :slidedata="zoneRank.Ad.data" :slidetimedata="zoneRank.Ad.time" :pagation="zoneRank.Ad.pagation"></ad-slide>
         </template>
-        <slot v-if="zoneRankdata.num=1" name="ad"></slot>
+        <!-- <slot v-if="zoneRank.num=1"></slot> -->
     </div>
 </template>
 
 <script>
 import Dropdown from '../base/dropdown'
+import AdSlide from '../ad/adSlide'
 export default {
     props: {
-        zoneRankdata: {
+        zoneRank: {
             type: [Object,Array],
             default: () => []
         },
@@ -147,18 +149,19 @@ export default {
         }
     },
     components: {
-        Dropdown
+        Dropdown,
+        AdSlide
     },
     computed: {
         rankLists(){
             if(this.bangumiRankLists===0){
-                return this.zoneRankdata.rankLists
+                return this.zoneRank.rankLists
             }else{
                 return this.bangumiRankLists
             }
         },
         rankPic(){
-            return this.zoneRankdata.rankPic
+            return this.zoneRank.rankPic
         }
     },
     data () {

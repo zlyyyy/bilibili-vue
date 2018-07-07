@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createLogger from 'vuex/dist/logger'
 import header from './modules/header'
 import login from './modules/login'
 import home from './modules/home'
@@ -17,6 +18,7 @@ export default new Vuex.Store({
 		login,
 		home
 	},
-	strict: debug
+	strict: debug,
+	plugins: debug ? [createLogger()] : []
 	// 是否开启严格模式
 })

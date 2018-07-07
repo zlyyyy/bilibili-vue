@@ -4,7 +4,7 @@
         <div class="zone-module">
             <storey-box :storeydata="moduledata"></storey-box>
             <!--  @videoInfoxy='videoinforevent' -->
-            <zone-rank :zoneRank="moduledata"></zone-rank>
+            <zone-rank :zoneRankdata="moduledata"></zone-rank>
         </div>
     </div>
 </template>
