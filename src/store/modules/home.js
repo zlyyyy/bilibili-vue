@@ -40,7 +40,7 @@ const mutations = {
         state.slide.data = Object.assign([],data)
     },
     setRec(state,data) {
-        state.recommend.rec = Object.assign([],data)
+        state.recommend.rec = Object.assign({},data)
     },
     setNowrec(state,data) {
         state.recommend.nowRec = data.now
@@ -51,8 +51,8 @@ const mutations = {
         state.popularize = Object.assign([],data)
     },
     setOnline(state,data) {
-        state.online = Object.assign([],data)
-    },
+        state.online = Object.assign({},data)
+    }
 }
 
 const actions = {

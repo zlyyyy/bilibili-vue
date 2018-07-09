@@ -1,11 +1,11 @@
 <template>
     <div class="nav-menu">
-        <div class="blur-bg" :style="{background:'url('+menubgsrc+')'}"></div>
+        <div class="blur-bg" :style="{background:'url('+headBanner.pic+')'}"></div>
         <div class="nav-mask"></div>
         <div class="bili-wrapper">
             <div class="nav-con fl">
                 <ul>
-                    <li class="nav-item" v-for="item in navdata" :class="item.class">
+                    <li class="nav-item" v-for="item in leftNav" :class="item.class">
                         <a href="" class="t">
                             <i :class="item.icon" v-if="item.icon"></i>
                             {{ item.name }}
@@ -255,47 +255,16 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('login')
 
 export default {
+    props: {
+        leftNav: {
+            default: []
+        },
+        headBanner: {
+            default: []
+        }
+    },
     data () {
         return {
-            menubgsrc: require('../../assets/nav-bg.png'),
-            navdata: [
-                {
-                    name: '主站',
-                    class: 'home',
-                    icon: 'bili-icon',
-                    href: '/'
-                },
-                {
-                    name: '画友',
-                    class: 'hbili',
-                    href: '/'
-                },
-                {
-                    name: '游戏中心',
-                    class: 'game',
-                    href: '/'
-                },
-                {
-                    name: '直播',
-                    class: 'live',
-                    href: '/'
-                },
-                {
-                    name: '会员购',
-                    class: 'buy',
-                    href: '/'
-                },
-                {
-                    name: 'BML',
-                    href: '/'
-                },
-                {
-                    name: '下载APP',
-                    class: 'mobile',
-                    icon: 'bili-icon',
-                    href: '/'
-                }
-            ],
             profileShow: false,//个人信息默认隐藏
             vipShow: false,//会员推荐默认隐藏
             messageShow: false//消息通知默认隐藏
@@ -380,7 +349,7 @@ export default {
             //     proInfo: JSON.parse(localStorage.getItem('proInfo'))//state传入用户信息
             // })
             //获取个人信息
-            this.$axios.get('../static/login.json')
+            this.$axios.get('http://localhost:8080/static/login.json')
             .then((res)=>{
                 this.moproInfo({
                     proInfo: res.data.data//state传入个人信息
@@ -389,7 +358,7 @@ export default {
                 console.log(error)
             })
             //获取大会员推荐信息
-            this.$axios.get('../static/topInfo.json')
+            this.$axios.get('http://localhost:8080/static/topInfo.json')
             .then((res)=>{
                 this.motopInfo({
                     topInfo: res.data.data//state传入大会员推荐信息

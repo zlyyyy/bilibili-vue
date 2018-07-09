@@ -48,10 +48,10 @@ const getters = {}
 
 const mutations = {
 	setNewTrends(state,data){
-		state.newTrends = Object.assign([],data)
+		state.newTrends = Object.assign({},data)
 	},
 	setNewSub(state,data){
-		state.newSub = Object.assign([],data)
+		state.newSub = Object.assign({},data)
 	},
 	setRankThreeAllList(state,data){
 		state.rankThreeAllList = Object.assign([],data)

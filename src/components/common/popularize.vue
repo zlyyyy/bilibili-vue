@@ -64,7 +64,6 @@ export default {
 	},
     data () {
         return {
-			spreads: []
         }
     },
     methods: {

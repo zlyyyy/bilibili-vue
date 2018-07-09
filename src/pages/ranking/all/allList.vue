@@ -59,6 +59,8 @@ export default {
     },
     components:{
     },
+    computed: {
+    },
     data () {
         return {
             RankingALL: []

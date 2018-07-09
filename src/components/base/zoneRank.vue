@@ -126,7 +126,7 @@
             <a :href="zoneRank.BrankSevenAllMoreUrl" target="_blank" class="more-link" v-else-if="ranknowtab===0&&rankselect===1">查看更多<i class="icon icon-arrow-r"></i></a>
             <ad-slide v-if="zoneRank.num==1" :slidedata="zoneRank.Ad.data" :slidetimedata="zoneRank.Ad.time" :pagation="zoneRank.Ad.pagation"></ad-slide>
         </template>
-        <!-- <slot v-if="zoneRank.num=1"></slot> -->
+        <!-- <slot></slot> -->
     </div>
 </template>
 

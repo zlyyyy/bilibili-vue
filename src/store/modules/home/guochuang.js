@@ -51,8 +51,8 @@ const state = {
 			name: '原创'
 		}
 	],
-	// timeline: true,
 	timeline: [],
+	timelineTab: 0,//更新时间轴
 	rankdropdown:[
 		{
 			name: '三日'
@@ -88,6 +88,9 @@ const mutations = {
 	setTimeline(state,data){
 		state.timeline = Object.assign([],data)
 	},
+	setTimelineTab(state,data){
+		state.timelineTab = data
+	},
 	setBrankThreeAllList(state,data){
 		state.BrankThreeAllList = Object.assign([],data)
 	},
@@ -95,10 +98,10 @@ const mutations = {
 		state.BrankSevenAllList = Object.assign([],data)
 	},
 	setNewTrends(state,data){
-		state.newTrends = Object.assign([],data)
+		state.newTrends = Object.assign({},data)
 	},
 	setNewSub(state,data){
-		state.newSub = Object.assign([],data)
+		state.newSub = Object.assign({},data)
 	},
 	setRankThreeAllList(state,data){
 		state.rankThreeAllList = Object.assign([],data)
@@ -120,6 +123,9 @@ const mutations = {
 const actions = {
 	getTimeline({ commit, state },data){
 		commit('setTimeline',data)
+	},
+	getTimelineTab({ commit, state },data){
+		commit('setTimelineTab',data)
 	},
 	getBrankThreeAllList({ commit, state },data){
 		commit('setBrankThreeAllList',data)

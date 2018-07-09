@@ -23,14 +23,14 @@
                             <i class="icon icon_t" :class="bangumi.icon"></i>
                             <a :href=bangumi.moreUrl class="name">{{ bangumi.title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in bangumi.tab2" :class="{'on' : index === fjnowtab }" @click="fjnowtabclick(index)">{{ index>0 && index===fjnowtab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in bangumi.tab2" :class="{'on' : index === bangumi.timelineTab }" @click="fjgetTimelineTab(index)">{{ index>0 && index===bangumi.timelineTab? "周"+item.name : item.name}}</div>
                             </div>
                             <a :href=bangumi.moreUrl target="_blank" class="c-clink">
                                 新番时间表
                                 <i class="icon"></i>
                             </a>   
                         </div>
-                        <timing-box :timelineData="bangumi.timeline" :nowtab="fjnowtab"></timing-box>
+                        <timing-box :timelineData="bangumi.timeline" :nowtab="bangumi.timelineTab"></timing-box>
                     </div>
                     <zone-rank :zoneRank="bangumi" :tag="1"> 
                     </zone-rank>
@@ -52,17 +52,17 @@
                             <i class="icon icon_t" :class="guochuang.icon"></i>
                             <a :href=guochuang.moreUrl class="name">{{ guochuang.title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in guochuang.tab2" :class="{'on' : index === gcnowtab }" @click="gcnowtabclick(index)">{{ index>0 && index===gcnowtab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in guochuang.tab2" :class="{'on' : index === guochuang.timelineTab }" @click="getTimelineTab(index)">{{ index>0 && index===guochuang.timelineTab? "周"+item.name : item.name}}</div>
                             </div>
                             <a :href=guochuang.moreUrl target="_blank" class="c-clink">
                                 新番时间表
                                 <i class="icon"></i>
                             </a>   
                         </div>
-                        <timing-box :timelineData="guochuang.timeline" :nowtab="gcnowtab" class="gc"></timing-box>
+                        <timing-box :timelineData="guochuang.timeline" :nowtab="guochuang.timelineTab" class="gc"></timing-box>
                     </div>
                     <zone-rank :zoneRank="guochuang" :tag="1" :bangumiRankLists="5" class="sec-gc">
-                        <!-- <ad-slide :slidedata="guochuang.Ad.data" :slidetimedata="guochuang.Ad.time" :pagation="guochuang.Ad.pagation"></ad-slide> -->
+                        <!-- <ad-slide v-if="guochuang.num=1" :slidedata="guochuang.Ad.data" :slidetimedata="guochuang.Ad.time" :pagation="guochuang.Ad.pagation"></ad-slide> -->
                     </zone-rank>
                 </div>
                 <storey-box :storeydata="guochuang"></storey-box>
@@ -142,9 +142,6 @@ export default {
     },
     data () {
         return {
-            fjnowtab: 0,//更新时间轴
-            gcnowtab: 0,//更新时间轴
-            timelineCn:[],   
             videodata: [],
             videoinforShow: false,
             videoinforitem: []
@@ -168,6 +165,7 @@ export default {
         }),
         ...mapActions('home/bangumi',{
             fjgetTimeline: 'getTimeline',
+            fjgetTimelineTab: 'getTimelineTab',
             fjgetNewTrends: 'getNewTrends',
             fjgetNewSub: 'getNewSub',
             fjgetRankThreeAllList: 'getRankThreeAllList',
@@ -176,6 +174,7 @@ export default {
         }),
         ...mapActions('home/guochuang',{
             gcgetTimeline: 'getTimeline',
+            gcgetTimelineTab: 'getTimelineTab',
             gcgetBrankThreeAllList: 'getBrankThreeAllList',
             gcgetBrankSevenAllList: 'getBrankSevenAllList',
             gcgetNewTrends: 'getNewTrends',
@@ -295,12 +294,6 @@ export default {
                     this.gcgetRankSevenOriginalList(gcRankSevenOriginalList.data.data)
                     this.gcgetAd(gcAdData.data.result)
                 }))
-        },
-        fjnowtabclick(index) {
-            this.fjnowtab =index
-        },
-        gcnowtabclick(index) {
-            this.gcnowtab =index
         },
         videotest()  {
             if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===0){

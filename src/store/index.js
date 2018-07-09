@@ -4,6 +4,7 @@ import createLogger from 'vuex/dist/logger'
 import header from './modules/header'
 import login from './modules/login'
 import home from './modules/home'
+import ranking from './modules/ranking'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -16,9 +17,10 @@ export default new Vuex.Store({
 		// 导入模块
 		header,
 		login,
-		home
+		home,
+		ranking
 	},
 	strict: debug,
-	plugins: debug ? [createLogger()] : []
+	// plugins: debug ? [createLogger()] : []
 	// 是否开启严格模式
 })

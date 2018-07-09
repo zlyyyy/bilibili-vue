@@ -156,7 +156,7 @@ export default {
             if(!this.userError.status || !this.passError.status){
                 this.btnErrorText = '部分选项未通过'
             }else{
-                this.$axios.get('/static/login.json')
+                this.$axios.get('http://localhost:8080/static/login.json')
                 .then((res)=>{
                     localStorage.setItem('userName',this.user);//浏览器存入用户名--测试用
                     localStorage.setItem('password',this.password);//浏览器存入密码--测试用
@@ -177,7 +177,7 @@ export default {
         },
         topInfo(){
             //获取大会员推荐信息
-            this.$axios.get('../static/topInfo.json')
+            this.$axios.get('http://localhost:8080/static/topInfo.json')
             .then((res)=>{
                 this.motopInfo({
                     topInfo: res.data.data//state传入大会员推荐信息

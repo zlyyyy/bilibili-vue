@@ -45,6 +45,7 @@ const state = {
 	newSub: [],//最新投稿
 	ranktab: [],
 	timeline: [],
+	timelineTab: 0,//更新时间轴
 	rankdropdown:[
 		{
 			name: '三日'
@@ -72,6 +73,9 @@ const mutations = {
 	setTimeline(state,data){
 		state.timeline = Object.assign([],data)
 	},
+	setTimelineTab(state,data){
+		state.timelineTab = data
+	},
 	setNewTrends(state,data){
 		state.newTrends = Object.assign([],data)
 	},
@@ -92,6 +96,9 @@ const mutations = {
 const actions = {
 	getTimeline({ commit, state },data){
 		commit('setTimeline',data)
+	},
+	getTimelineTab({ commit, state },data){
+		commit('setTimelineTab',data)
 	},
 	getNewTrends({ commit, state },data){
 		commit('setNewTrends',data)

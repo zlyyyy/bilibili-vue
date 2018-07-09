@@ -4,9 +4,9 @@
             <div class="rank-container">
                 <div class="rank-head">
                     <ul class="rank-menu">
-                        <router-link v-for="item in rankmenu" :to="{ path: item.path }" tag="li" active-class="active" :key="item.id">
+                        <router-link v-for="(item,index) in rankMenu" :to="{ path: item.path, params: { rankActive: index }}" tag="li" active-class="active" :key="item.id">
                             <span class="rank-icon" :class="item.icon"></span>
-                            <span class="text">{{ item.name }}</span>
+                            <span class="text">{{ item.name+index }}</span>
                         </router-link>
                     </ul>
                 </div>
@@ -19,40 +19,26 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('ranking')
+
 export default {
     created() { 
     },
     components:{
     },
+    computed: {
+        ...mapState([
+            'rankMenu',
+            'rankActive'
+        ]),
+        rankActive(){
+            return this.$route.params.rankActive
+        }
+    },
     data () {
         return {
-           rankmenu: [
-                {
-                    name: '全站榜',
-                    icon: 'all',
-                    path: '/ranking/all'
-                },
-                {
-                    name: '原创榜',
-                    icon: 'origin',
-                    path: '/ranking/origin'
-                },
-                {
-                    name: '新番榜',
-                    icon: 'bangumi',
-                    path: '/ranking/bangumi'
-                },
-                {
-                    name: '影视榜',
-                    icon: 'cinema',
-                    path: '/ranking/cinema'
-                },
-                {
-                    name: '新人榜',
-                    icon: 'rookie',
-                    path: '/ranking/rookie'
-                }
-            ]         
+           
         }
     },
     methods: {

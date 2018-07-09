@@ -115,7 +115,7 @@ body{
     min-height: 100%;
     box-sizing: border-box;
     padding-bottom: 242px;
-	font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
+	font-family: Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
 }
 .bili-icon, .icon {
     display: inline-block;
