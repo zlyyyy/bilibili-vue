@@ -9,16 +9,8 @@ import Axios from 'axios'
 import Base from './base/base'
 import Indexpage from './pages/index'
 import Ranking from './pages/ranking'
-// ranking page
-import RankingAll from './pages/ranking/all'
-//all page
-import RankingAllList from './pages/ranking/all/allList'
-
-
-import RankingOrigin from './pages/ranking/origin'
-import RankingBangumi from './pages/ranking/bangumi'
-import RankingCinema from './pages/ranking/cinema'
-import RankingRookie from './pages/ranking/rookie'
+//RankingAllList page
+import RankingAllList from './pages/ranking/allList'
 
 import Videopage from './pages/video'
 
@@ -47,38 +39,61 @@ const router = new VueRouter({
             name:'Ranking',
             path: '/ranking',
             component: Ranking,
-            redirect: '/ranking/all',
+            redirect: '/ranking/all/0/0/0',
             children: [
                 {
-                    path: 'all',
-                    component: RankingAll,
-                    redirect: '/ranking/all/0/0/0',
-                    children: [
-                        {
-                            name: 'All',
-                            path: ':rid/:rankselect/:rankselect2',
-                            component: RankingAllList,
-                            meta: {
-                                title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
-                            }
-                        }
-                    ]
+                    name: 'all',
+                    path: ':type/:rid/:rankselect/:rankselect2',
+                    component: RankingAllList,
+                    meta: {
+                        title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                    }
                 },
                 {
-                    path: 'origin',
-                    component: RankingOrigin
+                    name: 'origin',
+                    path: ':type/:rid/:rankselect/:rankselect2',
+                    component: RankingAllList,
+                    meta: {
+                        title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                    }
                 },
                 {
-                    path: 'bangumi',
-                    component: RankingBangumi
+                    name: 'bangumi',
+                    path: ':type/:rid/:rankselect/:rankselect2',
+                    component: RankingAllList,
+                    meta: {
+                        title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                    }
                 },
                 {
-                    path: 'cinema',
-                    component: RankingCinema
+                    name: 'cinema',
+                    path: ':type/:rid/:rankselect/:rankselect2',
+                    component: RankingAllList,
+                    meta: {
+                        title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                    }
                 },
                 {
-                    path: 'rookie',
-                    component: RankingRookie
+                    name: 'rookie',
+                    path: ':type/:rid/:rankselect/:rankselect2',
+                    component: RankingAllList,
+                    meta: {
+                        title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                    }
+
+                    // path: 'rookie',
+                    // component: RankingAll,
+                    // redirect: '/ranking/rookie/0/0/0',
+                    // children: [
+                    //     {
+                    //         name: 'Rookie',
+                    //         path: ':rid/:rankselect/:rankselect2',
+                    //         component: RankingAllList,
+                    //         meta: {
+                    //             title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                    //         }
+                    //     }
+                    // ]
                 }
             ]
         },

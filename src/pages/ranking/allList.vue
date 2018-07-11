@@ -1,7 +1,7 @@
 <template>
     <div class="rank-list-wrap">
         <ul class="rank-list">
-            <li class="rank-item" v-for="(item,index) in RankingALL.list">
+            <li class="rank-item" v-for="(item,index) in rankAll.list">
                 <div class="num">
                     {{ index+1 }}
                 </div>
@@ -48,14 +48,13 @@
 
 <script>
 export default {
+    props: {
+        rankAll: {
+            type: [Object,Array],
+            default: () => []
+        }
+    },
     created() {
-        this.$axios.get('/static/ranking/all.json')
-            .then((res)=>{
-                this.RankingALL = res.data.data
-                this.$emit('rankdata',res.data.data.note)
-            }).catch((error)=>{
-                console.log(error)
-            })
     },
     components:{
     },
@@ -63,7 +62,6 @@ export default {
     },
     data () {
         return {
-            RankingALL: []
         }
     },
     methods: {
