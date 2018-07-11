@@ -8,6 +8,7 @@ import VueLazyload from 'vue-lazyload'
 import Axios from 'axios'
 import Base from './base/base'
 import Indexpage from './pages/index'
+import NotFound from './pages/404'
 import Ranking from './pages/ranking'
 //RankingAllList page
 import RankingAllList from './pages/ranking/allList'
@@ -102,6 +103,13 @@ const router = new VueRouter({
             component: Videopage,
             meta: {
                 title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+            }
+        },
+        {
+            path: '*',
+            component: NotFound,
+            meta: {
+                title: 'VUE出错啦! - bilibili.com'
             }
         }
     ]
