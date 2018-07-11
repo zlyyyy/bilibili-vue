@@ -5,18 +5,17 @@
                 <div class="rank-head">
                     <ul class="rank-menu">
                         <router-link v-for="(item,index) in rankMenu" @click.native="one(index)"
-                         
                          :to="{
-                             name: item.icon,
+                             name: item.name,
                              params: {
-                                 type: item.icon,
+                                 type: item.name,
                                  rid: item.children[0].rid,
                                  rankselect: $route.params.rankselect,
                                  rankselect2: $route.params.rankselect2
                              }
                          }" tag="li" active-class="active" :key="item.id" :class="{active: index == firstMenuActive}" >
                             <span class="rank-icon" :class="item.icon"></span>
-                            <span class="text">{{ item.name }}</span>
+                            <span class="text">{{ item.title }}</span>
                         </router-link>
                     </ul>
                 </div>

@@ -2,7 +2,8 @@ const state = {
     //一级导航
     rankMenu: [
         {
-            name: '全站榜',
+            title: '全站榜',
+            name: 'all',
             icon: 'all',
             path: '/ranking/all',
             children: [
@@ -57,7 +58,8 @@ const state = {
             ]
         },
         {
-            name: '原创榜',
+            title: '原创榜',
+            name: 'origin',
             icon: 'origin',
             path: '/ranking/origin',
             children: [
@@ -112,7 +114,8 @@ const state = {
             ]
         },
         {
-            name: '新番榜',
+            title: '新番榜',
+            name: 'bangumi',
             icon: 'bangumi',
             path: '/ranking/bangumi',
             children: [
@@ -127,7 +130,8 @@ const state = {
             ]
         },
         {
-            name: '影视榜',
+            title: '影视榜',
+            name: 'cinema',
             icon: 'cinema',
             path: '/ranking/cinema',
             children: [
@@ -146,7 +150,8 @@ const state = {
             ]
         },
         {
-            name: '新人榜',
+            title: '新人榜',
+            name: 'rookie',
             icon: 'rookie',
             path: '/ranking/rookie',
             children: [
