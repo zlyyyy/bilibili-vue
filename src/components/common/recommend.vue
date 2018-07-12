@@ -1,7 +1,7 @@
 <template>
     <div class="recommend-module">
         <div class="groom-module home-card" v-for="(item,index) in recommend.nowRec">
-            <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title=item.title>
+            <a :href="'/video/av'+item.aid" target="_blank" :title=item.title>
                 <img v-lazy=item.pic :alt=item.title width="160" height="100" class="pic">
                 <div class="card-mark">
                     <p class="title">{{ item.title }}</p>

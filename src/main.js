@@ -99,7 +99,7 @@ const router = new VueRouter({
             ]
         },
         {
-            path: '/video',
+            path: '/video/:aid',
             component: Videopage,
             meta: {
                 title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'

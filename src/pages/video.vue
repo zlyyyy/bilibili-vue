@@ -73,17 +73,29 @@
         </div>
         <div class="player-box">
             <div class="bofangqi bili-wrapper">
-               <iframe src="//player.bilibili.com/player.html?aid=23562529&cid=39326841&page=1
-                " width="100%" height="585"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+               <iframe :src="'//player.bilibili.com/player.html?aid='+aid+'&cid'+cid+'&page=1'"
+                 width="100%" height="585"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('video')
+
 export default {
     created() {
-        
+        //通过aid获取cid
+        this.postAid(this.$route.params.aid.slice(2))
+        //设置aid
+        this.getAid(this.$route.params.aid.slice(2))
+    },
+    computed: {
+        ...mapState([
+            'aid',
+            'cid'
+        ])
     },
     components:{
 
@@ -94,6 +106,24 @@ export default {
         }
     },
     methods: {
+        ...mapActions([
+            'getAid',
+            'getCid'
+        ]),
+        postAid(num){
+            //获取cid接口https://api.bilibili.com/x/player/pagelist
+            this.$axios.get('http://localhost:8080/static/video/getCid.json',{
+                params:{
+                    aid: num
+                }   
+            })
+            .then((res)=>{
+                //设置cid
+                this.getCid(res.data.data[0].cid)
+            }).catch((error)=>{
+                console.log(error)
+            })
+        }
     }
 }
 </script>

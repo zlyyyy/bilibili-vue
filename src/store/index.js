@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import createLogger from 'vuex/dist/logger'
+import notFound from './modules/404'
 import header from './modules/header'
 import login from './modules/login'
 import home from './modules/home'
 import ranking from './modules/ranking'
+import video from './modules/video'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -15,10 +17,12 @@ export default new Vuex.Store({
 	// 默认导出vuex模块
 	modules: {
 		// 导入模块
+		notFound,
 		header,
 		login,
 		home,
-		ranking
+		ranking,
+		video
 	},
 	strict: debug,
 	// plugins: debug ? [createLogger()] : []

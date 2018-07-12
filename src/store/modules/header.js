@@ -9,7 +9,7 @@ const state = {
 		{
 			name: '画友',
 			class: 'hbili',
-			href: '/'
+			href: '/huayou'
 		},
 		{
 			name: '游戏中心',
