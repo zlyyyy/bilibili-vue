@@ -6,6 +6,7 @@ import header from './modules/header'
 import login from './modules/login'
 import home from './modules/home'
 import ranking from './modules/ranking'
+import search from './modules/search'
 import video from './modules/video'
 Vue.use(Vuex)
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
 		login,
 		home,
 		ranking,
+		search,
 		video
 	},
 	strict: debug,

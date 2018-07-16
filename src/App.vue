@@ -66,8 +66,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   outline: none;
   /* -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box; */
-  color: #333;
+  box-sizing: border-box;
+  color: #333; */
 }
 body { font-size: 62.5%; line-height: 1; font-family: Arial, Tahoma, sans-serif; }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
