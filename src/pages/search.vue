@@ -87,70 +87,119 @@
 					<router-link v-for="(item,index) in searchMenu"
 						:to="{
                              path: item.path
-                         }" active-class="active" tag="li" class="sub" :key="item.id">
+                         }" 
+                         active-class="active" tag="li" class="sub" :key="item.id" 
+                         @mouseover.native="hoverBarLeft(index)" 
+                         @mouseout.native="hoverBarLeave()" 
+                         @click.native="setHoverIndex(index)">
 						{{ item.title }}
-						<span class="num" v-show="index>0" @mouseover="hoverBarLeft(index)">{{ item.resultNum }}</span>
+						<span class="num" v-show="index>0">{{ item.resultNum }}</span>
 					</router-link>
 				</ul>
-				<div class="hover-bar" :style="{left: hoverBar}">
+				<div class="hover-bar" :style="{'left':hoverBar+'px'}">
 				</div>
 			</div>
 		</div>
-		<router-view></router-view>
+		<router-view :allResult="allResult.result" :season="season"></router-view>
     </div>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations, mapActions } = createNamespacedHelpers('search')
+const { mapState, mapGetters, mapMutations, mapActions } = createNamespacedHelpers('search')
 
 export default {
     created() {
-        // this.$axios.get('/api/activity/web/view/data/31')
-		// .then((res)=>{
-		// 	this.setError(res.data.data) 
-		// }).catch((error)=>{
-		// 	console.log(error)
-		// })
+        this.$axios.get('http://localhost:8080/static/search/all.json',{
+            params:{
+                highlight: 1,
+                keyword: '我的英雄学院'
+            }
+        })
+		.then((res)=>{
+            this.setAllResult(res.data.data)
+            this.getSeasonId()
+		}).catch((error)=>{
+			console.log(error)
+        })
     },
     computed: {
 		searchValue: {
             get() {
-                return this.$store.state.search.searchValue
+                return this.$store.state.search.searchWord
             },
             set(value) {
                 this.updateSearchValue(value)
             }
         },
-     	...mapState([//命名空间获取state
+         ...mapState([//命名空间获取state
+            'searchWord',
 			'searchMenu',
-			'hoverBar'
-		])
+            'hoverBar',
+            'hoverIndex',
+            'allResult',
+            'season'
+        ])
     },
     components:{
 
     },
     data () {
         return {
-                    
+            
         }
     },
     methods: {
 		...mapMutations([
-			'updateSearchValue'
+            'updateSearchValue',
 		]),
 		...mapActions([
-			'setHoverBar'
+            'setHoverBar',
+            'setHoverIndex',
+            'setAllResult',
+            'setSeason'
 		]),
 		hoverBarLeft(index){
-			this.setHoverBar(index*114)
-		}
+            this.setHoverBar(index*114)
+        },
+        hoverBarLeave(){
+            this.setHoverBar(this.hoverIndex*114)
+        },
+        getSeasonId(){
+            //获取media_id
+            let season = this.allResult.result.media_bangumi;
+            for(let i = 0; i<season.length;i++){
+                this.getSeason(i, season[i].media_id)
+            }
+        },
+        getSeason(index,id){
+            //根据media_id获取详细信息
+            this.$axios.get('http://localhost:8080/static/search/season'+index+'.json',{
+                params:{
+                    media_id: id
+                }
+            })
+            .then((res)=>{
+                this.setSeason({
+                    id: index,
+                    result: res.data.result
+                })
+            }).catch((error)=>{
+                console.log(error)
+            })
+        }
     }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+a{
+    outline: 0;
+    color: #00a1d6;
+    text-decoration: none;
+    cursor: pointer;
+}
 .contain {
     width: 980px;
     margin: 0 auto;
@@ -165,7 +214,7 @@ export default {
     width: 587px;
 }
 .search-wrap .search-logo {
-    background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/images/sprite-690be8a6ea.png);
+    background-image: url(../assets/search/sprite.png);
     background-position: -261px -72px;
     width: 131px;
     height: 35px;
@@ -212,7 +261,7 @@ export default {
     background: #00b5e5;
 }
 .search-wrap .search-block .search-button .icon-search-white {
-    background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/images/sprite-690be8a6ea.png);
+    background-image: url(../assets/search/sprite.png);
     background-position: -148px -327px;
     width: 18px;
     vertical-align: middle;
@@ -304,7 +353,7 @@ export default {
     position: absolute;
     right: 20px;
     top: 10px;
-    background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/images/sprite-690be8a6ea.png);
+    background-image: url(../assets/search/sprite.png);
     background-position: -485px -41px;
     width: 12px;
     height: 12px;
@@ -348,6 +397,9 @@ export default {
     font-size: 16px;
     padding-right: 75px;
 }
+.nav-wrap .wrap>.sub:last-child {
+    padding-right: 0;
+}
 .nav-wrap .wrap>.sub.active, .nav-wrap .wrap>.sub:hover {
     color: #00a1d6;
 }
@@ -367,4 +419,5 @@ export default {
     -o-transition: left .2s;
     transition: left .2s;
 }
+
 </style>

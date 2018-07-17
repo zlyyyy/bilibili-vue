@@ -1,6 +1,6 @@
 const state = {
     //分类导航
-    searchValue: '',
+    searchWord: '',
     searchMenu: [
         {
             title: '综合',
@@ -57,23 +57,55 @@ const state = {
             data: []
         }
     ],
-    hoverBar: 0
+    hoverBar: 0,
+    hoverIndex: 0,
+    allResult: [],
+    season: []
 }
 
-const getters = {}
+const getters = {
+    // test: (state, getters)=>{
+    //     return state.hoverBar
+    // }
+}
 
 const mutations = {
     updateSearchValue(state,data){
-        state.searchValue = data
+        state.searchWord = data
     },
     updateHoverBar(state,data){
         state.hoverBar = data
+    },
+    updateHoverIndex(state,data){
+        state.hoverIndex = data
+    },
+    updateAllResult(state,data){
+        state.allResult = Object.assign({},data)
+    },
+    updateSeason(state,data){
+        console.log(data.id)
+        Vue.$set(
+            state.allResult.result.media_bangum[data.id],
+            season,
+            data.result
+        )
+        // state.allResult.result.media_bangum[data.id].season = data.result
+        // state.season.push(data)
     }
 }
 
 const actions = {
     setHoverBar({commit,state},msg) {
         commit('updateHoverBar',msg)
+    },
+    setHoverIndex({commit,state},msg) {
+        commit('updateHoverIndex',msg)
+    },
+    setAllResult({commit,state},msg) {
+        commit('updateAllResult',msg)
+    },
+    setSeason({commit,state},msg) {
+        commit('updateSeason',msg)
     }
 }
 

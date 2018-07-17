@@ -1,0 +1,328 @@
+{
+    "code": 0,
+    "message": "success",
+    "result": {
+        "actors": "绿谷出久：山下大辉\n欧尔麦特：三宅健太\n爆豪胜己：冈本信彦\n丽日御茶子：佐仓绫音\n饭田天哉：石川界人\n蛙吹梅雨：悠木碧\n峰田实：广桥凉\n常暗踏阴：细谷佳正\n八百万百：井上麻里奈\n切岛锐児郎：增田俊树\n上鸣电気：畠中祐\n轰焦冻：梶裕贵\n青山优雅：桑野晃辅\n耳郎响香：真堂圭\n芦户三奈：喜多村英梨\n障子目藏：西田雅一\n尾白猿夫：三好晃祐\n濑吕范太：古岛清孝\n叶隐透：名冢佳织\n砂藤力道：奈良彻\n拳藤一佳：小笠原早纪\n铁哲彻铁：冲野晃司\n发目明：樱あず\n物间宁人：天崎滉平\n盐崎茨：真坂美帆\n最佳牛仔裤时尚名人：绿川光\n第四类接触：藤原贵弘\n枪豪：冲野晃司\n蟒蛇：山根舞",
+        "alias": "小英雄,我的英雄学园,我的英雄学院,我的英雄学院 第三季",
+        "areas": [
+            {
+                "id": 2,
+                "name": "日本"
+            }
+        ],
+        "cover": "http://i0.hdslb.com/bfs/bangumi/1ae7312cddb0cd5cf3eb985904f0a9cb85f897aa.png",
+        "episodes": [
+            {
+                "aid": 21778781,
+                "cid": 35926881,
+                "cover": "http://i0.hdslb.com/bfs/archive/a8defca3dd314a2c4ab4b3b3d614184e79f04960.jpg",
+                "duration": 1415102,
+                "ep_id": 200160,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "39",
+                "index_title": "游戏·开始",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-04-07 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 22077645,
+                "cid": 36498940,
+                "cover": "http://i0.hdslb.com/bfs/archive/422e6c9f11b092fb98f0ee5b8482b53c6b705190.jpg",
+                "duration": 1415059,
+                "ep_id": 200161,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "40",
+                "index_title": "Wild Wild Pussycats",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-04-14 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 22383563,
+                "cid": 37076520,
+                "cover": "http://i0.hdslb.com/bfs/archive/d94380e6f9c149bdc423256c7c760b45f5d3bbca.jpg",
+                "duration": 1415101,
+                "ep_id": 200162,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "41",
+                "index_title": "洸汰",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-04-21 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 22674945,
+                "cid": 37630716,
+                "cover": "http://i0.hdslb.com/bfs/archive/816151cbd0bf992d5ea83bb0798c9b78dd594178.jpg",
+                "duration": 1415142,
+                "ep_id": 200163,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "42",
+                "index_title": "我的英雄",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-04-28 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 23010292,
+                "cid": 38258903,
+                "cover": "http://i0.hdslb.com/bfs/archive/4a250966f071bae1c2c36c31a839307af0ad5d24.jpg",
+                "duration": 1415103,
+                "ep_id": 200164,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "43",
+                "index_title": "从天而降的铁拳",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-05-05 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 23328739,
+                "cid": 38869032,
+                "cover": "http://i0.hdslb.com/bfs/archive/2c1551c3b0e8603f5c12f15471f45511406621d0.jpg",
+                "duration": 1415102,
+                "ep_id": 200165,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "44",
+                "index_title": "风云突变",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-05-12 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 23591699,
+                "cid": 39386240,
+                "cover": "http://i0.hdslb.com/bfs/archive/0cf04eb73415fe578bdff954c097733c1d00b282.jpg",
+                "duration": 1415186,
+                "ep_id": 200166,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "45",
+                "index_title": "转转转！",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-05-19 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 23956508,
+                "cid": 40093275,
+                "cover": "http://i0.hdslb.com/bfs/archive/c8217aae23a66c3c36b8fe01679750eaf20b978b.jpg",
+                "duration": 1415145,
+                "ep_id": 200167,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "46",
+                "index_title": "饭田给绿谷",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-05-26 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 24275746,
+                "cid": 40712946,
+                "cover": "http://i0.hdslb.com/bfs/archive/28005e2a7cfd24b47e88489df28e5cb6e400e0d5.jpg",
+                "duration": 1415103,
+                "ep_id": 200168,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "47",
+                "index_title": "All For One",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-06-02 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 24600180,
+                "cid": 41338657,
+                "cover": "http://i0.hdslb.com/bfs/archive/6f50eb5aaca0fde06655bb5a135a423456260671.jpg",
+                "duration": 1415059,
+                "ep_id": 200169,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "48",
+                "index_title": "和平的象征",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-06-09 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 24991833,
+                "cid": 42225383,
+                "cover": "http://i0.hdslb.com/bfs/archive/3f5fbcd4bcce588911ffca2a86ef5c9ff91ec960.jpg",
+                "duration": 1415101,
+                "ep_id": 200170,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "49",
+                "index_title": "One For All",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-06-16 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 25409602,
+                "cid": 43183752,
+                "cover": "http://i0.hdslb.com/bfs/archive/2f433b0ff84846933d5c1e05c93e49a3b161ac93.jpg",
+                "duration": 1415039,
+                "ep_id": 200171,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "50",
+                "index_title": "开始的结束 结束的开始",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-06-23 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 25842334,
+                "cid": 44163254,
+                "cover": "http://i0.hdslb.com/bfs/archive/8577071ac67df7530a64642dbc7cdc8cbbc8e2cc.jpg",
+                "duration": 1415103,
+                "ep_id": 200172,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "51",
+                "index_title": "进宿舍吧",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-06-30 17:30:00",
+                "vid": ""
+            },
+            {
+                "aid": 26825293,
+                "badge": "会员",
+                "badge_type": 0,
+                "cid": 46178411,
+                "cover": "http://i0.hdslb.com/bfs/archive/6426107773a5faf298f270c75ef9468664b79b76.jpg",
+                "duration": 1415145,
+                "ep_id": 200173,
+                "episode_status": 13,
+                "from": "bangumi",
+                "index": "52",
+                "index_title": "编织必杀技吧",
+                "mid": 928123,
+                "page": 1,
+                "pub_real_time": "2018-07-14 17:30:00",
+                "vid": ""
+            }
+        ],
+        "evaluate": "　　拥有名为“个性”的超常能力的人类的存在变得理所当然的世界。与No.1英雄·欧尔麦特相遇了的“无个性”少年·绿谷出久，小出他的隐藏的英雄资质被发现，并继承了欧尔麦特的“个性”——ONE FOR ALL。而后小出成功地进入了英雄辈出的名门校·雄英高校，与同学们过着互相比试切磋琢磨的每一天。\n　　雄英高校的学生们激烈比试的大活动「雄英体育祭」、在职业英雄手下磨练技艺的「职场体验」、与“英雄杀手”斯坦因的死斗、期末考试中与欧尔麦特的战斗，然后是与敌联合的死柄木吊的邂逅…。在一个个试炼面前，目标着成为职业英雄而果敢的站了出来的出久。另一方，死柄木与欧尔麦特的宿敌·ALL FOR ONE的同伴也增加了，并伺机蠢蠢欲动。为了成为最棒的英雄的出久的步伐、以及与敌人们的战斗，日渐加速！",
+        "is_paster_ads": 0,
+        "jp_title": "僕のヒーローアカデミア 第3期",
+        "link": "http://www.bilibili.com/bangumi/media/md78552/",
+        "media_id": 78552,
+        "mode": 2,
+        "newest_ep": {
+            "desc": "连载中, 每周六17:30更新",
+            "id": 200173,
+            "index": "52",
+            "is_new": 1,
+            "pub_real_time": "1531560600000"
+        },
+        "paster_text": "",
+        "payment": {
+            "price": "0.0",
+            "promotion": "",
+            "tip": "大会员专享观看特权哦~",
+            "vip_first_promotion": "",
+            "vip_first_switch": "1",
+            "vip_promotion": "开通大会员抢先看"
+        },
+        "publish": {
+            "is_finish": 0,
+            "is_started": 1,
+            "pub_time": "2018-04-07 17:30:00",
+            "pub_time_show": "04月07日17:30",
+            "weekday": 6
+        },
+        "rating": {
+            "count": 36609,
+            "score": 9.8
+        },
+        "rights": {
+            "allow_bp": 0,
+            "allow_download": 0,
+            "allow_review": 1,
+            "copyright": "bilibili",
+            "is_preview": 0,
+            "watch_platform": 0
+        },
+        "season_id": 23858,
+        "season_status": 13,
+        "season_title": "第三季",
+        "season_type": 1,
+        "seasons": [
+            {
+                "is_new": 0,
+                "season_id": 5394,
+                "season_title": "第一季",
+                "title": "我的英雄学院 第一季"
+            },
+            {
+                "is_new": 0,
+                "season_id": 5969,
+                "season_title": "第二季",
+                "title": "我的英雄学院 第二季"
+            },
+            {
+                "is_new": 1,
+                "season_id": 23858,
+                "season_title": "第三季",
+                "title": "我的英雄学院 第三季"
+            },
+            {
+                "is_new": 0,
+                "season_id": 6082,
+                "season_title": "OAD",
+                "title": "我的英雄学院 OAD"
+            }
+        ],
+        "square_cover": "http://i0.hdslb.com/bfs/bangumi/c1dd4b6c705894f95f0b2dfd97a6bcc8f4147056.jpg",
+        "staff": "原作：堀越耕平\n监督：长崎健司\n系列构成·脚本：黑田洋介\n角色设计·总作画监督：马越嘉彦\n美术监督：池田繁美・丸山由纪子\n色彩设计：菊地和子\n撮影监督：池上真崇\n编集：坂本久美子\n音响监督：三间雅文\n音乐：林友树\n动画制作：BONES\n制作：我的英雄学院制作委员会",
+        "stat": {
+            "coins": 139067,
+            "danmakus": 556230,
+            "favorites": 1349089,
+            "reply": 0,
+            "share": 0,
+            "views": 33765781
+        },
+        "style": [
+            "热血",
+            "战斗",
+            "励志",
+            "漫改"
+        ],
+        "title": "我的英雄学院 第三季",
+        "total_ep": 25,
+        "up_info": {
+            "avatar": "http://i1.hdslb.com/bfs/face/60a9153609998b04301dc5b8ed44c41b537a2268.jpg",
+            "mid": 928123,
+            "pendant": {
+                "image": "",
+                "name": "",
+                "pid": 0
+            },
+            "uname": "哔哩哔哩番剧"
+        }
+    }
+}

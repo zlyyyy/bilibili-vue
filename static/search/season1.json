@@ -1,0 +1,135 @@
+{
+    "code": 0,
+    "message": "success",
+    "result": {
+        "actors": "绿谷出久：山下大輝\n欧尔麦特：三宅健太\n爆豪胜己：岡本信彦\n丽日御茶子：佐倉綾音\n饭田天哉：石川界人\n轰焦冻：梶裕貴\n蛙吹梅雨：悠木碧\n峰田实：広橋涼\n八百万百：井上麻里奈",
+        "alias": "",
+        "areas": [
+            {
+                "id": 2,
+                "name": "日本"
+            }
+        ],
+        "cover": "http://i0.hdslb.com/bfs/bangumi/d3db7397d56ac2bba4dee43e643a6232685b7a79.jpg",
+        "episodes": [
+            {
+                "aid": 10087791,
+                "cid": 16670078,
+                "cover": "http://i2.hdslb.com/bfs/archive/d5070ec53ce2a260e0614c47daa403651f2a6815.jpg",
+                "duration": 1609536,
+                "ep_id": 104298,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "1",
+                "index_title": "解救！救助训练！",
+                "mid": 223902,
+                "page": 1,
+                "pub_real_time": "2017-04-25 18:10:23",
+                "vid": ""
+            },
+            {
+                "aid": 11525378,
+                "cid": 19052185,
+                "cover": "http://i0.hdslb.com/bfs/bangumi/c9dca34321b0a425f967787d0c75a93479b9e270.jpg",
+                "duration": 1377624,
+                "ep_id": 112983,
+                "episode_status": 2,
+                "from": "bangumi",
+                "index": "2",
+                "index_title": "Training of the Dead",
+                "mid": 223902,
+                "page": 1,
+                "pub_real_time": "2017-06-22 15:56:16",
+                "vid": ""
+            }
+        ],
+        "evaluate": "单行本第13卷、第14卷限定版同捆DVD。",
+        "is_paster_ads": 0,
+        "jp_title": "僕のヒーローアカデミア OAD",
+        "link": "http://www.bilibili.com/bangumi/media/md6082/",
+        "media_id": 6082,
+        "mode": 2,
+        "newest_ep": {
+            "desc": "已完结, 全2话",
+            "id": 112983,
+            "index": "2",
+            "is_new": 0,
+            "pub_real_time": "1498118176000"
+        },
+        "publish": {
+            "is_finish": 1,
+            "is_started": 1,
+            "pub_time": "2017-04-03 00:00:01",
+            "pub_time_show": "2017年4月3日",
+            "weekday": -1
+        },
+        "rating": {
+            "count": 2263,
+            "score": 9.7
+        },
+        "rights": {
+            "allow_bp": 0,
+            "allow_download": 0,
+            "allow_review": 1,
+            "copyright": "ugc",
+            "is_preview": 0,
+            "watch_platform": 0
+        },
+        "season_id": 6082,
+        "season_status": 2,
+        "season_title": "OAD",
+        "season_type": 1,
+        "seasons": [
+            {
+                "is_new": 0,
+                "season_id": 5394,
+                "season_title": "第一季",
+                "title": "我的英雄学院 第一季"
+            },
+            {
+                "is_new": 0,
+                "season_id": 5969,
+                "season_title": "第二季",
+                "title": "我的英雄学院 第二季"
+            },
+            {
+                "is_new": 1,
+                "season_id": 23858,
+                "season_title": "第三季",
+                "title": "我的英雄学院 第三季"
+            },
+            {
+                "is_new": 0,
+                "season_id": 6082,
+                "season_title": "OAD",
+                "title": "我的英雄学院 OAD"
+            }
+        ],
+        "square_cover": "http://i0.hdslb.com/bfs/bangumi/ee1972b40ba04cf554c0f88c3883e213b445438b.jpg",
+        "staff": "声：木村良平、内田真礼\n脚本：黒田洋介\n导演：長崎健司\n人物设定：馬越嘉彦\n原作：堀越耕平\n系列构成：黒田洋介\n演出：高藤聡\n分镜：小寺勝之\n美术监督：池田繁美\n音乐：林ゆうき\n",
+        "stat": {
+            "coins": 4909,
+            "danmakus": 59605,
+            "favorites": 181868,
+            "reply": 0,
+            "share": 0,
+            "views": 3597133
+        },
+        "style": [
+            "热血",
+            "战斗"
+        ],
+        "title": "我的英雄学院 OAD",
+        "total_ep": 2,
+        "up_info": {
+            "avatar": "http://i2.hdslb.com/bfs/face/3d04fa7ca3db746927c639ba5db785c2eee7ed67.jpg",
+            "mid": 223902,
+            "pendant": {
+                "image": "",
+                "name": "",
+                "pid": 0
+            },
+            "uname": "空灵雨迹"
+        }
+    }
+}

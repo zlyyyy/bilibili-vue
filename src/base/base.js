@@ -24,14 +24,15 @@ exports.install =function(Vue,options){
             Math.floor(num%3600%60)<10? s="0"+Math.floor(num%3600%60) : s=Math.floor(num%3600%60)
             return num = Math.floor(num/3600)+":"+ m +":"+ s
         }
-    }
-    Vue.prototype.time = function(date){
+    };
+    Vue.prototype.time2 = function(timestamp){
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
         Y = date.getFullYear() + '-';
         M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
         D = date.getDate() + ' ';
         h = date.getHours() + ':';
         m = date.getMinutes() + ':';
-        s = date.getSeconds(); 
-        console.log(Y+M+D+h+m+s);
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
     }
 }
