@@ -49,13 +49,13 @@
 				</div>
 			</div>
 			<div class="result-wrap clearfix">
-				<ul class="bangumi-list all-class" >
-					<li class="synthetical" v-for="(item,index) in allResult.media_bangumi">
-						<div class="cardBangumibox">
+				<ul class="bangumi-list all-class" v-if="allResult.result">
+					<li class="synthetical" v-for="(item,index) in allResult.result.media_bangumi">
+						<div class="cardBangumibox" v-if="item.season">
 							<div class="left-img">
-								<a href="#" target="_blank" title="">
+								<a :href="'https://www.bilibili.com/bangumi/play/ss'+item.season_id+'/'" target="_blank" :title="item.season.title">
 									<div class="modal-box">
-										<div class="bangumi-tag vip">
+										<div class="bangumi-tag vip" v-if="item.season.payment">
 											会员专享
 										</div>
 										<div class="lazy-img">
@@ -67,7 +67,7 @@
 							<div class="right-info">
 								<div class="headline">
 									<span class="bangumi-label">番剧</span>
-									<a href="#" target="_blank" title="" class="title" v-html="item.title">
+									<a :href="'https://www.bilibili.com/bangumi/media/md'+item.media_id+'/'" target="_blank" :title="item.season.title" class="title" v-html="item.title">
 									</a>
 								</div>
 								<div class="info-items">
@@ -100,9 +100,9 @@
 										<div class="nav-container">
 											<div class="ep-card">
 												<div class="single-box">
-													<ul class="ep-box clearfix close">
-														<li class="ep-sub" v-for="(item,index) in season[index].episodes">
-															<a href="#" target="_blank">
+													<ul class="ep-box clearfix close" v-if="item.season">
+														<li class="ep-sub" v-for="(item,index) in item.season.episodes">
+															<a :href="'https://www.bilibili.com/bangumi/play/ep'+item.ep_id+'/'" target="_blank">
 																<div :title="item.index+' '+item.index_title" class="ep-item">
 																	{{item.index}}
 																</div>
@@ -127,20 +127,20 @@
 						</div>
 					</li>
 					<li class="card-more">
-						共找到4部相关番剧，
-						<a href="#" class="">点击查看</a>
+						共找到{{ allResult.top_tlist.media_bangumi }}部相关番剧，
+						<router-link :to="{path:'/search/bangumi'}" class="">点击查看</router-link>
 						&gt;
 					</li>
 				</ul>
-				<ul class="video-contain clearfix">
-					<li class="video matrix">
-						<a href="#" target="_blank" title="（我的英雄学院）关于雄英内奸的猜想...">
+				<ul class="video-contain clearfix" v-if="allResult.result">
+					<li class="video matrix" v-for="(item,index) in allResult.result.video">
+						<a :href="'https://www.bilibili.com/video/av'+item.aid+'/'" target="_blank" title="">
 							<div class="img">
 								<div class="lazy-img">
-									<img alt="" src="//i2.hdslb.com/bfs/archive/b3bf2104f33c1c300c457b9e04fe4bd73b66672b.jpg@320w_200h.webp">
+									<img alt="" v-lazy="item.pic">
 								</div>
 								<span class="so-imgTag_rb">
-									21:03
+									{{item.duration}}
 								</span>
 								<div class="watch-later-trigger watch-later">
 								</div>
@@ -148,27 +148,30 @@
 						</a>
 						<div class="info">
 							<div class="headline clearfix">
-								<span class="type avid">av25634478</span><span class="type hide">综合</span><a title="（我的英雄学院）关于雄英内奸的猜想..." href="#" target="_blank" class="title">（<em class="keyword">我的英雄</em><em class="keyword">学院</em>）关于雄英内奸的猜想...</a>
+								<span class="type avid">{{'av'+item.aid}}</span>
+                                <span class="type hide">综合</span>
+                                <a title="" :href="'https://www.bilibili.com/video/av'+item.aid+'/'" target="_blank" class="title" v-html="item.title">
+                                </a>
 							</div>
 							<div class="des hide">
-								转自：https://www.youtube.com/watch?v=Opp8AoDsPWA
+								{{item.description}}
 							</div>
 							<div class="tags">
 								<span title="观看" class="so-icon watch-num">
 									<i class="icon-playtime"></i>
-									5.4万
+									{{userCount(item.play)}}
 								</span>
 								<span title="弹幕" class="so-icon hide">
 									<i class="icon-subtitle"></i>
-									919
+									{{item.video_review}}
 								</span>
 								<span title="上传时间" class="so-icon time">
 									<i class="icon-date"></i>
-									2018-06-26
+									{{timeChange(item.pubdate)}}
 								</span>
 								<span title="up主" class="so-icon">
 									<i class="icon-uper"></i>
-									<a href="#" target="_blank" class="up-name">搬运工233</a>
+									<a :href="'//space.bilibili.com/'+item.mid+'/'" target="_blank" class="up-name">{{item.author}}</a>
 								</span>
 							</div>
 						</div>
@@ -420,6 +423,14 @@ export default {
     width: 100%;
     height: 100%;
 }
+.bangumi-list .synthetical .cardBangumibox .modal-box:hover {
+    background: rgba(0,0,0,.5);
+    background-image: url(../../assets/search/play.png);
+    background-repeat: no-repeat;
+    background-size: 38%;
+    background-position: 40px 60px;
+    border-radius: 4px;
+}
 .bangumi-list .synthetical .cardBangumibox .modal-box .bangumi-tag {
     border-radius: 0 4px 0 4px;
     width: 56px;
@@ -433,6 +444,10 @@ export default {
 }
 .bangumi-list .synthetical .cardBangumibox .modal-box .bangumi-tag.vip {
     background: #f25d8e;
+}
+.bangumi-list .synthetical .cardBangumibox .modal-box .lazy-img {
+    position: relative;
+    z-index: -1;
 }
 .bangumi-list .synthetical .cardBangumibox .modal-box .lazy-img img {
 	display: block;
@@ -581,6 +596,9 @@ export default {
     margin-right: 32px;
     margin-top: 20px;
 }
+.video.matrix:nth-child(5n) {
+    margin-right: 0;
+}
 .video.matrix .img {
     height: 100px;
     border-bottom-left-radius: 0;
@@ -652,6 +670,9 @@ export default {
     background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/images/sprite-690be8a6ea.png);
     width: 11px;
     height: 11px;
+}
+.so-icon i.icon-playtime {
+    background-position: -485px -543px;
 }
 .so-icon i.icon-subtitle {
     background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/images/sprite-690be8a6ea.png);

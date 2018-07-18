@@ -161,9 +161,9 @@ export default {
         },
         searchALL() {
             if(this.searchValue === ''){
-                window.open('http://search.bilibili.com/all?keyword='+this.searchWord.word)
+                window.open('http://localhost:8080/search/all?keyword='+this.searchWord.word)
             }else{
-                window.open('http://search.bilibili.com/all?keyword='+this.searchValue)
+                window.open('http://localhost:8080/search/all?keyword='+this.searchValue)
             }
             
         }

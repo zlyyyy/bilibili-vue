@@ -100,7 +100,7 @@
 				</div>
 			</div>
 		</div>
-		<router-view :allResult="allResult.result" :season="season"></router-view>
+		<router-view :allResult="allResult" :season="season"></router-view>
     </div>
 </template>
 

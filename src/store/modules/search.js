@@ -1,3 +1,4 @@
+import Vue from 'vue'
 const state = {
     //分类导航
     searchWord: '',
@@ -83,14 +84,11 @@ const mutations = {
         state.allResult = Object.assign({},data)
     },
     updateSeason(state,data){
-        console.log(data.id)
-        Vue.$set(
-            state.allResult.result.media_bangum[data.id],
-            season,
+        Vue.set(
+            state.allResult.result.media_bangumi[data.id],
+            'season',
             data.result
         )
-        // state.allResult.result.media_bangum[data.id].season = data.result
-        // state.season.push(data)
     }
 }
 
