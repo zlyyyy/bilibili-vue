@@ -254,6 +254,7 @@ const mutations = {
         state.rankSelect = data
     },
     rankSelect2(state,data) {
+        console.log(data)
         state.rankSelect2 = data
     },
     firstMenuActive(state,data) {
@@ -275,6 +276,7 @@ const actions = {
         commit('rankSelect',msg)
     },
     setRankSelect2({commit,state},msg) {
+        console.log(msg)
         commit('rankSelect2',msg)
     },
     setFirstMenuActive({commit,state},msg) {

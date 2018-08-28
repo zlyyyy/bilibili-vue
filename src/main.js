@@ -24,7 +24,7 @@ Vue.use(VueLazyload, {
     loading: require('../src/assets/loading.png'),
     attempt: 1
   })
-Vue.prototype.$axios = Axios;
+Vue.http = Vue.prototype.$axios = Axios;
 Vue.use(Base)
 Vue.config.productionTip = false
 

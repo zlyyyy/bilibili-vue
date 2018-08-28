@@ -75,7 +75,7 @@ export default {
                 // console.log(i)
             }
         }
-        this.setRankSelect2(num2)
+        this.setRankSelect2(this.$route.params.rankselect2)
         //数据获取
         this.refreshData()
     },
@@ -144,6 +144,7 @@ export default {
             this.RouterPush()//刷新路由
         },
         postRankSelect2(index) {
+            console.log(index)
             this.setRankSelect2(index)//同步修改二级多选
             this.$route.params.rankselect2 = this.rankDropdown2[index].num//修改路由rankselect2参数
             this.RouterPush()//刷新路由
