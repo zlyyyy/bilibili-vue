@@ -564,13 +564,13 @@ const mutations = {
 		state.headBanner = Object.assign({}, data[0])
 	},
 	SET_SEARCH_DEFAULT_WORDS: (state, data) => {
-		state.searchValue = data
+		state.searchWord = Object.assign({}, data)
 	},
 	SET_MENUICON: (state, data) => {
 		state.menuIcon = Object.assign({}, data)
 	},
 	SET_SEARCH_WORD: (state, data) => {
-		state.searchWord = Object.assign({}, data)
+		state.searchValue = Object.assign({}, data)
 	}	
 }
 
@@ -582,12 +582,12 @@ const actions = {
 	},
 	setSearchDefaultWords({ commit, state }){
 		getSearchDefaultWords().then(res=>{
-			commit('SET_SEARCH_DEFAULT_WORDS',res.data["0"])
+			commit('SET_SEARCH_DEFAULT_WORDS',res[0])
 		})
 	},
 	setMenuIcon({ commit, state }){
 		getMenuIcon().then(res=>{
-			commit('SET_SEARCH_DEFAULT_WORDS',res.data)
+			commit('SET_MENUICON',res.data)
 		})
 	}
 }
