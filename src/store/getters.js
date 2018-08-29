@@ -1,0 +1,1 @@
+export const slide = state =>state.slide

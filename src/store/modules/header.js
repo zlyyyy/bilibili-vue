@@ -1,3 +1,4 @@
+import { getHeadBanner, getSearchDefaultWords, getMenuIcon } from '../../api'
 const state = {
 	leftNav: [ //顶部左侧导航栏
 		{
@@ -559,30 +560,35 @@ const state = {
 const getters = {}
 
 const mutations = {
-	headBanner(state,data){
+	SET_HEAD_BANNER: (state, data) => {
 		state.headBanner = Object.assign({}, data[0])
 	},
-	setSearchValue(state,data){
+	SET_SEARCH_DEFAULT_WORDS: (state, data) => {
 		state.searchValue = data
 	},
-	searchWord(state,data){
-		state.searchWord = Object.assign({}, data)
-	},
-	menuIcon(state,data){
+	SET_MENUICON: (state, data) => {
 		state.menuIcon = Object.assign({}, data)
-	}
-	
+	},
+	SET_SEARCH_WORD: (state, data) => {
+		state.searchWord = Object.assign({}, data)
+	}	
 }
 
 const actions = {
-	setHeadBanner({ commit, state },data){
-		commit('headBanner',data)
+	setHeadBanner({ commit, state },id){
+		getHeadBanner(id).then(res=>{
+			commit('SET_HEAD_BANNER',res.data)
+		})
 	},
-	setSearchWord({ commit, state },data){
-		commit('searchWord',data)
+	setSearchDefaultWords({ commit, state }){
+		getSearchDefaultWords().then(res=>{
+			commit('SET_SEARCH_DEFAULT_WORDS',res.data["0"])
+		})
 	},
-	setMenuIcon({ commit, state },data){
-		commit('menuIcon',data)
+	setMenuIcon({ commit, state }){
+		getMenuIcon().then(res=>{
+			commit('SET_SEARCH_DEFAULT_WORDS',res.data)
+		})
 	}
 }
 

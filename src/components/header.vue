@@ -87,9 +87,9 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('header')
 
 export default {
     created() {
-        this.getSearchDefaultWords()
-        this.getMenuIcon()
-        this.getHeadBanner()
+        this.setHeadBanner()
+        this.setSearchDefaultWords()
+        this.setMenuIcon()
     },
     components:{
         NavMenu
@@ -119,46 +119,14 @@ export default {
         },
     },
     methods: {
-        ...mapMutations([
-            'setSearchValue'
-        ]),
+        ...mapMutations({
+            setSearchValue: 'SET_SEARCH_WORD'
+        }),
         ...mapActions([
              'setHeadBanner',// 将 `this.setHeadBanner(amount)` 映射为 `this.$store.dispatch('headBanner', amount)`
-             'setSearchWord',
+             'setSearchDefaultWords',
              'setMenuIcon'
         ]),
-        getHeadBanner(){
-            this.$axios({
-                method: "GET",
-                url: '/static/headbanner.json'
-                //根据不同页面修改参数
-                // params : {
-                //     pf: 0,
-                //     id: 142,
-                // },
-            }).then((res)=>{
-                // console.log(res.data.data)
-                this.setHeadBanner(res.data.data)//header模块state修改
-            }).catch((error)=>{
-                console.log(error)
-			})
-        },
-        getSearchDefaultWords(){
-            this.$axios.get('/api/widget/getSearchDefaultWords')
-            .then((res)=>{
-				this.setSearchWord(res.data["0"]) 
-            }).catch((error)=>{
-                console.log(error)
-			})
-        },
-        getMenuIcon(){
-            this.$axios.get('/static/menuicon.json')
-            .then((res)=>{
-				this.setMenuIcon(res.data.data)
-            }).catch((error)=>{
-                console.log(error)
-			})
-        },
         searchALL() {
             if(this.searchValue === ''){
                 window.open('http://localhost:8080/search/all?keyword='+this.searchWord.word)
