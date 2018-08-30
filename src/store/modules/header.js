@@ -1,4 +1,5 @@
 import { getHeadBanner, getSearchDefaultWords, getMenuIcon } from '../../api'
+
 const state = {
 	leftNav: [ //顶部左侧导航栏
 		{
@@ -570,7 +571,7 @@ const mutations = {
 		state.menuIcon = Object.assign({}, data)
 	},
 	SET_SEARCH_WORD: (state, data) => {
-		state.searchValue = Object.assign({}, data)
+		state.searchValue = data
 	}	
 }
 

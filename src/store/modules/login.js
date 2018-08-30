@@ -1,3 +1,4 @@
+import { getUserInfo, getVipInfo } from '../../api'
 const state = {
 	loginShow: false,//登录弹窗，默认隐藏
     userName: '',//用户名
@@ -11,32 +12,35 @@ const state = {
 const getters = {}
 
 const mutations = {
-	//登录弹窗显示隐藏
-    loginShow(state) {
+    //登录弹窗显示隐藏
+    SET_LOGIN_SHOW: (state, data) => {
         state.loginShow = state.loginShow? false : true
     },
-    regShow(state,nowindex){
+    SET_LOGIN_TAB: (state, data) => {
         state.nowindex = nowindex
     },
     //登录状态
-    signIn(state,msg){
-        state.signIn = msg.signIn
+    SET_SIGNIN: (state, data) => {
+        state.signIn = data.signIn
     },
     //个人信息
-    proInfo(state,msg){
-        state.proInfo = msg.proInfo
+    SET_USER_INFO: (state, data) => {
+        state.proInfo = data.proInfo
     },
+
     //会员推荐信息
-    topInfo(state,msg){
-        state.topInfo = msg.topInfo
+    SET_VIP_INFO: (state, data) => {
+        state.topInfo = data.topInfo
     },
+
     //用户名
-    updateUserName(state,msg){
+    SET_USERNAME: (state, data) => {
         state.userName = msg
     },
+
     //用户密码
-    updatePassword(state,msg){
-        state.password = msg
+    SET_PASSWORD: (state, data) => {
+        state.password = data
     }
 }
 
@@ -47,13 +51,48 @@ const actions = {
     regShow({commit,state},msg){
         commit('regShow',msg)
     },
-    signIn({commit,state},msg){
-        commit('signIn',msg)
+    setSignIn({commit,state}){
+        const login = localStorage.getItem('signIn')//读取缓存登录状态
+        if(!login){
+            //无状态即未登录状态，修改state值
+            commit('SET_SIGNIN',{
+                signIn: localStorage.setItem('signIn',0)
+            })
+        }else{
+            //已登录状态
+            //读取缓存状态
+            commit('SET_SIGNIN',{
+                signIn: localStorage.getItem('signIn')
+            })
+            //获取个人信息
+            getUserInfo().then(res=>{
+                commit('SET_USER_INFO',{
+                    proInfo: res.data.data//state传入个人信息
+                })
+            })
+            //获取大会员推荐信息
+            getVipInfo().then(res=>{
+                commit('SET_VIP_INFO',{
+                    topInfo: res.data.data//state传入大会员推荐信息
+                })
+            })
+        }
     },
-    proInfo({commit,state},msg){
+    //退出登录
+    signOut({commit,state}){
+        localStorage.setItem('signIn',0);
+        window.location.reload();
+        commit('SET_USER_INFO',{
+            proInfo: []//state传入个人信息
+        })
+        commit('SET_VIP_INFO',{
+            topInfo: []//state传入大会员推荐信息
+        })
+    },
+    setUserInfo({commit,state},msg){
         commit('proInfo',msg)
     },
-    topInfo({commit,state},msg){
+    setVipInfo({commit,state},msg){
         commit('topInfo',msg)
     }
 }

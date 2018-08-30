@@ -1,6 +1,6 @@
 <template>
     <div class="recommend-module">
-        <div class="groom-module home-card" v-for="(item,index) in recommend.nowRec">
+        <div class="groom-module home-card" v-for="(item,index) in recommend.recNow">
             <a :href="'/video/av'+item.aid" target="_blank" :title=item.title>
                 <img v-lazy=item.pic :alt=item.title width="160" height="100" class="pic">
                 <div class="card-mark">
@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('home')
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     props: {
@@ -42,26 +41,26 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'getNowrec'
-        ]),
+        ...mapMutations({
+            setRecNow: 'SET_RECNOW'
+        }),
         yesterday(){
-            this.getNowrec({
-                now: this.recommend.rec.yesterday,
+            this.setRecNow({
+                recNow: this.recommend.rec.yesterday,
                 nowLeft: '一周',
                 nowRight: '三日'
             })
         },
         threedays(){
-            this.getNowrec({
-                now: this.recommend.rec.threedays,
+            this.setRecNow({
+                recNow: this.recommend.rec.threedays,
                 nowLeft: '昨日',
                 nowRight: '一周'
             })
         },
         weekdays(){
-            this.getNowrec({
-                now: this.recommend.rec.week,
+            this.setRecNow({
+                recNow: this.recommend.rec.week,
                 nowLeft: '三日',
                 nowRight: '昨日'
             })

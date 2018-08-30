@@ -4,14 +4,7 @@ import state from './state'
 import * as getters from './getters'
 import * as actions from './actions'
 import mutations from './mutations'
-// import createLogger from 'vuex/dist/logger'
-import notFound from './modules/404'
-import header from './modules/header'
-import login from './modules/login'
-import home from './modules/index'
-import ranking from './modules/ranking'
-import search from './modules/search'
-import video from './modules/video'
+import modules from './modules'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -24,15 +17,7 @@ export default new Vuex.Store({
     mutations,
     actions,
 	// 默认导出vuex模块
-	modules: {
-		// 导入模块
-		notFound,
-		header,
-		login,
-		ranking,
-		search,
-		video
-	},
+	modules,
 	strict: debug,
 	// plugins: debug ? [createLogger()] : []
 	// 是否开启严格模式

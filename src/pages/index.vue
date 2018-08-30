@@ -7,13 +7,13 @@
             <keep-alive>
                 <recommend :recommend="recommend"></recommend>
             </keep-alive>
-        <!-- </div> -->
+        </div>
         <!-- 推广模块 -->
         <!--  推广数据、在线数据 -->
-        <!-- <popularize :popularize="popularize" :online="online"></popularize> -->
+        <popularize :popularize="popularize" :online="online"></popularize>
         <!--  动画 --> 
-        <!-- <zone-module :moduledata="donghua" @videoInfoxy='videoinforevent'>
-        </zone-module> -->
+        <zone-module :moduledata="donghua" @videoInfoxy='videoinforevent'>
+        </zone-module>
         <!--  番剧 --> 
         <!-- <div class="zone-wrap-module">
             <div class="bangumi-module">
@@ -70,7 +70,7 @@
                     <zone-rank :zoneRank="guochuang" :tag="0"></zone-rank>
                 </div>
             </div> -->
-        </div>
+        <!-- </div> -->
          <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
                 {{ videoinforitem[videodata.mouseindex].title }}
@@ -103,15 +103,18 @@ import TimingBox from '../components/base/timingBox'
 import ZoneRank from '../components/base/zoneRank'
 import StoreyBox from '../components/base/storeyBox'
 import AdSlide from '../components/ad/adSlide'
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     created() {
-        this.setSlide('23')
+        this.setSlidePop({
+            slide: 23,
+            popularize: 34
+        })
+        this.setRecom()
+        this.setOnline()
+        this.setDynamic()
         // this.mainDataGet()
-        // this.Mslide()
-        // this.Mrecommend()
-        // this.Monline()
     },
     components:{
         Slide,
@@ -126,17 +129,14 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'slide'
-        ])
-        // ...mapState([
-        //     'slide',//轮播图
-        //     'recommend',//推荐模块
-        //     'popularize',//推广模块
-        //     'online',//当前在线
-        // ]),
-        // ...mapState('home/donghua',{
-        //     donghua : state => state
-        // }),
+            'slide',//轮播图
+            'recommend',//推荐模块
+            'popularize',//推广模块
+            'online',//当前在线
+        ]),
+        ...mapState('donghua',{
+            donghua : state => state
+        }),
         // ...mapState('home/bangumi',{
         //     bangumi : state => state
         // }),
@@ -153,15 +153,13 @@ export default {
     },
     methods: {
         ...mapActions([
-            'setSlide'
+            'setSlidePop',
+            'setRecom',
+            'setOnline',
         ]),
-        // ...mapActions('home',[
-        //     'getSlide',
-        //     'getRec',
-        //     'getNowrec',
-        //     'getPopularize',
-        //     'getOnline'
-        // ]),
+        ...mapActions('donghua',[
+            'setDynamic'
+        ]),
         // ...mapActions('home/donghua',{
         //     dhgetNewTrends: 'getNewTrends',
         //     dhgetNewSub: 'getNewSub',
@@ -192,41 +190,6 @@ export default {
         //     gcgetRankSevenOriginalList: 'getRankSevenOriginalList',
         //     gcgetAd: 'getAd',
         // }),
-        //轮播图
-        //推荐模块
-        // Mslide() {
-        //     this.$axios.get('/static/popularize.json')
-        //     .then((res)=>{
-        //         this.getSlide(res.data.data["23"])
-        //         this.getPopularize(res.data.data["34"])
-        //     }).catch((error)=>{
-        //         console.log(error)
-        //     })
-        // },
-        //推荐模块
-        // Mrecommend() {
-        //     this.$axios.get('/static/recommend.json')
-        //     .then((res)=>{
-        //         this.getRec(res.data)//推荐模块set值
-        //         //推荐模块初始配置
-        //         this.getNowrec({
-        //             now: this.recommend.rec.yesterday,
-        //             nowLeft: '一周',
-        //             nowRight: '三日'
-        //         })
-        //     }).catch((error)=>{
-        //         console.log(error)
-        //     })
-        // },
-        //当前在线数
-        // Monline() {
-        //     this.$axios.get('/static/online.json')
-        //     .then((res)=>{
-        //         this.getOnline(res.data)
-        //     }).catch((error)=>{
-        //         console.log(error)
-        //     })
-        // },
         // mainDataGet() {
         //     //并发处理
         //         this.$axios.all([

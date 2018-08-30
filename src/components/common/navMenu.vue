@@ -252,7 +252,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('login')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('login')
 
 export default {
     props: {
@@ -285,30 +285,30 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'loginShow',//登录弹窗显示隐藏
-            'regShow'//注册登录tab状态
-        ]),
-        ...mapActions({
-            mosignIn: 'signIn',//命名重名修改
-            moproInfo: 'proInfo',
-            motopInfo: 'topInfo'
+        ...mapMutations({
+            loginShow: 'SET_LOGIN_SHOW',//登录弹窗显示隐藏
+            regShow: 'SET_LOGIN_TAB'//注册登录tab状态
         }),
-        // regShow(){
-        //     this.loginShow()
-        //     this.moregShow(1)
-        // },
+        ...mapActions([
+            'setSignIn',//登录
+            'signOut'//退出登录
+        ]),
+        // ...mapActions({
+        //     mosignIn: 'signIn',//命名重名修改
+        //     moproInfo: 'proInfo',
+        //     motopInfo: 'topInfo'
+        // }),
         //退出登录
-        signOut(){
-            localStorage.setItem('signIn',0);
-            window.location.reload();
-            this.moproInfo({
-                proInfo: []//state传入个人信息
-            });
-            this.motopInfo({
-                topInfo: []
-            });
-        },
+        // signOut(){
+        //     localStorage.setItem('signIn',0);
+        //     window.location.reload();
+        //     this.moproInfo({
+        //         proInfo: []//state传入个人信息
+        //     });
+        //     this.motopInfo({
+        //         topInfo: []
+        //     });
+        // },
         //个人信息显示隐藏
         profileFadeIn(){
             this.profileShow = true
@@ -331,54 +331,46 @@ export default {
             this.messageShow = false
         }
     },
-    created: function(){
-        let login = localStorage.getItem('signIn')//读取缓存登录状态
-        if(!login){
-            //无状态即未登录状态，修改state值
-            this.mosignIn({
-                signIn: localStorage.setItem('signIn',0),
-            })
-        }else{
-            //已登录状态
-            //读取缓存状态
-            this.mosignIn({
-                signIn: localStorage.getItem('signIn')
-            })
-            // //读取缓存个人信息
-            // this.$store.dispatch('proInfo',{
-            //     proInfo: JSON.parse(localStorage.getItem('proInfo'))//state传入用户信息
-            // })
-            //获取个人信息
-            this.$axios.get('http://localhost:8080/static/login.json')
-            .then((res)=>{
-                this.moproInfo({
-                    proInfo: res.data.data//state传入个人信息
-                })
-            }).catch((error)=>{
-                console.log(error)
-            })
-            //获取大会员推荐信息
-            this.$axios.get('http://localhost:8080/static/topInfo.json')
-            .then((res)=>{
-                this.motopInfo({
-                    topInfo: res.data.data//state传入大会员推荐信息
-                })
-            }).catch((error)=>{
-                console.log(error)
-            })
-        }
+    created(){
+        this.setSignIn()
     }
-    // mounted: function(){
-    //         this.$axios.get('https://bird.ioliu.cn/v2',{
-    //             params:{
-    //                 url: 'https://big.bilibili.com/web/bubble/topInfo',
-    //             }
-    //         }).then((res)=>{
-    //             console.log(res)
+    // created: function(){
+    //     let login = localStorage.getItem('signIn')//读取缓存登录状态
+    //     if(!login){
+    //         //无状态即未登录状态，修改state值
+    //         this.mosignIn({
+    //             signIn: localStorage.setItem('signIn',0),
+    //         })
+    //     }else{
+    //         //已登录状态
+    //         //读取缓存状态
+    //         this.mosignIn({
+    //             signIn: localStorage.getItem('signIn')
+    //         })
+    //         // //读取缓存个人信息
+    //         // this.$store.dispatch('proInfo',{
+    //         //     proInfo: JSON.parse(localStorage.getItem('proInfo'))//state传入用户信息
+    //         // })
+    //         //获取个人信息
+    //         this.$axios.get('http://localhost:8080/static/login.json')
+    //         .then((res)=>{
+    //             this.moproInfo({
+    //                 proInfo: res.data.data//state传入个人信息
+    //             })
+    //         }).catch((error)=>{
+    //             console.log(error)
+    //         })
+    //         //获取大会员推荐信息
+    //         this.$axios.get('http://localhost:8080/static/topInfo.json')
+    //         .then((res)=>{
+    //             this.motopInfo({
+    //                 topInfo: res.data.data//state传入大会员推荐信息
+    //             })
     //         }).catch((error)=>{
     //             console.log(error)
     //         })
     //     }
+    // }
 }
 </script>
 

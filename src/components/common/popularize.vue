@@ -32,13 +32,13 @@
                 </div>
             </div>
         </div>
-		<div class="r-con" v-if="online.data">
+		<div class="r-con" v-if="online">
 			<div class="online">
 				<a href="//www.bilibili.com/video/online.html" target="_blank" title="在线观看：2298667">
-					在线人数：{{ online.data.web_online }}
+					在线人数：{{ online.web_online }}
 				</a>
 				<em></em>
-				<a href="//www.bilibili.com/newlist.html" target="_blank">最新投稿：{{ online.data.all_count }}</a>
+				<a href="//www.bilibili.com/newlist.html" target="_blank">最新投稿：{{ online.all_count }}</a>
 			</div>
 			<div data-id="0" data-loc-id="29" class="adpos">
 				<a target="_blank" href="">

@@ -8,9 +8,9 @@ const state = {
     //推荐模块
     recommend: {
         rec: [],//所有
-        nowRec: [],//当前
-        nowLeft: '一周',
-        nowRight: '三日'
+        recNow: [],//当前
+        nowLeft: '',
+        nowRight: ''
     },
     //推广模块
     popularize: [],
