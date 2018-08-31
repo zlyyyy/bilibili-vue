@@ -69,7 +69,7 @@ const mutations = {
 }
 
 const actions = {
-	setDynamic({ commit, state },){
+	setDynamic({ commit, state }){
 		axios.all([
 			axios.get('/static/maindata/dh_newTrends.json'),
 			axios.get('/static/maindata/dh_newSub.json'),

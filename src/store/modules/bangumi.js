@@ -1,3 +1,5 @@
+import { getTimelineGlobal, getNewTrends, getNewSub,  getRankGlobalThree, getRankGlobalSeven, getGlobalAdSlide } from '../../api'
+
 const state = {
 	num: '0',
 	id: 'bili_bangumi',//模型id
@@ -56,10 +58,10 @@ const state = {
 	],
 	rankPic: false,
 	rankLists: 10,
-	BrankThreeAllList: [],//三日全部排行
-	BrankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
-	BrankSevenAllList: [],//一周全部排行
-	BrankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
+	mRankThreeAllList: [],//三日全部排行
+	mRankThreeAllMoreUrl: '/ranking/bangumi/13/1/3/',//三日全部排行更多链接
+	mRankSevenAllList: [],//一周全部排行
+	mRankSevenAllMoreUrl: '/ranking/bangumi/13/1/7/',//一周全部排行更多链接
 	Ad: {
 		data: [],
 		time: 3000,
@@ -70,50 +72,59 @@ const state = {
 const getters = {}
 
 const mutations = {
-	setTimeline(state,data){
+	SET_TIMELINE_GLOBAL: (state, data) => {
 		state.timeline = Object.assign([],data)
 	},
-	setTimelineTab(state,data){
+	SET_TIMELINE_TAB: (state, data) => {
 		state.timelineTab = data
 	},
-	setNewTrends(state,data){
+	SET_NEW_TRENDS: (state, data) => {
 		state.newTrends = Object.assign([],data)
 	},
-	setNewSub(state,data){
+	SET_NEW_SUB: (state, data) => {
 		state.newSub = Object.assign([],data)
 	},
-	setRankThreeAllList(state,data){
-		state.BrankThreeAllList = Object.assign([],data)
+	SET_RANK_GLOBAL_THREE: (state, data) => {
+		state.mRankThreeAllList = Object.assign([],data)
 	},
-	setRankSevenAllList(state,data){
-		state.BrankSevenAllList = Object.assign([],data)
+	SET_RANK_GLOBAL_SEVEN: (state, data) => {
+		state.mRankSevenAllList = Object.assign([],data)
 	},
-	setAd(state,data){
+	SET_AD_SLIDE: (state, data) => {
 		state.Ad.data = Object.assign([],data)
 	}
 }
 
 const actions = {
-	getTimeline({ commit, state },data){
-		commit('setTimeline',data)
+	setTimeline({ commit, state }){
+		getTimelineGlobal().then(res=>{
+			commit('SET_TIMELINE_GLOBAL',res.result)
+		})
 	},
-	getTimelineTab({ commit, state },data){
-		commit('setTimelineTab',data)
+	setNewTrends({ commit, state }){
+		getNewTrends().then(res=>{
+			commit('SET_NEW_TRENDS',res.data)
+		})
 	},
-	getNewTrends({ commit, state },data){
-		commit('setNewTrends',data)
+	setNewSub({ commit, state }){
+		getNewSub().then(res=>{
+			commit('SET_NEW_SUB',res.data)
+		})
 	},
-	getNewSub({ commit, state },data){
-		commit('setNewSub',data)
+	setRankGlobalThree({ commit, state }){
+		getRankGlobalThree().then(res=>{
+			commit('SET_RANK_GLOBAL_THREE',res.result.list)
+		})
 	},
-	getRankThreeAllList({ commit, state },data){
-		commit('setRankThreeAllList',data)
+	setRankGlobalSeven({ commit, state }){
+		getRankGlobalSeven().then(res=>{
+			commit('SET_RANK_GLOBAL_SEVEN',res.result.list)
+		})
 	},
-	getRankSevenAllList({ commit, state },data){
-		commit('setRankSevenAllList',data)
-	},
-	getAd({ commit, state },data){
-		commit('setAd',data)
+	setAdSlide({ commit, state }){
+		getGlobalAdSlide().then(res=>{
+			commit('SET_AD_SLIDE',res.result)
+		})
 	}
 }
 

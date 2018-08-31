@@ -27,7 +27,7 @@
                                 <img class="pendant">
                             </div>
                         </a>
-                        <a class="t" v-else @click="loginShow();regShow(0)">
+                        <a class="t" v-else @click="setLoginShow();setLoginTab(0)">
                             <div class="i-face">
                                 <img src="../../assets/akari.jpg" class="face">
                             </div>
@@ -147,9 +147,9 @@
                                 <img src="../../assets/danmu.png" >
                                 <img src="../../assets/danmu.png" >
                             </div>
-                            <a class="login-btn" @click="loginShow();regShow(0)">登录</a>
+                            <a class="login-btn" @click="setLoginShow();setLoginTab(0)">登录</a>
                             <p class="reg">
-                                首次使用？<a @click="loginShow();regShow(1)">点我去注册</a>
+                                首次使用？<a @click="setLoginShow();setLoginTab(1)">点我去注册</a>
                             </p>
                         </div>
                     </li>
@@ -286,29 +286,15 @@ export default {
     },
     methods: {
         ...mapMutations({
-            loginShow: 'SET_LOGIN_SHOW',//登录弹窗显示隐藏
-            regShow: 'SET_LOGIN_TAB'//注册登录tab状态
+            setLoginShow: 'SET_LOGIN_SHOW',//登录弹窗显示隐藏
+            setLoginTab: 'SET_LOGIN_TAB'//注册登录tab状态
         }),
         ...mapActions([
             'setSignIn',//登录
+            'setUserInfo',//获取个人信息
+            'setVipInfo',//获取大会员推荐信息
             'signOut'//退出登录
         ]),
-        // ...mapActions({
-        //     mosignIn: 'signIn',//命名重名修改
-        //     moproInfo: 'proInfo',
-        //     motopInfo: 'topInfo'
-        // }),
-        //退出登录
-        // signOut(){
-        //     localStorage.setItem('signIn',0);
-        //     window.location.reload();
-        //     this.moproInfo({
-        //         proInfo: []//state传入个人信息
-        //     });
-        //     this.motopInfo({
-        //         topInfo: []
-        //     });
-        // },
         //个人信息显示隐藏
         profileFadeIn(){
             this.profileShow = true
@@ -332,45 +318,24 @@ export default {
         }
     },
     created(){
-        this.setSignIn()
+        const login = localStorage.getItem('signIn')//读取缓存登录状态
+        if(!login){
+            //无状态即未登录状态，修改state值
+            this.setSignIn({
+                signIn: localStorage.setItem('signIn',0)
+            })
+        }else{
+            //已登录状态
+            //读取缓存状态
+            this.setSignIn({
+                signIn: localStorage.getItem('signIn')
+            })
+            //获取个人信息
+            this.setUserInfo()
+            //获取大会员推荐信息
+            this.setVipInfo()
+        }
     }
-    // created: function(){
-    //     let login = localStorage.getItem('signIn')//读取缓存登录状态
-    //     if(!login){
-    //         //无状态即未登录状态，修改state值
-    //         this.mosignIn({
-    //             signIn: localStorage.setItem('signIn',0),
-    //         })
-    //     }else{
-    //         //已登录状态
-    //         //读取缓存状态
-    //         this.mosignIn({
-    //             signIn: localStorage.getItem('signIn')
-    //         })
-    //         // //读取缓存个人信息
-    //         // this.$store.dispatch('proInfo',{
-    //         //     proInfo: JSON.parse(localStorage.getItem('proInfo'))//state传入用户信息
-    //         // })
-    //         //获取个人信息
-    //         this.$axios.get('http://localhost:8080/static/login.json')
-    //         .then((res)=>{
-    //             this.moproInfo({
-    //                 proInfo: res.data.data//state传入个人信息
-    //             })
-    //         }).catch((error)=>{
-    //             console.log(error)
-    //         })
-    //         //获取大会员推荐信息
-    //         this.$axios.get('http://localhost:8080/static/topInfo.json')
-    //         .then((res)=>{
-    //             this.motopInfo({
-    //                 topInfo: res.data.data//state传入大会员推荐信息
-    //             })
-    //         }).catch((error)=>{
-    //             console.log(error)
-    //         })
-    //     }
-    // }
 }
 </script>
 

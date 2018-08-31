@@ -15,7 +15,7 @@
         <zone-module :moduledata="donghua" @videoInfoxy='videoinforevent'>
         </zone-module>
         <!--  番剧 --> 
-        <!-- <div class="zone-wrap-module">
+        <div class="zone-wrap-module">
             <div class="bangumi-module">
                 <div class="up">
                     <div class="bangumi-timing-module l-con">
@@ -23,7 +23,7 @@
                             <i class="icon icon_t" :class="bangumi.icon"></i>
                             <a :href=bangumi.moreUrl class="name">{{ bangumi.title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in bangumi.tab2" :class="{'on' : index === bangumi.timelineTab }" @click="fjgetTimelineTab(index)">{{ index>0 && index===bangumi.timelineTab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in bangumi.tab2" :class="{'on' : index === bangumi.timelineTab }" @click="setBangumiTimelineTab(index)">{{ index>0 && index===bangumi.timelineTab? "周"+item.name : item.name}}</div>
                             </div>
                             <a :href=bangumi.moreUrl target="_blank" class="c-clink">
                                 新番时间表
@@ -43,8 +43,9 @@
                     <ad-slide :slidedata="bangumi.Ad.data" :slidetimedata="bangumi.Ad.time" :pagation="bangumi.Ad.pagation"></ad-slide>
                 </div>
             </div>
-        </div> -->
-        <!-- <div class="zone-wrap-module">
+        </div>
+        <!--  国创 -->
+        <div class="zone-wrap-module">
             <div class="bangumi-module">
                 <div class="up">
                     <div class="bangumi-timing-module l-con">
@@ -52,7 +53,7 @@
                             <i class="icon icon_t" :class="guochuang.icon"></i>
                             <a :href=guochuang.moreUrl class="name">{{ guochuang.title }}</a>
                             <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in guochuang.tab2" :class="{'on' : index === guochuang.timelineTab }" @click="getTimelineTab(index)">{{ index>0 && index===guochuang.timelineTab? "周"+item.name : item.name}}</div>
+                                <div class="bili-tab-item" v-for="(item,index) in guochuang.tab2" :class="{'on' : index === guochuang.timelineTab }" @click="setGuochuangTimelineTab(index)">{{ index>0 && index===guochuang.timelineTab? "周"+item.name : item.name}}</div>
                             </div>
                             <a :href=guochuang.moreUrl target="_blank" class="c-clink">
                                 新番时间表
@@ -61,16 +62,16 @@
                         </div>
                         <timing-box :timelineData="guochuang.timeline" :nowtab="guochuang.timelineTab" class="gc"></timing-box>
                     </div>
-                    <zone-rank :zoneRank="guochuang" :tag="1" :bangumiRankLists="5" class="sec-gc"> -->
+                    <zone-rank :zoneRank="guochuang" :tag="1" :bangumiRankLists="5" class="sec-gc">
                         <!-- <ad-slide v-if="guochuang.num=1" :slidedata="guochuang.Ad.data" :slidetimedata="guochuang.Ad.time" :pagation="guochuang.Ad.pagation"></ad-slide> -->
-                    <!-- </zone-rank>
+                    </zone-rank>
                 </div>
                 <storey-box :storeydata="guochuang"></storey-box>
                 <div class="r-con">
                     <zone-rank :zoneRank="guochuang" :tag="0"></zone-rank>
                 </div>
-            </div> -->
-        <!-- </div> -->
+            </div>
+        </div>
          <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
                 {{ videoinforitem[videodata.mouseindex].title }}
@@ -107,14 +108,21 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     created() {
+        //轮播图推广模块
         this.setSlidePop({
             slide: 23,
             popularize: 34
         })
+        //推荐模块
         this.setRecom()
+        //当前在线
         this.setOnline()
+        //动画模块
         this.setDynamic()
-        // this.mainDataGet()
+        //番剧模块
+        this.setBangumi()
+        //国创模块
+        this.setGuochuang()
     },
     components:{
         Slide,
@@ -137,12 +145,12 @@ export default {
         ...mapState('donghua',{
             donghua : state => state
         }),
-        // ...mapState('home/bangumi',{
-        //     bangumi : state => state
-        // }),
-        // ...mapState('home/guochuang',{
-        //     guochuang : state => state
-        // })
+        ...mapState('bangumi',{
+            bangumi : state => state
+        }),
+        ...mapState('guochuang',{
+            guochuang : state => state
+        })
     },
     data () {
         return {
@@ -160,51 +168,45 @@ export default {
         ...mapActions('donghua',[
             'setDynamic'
         ]),
-        // ...mapActions('home/donghua',{
-        //     dhgetNewTrends: 'getNewTrends',
-        //     dhgetNewSub: 'getNewSub',
-        //     dhgetRankThreeAllList: 'getRankThreeAllList',
-        //     dhgetRankThreeOriginalList: 'getRankThreeOriginalList',
-        //     dhgetRankSevenAllList: 'getRankSevenAllList',
-        //     dhgetRankSevenOriginalList: 'getRankSevenOriginalList'
-        // }),
-        // ...mapActions('home/bangumi',{
-        //     fjgetTimeline: 'getTimeline',
-        //     fjgetTimelineTab: 'getTimelineTab',
-        //     fjgetNewTrends: 'getNewTrends',
-        //     fjgetNewSub: 'getNewSub',
-        //     fjgetRankThreeAllList: 'getRankThreeAllList',
-        //     fjgetRankSevenAllList: 'getRankSevenAllList',
-        //     fjgetAd: 'getAd'
-        // }),
-        // ...mapActions('home/guochuang',{
-        //     gcgetTimeline: 'getTimeline',
-        //     gcgetTimelineTab: 'getTimelineTab',
-        //     gcgetBrankThreeAllList: 'getBrankThreeAllList',
-        //     gcgetBrankSevenAllList: 'getBrankSevenAllList',
-        //     gcgetNewTrends: 'getNewTrends',
-        //     gcgetNewSub: 'getNewSub',
-        //     gcgetRankThreeAllList: 'getRankThreeAllList',
-        //     gcgetRankThreeOriginalList: 'getRankThreeOriginalList',
-        //     gcgetRankSevenAllList: 'getRankSevenAllList',
-        //     gcgetRankSevenOriginalList: 'getRankSevenOriginalList',
-        //     gcgetAd: 'getAd',
-        // }),
+        ...mapMutations('bangumi',{
+            setBangumiTimelineTab: 'SET_TIMELINE_TAB'
+        }),
+        ...mapActions('bangumi',[
+            'setTimeline',
+            'setNewTrends',
+            'setNewSub',
+            'setRankGlobalThree',
+            'setRankGlobalSeven',
+            'setAdSlide'
+        ]),
+        setBangumi(){
+            this.setTimeline()
+            this.setNewTrends()
+            this.setNewSub()
+            this.setRankGlobalThree()
+            this.setRankGlobalSeven()
+            this.setAdSlide()
+        },
+        ...mapMutations('guochuang',{
+            setGuochuangTimelineTab: 'SET_TIMELINE_TAB'
+        }),
+        ...mapActions('guochuang',{
+            gcSetTimeline: 'setTimeline',
+            getRankCnThree: 'setRankCnThree',
+            getRankCnSeven: 'setRankCnSeven',
+            gcSetAdSlide: 'setAdSlide',
+            getRelatedContent: 'setRelatedContent'
+        }),
+        setGuochuang(){
+            this.gcSetTimeline()
+            this.getRankCnThree()
+            this.getRankCnSeven()
+            this.gcSetAdSlide()
+            this.getRelatedContent()
+        },
         // mainDataGet() {
         //     //并发处理
         //         this.$axios.all([
-        //             this.$axios.get('/static/maindata/dh_newTrends.json'),
-        //             this.$axios.get('/static/maindata/dh_newSub.json'),
-        //             this.$axios.get('/static/maindata/ranking/dh_rankThreeAllList.json'),
-        //             this.$axios.get('/static/maindata/ranking/dh_rankThreeOriginalList.json'),
-        //             this.$axios.get('/static/maindata/ranking/dh_rankSevenAllList.json'),
-        //             this.$axios.get('/static/maindata/ranking/dh_rankSevenOriginalList.json'),
-        //             this.$axios.get('/static/bangumiData/timeline_global.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/timeline_global_3.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/timeline_global_7.json'),
-        //             this.$axios.get('/static/bangumiData/fj_newTrends.json'),
-        //             this.$axios.get('/static/bangumiData/fj_newSub.json'),
-        //             this.$axios.get('/static/fj_ad_slide.json'),
         //             this.$axios.get('/static/bangumiData/timeline_cn.json'),
         //             this.$axios.get('/static/bangumiData/ranking/timeline_cn_3.json'),
         //             this.$axios.get('/static/bangumiData/ranking/timeline_cn_7.json'),
@@ -217,18 +219,6 @@ export default {
         //             this.$axios.get('/static/gc_ad_slide.json')
         //         ])
         //         .then(this.$axios.spread(( 
-        //             newTrends,//动画新投稿
-        //             newSub,//动画新动态
-        //             rankThreeAllList,//动画三日全部排行
-        //             rankThreeOriginalList,//动画三日原创排行
-        //             rankSevenAllList,//动画七日全部排行
-        //             rankSevenOriginalList,//动画七日原创排行
-        //             timelineGlobal,//番剧更新表
-        //             timelineGlobalThree,//番剧三日排行
-        //             timelineGlobalSeven,//番剧七日排行
-        //             fjnewTrends,//番剧相关新动态
-        //             fjnewSub,//番剧相关新投稿
-        //             fjadSlide,//番剧广告位
         //             timelineCn,//国创更新表
         //             timelineCnThree,//国创三日排行
         //             timelineCnSeven,//国创七日排行
@@ -240,18 +230,6 @@ export default {
         //             gcRankSevenOriginalList,//国创七日原创排行
         //             gcAdData
         //         ) => {
-        //             this.dhgetNewTrends(newTrends.data.data)
-        //             this.dhgetNewSub(newSub.data.data) 
-        //             this.dhgetRankThreeAllList(rankThreeAllList.data.data)
-        //             this.dhgetRankThreeOriginalList(rankThreeOriginalList.data.data)
-        //             this.dhgetRankSevenAllList(rankSevenAllList.data.data)
-        //             this.dhgetRankSevenOriginalList(rankSevenOriginalList.data.data)
-        //             this.fjgetTimeline(timelineGlobal.data.result)
-        //             this.fjgetRankThreeAllList(timelineGlobalThree.data.result.list)
-        //             this.fjgetRankSevenAllList(timelineGlobalSeven.data.result.list)
-        //             this.fjgetNewTrends(fjnewTrends.data.data)
-        //             this.fjgetNewSub(fjnewSub.data.data)
-        //             this.fjgetAd(fjadSlide.data.result)
                     
         //             this.gcgetTimeline(timelineCn.data.result)
         //             this.gcgetBrankThreeAllList(timelineCnThree.data.result.list)

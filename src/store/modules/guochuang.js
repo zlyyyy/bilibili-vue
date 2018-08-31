@@ -1,3 +1,5 @@
+import { getTimelineCn, getRankCnThree, getRankCnSeven, getCnAdSlide } from '../../api'
+import axios from 'axios'
 const state = {
 	num: '1',
 	id: 'bili_guochuang',//模型id
@@ -63,10 +65,10 @@ const state = {
 	],
 	rankPic: true,
 	rankLists: 7,
-	BrankThreeAllList: [],//三日全部排行
-	BrankThreeAllMoreUrl: '/ranking/bangumi/167/0/3/',//三日全部排行更多链接
-	BrankSevenAllList: [],//一周全部排行
-	BrankSevenAllMoreUrl: '/ranking/bangumi/167/0/7/',//一周全部排行更多链接
+	mRankThreeAllList: [],//三日全部排行
+	mRankThreeAllMoreUrl: '/ranking/bangumi/167/0/3/',//三日全部排行更多链接
+	mRankSevenAllList: [],//一周全部排行
+	mRankSevenAllMoreUrl: '/ranking/bangumi/167/0/7/',//一周全部排行更多链接
 	rankThreeAllList: [],//三日相关全部排行
 	rankThreeAllMoreUrl: '/ranking/all/168/1/3/',//三日全部排行更多链接
 	rankThreeOriginalList: [],//三日原创全部排行
@@ -85,74 +87,90 @@ const state = {
 const getters = {}
 
 const mutations = {
-	setTimeline(state,data){
+	SET_TIMELINE_CN: (state, data) => {
 		state.timeline = Object.assign([],data)
 	},
-	setTimelineTab(state,data){
+	SET_TIMELINE_TAB: (state, data) => {
 		state.timelineTab = data
 	},
-	setBrankThreeAllList(state,data){
-		state.BrankThreeAllList = Object.assign([],data)
+	SET_NEW_TRENDS: (state, data) => {
+		state.newTrends = Object.assign([],data)
 	},
-	setBrankSevenAllList(state,data){
-		state.BrankSevenAllList = Object.assign([],data)
+	SET_NEW_SUB: (state, data) => {
+		state.newSub = Object.assign([],data)
 	},
-	setNewTrends(state,data){
-		state.newTrends = Object.assign({},data)
-	},
-	setNewSub(state,data){
-		state.newSub = Object.assign({},data)
-	},
-	setRankThreeAllList(state,data){
+	SET_RANK_THREE_ALL_LIST: (state, data) => {
 		state.rankThreeAllList = Object.assign([],data)
 	},
-	setRankThreeOriginalList(state,data){
+	SET_RANK_THREE_ORIGINAL_LIST: (state, data) => {
 		state.rankThreeOriginalList = Object.assign([],data)
 	},
-	setRankSevenAllList(state,data){
+	SET_RANK_SEVEN_ALL_LIST: (state, data) => {
 		state.rankSevenAllList = Object.assign([],data)
 	},
-	setRankSevenOriginalList(state,data){
+	SET_RANK_SEVEN_ORIGINAL_LIST: (state, data) => {
 		state.rankSevenOriginalList = Object.assign([],data)
 	},
-	setAd(state,data){
+	SET_RANK_CN_THREE: (state, data) => {
+		state.mRankThreeAllList = Object.assign([],data)
+	},
+	SET_RANK_CN_SEVEN: (state, data) => {
+		state.mRankSevenAllList = Object.assign([],data)
+	},
+	SET_AD_SLIDE: (state, data) => {
 		state.Ad.data = Object.assign([],data)
 	}
 }
 
 const actions = {
-	getTimeline({ commit, state },data){
-		commit('setTimeline',data)
+	//七日更新表
+	setTimeline({ commit, state }){
+		getTimelineCn().then(res=>{
+			commit('SET_TIMELINE_CN',res.result)
+		})
 	},
-	getTimelineTab({ commit, state },data){
-		commit('setTimelineTab',data)
+	//三日排行
+	setRankCnThree({ commit, state }){
+		getRankCnThree().then(res=>{
+			commit('SET_RANK_CN_THREE',res.result.list)
+		})
 	},
-	getBrankThreeAllList({ commit, state },data){
-		commit('setBrankThreeAllList',data)
+	//七日排行
+	setRankCnSeven({ commit, state }){
+		getRankCnSeven().then(res=>{
+			commit('SET_RANK_CN_SEVEN',res.result.list)
+		})
 	},
-	getBrankSevenAllList({ commit, state },data){
-		commit('setBrankSevenAllList',data)
+	//广告位
+	setAdSlide({ commit, state }){
+		getCnAdSlide().then(res=>{
+			commit('SET_AD_SLIDE',res.result)
+		})
 	},
-	getNewTrends({ commit, state },data){
-		commit('setNewTrends',data)
-	},
-	getNewSub({ commit, state },data){
-		commit('setNewSub',data)
-	},
-	getRankThreeAllList({ commit, state },data){
-		commit('setRankThreeAllList',data)
-	},
-	getRankThreeOriginalList({ commit, state },data){
-		commit('setRankThreeOriginalList',data)
-	},
-	getRankSevenAllList({ commit, state },data){
-		commit('setRankSevenAllList',data)
-	},
-	getRankSevenOriginalList({ commit, state },data){
-		commit('setRankSevenOriginalList',data)
-	},
-	getAd({ commit, state },data){
-		commit('setAd',data)
+	//相关内容
+	setRelatedContent({ commit, state }){
+		axios.all([
+			axios.get('/static/bangumiData/gc_newTrends.json'),
+			axios.get('/static/bangumiData/gc_newSub.json'),
+			axios.get('/static/bangumiData/ranking/gc_rankThreeAllList.json'),
+			axios.get('/static/bangumiData/ranking/gc_rankThreeOriginalList.json'),
+			axios.get('/static/bangumiData/ranking/gc_rankSevenAllList.json'),
+			axios.get('/static/bangumiData/ranking/gc_rankSevenOriginalList.json'),
+		]).then(axios.spread((
+			newTrends,//国创相关新动态
+			newSub,//国创相关新投稿
+			rankThreeAllList,//国创三日全部排行
+			rankThreeOriginalList,//国创三日原创排行
+			rankSevenAllList,//国创七日全部排行
+			rankSevenOriginalList,//国创七日原创排行
+		)=>{
+			commit('SET_NEW_TRENDS',newTrends.data.data),
+			commit('SET_NEW_SUB',newSub.data.data),
+			commit('SET_RANK_THREE_ALL_LIST',rankThreeAllList.data.data),
+			commit('SET_RANK_THREE_ORIGINAL_LIST',rankThreeOriginalList.data.data)
+			commit('SET_RANK_SEVEN_ALL_LIST',rankSevenAllList.data.data),
+			commit('SET_RANK_SEVEN_ORIGINAL_LIST',rankSevenOriginalList.data.data)
+		}))
 	}
 }
 

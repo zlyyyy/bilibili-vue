@@ -1,14 +1,14 @@
 <template>
     <div class="login">
-        <div class="complain-mask" @click="loginShow()">
+        <div class="complain-mask" @click="setLoginShow()">
         </div>
         <div class="login-form">
-            <div class="login-close" @click="loginShow">
+            <div class="login-close" @click="setLoginShow()">
                 <i class="iconfont icon-close"></i>
             </div>
             <div class="login-logo"></div>
             <div class="login-title">
-                <a v-for="(item,index) in tab" :class="{active: index == nowindex}" href="#" @click="regShow(index)">{{ item.name }}</a>
+                <a v-for="(item,index) in tab" :class="{active: index == nowindex}" href="#" @click="setLoginTab(index)">{{ item.name }}</a>
             </div>
             <div class="login-user" v-if="nowindex == 0 ">
                 <div class="login-content">
@@ -47,7 +47,7 @@
                     立即注册
                 </div>
                  <div class="register-login">
-                    <a href="javascript:;" @click="regShow(0)">已有账号，直接登录>></a>
+                    <a href="javascript:;" @click="setLoginTab(0)">已有账号，直接登录>></a>
                 </div>
             </div>
         </div>
@@ -134,57 +134,40 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
-            'updateUserName',
-            'updatePassword'
-        ]),
-        ...mapActions([
-            'loginShow',//登录弹窗显示隐藏
-            'regShow'
-        ]),
-        ...mapActions({
-            mosignIn: 'signIn',
-            moproInfo: 'proInfo',
-            motopInfo: 'topInfo'
+        ...mapMutations({
+            setLoginShow: 'SET_LOGIN_SHOW',
+            setLoginTab: 'SET_LOGIN_TAB',
+            updateUserName: 'SET_USERNAME',
+            updatePassword: 'SET_PASSWORD'
         }),
-        // loginShow(){
-        //     //登录弹窗显示隐藏
-        //     this.mologinShow()
-        // },
+        ...mapActions([
+            'setSignIn',//登录
+            'setUserInfo',//获取个人信息
+            'setVipInfo',//获取大会员推荐信息
+        ]),
         onLogin(){
             sessionStorage.setItem("signIn", 0);
             if(!this.userError.status || !this.passError.status){
                 this.btnErrorText = '部分选项未通过'
             }else{
-                this.$axios.get('http://localhost:8080/static/login.json')
+                this.$http.get('http://localhost:8080/static/login.json')
                 .then((res)=>{
                     localStorage.setItem('userName',this.user);//浏览器存入用户名--测试用
                     localStorage.setItem('password',this.password);//浏览器存入密码--测试用
                     localStorage.setItem('signIn',1);//浏览器存入登录状态，0为未登录，1为已登录
                     // localStorage.setItem('proInfo',JSON.stringify(res.data.data));//浏览器存入个人信息
-                    this.mosignIn({
+                    this.setSignIn({
                         signIn: localStorage.getItem('signIn'),//更改state中的登录状态
                     })
-                    this.moproInfo({
+                    this.setUserInfo({
                         proInfo: res.data.data//state传入用户信息
                     })
-                    this.loginShow()//关闭登录框
-                    this.topInfo()//获取大会员推荐信息
+                    this.setLoginShow()//关闭登录框
+                    this.setVipInfo()//获取大会员推荐信息
                 }).catch((error)=>{
                     console.log(error)
                 })
             }
-        },
-        topInfo(){
-            //获取大会员推荐信息
-            this.$axios.get('http://localhost:8080/static/topInfo.json')
-            .then((res)=>{
-                this.motopInfo({
-                    topInfo: res.data.data//state传入大会员推荐信息
-                })
-            }).catch((error)=>{
-                console.log(error)
-            })
         }
     }
 }

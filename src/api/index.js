@@ -40,3 +40,46 @@ export function getUserInfo(){
 export function getVipInfo(){
     return http.get('/static/topInfo.json')
 }
+
+//番剧七日更新表
+export function getTimelineGlobal(){
+    return http.get('/static/bangumiData/timeline_global.json')
+}
+//番剧新动态
+export function getNewTrends(){
+    return http.get('/static/bangumiData/fj_newTrends.json')
+}
+//番剧最近投稿
+export function getNewSub(){
+    return http.get('/static/bangumiData/fj_newSub.json')
+}
+//番剧三日排行
+export function getRankGlobalThree(){
+    return http.get('/static/bangumiData/ranking/timeline_global_3.json')
+}
+//番剧七日排行
+export function getRankGlobalSeven(){
+    return http.get('/static/bangumiData/ranking/timeline_global_7.json')
+}
+//番剧广告位
+export function getGlobalAdSlide(){
+    return http.get('/static/fj_ad_slide.json')
+}
+
+
+//国创七日更新表
+export function getTimelineCn(){
+    return http.get('/static/bangumiData/timeline_cn.json')
+}
+//国创三日排行
+export function getRankCnThree(){
+    return http.get('/static/bangumiData/ranking/timeline_cn_3.json')
+}
+//国创七日排行
+export function getRankCnSeven(){
+    return http.get('/static/bangumiData/ranking/timeline_cn_7.json')
+}
+//国创广告位
+export function getCnAdSlide(){
+    return http.get('/static/gc_ad_slide.json')
+}

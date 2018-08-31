@@ -17,7 +17,7 @@ const mutations = {
         state.loginShow = state.loginShow? false : true
     },
     SET_LOGIN_TAB: (state, data) => {
-        state.nowindex = nowindex
+        state.nowindex = data
     },
     //登录状态
     SET_SIGNIN: (state, data) => {
@@ -35,7 +35,7 @@ const mutations = {
 
     //用户名
     SET_USERNAME: (state, data) => {
-        state.userName = msg
+        state.userName = data
     },
 
     //用户密码
@@ -45,38 +45,22 @@ const mutations = {
 }
 
 const actions = {
-	loginShow({commit,state},msg) {
-        commit('loginShow',msg)
+    setSignIn({commit,state},signin){
+        commit('SET_SIGNIN',signin)
     },
-    regShow({commit,state},msg){
-        commit('regShow',msg)
+    setUserInfo({commit,state}){
+        getUserInfo().then(res=>{
+            commit('SET_USER_INFO',{
+                proInfo: res.data//state传入个人信息
+            })
+        })
     },
-    setSignIn({commit,state}){
-        const login = localStorage.getItem('signIn')//读取缓存登录状态
-        if(!login){
-            //无状态即未登录状态，修改state值
-            commit('SET_SIGNIN',{
-                signIn: localStorage.setItem('signIn',0)
+    setVipInfo({commit,state}){
+        getVipInfo().then(res=>{
+            commit('SET_VIP_INFO',{
+                topInfo: res.data//state传入大会员推荐信息
             })
-        }else{
-            //已登录状态
-            //读取缓存状态
-            commit('SET_SIGNIN',{
-                signIn: localStorage.getItem('signIn')
-            })
-            //获取个人信息
-            getUserInfo().then(res=>{
-                commit('SET_USER_INFO',{
-                    proInfo: res.data.data//state传入个人信息
-                })
-            })
-            //获取大会员推荐信息
-            getVipInfo().then(res=>{
-                commit('SET_VIP_INFO',{
-                    topInfo: res.data.data//state传入大会员推荐信息
-                })
-            })
-        }
+        })
     },
     //退出登录
     signOut({commit,state}){
@@ -89,12 +73,7 @@ const actions = {
             topInfo: []//state传入大会员推荐信息
         })
     },
-    setUserInfo({commit,state},msg){
-        commit('proInfo',msg)
-    },
-    setVipInfo({commit,state},msg){
-        commit('topInfo',msg)
-    }
+
 }
 
 export default {
