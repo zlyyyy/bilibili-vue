@@ -9,7 +9,7 @@
                 <dropdown :dropdownData="zoneRank.rankdropdown" :selected="rankselect" @dropselected='rankSelect'></dropdown>
             </div>
             <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}">
-                <ul class="rank-list" :class="zoneRank.id==='bili_bangumi'||zoneRank.id==='bili_guochuang'? 'bangumi-rank-list' : 'hot-lists'" >
+                <ul class="rank-list" :class="zoneRank.id==='bili_bangumi'||zoneRank.id==='bili_guochuang'&&tag===1? 'bangumi-rank-list' : 'hot-lists'" >
                     <li class="rank-item" v-for="(item,index) in rankListHot" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true&&tag===0}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
@@ -43,7 +43,7 @@
                 </ul>
             </div>
             <a :href="moreUrl" target="_blank" class="more-link">查看更多<i class="icon icon-arrow-r"></i></a>
-             <ad-slide v-if="tag===1&&zoneRank.num==1" :slidedata="zoneRank.Ad.data" :slidetimedata="zoneRank.Ad.time" :pagation="zoneRank.Ad.pagation"></ad-slide>
+            <ad-slide v-if="tag===1&&zoneRank.num==1" :slidedata="zoneRank.Ad.data" :slidetimedata="zoneRank.Ad.time" :pagation="zoneRank.Ad.pagation"></ad-slide>
         </template>
     </div>
 </template>

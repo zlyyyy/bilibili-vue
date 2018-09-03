@@ -204,45 +204,6 @@ export default {
             this.gcSetAdSlide()
             this.getRelatedContent()
         },
-        // mainDataGet() {
-        //     //并发处理
-        //         this.$axios.all([
-        //             this.$axios.get('/static/bangumiData/timeline_cn.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/timeline_cn_3.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/timeline_cn_7.json'),
-        //             this.$axios.get('/static/bangumiData/gc_newTrends.json'),
-        //             this.$axios.get('/static/bangumiData/gc_newSub.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/gc_rankThreeAllList.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/gc_rankThreeOriginalList.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/gc_rankSevenAllList.json'),
-        //             this.$axios.get('/static/bangumiData/ranking/gc_rankSevenOriginalList.json'),
-        //             this.$axios.get('/static/gc_ad_slide.json')
-        //         ])
-        //         .then(this.$axios.spread(( 
-        //             timelineCn,//国创更新表
-        //             timelineCnThree,//国创三日排行
-        //             timelineCnSeven,//国创七日排行
-        //             gcnewTrends,//国创相关新动态
-        //             gcnewSub,//国创相关新投稿
-        //             gcRankThreeAllList,//国创三日全部排行
-        //             gcRankThreeOriginalList,//国创三日原创排行
-        //             gcRankSevenAllList,//国创七日全部排行
-        //             gcRankSevenOriginalList,//国创七日原创排行
-        //             gcAdData
-        //         ) => {
-                    
-        //             this.gcgetTimeline(timelineCn.data.result)
-        //             this.gcgetBrankThreeAllList(timelineCnThree.data.result.list)
-        //             this.gcgetBrankSevenAllList(timelineCnSeven.data.result.list)
-        //             this.gcgetNewTrends(gcnewTrends.data.data)
-        //             this.gcgetNewSub(gcnewSub.data.data)
-        //             this.gcgetRankThreeAllList(gcRankThreeAllList.data.data)
-        //             this.gcgetRankThreeOriginalList(gcRankThreeOriginalList.data.data)
-        //             this.gcgetRankSevenAllList(gcRankSevenAllList.data.data)
-        //             this.gcgetRankSevenOriginalList(gcRankSevenOriginalList.data.data)
-        //             this.gcgetAd(gcAdData.data.result)
-        //         }))
-        // },
         videotest()  {
             if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===0){
                 this.videoinforitem = this.mainData[0].rankThreeAllList
