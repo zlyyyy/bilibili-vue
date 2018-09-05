@@ -100,7 +100,7 @@ import Slide from '../../components/slide/slide'
 import Recommend from '../../components/recommend/recommend'
 import Popularize from '../../components/popularize/popularize'
 import ZoneModule from '../../components/zoneModule/zoneModule'
-import BangumiModule from '../../components/bangumiModule/bangumiModule'
+// import BangumiModule from '../../components/bangumiModule/bangumiModule'
 import TimingBox from '../../components/timingBox/timingBox'
 import ZoneRank from '../../components/zoneRank/zoneRank'
 import StoreyBox from '../../components/storeyBox/storeyBox'
@@ -130,7 +130,6 @@ export default {
         Recommend,
         Popularize,
         ZoneModule,
-        BangumiModule,
         TimingBox,
         ZoneRank,
         StoreyBox,

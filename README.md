@@ -19,22 +19,89 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-####文件架构
- .
-+-- _config.yml
-+-- _drafts
-|   +-- begin-with-the-crazy-ideas.textile
-|   +-- on-simplicity-in-technology.markdown
-+-- _includes
-|   +-- footer.html
-|   +-- header.html
-+-- _layouts
-|   +-- default.html
-|   +-- post.html
-+-- _posts
-|   +-- 2007-10-29-why-every-programmer-should-play-nethack.textile
-|   +-- 2009-04-26-barcamp-boston-4-roundup.textile
-+-- _data
-|   +-- members.yml
-+-- _site
-+-- index.html
+#### 文件架构
+
+```
+.
+├── build                                       // webpack配置文件
+├── config                                      // 项目打包路径
+├── screenshots                                 // 项目截图
+├── src                                         // 源码目录
+│   ├── api                                     
+│   │   └──  index.js                           // 接口配置
+│   ├── assets                                  // 图片文件
+│   ├── components                              // 组件
+│   │   │   ├── ad                 
+│   │   │   │   └── adSlide.vue                 // 广告位轮播组件
+│   │   │   ├── dropdown                 
+│   │   │   │   └── dropdown.vue                // 下拉选择组件
+│   │   │   ├── foot
+│   │   │   │   └── footer.vue                  // 底部公共组件
+│   │   │   ├── head
+│   │   │   │   └── header.vue                  // 头部公共组件
+│   │   │   ├── loginIn
+│   │   │   │   └── loginIn.vue                 // 登录注册组件
+│   │   │   ├── navMenu
+│   │   │   │   └── navMenu.vue                 // 头部公用菜单组件
+│   │   │   ├── popularize
+│   │   │   │   └── popularize.vue              // 首页推广模块组件
+│   │   │   ├── ranking
+│   │   │   │   └── allList.vue                 // 排行榜页面排行组件
+│   │   │   ├── recommend
+│   │   │   │   └── recommend.vue               // 首页推荐内容组件
+│   │   │   ├── search
+│   │   │   │   └── searchList.vue              // 搜索页面搜索结果组件
+│   │   │   ├── slide
+│   │   │   │   └── slide.vue                   // 首页轮播图组件
+│   │   │   ├── storeyBox
+│   │   │   │   └── storeyBox.vue               // 新动态、新投稿组件
+│   │   │   ├── timingBox
+│   │   │   │   └── timingBox.vue               // 首页更新时间表组件
+│   │   │   ├── zoneModule
+│   │   │   │   └── zoneModule.vue              // 首页分类模块组件
+│   │   │   ├── zoneRank
+│   │   │       └── zoneRank.vue                // 首页分类模块内部排行组件
+│   ├── pages                                  
+│   │   ├── home
+│   │   │   └── index.vue                       // 首页
+│   │   ├── notFound
+│   │   │   └── 404.vue                         // 404
+│   │   ├── ranking
+│   │   │   └── ranking.vue                     // 排行榜页面
+│   │   ├── search
+│   │   │   └── search.vue                      // 搜索页面
+│   │   ├── video
+│   │       └── video.vue                       // 播放视频页面
+│   ├── router                                  
+│   │   └── index.js                            // 路由配置页面
+│   ├── store                                   // vuex的状态管理
+│   │   ├── modules                             // store模块
+│   │   │   ├── 404.js                          // 404模块
+│   │   │   ├── bangumi.js                      // 番剧模块
+│   │   │   ├── donghua.js                      // 动画模块
+│   │   │   ├── guochuang.js                    // 国创模块
+│   │   │   ├── header.js                       // 公用头部模块
+│   │   │   ├── index.js                        // 首页模块
+│   │   │   ├── login.js                        // 登录注册模块
+│   │   │   ├── ranking.js                      // 排行榜页面模块
+│   │   │   ├── search.js                       // 搜索页面模块
+│   │       └── video.js                        // 视频播放模块
+│   │   ├── action.js                           // 配置actions
+│   │   ├── getters.js                          // 配置getters
+│   │   ├── index.js                            // 引用vuex，组装各个配置
+│   │   ├── mutation-types.js                   // 定义常量muations名
+│   │   ├── mutation.js                         // 配置mutations
+│   │   └── state.js                            // 配置store
+│   ├── utils
+│   │   ├── http.js                             // axios二次封装
+│   │   └── utils.js                            // 公共方法配置
+│   └── style
+│       ├── common.scss                         // 公共样式文件
+│       └── mixin.scss                          // 样式配置文件
+│   ├── App.vue                                 // 页面入口文件
+│   ├── main.js                                 // 程序入口文件，加载各种公共组件
+├── favicon.ico                                 // 图标
+├── index.html                                  // 入口html文件
+.
+
+```
