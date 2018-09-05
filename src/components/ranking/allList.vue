@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { count2 } from '../../utils/utils'
 export default {
     props: {
         rankAll: {
@@ -65,7 +66,9 @@ export default {
         }
     },
     methods: {
-
+        count2(num){
+            count2(num)
+        }
     }
 }
 </script>

@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import Dropdown from '../components/base/dropdown'
+import Dropdown from '../../components/dropdown/dropdown'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('ranking')
 
@@ -207,7 +207,7 @@ export default {
     width: 30px;
     height: 30px;
     vertical-align: middle;
-    background: url(../assets/icons.png) no-repeat;
+    background: url(../../assets/icons.png) no-repeat;
 }
 .rank-menu li .rank-icon.all {
     background-position: -83px -979px;
@@ -268,7 +268,7 @@ export default {
     display: inline-block;
     vertical-align: middle;
     margin: 0 10px;
-    background: url(../assets/icons3.png) -52px -27px no-repeat;
+    background: url(../../assets/icons3.png) -52px -27px no-repeat;
 }
 .rank-list-head .rank_tips .tip-txt {
     vertical-align: middle;
@@ -321,7 +321,7 @@ export default {
     right: 6px;
     bottom: 4px;
     cursor: pointer;
-    background-image: url(../assets/play.png);
+    background-image: url(../../assets/play.png);
 }
 .rank-item .content .img:hover .w-later {
     display: block;
@@ -360,7 +360,7 @@ export default {
     margin-right: 5px;
     display: inline-block;
     vertical-align: text-top;
-    background: url(../assets/icons.png) no-repeat;
+    background: url(../../assets/icons.png) no-repeat;
 }
 .rank-item .content .info .detail .b-icon.play {
     background-position: -282px -90px;

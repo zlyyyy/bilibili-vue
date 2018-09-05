@@ -6,7 +6,6 @@ import router from './router/index'
 import store from './store/index'
 import VueLazyload from 'vue-lazyload'
 import axios from './utils/http'
-import Base from './base/base'
 
 Vue.use(VueLazyload, {
     preLoad: 1.3,
@@ -15,7 +14,7 @@ Vue.use(VueLazyload, {
     attempt: 1
   })
 Vue.http = Vue.prototype.$http = axios;
-Vue.use(Base)
+// Vue.use(Base)
 Vue.config.productionTip = false
 
 

@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import Dropdown from '../base/dropdown'
+import { count, count2 } from '../../utils/utils'
+import Dropdown from '../dropdown/dropdown'
 import AdSlide from '../ad/adSlide'
 export default {
     props: {
@@ -147,6 +148,12 @@ export default {
                 'ranknowtab' : this.ranknowtab,
                 'rankselect' : this.rankselect
             })
+        },
+        count(num){
+            count(num)
+        },
+        count2(num){
+            count2(num)
         }
     }
 }

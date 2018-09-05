@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import NavMenu from '../components/common/navMenu'
+import NavMenu from '../../components/navMenu/navMenu'
 //创建基于header辅助函数,返回一个对象,对象里有新的绑定在给定命名空间值上的组件绑定辅助函数
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('header')

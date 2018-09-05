@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Indexpage from '../pages/index'
-import NotFound from '../pages/404'
-import Ranking from '../pages/ranking'
+import Indexpage from '../pages/home/index'
+import NotFound from '../pages/notFound/404'
+import Ranking from '../pages/ranking/ranking'
 //RankingAllList page
-import RankingAllList from '../pages/ranking/allList'
-import Search from '../pages/search'
-import SearchList from '../pages/search/searchList'
+import RankingAllList from '../components/ranking/allList'
+import Search from '../pages/search/search'
+import SearchList from '../components/search/searchList'
 
-import Videopage from '../pages/video'
+import Videopage from '../pages/video/video'
 
 Vue.use(VueRouter)
 

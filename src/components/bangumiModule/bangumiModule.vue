@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import TimingBox from '../base/timingBox'
-import ZoneRank from '../base/zoneRank'
-import StoreyBox from '../base/storeyBox'
+import TimingBox from '../timingBox/timingBox'
+import ZoneRank from '../zoneRank/zoneRank'
+import StoreyBox from '../storeyBox/storeyBox'
 import AdSlide from '../ad/adSlide'
 export default {
     props: {

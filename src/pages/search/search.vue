@@ -214,7 +214,7 @@ a{
     width: 587px;
 }
 .search-wrap .search-logo {
-    background-image: url(../assets/search/sprite.png);
+    background-image: url('../../assets/search/sprite.png');
     background-position: -261px -72px;
     width: 131px;
     height: 35px;
@@ -261,7 +261,7 @@ a{
     background: #00b5e5;
 }
 .search-wrap .search-block .search-button .icon-search-white {
-    background-image: url(../assets/search/sprite.png);
+    background-image: url(../../assets/search/sprite.png);
     background-position: -148px -327px;
     width: 18px;
     vertical-align: middle;
@@ -353,7 +353,7 @@ a{
     position: absolute;
     right: 20px;
     top: 10px;
-    background-image: url(../assets/search/sprite.png);
+    background-image: url(../../assets/search/sprite.png);
     background-position: -485px -41px;
     width: 12px;
     height: 12px;

@@ -219,7 +219,7 @@ export default {
 .login-form .login-logo{
     width: 220px;
     height: 105px;
-    background: url(../assets/logo.png) 0 0 no-repeat;
+    background: url(../../assets/logo.png) 0 0 no-repeat;
     margin: 0 auto;
 }
 .login-form .login-title{

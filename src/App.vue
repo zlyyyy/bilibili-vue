@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import AppHeader from './components/header'
-import AppFooter from './components/footer'
-import Login from './components/login'
+import AppHeader from './components/head/header'
+import AppFooter from './components/foot/footer'
+import Login from './components/loginIn/login'
 
 export default {
     components: {

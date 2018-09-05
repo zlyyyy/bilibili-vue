@@ -95,15 +95,16 @@
 </template>
 
 <script>
-import Slide from '../components/common/slide'
-import Recommend from '../components/common/recommend'
-import Popularize from '../components/common/popularize'
-import ZoneModule from '../components/common/zoneModule'
-import BangumiModule from '../components/base/bangumiModule'
-import TimingBox from '../components/base/timingBox'
-import ZoneRank from '../components/base/zoneRank'
-import StoreyBox from '../components/base/storeyBox'
-import AdSlide from '../components/ad/adSlide'
+import { count2 } from '../../utils/utils'
+import Slide from '../../components/slide/slide'
+import Recommend from '../../components/recommend/recommend'
+import Popularize from '../../components/popularize/popularize'
+import ZoneModule from '../../components/zoneModule/zoneModule'
+import BangumiModule from '../../components/bangumiModule/bangumiModule'
+import TimingBox from '../../components/timingBox/timingBox'
+import ZoneRank from '../../components/zoneRank/zoneRank'
+import StoreyBox from '../../components/storeyBox/storeyBox'
+import AdSlide from '../../components/ad/adSlide'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {

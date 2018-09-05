@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import StoreyBox from '../base/storeyBox'
-import ZoneRank from '../base/zoneRank'
+import StoreyBox from '../storeyBox/storeyBox'
+import ZoneRank from '../zoneRank/zoneRank'
 export default {
     created() {
         

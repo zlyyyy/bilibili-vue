@@ -184,7 +184,7 @@ export default {
     height: 28px;
     margin-top: -3px;
     margin-right: 3px;
-    background: url('../assets/icons.png');
+    background: url('../../assets/icons.png');
 }
 .video-info-m .number .play:before {
     background-position: -659px -210px;
@@ -216,14 +216,14 @@ export default {
     margin-right: 3px;
 }
 .video-info-m .number .coin i {
-    background: url('../assets/anim-coin-small.png');
+    background: url('../../assets/anim-coin-small.png');
 }
 .video-info-m .number .coin b {
-    background: url('../assets/anim-coin-small.png');
+    background: url('../../assets/anim-coin-small.png');
     background-position: -2340px -60px;
 }
 .video-info-m .number .fav i {
-    background: url('../assets/anim-collect.png');
+    background: url('../../assets/anim-collect.png');
     background-position: 0px 0px;
 }
 .up-info-m {
@@ -248,7 +248,7 @@ export default {
     height: 24px;
     white-space: nowrap;
     color: #f25d8e;
-    background-image: url('../assets/lb.gif');
+    background-image: url('../../assets/lb.gif');
     background-repeat: no-repeat;
 }
 .up-info-m .u-face .live-online span {
@@ -272,7 +272,7 @@ export default {
     height: 20px;
     right: 0;
     top: 50px;
-    background: url('../assets/user-auth.png');
+    background: url('../../assets/user-auth.png');
     background-repeat: no-repeat;
     z-index: 3;
 }

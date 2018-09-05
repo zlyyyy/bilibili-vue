@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { count } from '../../utils/utils'
 export default {
 	props: {
         //推广数据
@@ -67,6 +68,9 @@ export default {
         }
     },
     methods: {
+        count(num){
+            count(num)
+        }
     }  
 }
 </script>

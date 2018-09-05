@@ -1,7 +1,7 @@
 <template>
     <div class="error-container">
         <div class="error-panel server-error error-404">
-            <img src="../assets/error/very_sorry.png">
+            <img src="../../assets/error/very_sorry.png">
             <div>
                 <div class="left-panel">
                     <a class="rollback-btn" @click="goBack()">返回上一页</a>
@@ -142,7 +142,7 @@ export default {
 .error-split {
 	width: 100%;
 	height: 40px;
-	background: url('../assets/error/have_rest.png') center no-repeat;
+	background: url('../../assets/error/have_rest.png') center no-repeat;
 }
 .error-manga {
 	padding: 30px;

@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import { count, count2 } from '../../utils/utils'
 export default {
     props: {
         storeydata: {
@@ -84,6 +85,12 @@ export default {
     methods: {
         nowtabclick(index) {
             this.nowtab =index
+        },
+        count(num){
+            count(num)
+        },
+        count2(num){
+            count2(num)
         }
     }
 }
