@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         count2(num){
-            count2(num)
+            return count2(num)
         }
     }
 }

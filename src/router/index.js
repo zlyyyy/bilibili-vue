@@ -3,13 +3,12 @@ import VueRouter from 'vue-router'
 
 import Indexpage from '../pages/home/index'
 import NotFound from '../pages/notFound/404'
-import Ranking from '../pages/ranking/ranking'
-//RankingAllList page
-import RankingAllList from '../components/ranking/allList'
-import Search from '../pages/search/search'
-import SearchList from '../components/search/searchList'
 
-import Videopage from '../pages/video/video'
+const Ranking = resolve => require(['@/pages/ranking/ranking'], resolve),
+          RankingAllList = resolve => require(['@/components/ranking/allList'], resolve),
+          Search = resolve => require(['@/pages/search/search'], resolve),
+          SearchList = resolve => require(['@/components/search/searchList'], resolve),
+          Videopage = resolve => require(['@/pages/video/video'], resolve)
 
 Vue.use(VueRouter)
 
@@ -17,6 +16,7 @@ export default new VueRouter({
     mode: 'history',
     routes: [
         {
+            name: 'home',
             path: '/',
             component: Indexpage,
             meta: {
@@ -68,20 +68,6 @@ export default new VueRouter({
                     meta: {
                         title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
-
-                    // path: 'rookie',
-                    // component: RankingAll,
-                    // redirect: '/ranking/rookie/0/0/0',
-                    // children: [
-                    //     {
-                    //         name: 'Rookie',
-                    //         path: ':rid/:rankselect/:rankselect2',
-                    //         component: RankingAllList,
-                    //         meta: {
-                    //             title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
-                    //         }
-                    //     }
-                    // ]
                 }
             ]
         },

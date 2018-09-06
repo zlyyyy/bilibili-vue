@@ -100,7 +100,6 @@ import Slide from '../../components/slide/slide'
 import Recommend from '../../components/recommend/recommend'
 import Popularize from '../../components/popularize/popularize'
 import ZoneModule from '../../components/zoneModule/zoneModule'
-// import BangumiModule from '../../components/bangumiModule/bangumiModule'
 import TimingBox from '../../components/timingBox/timingBox'
 import ZoneRank from '../../components/zoneRank/zoneRank'
 import StoreyBox from '../../components/storeyBox/storeyBox'
@@ -109,21 +108,7 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     created() {
-        //轮播图推广模块
-        this.setSlidePop({
-            slide: 23,
-            popularize: 34
-        })
-        //推荐模块
-        this.setRecom()
-        //当前在线
-        this.setOnline()
-        //动画模块
-        this.setDynamic()
-        //番剧模块
-        this.setBangumi()
-        //国创模块
-        this.setGuochuang()
+        this.setData()
     },
     components:{
         Slide,
@@ -203,6 +188,23 @@ export default {
             this.getRankCnSeven()
             this.gcSetAdSlide()
             this.getRelatedContent()
+        },
+        setData(){
+            //轮播图推广模块
+            this.setSlidePop({
+                slide: 23,
+                popularize: 34
+            })
+            //推荐模块
+            this.setRecom()
+            //当前在线
+            this.setOnline()
+            //动画模块
+            this.setDynamic()
+            //番剧模块
+            this.setBangumi()
+            //国创模块
+            this.setGuochuang()
         },
         videotest()  {
             if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===0){

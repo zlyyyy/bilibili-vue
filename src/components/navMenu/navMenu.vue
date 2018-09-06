@@ -6,10 +6,10 @@
             <div class="nav-con fl">
                 <ul>
                     <li class="nav-item" v-for="item in leftNav" :class="item.class">
-                        <router-link class="t" :to="{path:item.href}">
+                        <a class="t" :href='item.href'>
                             <i :class="item.icon" v-if="item.icon"></i>
                             {{ item.name }}
-                        </router-link>
+                        </a>
                     </li>
                 </ul>
             </div>

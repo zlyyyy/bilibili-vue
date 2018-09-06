@@ -3,21 +3,23 @@
         <div class="main-inner">
             <div class="rank-container">
                 <div class="rank-head">
-                    <ul class="rank-menu">
-                        <router-link v-for="(item,index) in rankMenu" @click.native="one(index)"
-                         :to="{
-                             name: item.name,
-                             params: {
-                                 type: item.name,
-                                 rid: item.children[0].rid,
-                                 rankselect: $route.params.rankselect,
-                                 rankselect2: $route.params.rankselect2
-                             }
-                         }" tag="li" active-class="active" :key="item.id" :class="{active: index == firstMenuActive}" >
-                            <span class="rank-icon" :class="item.icon"></span>
-                            <span class="text">{{ item.title }}</span>
-                        </router-link>
-                    </ul>
+                    <template v-if="rankAll">
+                        <ul class="rank-menu">
+                                <router-link v-for="(item,index) in rankMenu" @click.native="one(index)"
+                                :to="{
+                                    name: item.name,
+                                    params: {
+                                        type: item.name,
+                                        rid: item.children[0].rid,
+                                        rankselect: $route.params.rankselect,
+                                        rankselect2: $route.params.rankselect2
+                                    }
+                                }" tag="li" active-class="active" :key="item.id" :class="{active: index == firstMenuActive}" >
+                                    <span class="rank-icon" :class="item.icon"></span>
+                                    <span class="text">{{ item.title }}</span>
+                                </router-link>
+                        </ul>
+                    </template>
                 </div>
                 <div class="rank-body">
                     <div class="rank-tab-wrap">
@@ -104,13 +106,14 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            setRankSelect: 'SET_RANK_SELECT',
+            setRankSelect2: 'SET_RANK_SELECT2',
+            setFirstMenuActive: 'SET_FIRST_MENU_ACTIVE',
+            setSecondMenuActive: 'SET_SECOND_MENU_ACTIVE'
+        }),
         ...mapActions([
-            'setRankAll',
-            // 'setRankTips',
-            'setRankSelect',
-            'setRankSelect2',
-            'setFirstMenuActive',
-            'setSecondMenuActive'
+            'setRankData',
         ]),
         one(index){
             this.setFirstMenuActive(index);//同步修改state一级高亮
@@ -123,19 +126,11 @@ export default {
             this.RouterPush()//刷新路由
         },
         refreshData(){
-            this.$axios.get('http://localhost:8080/static/ranking/all.json',{
-                params:{
-                    type: this.firstMenuActive+1,//一级类目
-                    rid: this.rankMenu[this.firstMenuActive].children[this.secondMenuActive].rid,//二级类目
-                    arc_type: this.rankSelect,//全部近期筛选
-                    day: this.rankDropdown2[this.rankSelect2].num//时间筛选
-                }
-            })
-            .then((res)=>{
-                this.setRankAll(res.data.data)//修改rankall数据
-                // this.setRankTips(res.data.data.note)//修改rankTips数据
-            }).catch((error)=>{
-                console.log(error)
+            this.setRankData({
+                type: this.firstMenuActive+1,//一级类目
+                rid: this.rankMenu[this.firstMenuActive].children[this.secondMenuActive].rid,//二级类目
+                arc_type: this.rankSelect,//全部近期筛选
+                day: this.rankDropdown2[this.rankSelect2].num//时间筛选
             })
         },
         postRankSelect(index) {

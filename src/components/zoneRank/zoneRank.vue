@@ -150,10 +150,10 @@ export default {
             })
         },
         count(num){
-            count(num)
+            return count(num)
         },
         count2(num){
-            count2(num)
+            return count2(num)
         }
     }
 }

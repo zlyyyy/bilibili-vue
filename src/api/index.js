@@ -83,3 +83,15 @@ export function getRankCnSeven(){
 export function getCnAdSlide(){
     return http.get('/static/gc_ad_slide.json')
 }
+
+//排行榜数据
+export function getRankData(type, rid, arc_type,day){
+    return http.get('/static/ranking/all.json',{
+        params: {
+            type: type,
+            rid: rid,
+            arc_type: arc_type,
+            day: day
+        }
+    })
+}

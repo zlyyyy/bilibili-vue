@@ -174,188 +174,194 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.login{
-    position: absolute;
+<style lang="scss">
+@import '../../style/mixin';
+
+.login {
+	position: absolute;
     top: 0;
-    width: 100%;
-    height: 100%;
+    @include wh(100%, 100%);
 }
-.complain-mask{
-    background: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 999;
-    display: block;
-    top: 0px;
-    left: 0px;
+.complain-mask {
+	background: rgba(0, 0, 0, 0.8);
+	@include wh(100%, 100%);
+	position: fixed;
+	z-index: 999;
+	display: block;
+	top: 0px;
+	left: 0px;
 }
-.login-form{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    width: 300px;
-    padding: 30px 50px 30px;
-    background: #fff;
-    border-radius: 5px;
-    z-index: 9999;
-    overflow: hidden;
-}
-.login-form .login-close{
-    position: absolute;
-    cursor: pointer;
-    right: 20px;
-    top: 20px;
-}
-.login-form .login-close .icon-close{
-    font-size: 24px;
-    color: #909399;
-}
-.login-form .login-close .icon-close:hover{
-    color: #00a1d6;
-}
-.login-form .login-logo{
-    width: 220px;
-    height: 105px;
-    background: url(../../assets/logo.png) 0 0 no-repeat;
-    margin: 0 auto;
-}
-.login-form .login-title{
-    overflow: hidden;
-    text-align: center;
-}
-.login-form .login-title a{
-    display: inline-block;
-    font-size: 18px;
-    padding: 10px;
-    margin: 0 20px;
-    color: #969696;
-}
-.login-form .login-title a.active{
-    font-weight: 700;
-    color: #00a1d6;
-    border-bottom: 2px solid #00a1d6;
+.login-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	width: 300px;
+	padding: 30px 50px 30px;
+    background: $white;
+    @include borderRadius(5px);
+	z-index: 9999;
+	overflow: hidden;
+	.login-close {
+		position: absolute;
+		cursor: pointer;
+		right: 20px;
+		top: 20px;
+		.icon-close {
+            @include sc(24px, #909399);
+			&:hover {
+				color: $blue;
+			}
+		}
+	}
+	.login-logo {
+        @include wh(220px, 105px);
+		background: url(../../assets/logo.png) 0 0 no-repeat;
+		margin: 0 auto;
+	}
+	.login-title {
+		overflow: hidden;
+		text-align: center;
+		a {
+			display: inline-block;
+            @include sc(18px, #969696);
+			padding: 10px;
+			margin: 0 20px;
+			&.active {
+				font-weight: 700;
+				color: $blue;
+				border-bottom: 2px solid $blue;
+			}
+		}
+	}
+	.error {
+        position: absolute;
+        @include sc(14px, $pink);
+		bottom: 15px;
+		right: 0;
+	}
+	.btn-error {
+		margin-top: 10px;
+		height: 20px;
+        line-height: 20px;
+        @include sc(12px, $pink);
+		text-align: right;
+	}
 }
 .login-user,
-.register-user{
-    float: left;
-    width: 100%;
+.register-user {
+	float: left;
+	width: 100%;
 }
 .login-user .login-content,
-.register-user .register-content{
-    margin-top: 20px;
-    box-sizing: border-box;
-    width: 100%;
+.register-user .register-content {
+	margin-top: 20px;
+	box-sizing: border-box;
+	width: 100%;
 }
 .login-form .user,
-.login-form .password{
-    position: relative;
-}
-.login-form .error{
-    position: absolute;
-    font-size: 14px;
-    bottom: 15px;
-    right: 0;
-    color: #f45d90;
-}
-.login-form .btn-error{
-    margin-top: 10px;
-    height: 20px;
-    line-height: 20px;
-    font-size: 12px;
-    text-align: right;
-    color: #f45d90;
+.login-form .password {
+	position: relative;
 }
 .login-user .login-content input,
-.register-user .register-content input{
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 1px solid rgba(0,0,0,0.12);
-    padding: 10px 10px 0;
+.register-user .register-content input {
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+	padding: 10px 10px 0;
     margin: 10px 0 0 0;
-    height: 50px;
-    width: 100%;
-    font-size: 14px;
+    @include wh(100%, 50px);
+	font-size: 14px;
 }
 .login-user .login-content .on input,
 .login-user .login-content input:focus,
 .register-user .register-content .on input,
-.register-user .register-content input:focus{
-    border-bottom: 1px solid #00a1d6;
+.register-user .register-content input:focus {
+	border-bottom: 1px solid $blue;
 }
 /* 记住密码 */
-.login-user .login-forget{
-	margin-top: 5px;
-	height: 40px;
-	line-height: 40px;
+.login-user {
+	.login-forget {
+		margin-top: 5px;
+		height: 40px;
+		line-height: 40px;
+		.lf-password {
+			position: relative;
+			float: left;
+		}
+	}
 }
-.login-user .login-forget .lf-password{
-	position: relative;
-	float: left;
-}
-.login-forget .lf-password input[type="checkbox"] {
-	width: 12px;
-	height: 12px;
-	opacity: 0;
-}
-.login-forget .lf-password label{
-	cursor: pointer;
-	position: absolute;
-	left: 3px;
-    top: 13px;
-	width: 12px;
-	height: 12px;
-	border-radius: 3px;
-	border: 1px solid #999;
+.login-forget {
+	.lf-password {
+		input[type="checkbox"] {
+            @include wh(12px, 12px);
+			opacity: 0;
+		}
+		label {
+			cursor: pointer;
+			position: absolute;
+			left: 3px;
+			top: 13px;
+            @include wh(12px, 12px);
+            @include borderRadius(3px);
+			border: 1px solid #999;
+		}
+		input {
+			&:checked {
+				& + label {
+					background: $white;
+					&::after {
+						position: absolute;
+                        content: "";
+                        @include wh(8px, 4px);
+						border: 1px solid $blue;
+						border-right: none;
+						border-top: none;
+						transform: rotate(-45deg);
+						top: 2px;
+						left: 2px;
+					}
+				}
+			}
+		}
+	}
 }
 /*设置选中的input的样式*/
 /* + 是兄弟选择器,获取选中后的label元素*/
-.login-forget .lf-password input:checked+label { 
-	background: #fff;
-}
-.login-forget .lf-password input:checked+label::after {
-	position: absolute;
-	content: "";
-	width: 8px;
-	height: 4px;
-	border: 1px solid #00a1d6;
-	border-right: none;
-	border-top: none;
-	transform: rotate(-45deg);
-	top: 2px;
-	left: 2px;
-}
 .login-user .login-forget .lff-password,
-.register-user .register-login a{
+.register-user .register-login a {
 	float: right;
 	font-size: 12px;
 	color: #999;
 }
 .register-user .register-login a,
-.login-user .login-forget .lff-password:hover{
-	color: #00a1d6;
+.login-user .login-forget .lff-password:hover {
+	color: $blue;
 }
-.register-user .register-login a{
-    margin-top: 20px;
+.register-user {
+	.register-login {
+		a {
+			margin-top: 20px;
+		}
+	}
+	.register-btn {
+		margin-top: 20px;
+	}
 }
 .login-user .login-btn,
-.register-user .register-btn{
-    cursor: pointer;
-    margin-top: 20px;
-    background: #d1d1d1;
-    color: #fff;
-    font-size: 16px;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 20px;
-}
-.register-user .register-btn{
-    margin-top: 20px;
+.register-user .register-btn {
+	cursor: pointer;
+	margin-top: 20px;
+	background: #d1d1d1;
+	color: $white;
+	font-size: 16px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 20px;
 }
 .login-user .login-btn.on,
-.register-user .register-btn.on{
-    background: #00a1d6;
+.register-user .register-btn.on {
+	background: $blue;
 }
+
 </style>

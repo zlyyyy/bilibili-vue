@@ -1,3 +1,5 @@
+import { getRankData } from '../../api'
+
 const state = {
     //一级导航
     rankMenu: [
@@ -243,47 +245,28 @@ const state = {
 const getters = {}
 
 const mutations = {
-    rankAll(state,data) {
-        // console.log(data)
+    SET_RANK_ALL: (state, data) => {
         state.rankAll = Object.assign({},data)
     },
-    // rankTips(state,data) {
-    //     state.rankTips = data
-    // },
-    rankSelect(state,data) {
+    SET_RANK_SELECT: (state, data) => {
         state.rankSelect = data
     },
-    rankSelect2(state,data) {
-        console.log(data)
+    SET_RANK_SELECT2: (state, data) => {
         state.rankSelect2 = data
     },
-    firstMenuActive(state,data) {
+    SET_FIRST_MENU_ACTIVE: (state, data) => {
         state.firstMenuActive = data
     },
-    secondMenuActive(state,data) {
+    SET_SECOND_MENU_ACTIVE: (state, data) => {
         state.secondMenuActive = data
     }
 }
 
 const actions = {
-    setRankAll({commit,state},msg) {
-        commit('rankAll',msg)
-    },
-    // setRankTips({commit,state},msg) {
-    //     commit('rankTips',msg)
-    // },
-    setRankSelect({commit,state},msg) {
-        commit('rankSelect',msg)
-    },
-    setRankSelect2({commit,state},msg) {
-        console.log(msg)
-        commit('rankSelect2',msg)
-    },
-    setFirstMenuActive({commit,state},msg) {
-        commit('firstMenuActive',msg)
-    },
-    setSecondMenuActive({commit,state},msg) {
-        commit('secondMenuActive',msg)
+    setRankData({ commit, state },{ type, rid, arc_type, day }){
+        getRankData(type, rid, arc_type, day).then(res=>{
+            commit('SET_RANK_ALL',res.data)
+        })
     }
 }
 

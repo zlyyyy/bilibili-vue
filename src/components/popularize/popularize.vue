@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         count(num){
-            count(num)
+            return count(num)
         }
     }  
 }
