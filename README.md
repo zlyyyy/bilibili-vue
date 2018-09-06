@@ -1,24 +1,37 @@
-# myvue-bilibili
+# bilibili仿站vue
 
->Author: zlang
->Url: zlang.top
-> my home vue_project
+目前B站也是用的vue框架，自己试试用vue搭建B站，巩固一下学习的vue知识
+> 木有api是比较难受的事，数据都是自己一个个接口手动扒的假数据拿来测试用
 
-## Build Setup
+## 如何安装与使用
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
+git clone https://github.com/zlyyyy/zly-vue-project.git  //下载项目
+
+cd zly-vue-project //进入zly-vue-projec目录
+
+npm install //安装依赖
+
+npm run dev //服务端运行
+
+npm run build  //项目打包
+```
+## 技术栈
+
+- Vue-Cli（Vue 脚手架工具）
+- Vue（核心框架）
+- Vue-Router（页面路由）
+- Vuex（状态管理）
+- ES 6 / 7 （JavaScript 语言的下一代标准）
+- Sass（CSS预处理器）
+- Axios（网络请求）
+
+## 部分截图
+
+
+<img src="https://github.com/zlyyyy/zly-vue-project/blob/master/screenshots/home.png" width="898" />
+
 #### 文件架构
 
 ```
@@ -92,15 +105,15 @@ npm run build --report
 │   │   ├── mutation-types.js                   // 定义常量muations名
 │   │   ├── mutation.js                         // 配置mutations
 │   │   └── state.js                            // 配置store
-│   ├── utils
+│   ├── style
+│   │   ├── common.scss                         // 公共样式文件
+│   │   └── mixin.scss                          // 样式配置文件
+│   └── utils
 │   │   ├── http.js                             // axios二次封装
-│   │   └── utils.js                            // 公共方法配置
-│   └── style
-│       ├── common.scss                         // 公共样式文件
-│       └── mixin.scss                          // 样式配置文件
+│       └── utils.js                            // 公共方法配置
 │   ├── App.vue                                 // 页面入口文件
 │   ├── main.js                                 // 程序入口文件，加载各种公共组件
-├── favicon.ico                                 // 图标
+├── static                                      // 静态资源文件目录 
 ├── index.html                                  // 入口html文件
 .
 
