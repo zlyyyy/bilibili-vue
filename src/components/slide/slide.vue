@@ -99,13 +99,11 @@ export default {
 }
 .slide {
 	position: relative;
-	width: 440px;
-	height: 220px;
+	@include wh(440px, 220px);
 	float: left;
 	.slide-img {
 		position: absolute;
-		width: 100%;
-		height: 100%;
+		@include wh(100%, 100%);
 		overflow: hidden;
 		a {
 			position: relative;
@@ -114,7 +112,7 @@ export default {
 			img {
 				position: absolute;
 				top: 0;
-				border-radius: 4px;
+				@include borderRadius(4px);
 			}
 		}
 	}
@@ -122,8 +120,7 @@ export default {
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: 100%;
-		height: 36px;
+		@include wh(100%, 36px);
 		line-height: 36px;
 		background: -webkit-linear-gradient(transparent,rgba(0,0,0,.5));
 		font-size: 14px;
@@ -144,11 +141,10 @@ export default {
 		right: 20px;
 		li {
 			display: inline-block;
-			width: 12px;
-			height: 12px;
+			@include wh(12px, 12px);
 			margin: 5px;
 			cursor: pointer;
-			border-radius: 50%;
+			@include borderRadius(50%);
 			background: $white;
 			@include transition(.3s);
 			&:hover {
@@ -200,7 +196,7 @@ export default {
 .slide .slide-page li.on {
 	background: $blue;
 	width: 30px;
-	border-radius: 6px;
+	@include borderRadius(6px);
 	box-sizing: border-box;
 	border: 2px solid $white;
 }

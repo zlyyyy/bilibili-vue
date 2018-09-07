@@ -330,9 +330,8 @@ export default {
 /* + 是兄弟选择器,获取选中后的label元素*/
 .login-user .login-forget .lff-password,
 .register-user .register-login a {
-	float: right;
-	font-size: 12px;
-	color: #999;
+    float: right;
+    @include sc(12px, #999);
 }
 .register-user .register-login a,
 .login-user .login-forget .lff-password:hover {
@@ -353,11 +352,10 @@ export default {
 	cursor: pointer;
 	margin-top: 20px;
 	background: #d1d1d1;
-	color: $white;
-	font-size: 16px;
+    @include sc(16px, $white);
 	line-height: 40px;
-	text-align: center;
-	border-radius: 20px;
+    text-align: center;
+    @include borderRadius(20px);
 }
 .login-user .login-btn.on,
 .register-user .register-btn.on {

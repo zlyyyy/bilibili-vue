@@ -70,125 +70,121 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.recommend-module{
-    height: 220px;
-    position: relative;
-    overflow: hidden;
+<style lang="scss" scoped>
+@import '../../style/mixin';
+
+.recommend-module {
+	height: 220px;
+	position: relative;
+	overflow: hidden;
+	&:hover {
+		.rec-btn {
+			opacity: 1;
+		}
+	}
 }
-.groom-module{
-    float: left;
+.groom-module {
+	float: left;
     margin: 0 0 20px 20px;
-    width: 160px;
-    height: 100px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    background: #fff;
-}
-.groom-module .pic {
-	width: 160px;
-	height: 100px
-}
-.groom-module .type-name {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: .5em;
-	padding: 0 5px;
-	height: 20px;
-	line-height: 20px;
-	border-radius: 4px;
-	color: #fff;
-	font-style: normal;
-	background-color: #00a1d6;
-	background-color: rgba(0,161,214,.8)
-}
-.groom-module .card-mark {
-	position: absolute;
-	left: 0;
-	top: 68px;
-	width: 150px;
-	height: 100%;
-	font-size: 12px;
-	height: 20px;
-	line-height: 20px;
-	padding: 10px 5px;
+    @include wh(160px, 100px);
+    @include borderRadius(4px);
+	position: relative;
 	overflow: hidden;
-	background: #000;
-	background: -webkit-linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9));
-	background: -o-linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9));
-	background: -webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(20%,rgba(0,0,0,.1)),color-stop(35%,rgba(0,0,0,.2)),color-stop(65%,rgba(0,0,0,.6)),to(rgba(0,0,0,.9)));
-	background: linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9))
-}
-.groom-module .card-mark .title {
-	color: #fff;
-	height: 40px;
-    font-size: 12px;
-	overflow: hidden;
-	margin-bottom: 5px;
-    white-space: nowrap;
-    text-overflow:ellipsis; 
-    line-height: 20px;
+	background: $white;
+	.pic {
+		@include wh(160px, 100px);
+	}
+	.type-name {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: .5em;
+		padding: 0 5px;
+		height: 20px;
+		line-height: 20px;
+		@include borderRadius(4px);
+		color: $white;
+		font-style: normal;
+		background-color: $blue;
+		background-color: rgba(0,161,214,.8);
+	}
+	.card-mark {
+		position: absolute;
+		left: 0;
+        top: 68px;
+        @include wh(150px, 20px);
+		font-size: 12px;
+		line-height: 20px;
+		padding: 10px 5px;
+		overflow: hidden;
+		background: #000;
+		background: -webkit-linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9));
+		background: -o-linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9));
+		background: -webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(20%,rgba(0,0,0,.1)),color-stop(35%,rgba(0,0,0,.2)),color-stop(65%,rgba(0,0,0,.6)),to(rgba(0,0,0,.9)));
+		background: linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9));
+		.title {
+            height: 40px;
+            @include sc(12px, $white);
+			overflow: hidden;
+			margin-bottom: 5px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			line-height: 20px;
+		}
+	}
+	&:hover {
+		.card-mark {
+			top: 0;
+			height: 100%;
+			background: rgba(0,0,0,.7);
+			.title {
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				display: -webkit-box;
+				white-space: inherit;
+			}
+		}
+		.w-later {
+			display: block;
+		}
+	}
 }
 .groom-module .card-mark .author,.groom-module .card-mark .play {
-	opacity: 0;
-	color: #99a2aa;
-    font-size: 12px;
+    opacity: 0;
+    @include sc(12px, $grau);
 	height: 20px;
 	line-height: 20px;
-	overflow: hidden;
-	-webkit-transition: all .6s;
-	-o-transition: all .6s;
-	transition: all .6s
-}
-.groom-module:hover .card-mark {
-	top: 0;
-	height: 100%;
-	background: rgba(0,0,0,.7)
-}
-.groom-module:hover .card-mark .title{
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    white-space: inherit;
+    overflow: hidden;
+    @include transition(.6s);
 }
 .groom-module:hover .card-mark .author,.groom-module:hover .card-mark .play {
-	opacity: 1
+	opacity: 1;
 }
-.groom-module:hover .w-later {
-	display: block
-}
-.rec-btn{
-    opacity: 0;
-    position: absolute;
-    background-color: rgba(0,0,0,.6);
-    background-image: url(../../assets/icons2.png);
-    background-repeat: no-repeat;
-    width: 20px;
-    top: calc(50% - 28px);
+.rec-btn {
+	opacity: 0;
+	position: absolute;
+	background-color: rgba(0,0,0,.6);
+	background-image: url(../../assets/icons2.png);
+	background-repeat: no-repeat;
+	width: 20px;
+	top: calc(50% - 28px);
     cursor: pointer;
-    font-size: 12px;
-    color: #fff;
-    text-align: center;
-    -webkit-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
-    line-height: 1.3;
+    @include sc(12px, $white);
+    @include transition(.3s);
+	text-align: center;
+	line-height: 1.3;
 }
-.recommend-module:hover .rec-btn {
-    opacity: 1;
+.rec-left {
+	left: 20px;
+	border-radius: 0 4px 4px 0;
+	padding: 13px 5px 13px 10px;
+	background-position: 6px -1211px;
 }
-.rec-left{
-    left: 20px;
-    border-radius: 0 4px 4px 0;
-    padding: 13px 5px 13px 10px;
-    background-position: 6px -1211px;
+.rec-right {
+	right: 0;
+	border-radius: 4px 0 0 4px;
+	padding: 13px 10px 13px 5px;
+	background-position: 25px -1262px;
 }
-.rec-right{
-    right: 0;
-    border-radius: 4px 0 0 4px;
-    padding: 13px 10px 13px 5px;
-    background-position: 25px -1262px;
-}
+
 </style>

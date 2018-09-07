@@ -8,8 +8,8 @@ $border_color: #ccd0d7;
 //动画
 @mixin transition($time){
 	-webkit-transition: all $time;
-	-o-transition: all $time;;
-	transition: all $time;;
+	-o-transition: all $time;
+	transition: all $time;
 }
 
 // 背景图片地址和大小
