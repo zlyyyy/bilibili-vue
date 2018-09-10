@@ -161,227 +161,224 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang="scss">
+@import '../../style/mixin';
+
 .main-inner {
     width: 1160px;
     margin: 0 auto;
     position: relative;
-}
-.main-inner .rank-container {
-    border: 0;
-    margin: 20px 0;
-    border-radius: 4px;
+    .rank-container {
+        border: 0;
+        margin: 20px 0;
+        @include borderRadius(4px);
+    }
 }
 .rank-menu, .rank-menu li {
     text-align: center;
 }
-.rank-menu li {
-    width: 115px;
-    height: 40px;
-    font-size: 18px;
-    line-height: 25px;
-    padding: 0 12px;
-    margin-left: 52px;
-    display: inline-block;
-    cursor: pointer;
-}
-.rank-menu li:first-child {
-    margin-left: 0;
-}
-.rank-menu li.active {
-    color: #00a1d6;
-    height: 38px;
-    border-bottom: 2px solid #00a1d6;
-}
-.rank-menu li .text {
-    margin-left: 5px;
-    font-size: 16px;
-}
-.rank-menu li .rank-icon {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
-    background: url(../../assets/icons.png) no-repeat;
-}
-.rank-menu li .rank-icon.all {
-    background-position: -83px -979px;
-}
-.rank-menu li .rank-icon.origin {
-    background-position: -83px -1041px;
-}
-.rank-menu li .rank-icon.bangumi {
-    background-position: -83px -1107px;
-}
-.rank-menu li .rank-icon.cinema {
-    background-position: -146px -1555px;
-}
-.rank-menu li .rank-icon.rookie {
-    background-position: -83px -1170px;
+.rank-menu {
+    li {
+        @include wh(115px, 40px);
+        font-size: 18px;
+        line-height: 25px;
+        padding: 0 12px;
+        margin-left: 52px;
+        display: inline-block;
+        cursor: pointer;
+        &:first-child {
+            margin-left: 0;
+        }
+        &.active {
+            color: $blue;
+            height: 38px;
+            border-bottom: 2px solid $blue;
+        }
+        .text {
+            margin-left: 5px;
+            font-size: 16px;
+        }
+        .rank-icon {
+            display: inline-block;
+            @include wh(30px, 30px);
+            vertical-align: middle;
+            background: url(../../assets/icons.png) no-repeat;
+            &.all {
+                background-position: -83px -979px;
+            }
+            &.origin {
+                background-position: -83px -1041px;
+            }
+            &.bangumi {
+                background-position: -83px -1107px;
+            }
+            &.cinema {
+                background-position: -146px -1555px;
+            }
+            &.rookie {
+                background-position: -83px -1170px;
+            }
+        }
+    }
 }
 .rank-tab-wrap {
     background: #edf2f9;
     padding: 0;
-    border-radius: 4px;
+    @include borderRadius(4px);
     clear: both;
     height: 40px;
-}
-.rank-tab-wrap .rank-tab {
-    float: left;
-}
-.rank-tab-wrap .rank-tab li {
-    float: left;
-    padding: 0 10px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 14px;
-    margin-right: 10px;
-}
-.rank-tab-wrap .rank-tab .active {
-    color: #00a1d6;
+    .rank-tab {
+        float: left;
+        li {
+            float: left;
+            padding: 0 10px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        .active {
+            color: $blue;
+        }
+    }
+    .rank-dropdown {
+        margin-top: 8px;
+        margin-right: 10px;
+    }
 }
 .rank-type-dropdown {
     float: right;
 }
-.rank-tab-wrap .rank-dropdown {
-    margin-top: 8px;
-    margin-right: 10px;
-}
 .rank-list-head {
     padding: 15px 0;
-}
-.rank-list-head .rank_tips {
-    padding: 7px 0;
-    background-color: #edf2f9;
-    border-radius: 4px;
-}
-.rank-list-head .rank_tips .b-icon-tip {
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 10px;
-    background: url(../../assets/icons3.png) -52px -27px no-repeat;
-}
-.rank-list-head .rank_tips .tip-txt {
-    vertical-align: middle;
+    .rank_tips {
+        padding: 7px 0;
+        background-color: #edf2f9;
+        @include borderRadius(4px);
+        .b-icon-tip {
+            @include wh(16px, 16px);
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 10px;
+            background: url(../../assets/icons3.png) -52px -27px no-repeat;
+        }
+        .tip-txt {
+            vertical-align: middle;
+        }
+    }
 }
 .rank-item {
-    -webkit-transition: .2s;
-    -o-transition: .2s;
-    transition: .2s;
+    @include transition(.2s);
     overflow: hidden;
     border-bottom: 1px solid #e5e9ef;
     position: relative;
-}
-.rank-item:hover {
-    -webkit-box-shadow: 0 2px 5px #ccc;
-    box-shadow: 0 2px 5px #ccc;
-}
-.rank-item .num {
-    width: 70px;
-    height: 70px;
-    position: absolute;
-    top: 20px;
-    left: 0;
-    line-height: 70px;
-    text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    color: #b8c0cc;
-    font-family: simhei;
-}
-.rank-item .content {
-    padding: 20px 0 0 70px;
-    overflow: hidden;
-}
-.rank-item .content .img {
-    position: relative;
-    float: left;
-}
-.rank-item .content .img a {
-    display: inline-block;
-}
-.rank-item .content .img .cover {
-    width: 114px;
-    height: 70px;
+    &:hover {
+        -webkit-box-shadow: 0 2px 5px #ccc;
+        box-shadow: 0 2px 5px #ccc;
+    }
+    .num {
+        @include wh(70px, 70px);
+        position: absolute;
+        top: 20px;
+        left: 0;
+        line-height: 70px;
+        text-align: center;
+        @include sc(36px, #b8c0cc);
+        font-weight: 700;
+        font-family: simhei;
+    }
+    .content {
+        padding: 20px 0 0 70px;
+        overflow: hidden;
+        .img {
+            position: relative;
+            float: left;
+            a {
+                display: inline-block;
+            }
+            .cover {
+                @include wh(114px, 70px);
+            }
+            &:hover {
+                .w-later {
+                    display: block;
+                }
+            }
+        }
+        .info {
+            padding-bottom: 20px;
+            margin-left: 130px;
+            height: 70px;
+            position: relative;
+            .title {
+                height: 20px;
+                line-height: 20px;
+                font-weight: 700;
+                @include sc(14px, $black);
+            }
+            .detail {
+                margin-top: 20px;
+                color: $grau;
+                a {
+                    color: $grau;
+                    &:hover {
+                        span {
+                            color: $blue;
+                        }
+                    }
+                }
+                .data-box {
+                    width: 80px;
+                    margin-right: 20px;
+                    white-space: nowrap;
+                    -o-text-overflow: ellipsis;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                .b-icon {
+                    @include wh(12px, 12px);
+                    margin-right: 5px;
+                    display: inline-block;
+                    vertical-align: text-top;
+                    background: url(../../assets/icons.png) no-repeat;
+                    &.play {
+                        background-position: -282px -90px;
+                    }
+                    &.view {
+                        background-position: -282px -218px;
+                    }
+                    &.author {
+                        background-position: -282px -154px;
+                    }
+                }
+            }
+            .pts {
+                height: 20px;
+                color: #b8c0cc;
+                line-height: 20px;
+                position: absolute;
+                bottom: 40px;
+                right: 20px;
+                text-align: center;
+                div {
+                    font-weight: 700;
+                    @include sc(16px, $blue);
+                    margin-bottom: 12px;
+                }
+            }
+        }
+    }
 }
 .watch-later-trigger {
     display: none;
-    width: 22px;
-    height: 22px;
+    @include wh(22px, 22px);
     position: absolute;
     right: 6px;
     bottom: 4px;
     cursor: pointer;
     background-image: url(../../assets/play.png);
 }
-.rank-item .content .img:hover .w-later {
-    display: block;
-}
-.rank-item .content .info {
-    padding-bottom: 20px;
-    margin-left: 130px;
-    height: 70px;
-    position: relative;
-}
-.rank-item .content .info .title {
-    height: 20px;
-    line-height: 20px;
-    font-weight: 700;
-    font-size: 14px;
-    color: #222;
-}
-.rank-item .content .info .detail {
-    margin-top: 20px;
-    color: #99a2aa;
-}
-.rank-item .content .info .detail a:hover span{
-    color:#00a1d6;
-}
-.rank-item .content .info .detail .data-box {
-    width: 80px;
-    margin-right: 20px;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-.rank-item .content .info .detail .b-icon {
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    display: inline-block;
-    vertical-align: text-top;
-    background: url(../../assets/icons.png) no-repeat;
-}
-.rank-item .content .info .detail .b-icon.play {
-    background-position: -282px -90px;
-}
-.rank-item .content .info .detail .b-icon.view {
-    background-position: -282px -218px;
-}
-.rank-item .content .info .detail a {
-    color: #99a2aa;
-}
-.rank-item .content .info .detail .b-icon.author {
-    background-position: -282px -154px;
-}
-.rank-item .content .info .pts {
-    height: 20px;
-    color: #b8c0cc;
-    line-height: 20px;
-    position: absolute;
-    bottom: 40px;
-    right: 20px;
-    text-align: center;
-}
-.rank-item .content .info .pts div {
-    color: #00a1d6;
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 12px;
-}
+
 </style>

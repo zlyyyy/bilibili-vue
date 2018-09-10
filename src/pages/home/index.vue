@@ -579,8 +579,7 @@ export default {
 			display: inline-block;
 			vertical-align: middle;
 			background-position: -478px -218px;
-			width: 6px;
-			height: 12px;
+			@include wh(6px, 12px);
 			margin: -2px 0 0 5px;
 		}
 		&:hover {
@@ -611,7 +610,7 @@ export default {
 			min-width: 12px;
 			text-align: center;
 			background-color: #b8c0cc;
-			border-radius: 4px;
+			@include borderRadius(4px);
 			padding: 0 3px;
 			font-weight: bolder;
 			font-style: normal;
@@ -636,11 +635,10 @@ export default {
 		}
 		.ri-preview {
 			margin-right: 5px;
-			width: 80px;
-			height: 50px;
+			@include wh(80px, 50px);
 			float: left;
 			display: none;
-			border-radius: 4px;
+			@include borderRadius(4px);
 			overflow: hidden;
 		}
 		&.show-detail {
@@ -649,10 +647,9 @@ export default {
 			}
 			.ri-detail {
 				.ri-title {
-					height: 36px;
+					@include wh(150px, 36px);
 					line-height: 18px;
 					margin-top: -3px;
-					width: 150px;
 					padding: 0;
 				}
 			}
@@ -701,9 +698,8 @@ export default {
 	}
 	.slide {
 		overflow: hidden;
-		height: 268px;
-		width: 100%;
-		border-radius: 4px;
+		@include wh(100%, 268px);
+		@include borderRadius(4px);
 	}
 }
 .bangumi-rank-list {
@@ -736,9 +732,8 @@ export default {
 	.slide {
 		overflow: hidden;
 		margin-top: 15px;
-		height: 90px;
-		width: 100%;
-		border-radius: 4px;
+		@include wh(100%, 90px);
+		@include borderRadius(4px);
 	}
 }
 </style>

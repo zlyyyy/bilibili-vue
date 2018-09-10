@@ -193,10 +193,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-a{
+<style lang="scss">
+@import '../../style/mixin';
+
+a {
     outline: 0;
-    color: #00a1d6;
+    color: $blue;
     text-decoration: none;
     cursor: pointer;
 }
@@ -208,216 +210,208 @@ a{
     padding-top: 40px;
 }
 .search-wrap {
-    height: 44px;
+    @include wh(587px, 44px);
     margin: 0 auto;
     position: relative;
-    width: 587px;
-}
-.search-wrap .search-logo {
-    background-image: url('../../assets/search/sprite.png');
-    background-position: -261px -72px;
-    width: 131px;
-    height: 35px;
-    float: left;
-    margin-top: 7px;
-}
-.search-wrap .search-block {
-    width: 430px;
-    float: left;
-    margin-left: 26px;
-}
-.search-wrap .search-block .input-wrap {
-    position: relative;
-    background: #fff;
-    border-radius: 4px;
-    float: left;
-    width: 330px;
-    margin-right: 10px;
-}
-.search-wrap .search-block .input-wrap input {
-    height: 18px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    padding: 11px 15px;
-    background: transparent;
-    width: 296px;
-    border: 2px solid #ccd0d7;
-    border-radius: 4px;
-    color: #222;
-}
-.search-wrap .search-block .search-button {
-    cursor: pointer;
-    float: left;
-    color: #fff;
-    background: #00a1d6;
-    font-size: 16px;
-    letter-spacing: 2px;
-    line-height: 42px;
-    text-align: center;
-    width: 90px;
-    border-radius: 4px;
-}
-.search-wrap .search-block .search-button:hover {
-    background: #00b5e5;
-}
-.search-wrap .search-block .search-button .icon-search-white {
-    background-image: url(../../assets/search/sprite.png);
-    background-position: -148px -327px;
-    width: 18px;
-    vertical-align: middle;
-    margin-top: -2px;
-    height: 19px;
-    display: inline-block;
-}
-.search-wrap .search-block .search-text {
-    margin-left: 7px;
+    .search-logo {
+        background-image: url('../../assets/search/sprite.png');
+        background-position: -261px -72px;
+        @include wh(131px, 35px);
+        float: left;
+        margin-top: 7px;
+    }
+    .search-block {
+        width: 430px;
+        float: left;
+        margin-left: 26px;
+        .input-wrap {
+            position: relative;
+            background: $white;
+            @include borderRadius(4px);
+            float: left;
+            width: 330px;
+            margin-right: 10px;
+            input {
+                @include wh(296px, 18px);
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                padding: 11px 15px;
+                background: transparent;
+                border: 2px solid $border_color;
+                @include borderRadius(4px);
+                color: $black;
+            }
+        }
+        .search-button {
+            cursor: pointer;
+            float: left;
+            background: $blue;
+            @include sc(16px, $white);
+            letter-spacing: 2px;
+            line-height: 42px;
+            text-align: center;
+            width: 90px;
+            @include borderRadius(4px);
+            &:hover {
+                background: #00b5e5;
+            }
+            .icon-search-white {
+                background-image: url(../../assets/search/sprite.png);
+                background-position: -148px -327px;
+                @include wh(18px, 19px);
+                vertical-align: middle;
+                margin-top: -2px;
+                display: inline-block;
+            }
+        }
+        .search-text {
+            margin-left: 7px;
+        }
+    }
 }
 .suggest-wrap {
     border: 1px solid #e5e9ef;
     position: absolute;
     width: 327px;
-    border-radius: 4px;
+    @include borderRadius(4px);
     text-align: center;
     padding: 10px 0;
-    color: #222;
-    background: #fff;
+    color: $black;
+    background: $white;
     z-index: 100;
     overflow: hidden;
     margin-top: 5px;
     -webkit-box-shadow: rgba(0,0,0,.16) 0 2px 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,.16);
-}
-.suggest-wrap .horizontal {
-    padding: 0 20px;
-    max-height: 84px;
-    overflow: hidden;
-}
-.suggest-wrap .horizontal .hz-text {
-    border-radius: 4px;
-    margin-right: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #e5e9ef;
-    color: #222;
-    height: 18px;
-    padding: 7px 8px;
-    float: left;
-    text-align: center;
-    font-size: 14px;
-}
-.suggest-wrap .horizontal .hz-text:hover {
-    border-color: #00a1d6;
-    color: #00a1d6;
-}
-.suggest-wrap .history-wrap {
-    margin-top: 20px;
-    position: relative;
-    padding-bottom: 20px;
-}
-.suggest-wrap .title {
-    border-top: 1px solid #e5e9ef;
-    height: 10px;
-    line-height: 10px;
-    margin: 0 20px;
-}
-.suggest-wrap .title span {
-    display: inline-block;
-    font-size: 12px;
-    color: #99a2aa;
-    padding: 0 10px;
-    text-align: center;
-    background: #fff;
-    position: relative;
-    top: -6px;
-}
-.suggest-wrap .history-wrap .history-li {
-    position: relative;
-    margin: 0;
-}
-.suggest-wrap .vt-text {
-    height: 32px;
-    display: block;
-    line-height: 32px;
-    font-size: 14px;
-    position: relative;
-    text-align: left;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    cursor: pointer;
-    color: #222;
-    padding: 0 20px;
-    margin: 0 0 4px;
-}
-.suggest-wrap .history-wrap .history-li .clear {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    background-image: url(../../assets/search/sprite.png);
-    background-position: -485px -41px;
-    width: 12px;
-    height: 12px;
-    cursor: pointer;
-}
-.suggest-wrap .history-wrap .clearall {
-    position: absolute;
-    bottom: 0;
-    right: 20px;
-    font-size: 12px;
-    color: #00a1d6;
-}
-.suggest-wrap .keyword-wrap .keyword {
-    padding: 0 20px;
-    color: #222;
-}
-.suggest-wrap .keyword-wrap .keyword .suggest_high_light {
-    color: #f25d8e;
-}
-.suggest-wrap .vt-text:hover {
-    background-color: #e5e9ef;
+    .horizontal {
+        padding: 0 20px;
+        max-height: 84px;
+        overflow: hidden;
+        .hz-text {
+            @include borderRadius(4px);
+            margin-right: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #e5e9ef;
+            @include sc(14px, $black);
+            height: 18px;
+            padding: 7px 8px;
+            float: left;
+            text-align: center;
+            &:hover {
+                border-color: $blue;
+                color: $blue;
+            }
+        }
+    }
+    .history-wrap {
+        margin-top: 20px;
+        position: relative;
+        padding-bottom: 20px;
+        .history-li {
+            position: relative;
+            margin: 0;
+            .clear {
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                background-image: url(../../assets/search/sprite.png);
+                background-position: -485px -41px;
+                @include wh(12px, 12px);
+                cursor: pointer;
+            }
+        }
+        .clearall {
+            position: absolute;
+            bottom: 0;
+            right: 20px;
+            @include sc(12px, $blue);
+        }
+    }
+    .title {
+        border-top: 1px solid #e5e9ef;
+        height: 10px;
+        line-height: 10px;
+        margin: 0 20px;
+        span {
+            display: inline-block;
+            @include sc(12px, $grau);
+            padding: 0 10px;
+            text-align: center;
+            background: $white;
+            position: relative;
+            top: -6px;
+        }
+    }
+    .vt-text {
+        height: 32px;
+        display: block;
+        line-height: 32px;
+        @include sc(14px, $black);
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: pointer;
+        padding: 0 20px;
+        margin: 0 0 4px;
+        &:hover {
+            background-color: #e5e9ef;
+        }
+    }
+    .keyword-wrap {
+        .keyword {
+            padding: 0 20px;
+            color: $black;
+            .suggest_high_light {
+                color: $pink;
+            }
+        }
+    }
 }
 .nav-wrap {
-    border-bottom: 1px solid #ccd0d7;
+    border-bottom: 1px solid $border_color;
     height: 54px;
     padding: 0 0 1px;
     margin: 18px auto 0;
     position: relative;
+    .wrap {
+        & > .sub {
+            float: left;
+            line-height: 54px;
+            text-align: center;
+            cursor: pointer;
+            width: 39px;
+            padding: 0;
+            font-size: 16px;
+            padding-right: 75px;
+            &:last-child {
+                padding-right: 0;
+            }
+            & > span {
+                position: absolute;
+                margin-left: 6px;
+                @include sc(12px, #6d757a);
+            }
+        }
+    }
+    .hover-bar {
+        position: absolute;
+        @include wh(39px, 2px);
+        background-color: $blue;
+        bottom: -1px;
+        -webkit-transition: left .2s;
+        -o-transition: left .2s;
+        transition: left .2s;
+    }
 }
 .nav-wrap .wrap, .nav-wrap .wrap>.sub {
     height: 100%;
     position: relative;
 }
-.nav-wrap .wrap>.sub {
-    float: left;
-    line-height: 54px;
-    text-align: center;
-    cursor: pointer;
-    width: 39px;
-    padding: 0;
-    font-size: 16px;
-    padding-right: 75px;
-}
-.nav-wrap .wrap>.sub:last-child {
-    padding-right: 0;
-}
 .nav-wrap .wrap>.sub.active, .nav-wrap .wrap>.sub:hover {
-    color: #00a1d6;
-}
-.nav-wrap .wrap>.sub>span {
-    position: absolute;
-    margin-left: 6px;
-    font-size: 12px;
-    color: #6d757a;
-}
-.nav-wrap .hover-bar {
-    position: absolute;
-    height: 2px;
-    background-color: #00a1d6;
-    width: 39px;
-    bottom: -1px;
-    -webkit-transition: left .2s;
-    -o-transition: left .2s;
-    transition: left .2s;
+    color: $blue;
 }
 
 </style>

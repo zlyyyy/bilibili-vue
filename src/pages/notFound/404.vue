@@ -65,108 +65,103 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang="scss" scoped>
+@import '../../style/mixin';
+
 .error-container {
-	width: 1160px;
-	margin: 30px auto 30px;
-	background: #fff;
-	border-radius: 10px;
+    width: 1160px;
+    margin: 30px auto 30px;
+	background: $white;
+	@include borderRadius(10px);
 }
 .error-panel {
-  	overflow: hidden;
-}
-.error-panel.server-error .left-panel {
-	height: 150px;
-	width: 404px;
-	display: inline-block;
-	position: absolute;
-}
-.error-panel.server-error .left-panel .rollback-btn {
-	height: 40px;
-	width: 140px;
-	margin: 25px 40px 0 0;
-}
-.error-panel.server-error .right-panel {
-	display: inline-block;
-	width: 100%;
-	margin: 32px 0 25px 0;
-	margin-left: 404px;
-	padding-left: 26px;
-	font-size: 24px;
-	color: #99a2aa;
-	border-left: 1px #ccd0d7 dashed;
-}
-.error-panel.article-error {
-	height: 307px;
-	background-position: center;
-	background-repeat: no-repeat;
-	position: relative;
-}
-.error-panel.article-error .rollback-btn {
-	position: absolute;
-	left: 720px;
-	top: 220px;
-	padding: 0 20px;
-}
-.error-panel.article-error .msg-text {
-	position: absolute;
-	width: 500px;
-	height: 40px;
-	top: 160px;
-	left: 540px;
-	font-size: 14px;
-	color: #ccd0d7;
-	overflow: hidden;
-}
-.error-panel.article-error .rollback-btn.login-btn {
-	display: inline-block;
-	position: absolute;
-	top: 144px;
-	left: 906px;
-}
-.error-panel .rollback-btn {
-	display: block;
-	line-height: 40px;
-	text-align: center;
-	background: #00a1d6;
-	color: #fff;
-	border-radius: 4px;
-	float: right;
-	font-size: 16px;
-	transition: 0.2s;
-	cursor: pointer;
-}
-.error-panel .rollback-btn:hover {
-	background: #00b5e5;
+    overflow: hidden;
+    &.server-error {
+        .left-panel {
+			@include wh(404px, 150px);
+            display: inline-block;
+            position: absolute;
+            .rollback-btn {
+				@include wh(140px, 40px);
+                margin: 25px 40px 0 0;
+            }
+        }
+        .right-panel {
+            display: inline-block;
+            width: 100%;
+            margin: 32px 0 25px 0;
+            margin-left: 404px;
+			padding-left: 26px;
+			@include sc(24px, $grau);
+            border-left: 1px $border_color dashed;
+        }
+    }
+    &.article-error {
+        height: 307px;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        .rollback-btn {
+            position: absolute;
+            left: 720px;
+            top: 220px;
+            padding: 0 20px;
+            &.login-btn {
+                display: inline-block;
+                position: absolute;
+                top: 144px;
+                left: 906px;
+            }
+        }
+        .msg-text {
+			position: absolute;
+			@include wh(500px, 40px);
+            top: 160px;
+			left: 540px;
+			@include sc(14px, $border_color);
+            overflow: hidden;
+        }
+    }
+    .rollback-btn {
+        display: block;
+        line-height: 40px;
+        text-align: center;
+        background: $blue;
+		@include sc(16px, $white);
+		@include borderRadius(4px);
+		float: right;
+		@include transition(.2s);
+        cursor: pointer;
+        &:hover {
+            background: #00b5e5;
+        }
+    }
 }
 .error-split {
-	width: 100%;
-	height: 40px;
-	background: url('../../assets/error/have_rest.png') center no-repeat;
+	@include wh(100%, 40px);
+    background: url('../../assets/error/have_rest.png') center no-repeat;
 }
 .error-manga {
-	padding: 30px;
-	text-align: center;
-}
-.error-manga img {
-  	max-width: 800px;
-}
-.error-manga .change-img-btn {
-	display: block;
-	height: 48px;
-	width: 150px;
-	margin: 30px auto 0;
-	line-height: 48px;
-	text-align: center;
-	font-size: 16px;
-	background: #00a1d6;
-	color: #fff;
-	border-radius: 4px;
-	transition: 0.2s;
-}
-.error-manga .change-img-btn.off {
-	background-color: #e5e9ef;
-	color: #b8c0cc;
+    padding: 30px;
+    text-align: center;
+    img {
+        max-width: 800px;
+    }
+    .change-img-btn {
+		display: block;
+		@include wh(150px, 48px);
+        margin: 30px auto 0;
+        line-height: 48px;
+        text-align: center;
+		@include sc(16px, $white);
+		background: $blue;
+		@include borderRadius(4px);
+		@include transition(.2s);
+        &.off {
+            background-color: #e5e9ef;
+            color: #b8c0cc;
+        }
+    }
 }
 
 </style>
