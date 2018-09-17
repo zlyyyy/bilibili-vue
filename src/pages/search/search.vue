@@ -86,21 +86,24 @@
 				<ul class="wrap clearfix">
 					<router-link v-for="(item,index) in searchMenu"
 						:to="{
-                             path: item.path
+                             path: item.path,
+                             params: {
+                                 keyword: $route.query.keyword
+                             }
                          }" 
                          active-class="active" tag="li" class="sub" :key="item.id" 
                          @mouseover.native="hoverBarLeft(index)" 
                          @mouseout.native="hoverBarLeave()" 
                          @click.native="setHoverIndex(index)">
 						{{ item.title }}
-						<span class="num" v-show="index>0">{{ item.resultNum }}</span>
+						<span class="num" v-show="index>0">{{ topNumChange(item.resultNum) }}</span>
 					</router-link>
 				</ul>
 				<div class="hover-bar" :style="{'left':hoverBar+'px'}">
 				</div>
 			</div>
 		</div>
-		<router-view :allResult="allResult" :season="season"></router-view>
+		<router-view :allResult="allResult"></router-view>
     </div>
 </template>
 
@@ -110,18 +113,13 @@ const { mapState, mapGetters, mapMutations, mapActions } = createNamespacedHelpe
 
 export default {
     created() {
-        this.$axios.get('http://localhost:8080/static/search/all.json',{
-            params:{
-                highlight: 1,
-                keyword: '我的英雄学院'
-            }
+        this.getAllResult({
+            highlight: 1,
+            keyword: '我的英雄学院'
         })
-		.then((res)=>{
-            this.setAllResult(res.data.data)
-            this.getSeasonId()
-		}).catch((error)=>{
-			console.log(error)
-        })
+        //根据地址栏修改当前搜索条件
+        const keyword = this.$route.query.keyword
+        this.setSearchValue(keyword)
     },
     computed: {
 		searchValue: {
@@ -129,7 +127,7 @@ export default {
                 return this.$store.state.search.searchWord
             },
             set(value) {
-                this.updateSearchValue(value)
+                this.setSearchValue(value)
             }
         },
          ...mapState([//命名空间获取state
@@ -137,27 +135,24 @@ export default {
 			'searchMenu',
             'hoverBar',
             'hoverIndex',
-            'allResult',
-            'season'
+            'allResult'
         ])
     },
     components:{
-
     },
     data () {
         return {
-            
         }
     },
     methods: {
-		...mapMutations([
-            'updateSearchValue',
-		]),
+		...mapMutations({
+            setSearchValue: 'SET_SEARCH_VALUE',
+            setHoverBar: 'SET_HOVER_BAR',
+            setHoverIndex: 'SET_HOVER_INDEX'
+        }),
 		...mapActions([
-            'setHoverBar',
-            'setHoverIndex',
-            'setAllResult',
-            'setSeason'
+            'getAllResult',
+            'getSeason'
 		]),
 		hoverBarLeft(index){
             this.setHoverBar(index*114)
@@ -165,28 +160,12 @@ export default {
         hoverBarLeave(){
             this.setHoverBar(this.hoverIndex*114)
         },
-        getSeasonId(){
-            //获取media_id
-            let season = this.allResult.result.media_bangumi;
-            for(let i = 0; i<season.length;i++){
-                this.getSeason(i, season[i].media_id)
+        topNumChange(num){
+            if(num>99){
+                return '99+'
+            }else{
+                return num
             }
-        },
-        getSeason(index,id){
-            //根据media_id获取详细信息
-            this.$axios.get('http://localhost:8080/static/search/season'+index+'.json',{
-                params:{
-                    media_id: id
-                }
-            })
-            .then((res)=>{
-                this.setSeason({
-                    id: index,
-                    result: res.data.result
-                })
-            }).catch((error)=>{
-                console.log(error)
-            })
         }
     }
 }

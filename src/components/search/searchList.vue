@@ -1,53 +1,7 @@
 <template>
     <div class="body-contain">
 		<div class="all-contain">
-			<div class="filter-wrap">
-				<ul class="filter-type clearfix order" style="">
-					<li class="filter-item active"><a href="javascript:;">综合排序</a></li>
-					<li class="filter-item"><a href="javascript:;">最多点击</a></li>
-					<li class="filter-item"><a href="javascript:;">最新发布</a></li>
-					<li class="filter-item"><a href="javascript:;">最多弹幕</a></li>
-					<li class="filter-item"><a href="javascript:;">最多收藏</a></li>
-				</ul>
-				<ul class="filter-type clearfix duration" style="">
-					<li class="filter-item active"><a href="javascript:;">全部时长</a></li>
-					<li class="filter-item"><a href="javascript:;">10分钟以下</a></li>
-					<li class="filter-item"><a href="javascript:;">10-30分钟</a></li>
-					<li class="filter-item"><a href="javascript:;">30-60分钟</a></li>
-					<li class="filter-item"><a href="javascript:;">60分钟以上</a></li>
-				</ul>
-				<ul class="filter-type clearfix tids_1" style="">
-					<li class="filter-item active"><a href="javascript:;">全部分区</a></li>
-					<li class="filter-item"><a href="javascript:;">动画</a></li>
-					<li class="filter-item"><a href="javascript:;">番剧相关</a></li>
-					<li class="filter-item"><a href="javascript:;">国创</a></li>
-					<li class="filter-item"><a href="javascript:;">音乐</a></li>
-					<li class="filter-item"><a href="javascript:;">舞蹈</a></li>
-					<li class="filter-item"><a href="javascript:;">游戏</a></li>
-					<li class="filter-item"><a href="javascript:;">科技</a></li>
-					<li class="filter-item"><a href="javascript:;">生活</a></li>
-					<li class="filter-item"><a href="javascript:;">鬼畜</a></li>
-					<li class="filter-item"><a href="javascript:;">时尚</a></li>
-					<li class="filter-item"><a href="javascript:;">广告</a></li>
-					<li class="filter-item"><a href="javascript:;">娱乐</a></li>
-					<li class="filter-item"><a href="javascript:;">影视</a></li>
-					<li class="filter-item"><a href="javascript:;">纪录片</a></li>
-					<li class="filter-item"><a href="javascript:;">电影</a></li>
-					<li class="filter-item"><a href="javascript:;">电视剧</a></li>
-					<!----><!---->
-				</ul>
-				<a class="fold up" style="">收起筛选
-				<i class="arrow-up"></i></a><a class="fold down" style="display: none;">更多筛选
-				<i class="arrow-down"></i></a>
-				<div class="switch-wrap">
-					<div class="aver type active">
-						<i class="icon-aver"></i>
-					</div>
-					<div class="imgleft type">
-						<i class="icon-imgleft"></i>
-					</div>
-				</div>
-			</div>
+			<search-filter></search-filter>
 			<div class="result-wrap clearfix">
 				<ul class="bangumi-list all-class" v-if="allResult.result">
 					<li class="synthetical" v-for="(item,index) in allResult.result.media_bangumi">
@@ -183,16 +137,14 @@
 </template>
 
 <script>
+import { count2, timeChange } from '../../utils/utils'
+import searchFilter from '../searchFilter/searchFilter'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('notFound')
 
 export default {
 	props: {
 		allResult: {
-			type: [Object,Array],
-            default: () => []
-		},
-		season: {
 			type: [Object,Array],
             default: () => []
 		}
@@ -207,7 +159,7 @@ export default {
 		])
     },
     components:{
-
+		searchFilter
     },
     data () {
         return {
@@ -215,23 +167,11 @@ export default {
         }
     },
     methods: {
-		timeChange(timestamp){
-			let Y,M,D,h,m,s;
-			var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-			Y = date.getFullYear() + '-';
-			M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-			D = date.getDate() <10 ? '0'+date.getDate() : date.getDate() + ' ';
-			h = date.getHours() + ':';
-			m = date.getMinutes() + ':';
-			s = date.getSeconds();
-			return Y+M+D;
+		timeChange(time){
+			return timeChange(time)
 		},
 		userCount(num){
-			if(num>10000){
-				return (Math.round(num/1e3)/10).toFixed(1)+'万'
-			}else{
-				return num
-			}
+			return count2(num)
 		}
     }
 }

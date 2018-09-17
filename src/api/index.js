@@ -95,3 +95,21 @@ export function getRankData(type, rid, arc_type,day){
         }
     })
 }
+
+//搜索结果
+export function getSearchResult(highlight, keyword){
+    return http.get('/static/search/all.json',{
+        params: {
+            highlight: highlight,
+            keyword: keyword
+        }
+    })
+}
+//根据media_id获取详细信息
+export function getSeason(index, id){
+    return http.get('/static/search/season'+index+'.json',{
+        params: {
+            media_id: id
+        }
+    })
+}

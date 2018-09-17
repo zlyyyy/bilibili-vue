@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import { getSearchResult, getSeason } from '../../api'
+
 const state = {
     //分类导航
     searchWord: '',
@@ -60,30 +62,46 @@ const state = {
     ],
     hoverBar: 0,
     hoverIndex: 0,
-    allResult: [],
-    season: []
+    allResult: []
 }
 
 const getters = {
-    // test: (state, getters)=>{
-    //     return state.hoverBar
-    // }
 }
 
 const mutations = {
-    updateSearchValue(state,data){
+    SET_TOP_NUM: (state, data) =>{
+        const topNum = state.searchMenu
+        //视频
+        topNum[1].resultNum = data.video
+        //番剧
+        topNum[2].resultNum = data.media_bangumi
+        //影视
+        topNum[3].resultNum = data.movie
+        //直播
+        topNum[4].resultNum = data.live
+        //专栏
+        topNum[5].resultNum = data.article
+        //话题
+        topNum[6].resultNum = data.topic
+        //用户
+        topNum[7].resultNum = data.bili_user
+        //相簿
+        topNum[8].resultNum = data.photo
+    },
+    SET_SEARCH_VALUE: (state, data) => {
         state.searchWord = data
     },
-    updateHoverBar(state,data){
+    SET_HOVER_BAR: (state, data) => {
         state.hoverBar = data
     },
-    updateHoverIndex(state,data){
+    SET_HOVER_INDEX: (state, data) => {
         state.hoverIndex = data
     },
-    updateAllResult(state,data){
+    SET_ALL_RESULT: (state, data) => {
         state.allResult = Object.assign({},data)
     },
-    updateSeason(state,data){
+    SET_SEASON: (state, data) => {
+        //media_bangumi设置新增season值
         Vue.set(
             state.allResult.result.media_bangumi[data.id],
             'season',
@@ -93,17 +111,25 @@ const mutations = {
 }
 
 const actions = {
-    setHoverBar({commit,state},msg) {
-        commit('updateHoverBar',msg)
+    getAllResult({commit,state},{ highlight, keyword }) {
+        getSearchResult(highlight, keyword ).then(res=>{
+            commit('SET_ALL_RESULT',res.data)
+            let season = state.allResult.result.media_bangumi;
+            const toplist = res.data.top_tlist
+            commit('SET_TOP_NUM',toplist)
+            //根据media_id番剧ID查询详细信息
+            for(let i = 0; i<season.length;i++){
+                getSeason(i, season[i].media_id).then(res=>{
+                    commit('SET_SEASON',{
+                        id: i,
+                        result: res.result
+                    })
+                })
+            }
+        })
     },
-    setHoverIndex({commit,state},msg) {
-        commit('updateHoverIndex',msg)
-    },
-    setAllResult({commit,state},msg) {
-        commit('updateAllResult',msg)
-    },
-    setSeason({commit,state},msg) {
-        commit('updateSeason',msg)
+    getSeason({commit,state},msg) {
+        commit('SET_SEASON',msg)
     }
 }
 
