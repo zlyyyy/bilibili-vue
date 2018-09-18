@@ -139,8 +139,6 @@
 <script>
 import { count2, timeChange } from '../../utils/utils'
 import searchFilter from '../searchFilter/searchFilter'
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations, mapActions } = createNamespacedHelpers('notFound')
 
 export default {
 	props: {
@@ -153,10 +151,6 @@ export default {
 
     },
     computed: {
-     	...mapState([//命名空间获取state
-			'error',
-			'randomNum'
-		])
     },
     components:{
 		searchFilter

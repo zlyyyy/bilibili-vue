@@ -62,7 +62,8 @@ const state = {
     ],
     hoverBar: 0,
     hoverIndex: 0,
-    allResult: []
+    allResult: [],
+    menuShow: true
 }
 
 const getters = {
@@ -107,6 +108,9 @@ const mutations = {
             'season',
             data.result
         )
+    },
+    SET_MENU_SHOW: (state, data) => {
+        state.menuShow = data
     }
 }
 

@@ -120,6 +120,9 @@ export default {
         //根据地址栏修改当前搜索条件
         const keyword = this.$route.query.keyword
         this.setSearchValue(keyword)
+        //路由判断设置头部菜单栏显示隐藏
+        const path = this.$route.matched[0].path === '/search'? false : true
+        this.setMenuShow(path)
     },
     computed: {
 		searchValue: {
@@ -135,7 +138,8 @@ export default {
 			'searchMenu',
             'hoverBar',
             'hoverIndex',
-            'allResult'
+            'allResult',
+            'menuShow'
         ])
     },
     components:{
@@ -148,7 +152,8 @@ export default {
 		...mapMutations({
             setSearchValue: 'SET_SEARCH_VALUE',
             setHoverBar: 'SET_HOVER_BAR',
-            setHoverIndex: 'SET_HOVER_INDEX'
+            setHoverIndex: 'SET_HOVER_INDEX',
+            setMenuShow: 'SET_MENU_SHOW'
         }),
 		...mapActions([
             'getAllResult',

@@ -1,6 +1,6 @@
 <template>
     <div class="nav-menu">
-        <div class="blur-bg" :style="{background:'url('+headBanner.pic+')'}"></div>
+        <div v-if="menuShow" class="blur-bg" :style="{background:'url('+headBanner.pic+')'}"></div>
         <div class="nav-mask"></div>
         <div class="bili-wrapper">
             <div class="nav-con fl">
@@ -260,6 +260,9 @@ export default {
             default: []
         },
         headBanner: {
+            default: []
+		},
+		menuShow: {
             default: []
         }
     },
