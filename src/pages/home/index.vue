@@ -151,7 +151,7 @@ export default {
             'setOnline',
         ]),
         ...mapActions('donghua',[
-            'setDynamic'
+            'setDynamicRegion'
         ]),
         ...mapMutations('bangumi',{
             setBangumiTimelineTab: 'SET_TIMELINE_TAB'
@@ -195,12 +195,15 @@ export default {
                 pf: 0,
                 ids: '23,34,29,31,40,42,44'
             })
-            //推荐模块
+            //推荐排行三日数据
             this.setRankingIndex(3)
             //当前在线
             this.setOnline()
-            //动画模块
-            this.setDynamic()
+            //动画模块动态内容默认-有新动态
+            this.setDynamicRegion({
+				ps: 10,
+				rid: 1
+			})
             //番剧模块
             this.setBangumi()
             //国创模块
