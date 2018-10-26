@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getDynamicRegion, getNewlist, getRankingRegion } from '../../api'
 const state = {
 	id: 'bili_donghua',//模型id
 	title: '动画', //模型名称
@@ -14,6 +15,7 @@ const state = {
 	],
 	dynamic: 27989,//模型新动态数
 	moreUrl: '/v/donghua',//模型更多链接
+	data: [],//动态区域数据
 	newTrends: [],//最新动态
 	newSub: [],//最新投稿
 	ranktab: [
@@ -48,8 +50,8 @@ const state = {
 const getters = {}
 
 const mutations = {
-	SET_NEW_TRENDS: (state, data) => {
-		state.newTrends = Object.assign({},data)
+	SET_DONGHUA_DATA: (state, data) => {
+		state.data = Object.assign({},data)
 	},
 	SET_NEW_SUB: (state, data) => {
 		state.newSub = Object.assign({},data)
@@ -69,29 +71,19 @@ const mutations = {
 }
 
 const actions = {
-	setDynamic({ commit, state }){
-		axios.all([
-			axios.get('/static/maindata/dh_newTrends.json'),
-			axios.get('/static/maindata/dh_newSub.json'),
-			axios.get('/static/maindata/ranking/dh_rankThreeAllList.json'),
-        	axios.get('/static/maindata/ranking/dh_rankThreeOriginalList.json'),
-        	axios.get('/static/maindata/ranking/dh_rankSevenAllList.json'),
-        	axios.get('/static/maindata/ranking/dh_rankSevenOriginalList.json'),
-		]).then(axios.spread((
-			newTrends,//动画新投稿
-			newSub,//动画新动态
-			rankThreeAllList,//动画三日全部排行
-			rankThreeOriginalList,//动画三日原创排行
-			rankSevenAllList,//动画七日全部排行
-			rankSevenOriginalList,//动画七日原创排行
-		)=>{
-			commit('SET_NEW_TRENDS',newTrends.data.data),
-			commit('SET_NEW_SUB',newSub.data.data)
-			commit('SET_RANK_THREE_ALL_LIST',rankThreeAllList.data.data),
-			commit('SET_RANK_THREE_ORIGINAL_LIST',rankThreeOriginalList.data.data)
-			commit('SET_RANK_SEVEN_ALL_LIST',rankSevenAllList.data.data),
-			commit('SET_RANK_SEVEN_ORIGINAL_LIST',rankSevenOriginalList.data.data)
-		}))
+	setDynamicRegion({ commit, state },data){
+		//获取新动态
+		//设置当前动态区域数据
+		getDynamicRegion(data).then(res=>{
+			commit('SET_DONGHUA_DATA', res.data)
+		})
+	},
+	setNewlist({ commit, state },data){
+		//获取最新投稿
+		//设置当前动态区域数据
+		getNewlist(data).then(res=>{
+			commit('SET_DONGHUA_DATA', res.data)
+		})
 	}
 }
 

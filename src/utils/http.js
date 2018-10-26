@@ -4,7 +4,7 @@ import { Message } from 'element-ui';
 const service = axios.create({
     // `withCredentials` 表示跨域请求时是否需要使用凭证
     withCredentials: true,
-    baseURL: 'http://localhost:8080',
+    baseURL: 'https://easy-mock.com/mock/5bd273b32d219744ff849604/bilibili',
     timeout: 15000 // 请求超时时间
 })
 //添加请求拦截器

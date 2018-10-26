@@ -6,7 +6,7 @@
                 <div class="bili-wrapper head-content">
                     <div class="search">
                         <div class="searchform">
-                            <input v-model="searchValue" type="text" :placeholder=searchWord.show @keyup.enter="searchALL()" class="search-keyword">
+                            <input v-model="searchValue" type="text" :placeholder=searchWord.show_name @keyup.enter="searchALL()" class="search-keyword">
                             <button type="submit" class="search-submit" @click="searchALL()"></button>
                         </div>
                         <ul class="bilibili-suggest" v-show="suggestShow">
@@ -87,7 +87,10 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     created() {
-        this.setHeadBanner()
+        this.setHeadBanner({
+            pf: 0,
+            id: 142
+        })
         this.setSearchDefaultWords()
         this.setMenuIcon()
     },

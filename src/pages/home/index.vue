@@ -146,8 +146,8 @@ export default {
     },
     methods: {
         ...mapActions([
-            'setSlidePop',
-            'setRecom',
+            'setSlide',
+            'setRankingIndex',
             'setOnline',
         ]),
         ...mapActions('donghua',[
@@ -191,12 +191,12 @@ export default {
         },
         setData(){
             //轮播图推广模块
-            this.setSlidePop({
-                slide: 23,
-                popularize: 34
+            this.setSlide({
+                pf: 0,
+                ids: '23,34,29,31,40,42,44'
             })
             //推荐模块
-            this.setRecom()
+            this.setRankingIndex(3)
             //当前在线
             this.setOnline()
             //动画模块

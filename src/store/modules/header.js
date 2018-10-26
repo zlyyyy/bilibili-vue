@@ -1,4 +1,4 @@
-import { getHeadBanner, getSearchDefaultWords, getMenuIcon } from '../../api'
+import { getLoc, getSearchDefaultWords, getMenuIcon } from '../../api'
 
 const state = {
 	leftNav: [ //顶部左侧导航栏
@@ -576,14 +576,14 @@ const mutations = {
 }
 
 const actions = {
-	setHeadBanner({ commit, state },id){
-		getHeadBanner(id).then(res=>{
+	setHeadBanner({ commit, state },data){
+		getLoc(data).then(res=>{
 			commit('SET_HEAD_BANNER',res.data)
 		})
 	},
 	setSearchDefaultWords({ commit, state }){
 		getSearchDefaultWords().then(res=>{
-			commit('SET_SEARCH_DEFAULT_WORDS',res[0])
+			commit('SET_SEARCH_DEFAULT_WORDS',res.data)
 		})
 	},
 	setMenuIcon({ commit, state }){

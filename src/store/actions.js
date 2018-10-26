@@ -1,21 +1,19 @@
 import * as types from './mutation-types'
-import { getSlidePop, getRecom, getOnline } from '../api'
+import { getLocs, getRankingIndex, getOnline } from '../api'
 
 //轮播图，推广模块
-export const setSlidePop = function({commit}, { slide, popularize }) {
-    getSlidePop().then(res=>{
-        commit(types.SET_SLIDE, res.data[slide])
-        commit(types.SET_POPULARIZE, res.data[popularize])
+export const setSlide = function({commit}, data) {
+    getLocs(data).then(res=>{
+        commit(types.SET_SLIDE, res.data['23'])
+        commit(types.SET_POPULARIZE, res.data['34'])
     })
 }
 //推荐模块
-export const setRecom = function({commit}){
-    getRecom().then(res=>{
-        commit(types.SET_RECOMMEND, res.data)
-        commit(types.SET_RECNOW, {
-            recNow: res.data.yesterday,
-            nowLeft: '一周',
-            nowRight: '三日'
+export const setRankingIndex = function({commit}, day){
+    getRankingIndex(day).then(res=>{
+        commit(types.SET_RANKING_INDEX, {
+            data: res.data,
+            day: day
         })
     })
 }

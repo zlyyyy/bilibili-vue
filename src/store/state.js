@@ -7,10 +7,8 @@ const state = {
     },
     //推荐模块
     recommend: {
-        rec: [],//所有
-        recNow: [],//当前
-        nowLeft: '',
-        nowRight: ''
+        rec: [],
+        day: 3//所有
     },
     //推广模块
     popularize: [],

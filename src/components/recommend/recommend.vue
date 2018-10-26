@@ -1,6 +1,6 @@
 <template>
     <div class="recommend-module">
-        <div class="groom-module home-card" v-for="(item,index) in recommend.recNow">
+        <div class="groom-module home-card" v-for="(item,index) in recommend.rec">
             <a :href="'/video/av'+item.aid" target="_blank" :title=item.title>
                 <img v-lazy=item.pic :alt=item.title width="160" height="100" class="pic">
                 <div class="card-mark">
@@ -11,17 +11,9 @@
             </a>
             <div class="watch-later-trigger w-later"></div>
         </div>
-        <template v-if="this.recommend.nowLeft === '一周'">
-            <span class="rec-btn rec-left" @click="weekdays()">{{ recommend.nowLeft }}</span>
-            <span class="rec-btn rec-right" @click="threedays()">{{ recommend.nowRight }}</span>
-        </template>
-        <template v-else-if="this.recommend.nowLeft === '昨日'">
-            <span class="rec-btn rec-left" @click="yesterday()">{{ recommend.nowLeft }}</span>
-            <span class="rec-btn rec-right" @click="weekdays()">{{ recommend.nowRight }}</span>
-        </template>
-        <template v-else-if="this.recommend.nowLeft === '三日'">
-            <span class="rec-btn rec-left" @click="threedays()">{{ recommend.nowLeft }}</span>
-            <span class="rec-btn rec-right" @click="yesterday()">{{ recommend.nowRight }}</span>
+        <template>
+            <span class="rec-btn rec-left" @click="left()">{{ recTextLeft }}</span>
+            <span class="rec-btn rec-right" @click="right()">{{ recTextRight }}</span>
         </template>
     </div>
 </template>
@@ -34,37 +26,80 @@ export default {
         recommend: {
 			default: []
 		} 
-    },
+	},
+	computed: {
+		recTextLeft(){
+			switch(this.recommend.day){
+				case 1:
+					return '一周'
+					break
+				case 3:
+					return '昨日'
+					break
+				case 7:
+					return '三日'
+					break
+				default:
+					return '三日'
+			}
+		},
+		recTextRight(){
+			switch(this.recommend.day){
+				case 1:
+					return '三日'
+					break
+				case 3:
+					return '一周'
+					break
+				case 7:
+					return '昨日'
+					break
+				default:
+					return '一周'
+			}
+		}
+	},
     data () {
         return {
 
         }
     },
     methods: {
-        ...mapMutations({
-            setRecNow: 'SET_RECNOW'
-        }),
-        yesterday(){
-            this.setRecNow({
-                recNow: this.recommend.rec.yesterday,
-                nowLeft: '一周',
-                nowRight: '三日'
-            })
-        },
-        threedays(){
-            this.setRecNow({
-                recNow: this.recommend.rec.threedays,
-                nowLeft: '昨日',
-                nowRight: '一周'
-            })
-        },
-        weekdays(){
-            this.setRecNow({
-                recNow: this.recommend.rec.week,
-                nowLeft: '三日',
-                nowRight: '昨日'
-            })
-        }
+        ...mapActions([
+			'setRecom'
+		]),
+		left(){
+			switch(this.recommend.day){
+				case 1:
+					this.setRecom(7)
+					break
+				case 3:
+					this.setRecom(1)
+					break
+				case 7:
+					this.setRecom(3)
+					break
+				default:
+					this.setRecom(3)
+					break
+			}
+		},
+		right(){
+			switch(this.recommend.day){
+				case 1:
+					this.setRecom(3)
+					break
+				case 3:
+					this.setRecom(7)
+					break
+				case 7:
+					this.setRecom(1)
+					break
+				default:
+					this.setRecom(7)
+					break
+			}
+		}
     } 
 }
 </script>
