@@ -1,9 +1,7 @@
 <template>
     <div class="zone-wrap-module" id="bili_donghua">
-        <!-- v-for="(item,index) in maindataModule" :id="item.id" :key="item.id" -->
         <div class="zone-module">
             <storey-box :storeydata="moduledata"></storey-box>
-            <!--  @videoInfoxy='videoinforevent' -->
             <zone-rank :zoneRank="moduledata" :tag="0"></zone-rank>
         </div>
     </div>

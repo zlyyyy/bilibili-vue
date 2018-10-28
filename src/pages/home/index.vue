@@ -12,40 +12,19 @@
         <!--  推广数据、在线数据 -->
         <popularize :popularize="popularize" :online="online"></popularize>
         <!--  动画 --> 
-        <zone-module :moduledata="donghua" @videoInfoxy='videoinforevent'>
-        </zone-module>
+        <donghua 
+			:donghua="donghua" 
+			@setDynamicRegion="setDynamicRegion"
+			@setNewlist="setNewlist"
+			@setRankingRegion="setRankingRegion"
+			/>
         <!--  番剧 --> 
-        <div class="zone-wrap-module">
-            <div class="bangumi-module">
-                <div class="up">
-                    <div class="bangumi-timing-module l-con">
-                        <div class="headline">
-                            <i class="icon icon_t" :class="bangumi.icon"></i>
-                            <a :href=bangumi.moreUrl class="name">{{ bangumi.title }}</a>
-                            <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in bangumi.tab2" :class="{'on' : index === bangumi.timelineTab }" @click="setBangumiTimelineTab(index)">{{ index>0 && index===bangumi.timelineTab? "周"+item.name : item.name}}</div>
-                            </div>
-                            <a :href=bangumi.moreUrl target="_blank" class="c-clink">
-                                新番时间表
-                                <i class="icon"></i>
-                            </a>   
-                        </div>
-                        <timing-box :timelineData="bangumi.timeline" :nowtab="bangumi.timelineTab"></timing-box>
-                    </div>
-                    <zone-rank :zoneRank="bangumi" :tag="1"> 
-                    </zone-rank>
-                </div>
-                <storey-box :storeydata="bangumi"></storey-box>
-                <div class="r-con">
-                    <div class="ad-title">
-                        <h3>排行</h3>
-                    </div>
-                    <ad-slide :slidedata="bangumi.Ad.data" :slidetimedata="bangumi.Ad.time" :pagation="bangumi.Ad.pagation"></ad-slide>
-                </div>
-            </div>
-        </div>
+		<bangumi
+			:bangumi="bangumi" 
+			@setTimeline="setTimeline"
+			/>
         <!--  国创 -->
-        <div class="zone-wrap-module">
+        <div id="bili_guochuang" class="zone-wrap-module">
             <div class="bangumi-module">
                 <div class="up">
                     <div class="bangumi-timing-module l-con">
@@ -72,7 +51,7 @@
                 </div>
             </div>
         </div>
-         <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
+         <!-- <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
                 {{ videoinforitem[videodata.mouseindex].title }}
             </div>
@@ -90,21 +69,23 @@
             <div class="v-data">
                 <span class="play"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].play) }}</span><span class="danmu"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].video_review) }}</span><span class="star"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].favorites) }}</span><span class="coin"><i class="icon"></i>{{ count2(videoinforitem[videodata.mouseindex].coins) }}</span>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
-import { count2 } from '../../utils/utils'
-import Slide from '../../components/slide/slide'
-import Recommend from '../../components/recommend/recommend'
-import Popularize from '../../components/popularize/popularize'
-import ZoneModule from '../../components/zoneModule/zoneModule'
-import TimingBox from '../../components/timingBox/timingBox'
-import ZoneRank from '../../components/zoneRank/zoneRank'
-import StoreyBox from '../../components/storeyBox/storeyBox'
-import AdSlide from '../../components/ad/adSlide'
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import 	{ count2 } 	from '../../utils/utils'
+import 	Slide from 	'../../components/slide/slide'
+import 	Recommend 	from '../../components/recommend/recommend'
+import 	Popularize 	from '../../components/popularize/popularize'
+import	Donghua 	from '../../components/home/donghua/donghua.vue'
+import	Bangumi 	from '../../components/home/bangumi/bangumi.vue'
+
+import 	TimingBox 	from '../../components/timingBox/timingBox'
+import 	ZoneRank 	from '../../components/zoneRank/zoneRank'
+import 	StoreyBox 	from '../../components/storeyBox/storeyBox'
+import 	AdSlide	 from '../../components/ad/adSlide'
+import 	{ mapState, mapGetters, mapMutations, mapActions } 	from 'vuex'
 
 export default {
     created() {
@@ -114,7 +95,7 @@ export default {
         Slide,
         Recommend,
         Popularize,
-        ZoneModule,
+        Donghua,
         TimingBox,
         ZoneRank,
         StoreyBox,
@@ -125,11 +106,10 @@ export default {
             'slide',//轮播图
             'recommend',//推荐模块
             'popularize',//推广模块
-            'online',//当前在线
-        ]),
-        ...mapState('donghua',{
-            donghua : state => state
-        }),
+			'online',//当前在线
+			'donghua',//动画
+			'bangumi',//番剧
+		]),
         ...mapState('bangumi',{
             bangumi : state => state
         }),
@@ -148,47 +128,48 @@ export default {
         ...mapActions([
             'setSlide',
             'setRankingIndex',
-            'setOnline',
-        ]),
-        ...mapActions('donghua',[
-            'setDynamicRegion'
-        ]),
-        ...mapMutations('bangumi',{
-            setBangumiTimelineTab: 'SET_TIMELINE_TAB'
-        }),
-        ...mapActions('bangumi',[
-            'setTimeline',
-            'setNewTrends',
-            'setNewSub',
-            'setRankGlobalThree',
-            'setRankGlobalSeven',
-            'setAdSlide'
-        ]),
-        setBangumi(){
-            this.setTimeline()
-            this.setNewTrends()
-            this.setNewSub()
-            this.setRankGlobalThree()
-            this.setRankGlobalSeven()
-            this.setAdSlide()
-        },
-        ...mapMutations('guochuang',{
-            setGuochuangTimelineTab: 'SET_TIMELINE_TAB'
-        }),
-        ...mapActions('guochuang',{
-            gcSetTimeline: 'setTimeline',
-            getRankCnThree: 'setRankCnThree',
-            getRankCnSeven: 'setRankCnSeven',
-            gcSetAdSlide: 'setAdSlide',
-            getRelatedContent: 'setRelatedContent'
-        }),
-        setGuochuang(){
-            this.gcSetTimeline()
-            this.getRankCnThree()
-            this.getRankCnSeven()
-            this.gcSetAdSlide()
-            this.getRelatedContent()
-        },
+			'setOnline',
+			'setDynamicRegion',
+			'setNewlist',
+			'setRankingRegion',
+			'setTimeline'
+		]),
+        // ...mapMutations('bangumi',{
+        //     setBangumiTimelineTab: 'SET_TIMELINE_TAB'
+        // }),
+        // ...mapActions('bangumi',[
+        //     'setTimeline',
+        //     'setNewTrends',
+        //     'setNewSub',
+        //     'setRankGlobalThree',
+        //     'setRankGlobalSeven',
+        //     'setAdSlide'
+        // ]),
+        // setBangumi(){
+        //     this.setTimeline()
+        //     this.setNewTrends()
+        //     this.setNewSub()
+        //     this.setRankGlobalThree()
+        //     this.setRankGlobalSeven()
+        //     this.setAdSlide()
+        // },
+        // ...mapMutations('guochuang',{
+        //     setGuochuangTimelineTab: 'SET_TIMELINE_TAB'
+        // }),
+        // ...mapActions('guochuang',{
+        //     gcSetTimeline: 'setTimeline',
+        //     getRankCnThree: 'setRankCnThree',
+        //     getRankCnSeven: 'setRankCnSeven',
+        //     gcSetAdSlide: 'setAdSlide',
+        //     getRelatedContent: 'setRelatedContent'
+        // }),
+        // setGuochuang(){
+        //     this.gcSetTimeline()
+        //     this.getRankCnThree()
+        //     this.getRankCnSeven()
+        //     this.gcSetAdSlide()
+        //     this.getRelatedContent()
+        // },
         setData(){
             //轮播图推广模块
             this.setSlide({
@@ -199,15 +180,10 @@ export default {
             this.setRankingIndex(3)
             //当前在线
             this.setOnline()
-            //动画模块动态内容默认-有新动态
-            this.setDynamicRegion({
-				ps: 10,
-				rid: 1
-			})
             //番剧模块
-            this.setBangumi()
-            //国创模块
-            this.setGuochuang()
+            // this.setBangumi()
+            // //国创模块
+            // this.setGuochuang()
         },
         videotest()  {
             if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===0){
@@ -644,22 +620,6 @@ export default {
 			@include borderRadius(4px);
 			overflow: hidden;
 		}
-		&.show-detail {
-			.ri-preview {
-				display: block;
-			}
-			.ri-detail {
-				.ri-title {
-					@include wh(150px, 36px);
-					line-height: 18px;
-					margin-top: -3px;
-					padding: 0;
-				}
-			}
-			.ri-point {
-				display: block;
-			}
-		}
 		.ri-detail {
 			float: left;
 			.ri-point {
@@ -675,6 +635,22 @@ export default {
 				height: 18px;
 				overflow: hidden;
 				color: $black;
+			}
+		}
+		&.show-detail {
+			.ri-preview {
+				display: block;
+			}
+			.ri-detail {
+				.ri-title {
+					@include wh(150px, 36px);
+					line-height: 18px;
+					margin-top: -3px;
+					padding: 0;
+				}
+			}
+			.ri-point {
+				display: block;
 			}
 		}
 		&:hover {

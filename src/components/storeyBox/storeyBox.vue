@@ -22,8 +22,8 @@
                 </div>
             </div>
         </div>
-        <div class="storey-box">
-            <div class="spread-module" v-for="(item,index) in archives" v-if="index<10">
+        <div class="storey-box" v-if="storeydata.data">
+            <div class="spread-module" v-for="(item,index) in storeydata.data.archives" v-if="index<10">
                 <a :href="'https://www.bilibili.com/video/av'+item.aid+'/'" target="_blank" :title=item.title>
                     <div class="pic">
                         <div class="lazy-img">
@@ -63,6 +63,14 @@
 <script>
 import { count, count2 } from '../../utils/utils'
 export default {
+    created() {
+        // 默认显示新动态
+        this.$emit('setDynamicRegion',{
+            id: this.storeydata.id,
+            ps: 10,
+            rid: this.storeydata.rid
+        })
+    },
     props: {
         storeydata: {
             type: [Object,Array],
@@ -73,9 +81,6 @@ export default {
         
     },
     computed:{
-        archives(){
-            return this.nowtab===0? this.storeydata.newTrends.archives : this.storeydata.newSub.archives
-        }
     },
     data () {
         return {
@@ -85,6 +90,24 @@ export default {
     methods: {
         nowtabclick(index) {
             this.nowtab =index
+            switch(index){
+                case 0:
+                    this.$emit('setDynamicRegion',{
+                        id: this.storeydata.id,
+                        ps: 10,
+                        rid: this.storeydata.rid
+                    })
+                    break
+                case 1:
+                    this.$emit('setNewlist',{
+                        id: this.storeydata.id,
+                        ps: 10,
+                        rid: this.storeydata.rid
+                    })
+                    break
+                default:
+                    break
+            }
         },
         count(num){
             return count(num)

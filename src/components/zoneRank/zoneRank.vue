@@ -4,13 +4,13 @@
             <div class="rank-head">
                 <h3>排行</h3>
                 <div class="bili-tab rank-tab" v-if="tag===0">
-                    <div class="bili-tab-item" v-for="(item,index) in zoneRank.ranktab" :class="{'on' : index===ranknowtab}" @mousemove="ranknowtabclick(index)">{{item.name }}</div>
+                    <div class="bili-tab-item" v-for="(item,index) in zoneRank.ranktab" :class="{'on' : index===tab}" @mousemove="tabMove(index)">{{item.name }}</div>
                 </div>
-                <dropdown :dropdownData="zoneRank.rankdropdown" :selected="rankselect" @dropselected='rankSelect'></dropdown>
+                <dropdown :dropdownData="zoneRank.rankdropdown" @selectClick='selectClick'></dropdown>
             </div>
-            <div class="rank-list-wrap" :class="{'show-origin' : ranknowtab===1}">
+            <div class="rank-list-wrap" :class="{'show-origin' : tab===1}">
                 <ul class="rank-list" :class="zoneRank.id==='bili_bangumi'||zoneRank.id==='bili_guochuang'&&tag===1? 'bangumi-rank-list' : 'hot-lists'" >
-                    <li class="rank-item" v-for="(item,index) in rankListHot" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true&&tag===0}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.rankAllData" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&zoneRank.rankPic==true&&tag===0}]" v-if="index<zoneRank.rankList">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
@@ -26,7 +26,7 @@
                     </li>             
                 </ul>
                 <ul class="rank-list origin-list"  v-if="rankPic==true">
-                    <li class="rank-item" v-for="(item,index) in rankListOrig" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&rankPic==true}]" v-if="index<rankLists" @mouseover="videoInfo(index,$event)" @mouseout="videoInfoshow">
+                    <li class="rank-item" v-for="(item,index) in zoneRank.rankOriginalData" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&zoneRank.rankPic==true}]" v-if="index<zoneRank.rankList">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
@@ -53,6 +53,10 @@ import { count, count2 } from '../../utils/utils'
 import Dropdown from '../dropdown/dropdown'
 import AdSlide from '../ad/adSlide'
 export default {
+    created() {
+        // 默认三日排行
+        this.setData(3)
+    },
     props: {
         zoneRank: {
             type: [Object,Array],
@@ -72,32 +76,15 @@ export default {
         AdSlide
     },
     computed: {
-        rankListHot(){
-            if(this.tag===0){
-                return this.rankselect===0? this.zoneRank.rankThreeAllList : this.zoneRank.rankSevenAllList
-            }else{
-                return this.rankselect===0? this.zoneRank.mRankThreeAllList : this.zoneRank.mRankSevenAllList
-            }
-        },
-        rankListOrig(){
-            if(this.tag===0){
-                return this.rankselect===0? this.zoneRank.rankThreeOriginalList : this.zoneRank.rankSevenOriginalList
-            }else{
-                return this.rankselect===0? this.zoneRank.mRankThreeOriginalList : this.zoneRank.mRankSevenOriginalList
-            }
-        },
         moreUrl(){
-            if(this.ranknowtab===0){
-                return this.rankselect===0? this.zoneRank.rankThreeAllMoreUrl : this.zoneRank.rankSevenAllMoreUrl
-            }else{
-                return this.rankselect===0? this.zoneRank.rankThreeOriginalMoreUrl : this.zoneRank.rankSevenOriginalMoreUrl
-            }
-        },
-        rankLists(){
-            if(this.bangumiRankLists===0){
-                return this.zoneRank.rankLists
-            }else{
-                return this.bangumiRankLists
+            const url = `${this.zoneRank.rid}/1/${this.selectDay}`
+            switch(this.tab){
+                case 0:
+                   return `../ranking/all/${url}` 
+                case 1:
+                    return `../ranking/origin/${url}`
+                default:
+                    break
             }
         },
         rankPic(){
@@ -106,48 +93,41 @@ export default {
     },
     data () {
         return {
-            ranknowtab: 0,
-            rankselect: 0,
-            leftnum:'',
-            topnum:'',
-            videoinforShow: false,
-            mouseindex: ''
+            tab: 0,
+            selectDay: 3
         }
     },
     methods: {
-        ranknowtabclick(index){
-            this.ranknowtab = index
+        tabMove(index){
+            //tab鼠标move
+            this.tab = index
         },
-        rankSelect(index){
-            this.rankselect = index
+        selectClick(index){
+            console.log(index)
+            //时间筛选设置
+            switch(index){
+                case 0: 
+                    this.selectDay = 3
+                    this.setData(3)
+                    break
+                case 1: 
+                    this.selectDay = 7
+                    this.setData(7)
+                    break
+                default:
+                    break
+            }
         },
-        videoInfo(index,e){
-            var c = e.currentTarget
-            this.leftnum = c.getBoundingClientRect().left
-            this.topnum = c.offsetTop+550
-            this.mouseindex = index
-            this.videoinforShow = true
-            setTimeout(()=>{
-            this.$emit('videoInfoxy',{
-                'leftnum' : this.leftnum, 
-                'topnum': this.topnum, 
-                'videoinforShow': this.videoinforShow, 
-                'mouseindex' : this.mouseindex , 
-                'ranknowtab' : this.ranknowtab,
-                'rankselect' : this.rankselect
+        setData(day){
+            // id，rid模块ID，day天数，original是否原创
+            for(let i =0;i<2;i++){
+                this.$emit('setRankingRegion',{
+                    id: this.zoneRank.id,
+                    rid: this.zoneRank.rid,
+                    day: day,
+                    original: i
                 })
-            },1500)
-        },
-        videoInfoshow() {
-            this.videoinforShow = false
-            this.$emit('videoInfoxy',{
-                'leftnum' : this.leftnum, 
-                'topnum': this.topnum, 
-                'videoinforShow': false, 
-                'mouseindex' : this.mouseindex , 
-                'ranknowtab' : this.ranknowtab,
-                'rankselect' : this.rankselect
-            })
+            }
         },
         count(num){
             return count(num)
