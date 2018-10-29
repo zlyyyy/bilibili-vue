@@ -21,36 +21,21 @@
         <!--  番剧 --> 
 		<bangumi
 			:bangumi="bangumi" 
+			@setAdSlide="setAdSlide"
 			@setTimeline="setTimeline"
+			@setDynamicRegion="setDynamicRegion"
+			@setNewlist="setNewlist"
+			@setRankingRegion="setRankingRegion"
 			/>
         <!--  国创 -->
-        <div id="bili_guochuang" class="zone-wrap-module">
-            <div class="bangumi-module">
-                <div class="up">
-                    <div class="bangumi-timing-module l-con">
-                        <div class="headline">
-                            <i class="icon icon_t" :class="guochuang.icon"></i>
-                            <a :href=guochuang.moreUrl class="name">{{ guochuang.title }}</a>
-                            <div class="bili-tab">
-                                <div class="bili-tab-item" v-for="(item,index) in guochuang.tab2" :class="{'on' : index === guochuang.timelineTab }" @click="setGuochuangTimelineTab(index)">{{ index>0 && index===guochuang.timelineTab? "周"+item.name : item.name}}</div>
-                            </div>
-                            <a :href=guochuang.moreUrl target="_blank" class="c-clink">
-                                新番时间表
-                                <i class="icon"></i>
-                            </a>   
-                        </div>
-                        <timing-box :timelineData="guochuang.timeline" :nowtab="guochuang.timelineTab" class="gc"></timing-box>
-                    </div>
-                    <zone-rank :zoneRank="guochuang" :tag="1" :bangumiRankLists="5" class="sec-gc">
-                        <!-- <ad-slide v-if="guochuang.num=1" :slidedata="guochuang.Ad.data" :slidetimedata="guochuang.Ad.time" :pagation="guochuang.Ad.pagation"></ad-slide> -->
-                    </zone-rank>
-                </div>
-                <storey-box :storeydata="guochuang"></storey-box>
-                <div class="r-con">
-                    <zone-rank :zoneRank="guochuang" :tag="0"></zone-rank>
-                </div>
-            </div>
-        </div>
+        <guochuang
+			:guochuang="guochuang" 
+			@setAdSlide="setAdSlide"
+			@setTimeline="setTimeline"
+			@setDynamicRegion="setDynamicRegion"
+			@setNewlist="setNewlist"
+			@setRankingRegion="setRankingRegion"
+			/>
          <!-- <div class="video-info-module" :style="{ left: videodata.leftnum+'px' , top: videodata.topnum+'px' }" v-if="videoinforShow">
             <div class="v-title">
                 {{ videoinforitem[videodata.mouseindex].title }}
@@ -78,13 +63,10 @@ import 	{ count2 } 	from '../../utils/utils'
 import 	Slide from 	'../../components/slide/slide'
 import 	Recommend 	from '../../components/recommend/recommend'
 import 	Popularize 	from '../../components/popularize/popularize'
-import	Donghua 	from '../../components/home/donghua/donghua.vue'
-import	Bangumi 	from '../../components/home/bangumi/bangumi.vue'
+import	Donghua 	from '../../components/home/donghua/donghua'
+import	Bangumi 	from '../../components/home/bangumi/bangumi'
+import	Guochuang 	from '../../components/home/guochuang/guochuang'
 
-import 	TimingBox 	from '../../components/timingBox/timingBox'
-import 	ZoneRank 	from '../../components/zoneRank/zoneRank'
-import 	StoreyBox 	from '../../components/storeyBox/storeyBox'
-import 	AdSlide	 from '../../components/ad/adSlide'
 import 	{ mapState, mapGetters, mapMutations, mapActions } 	from 'vuex'
 
 export default {
@@ -95,11 +77,9 @@ export default {
         Slide,
         Recommend,
         Popularize,
-        Donghua,
-        TimingBox,
-        ZoneRank,
-        StoreyBox,
-        AdSlide
+		Donghua,
+		Bangumi,
+		Guochuang,
     },
     computed: {
         ...mapGetters([
@@ -109,13 +89,8 @@ export default {
 			'online',//当前在线
 			'donghua',//动画
 			'bangumi',//番剧
-		]),
-        ...mapState('bangumi',{
-            bangumi : state => state
-        }),
-        ...mapState('guochuang',{
-            guochuang : state => state
-        })
+			'guochuang'//国创
+		])
     },
     data () {
         return {
@@ -126,6 +101,7 @@ export default {
     },
     methods: {
         ...mapActions([
+			'setAdSlide',
             'setSlide',
             'setRankingIndex',
 			'setOnline',
@@ -134,42 +110,6 @@ export default {
 			'setRankingRegion',
 			'setTimeline'
 		]),
-        // ...mapMutations('bangumi',{
-        //     setBangumiTimelineTab: 'SET_TIMELINE_TAB'
-        // }),
-        // ...mapActions('bangumi',[
-        //     'setTimeline',
-        //     'setNewTrends',
-        //     'setNewSub',
-        //     'setRankGlobalThree',
-        //     'setRankGlobalSeven',
-        //     'setAdSlide'
-        // ]),
-        // setBangumi(){
-        //     this.setTimeline()
-        //     this.setNewTrends()
-        //     this.setNewSub()
-        //     this.setRankGlobalThree()
-        //     this.setRankGlobalSeven()
-        //     this.setAdSlide()
-        // },
-        // ...mapMutations('guochuang',{
-        //     setGuochuangTimelineTab: 'SET_TIMELINE_TAB'
-        // }),
-        // ...mapActions('guochuang',{
-        //     gcSetTimeline: 'setTimeline',
-        //     getRankCnThree: 'setRankCnThree',
-        //     getRankCnSeven: 'setRankCnSeven',
-        //     gcSetAdSlide: 'setAdSlide',
-        //     getRelatedContent: 'setRelatedContent'
-        // }),
-        // setGuochuang(){
-        //     this.gcSetTimeline()
-        //     this.getRankCnThree()
-        //     this.getRankCnSeven()
-        //     this.gcSetAdSlide()
-        //     this.getRelatedContent()
-        // },
         setData(){
             //轮播图推广模块
             this.setSlide({
@@ -180,10 +120,6 @@ export default {
             this.setRankingIndex(3)
             //当前在线
             this.setOnline()
-            //番剧模块
-            // this.setBangumi()
-            // //国创模块
-            // this.setGuochuang()
         },
         videotest()  {
             if(this.videodata.ranknowtab === 0 && this.videodata.rankselect ===0){
@@ -227,6 +163,14 @@ export default {
 			.name {
 				&:hover {
 					color: $blue;
+				}
+			}
+			&.fj {
+				.icon_t {
+					display: none;
+				}
+				.name {
+					font-size: 18px;
 				}
 			}
 			.link-more {
@@ -292,11 +236,6 @@ export default {
 				}
 			}
 		}
-		.fj {
-			.name {
-				font-size: 18px;
-			}
-		}
 	}
 	.bili-tab {
 		float: left;
@@ -334,7 +273,7 @@ export default {
             @include wh(650px, 30px);
 			line-height: 30px;
 			.bili-tab-item {
-				width: 70px;
+				width: 60px;
 				border-color: #e5e9ef;
 				text-align: center;
 				margin: 0;

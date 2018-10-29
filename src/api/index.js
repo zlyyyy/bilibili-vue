@@ -9,6 +9,14 @@ export function getVipInfo(){
     return http.get('/static/topInfo.json')
 }
 //头部背景图
+export function getAdSlide(data) {
+    return http.get('/ad_slide',{
+        params: {
+            position_id: data.position_id
+        }
+    })
+}
+//头部背景图
 export function getLoc(data) {
     return http.get('/loc',{
         params: {

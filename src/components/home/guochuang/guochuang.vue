@@ -1,11 +1,11 @@
 <template>
-    <div :id="bangumi.ref" class="zone-wrap-module">
+    <div :id="guochuang.ref" class="zone-wrap-module">
         <div class="bangumi-module">
             <div class="up">
                 <div class="bangumi-timing-module l-con">
                     <div class="headline">
-                        <i class="icon icon_t" :class="bangumi.icon"></i>
-                        <a :href=bangumi.moreUrl class="name">{{ bangumi.title }}</a>
+                        <i class="icon icon_t" :class="guochuang.icon"></i>
+                        <a :href=guochuang.moreUrl class="name">{{ guochuang.title }}</a>
                         <div class="bili-tab">
                             <div class="bili-tab-item" v-for="(item,index) in timeline.tab" :class="{'on' : index === activeTab }" @click="setActiveTab(index)">{{ index>0 && index==activeTab? "周"+item.name : item.name}}</div>
                         </div>
@@ -17,13 +17,13 @@
                     <timing-box :timelineData="timeline.data" :activetab="activeTab"></timing-box>
                 </div>
                 <zone-rank 
-                    :zoneRank="bangumi" 
+                    :zoneRank="guochuang" 
                     :tag="1"
                     @setRankingRegion="setRankingRegion"
                 /> 
             </div>
             <storey-box 
-                :storeydata="bangumi" 
+                :storeydata="guochuang" 
                 @setDynamicRegion="setDynamicRegion"
                 @setNewlist="setNewlist"
             />
@@ -31,7 +31,7 @@
                 <div class="ad-title">
                     <h3>特别推荐</h3>
                 </div>
-                <ad-slide :slidedata="bangumi.ad.data" :slidetimedata="bangumi.ad.time" :pagation="bangumi.ad.pagation"></ad-slide>
+                <ad-slide :slidedata="guochuang.ad.data" :slidetimedata="guochuang.ad.time" :pagation="guochuang.ad.pagation"></ad-slide>
             </div>
         </div>
     </div>
@@ -46,12 +46,12 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
     created() {
         this.setTimeline({
-            id: this.bangumi.id,
-            rid: this.bangumi.rid
+            id: this.guochuang.id,
+            rid: this.guochuang.rid
         })
         this.setAdSlide({
-            id: this.bangumi.id,
-            rid: this.bangumi.rid,
+            id: this.guochuang.id,
+            rid: this.guochuang.rid,
             position_id: 104
         })
     },
@@ -62,14 +62,14 @@ export default {
         AdSlide
     },
     props: {
-        bangumi: {
+        guochuang: {
             type: [Object,Array],
             default: () => []
         }
     },
     computed: {
         timeline(){
-            return this.bangumi.timeline
+            return this.guochuang.timeline
         }
     },
     data () {

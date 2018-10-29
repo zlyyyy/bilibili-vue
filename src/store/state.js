@@ -53,77 +53,150 @@ const state = {
             rankList: 7,
             rankAllData: [],//全部排行
             rankOriginalData: []//原创排行
-        }
-    ],
-    bangumi: {
-        id: 0,
-        ref: 'bili_bangumi',
-        rid: 13,
-        title: '番剧动态',
-        icon: 'icon-bangumi',
-        tab:[
-            {
-                name: '有新动态'
-            },
-            {
-                name: '最新投稿'
-            }
-        ],
-        dynamic: 1514,//模型新动态数
-        moreUrl: '/v/bangumi',//模型更多链接
-        newTrends: [],//最新动态
-        data: [],//动态区域数据
-        ranktab: [],
-        rankdropdown:[
-            {
-                name: '三日'
-            },
-            {
-                name: '一周'
-            }
-        ],
-        rankPic: false,
-        rankList: 10,
-        rankBangumiData: [],//番剧排行
-        rankAllData: [],//全部排行
-        rankOriginalData: [],//原创排行
-        timeline: {
-            title: '番剧',
+        },
+        {
+            id: 1,
+            ref: 'bili_bangumi',
+            rid: 13,
+            title: '番剧动态',
+            icon: 'icon-bangumi',
             tab:[
                 {
-                    name: '最新'
+                    name: '有新动态'
                 },
                 {
-                    name: '一'
-                },
-                {
-                    name: '二'
-                },
-                {
-                    name: '三'
-                },
-                {
-                    name: '四'
-                },
-                {
-                    name: '五'
-                },
-                {
-                    name: '六'
-                },
-                {
-                    name: '日'
+                    name: '最新投稿'
                 }
             ],
-            activeTab: 0,//更新时间轴
-            moreUrl: '/v/bangumi',
-            data: []
+            dynamic: 1514,//模型新动态数
+            moreUrl: '/v/bangumi',//模型更多链接
+            data: [],//动态区域数据
+            ranktab: [],
+            rankdropdown:[
+                {
+                    name: '三日'
+                },
+                {
+                    name: '一周'
+                }
+            ],
+            rankPic: false,
+            rankList: 10,
+            rankBangumiData: [],//番剧排行
+            rankAllData: [],//全部排行
+            rankOriginalData: [],//原创排行
+            timeline: {
+                title: '番剧',
+                tab:[
+                    {
+                        name: '最新'
+                    },
+                    {
+                        name: '一'
+                    },
+                    {
+                        name: '二'
+                    },
+                    {
+                        name: '三'
+                    },
+                    {
+                        name: '四'
+                    },
+                    {
+                        name: '五'
+                    },
+                    {
+                        name: '六'
+                    },
+                    {
+                        name: '日'
+                    }
+                ],
+                moreUrl: '/v/bangumi',
+                data: []
+            },
+            ad: {
+                data: [],
+                time: 3000,
+                pagation: false
+            }
         },
-        ad: {
-            data: [],
-            time: 3000,
-            pagation: false
+        {
+            id: 2,
+            ref: 'bili_guochuang',
+            rid: 168,
+            title: '国产原创相关',
+            icon: 'icon-guochuang',
+            tab:[
+                {
+                    name: '有新动态'
+                },
+                {
+                    name: '最新投稿'
+                }
+            ],
+            dynamic: 1514,//模型新动态数
+            moreUrl: '/v/bangumi',//模型更多链接
+            data: [],//动态区域数据
+            ranktab: [
+                {
+                    name: '全部'
+                },
+                {
+                    name: '原创'
+                }
+            ],
+            rankdropdown:[
+                {
+                    name: '三日'
+                },
+                {
+                    name: '一周'
+                }
+            ],
+            rankPic: false,
+            rankList: 7,
+            rankBangumiData: [],//番剧排行
+            rankAllData: [],//全部排行
+            rankOriginalData: [],//原创排行
+            timeline: {
+                title: '国创',
+                tab:[
+                    {
+                        name: '最新'
+                    },
+                    {
+                        name: '一'
+                    },
+                    {
+                        name: '二'
+                    },
+                    {
+                        name: '三'
+                    },
+                    {
+                        name: '四'
+                    },
+                    {
+                        name: '五'
+                    },
+                    {
+                        name: '六'
+                    },
+                    {
+                        name: '日'
+                    }
+                ],
+                moreUrl: '/v/bangumi',
+                data: []
+            },
+            ad: {
+                data: [],
+                time: 3000,
+                pagation: false
+            }
         }
-    }
+    ]
 }
 export default state

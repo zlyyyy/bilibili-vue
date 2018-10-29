@@ -70,6 +70,10 @@ export default {
     components: {
     },
     computed:{
+        date(){
+            const _time = new Date()
+            return _time.getDay()
+        },
         //根据今天的日期排序返回数组，取本周今日前包括今日的数据
         timelineToday(){
             return this.timelineData.filter(function(item){
