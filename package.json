@@ -14,6 +14,7 @@
     "element-ui": "^2.4.6",
     "url-parse": "^1.4.3",
     "vue": "^2.5.2",
+    "vue-jsonp": "^0.1.8",
     "vue-lazyload": "^1.2.3",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

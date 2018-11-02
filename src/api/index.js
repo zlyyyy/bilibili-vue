@@ -108,7 +108,9 @@ export function getRankingCn3(){
 }
 //国创更新七日排行
 export function getRankingCn7(){
-    return http.get('/ranking/cn_7')
+    return http.get('/ranking/cn_7',{
+        headers: {'Content-Type': 'application/json'},
+    })
 }
 
 
@@ -124,8 +126,9 @@ export function getCnAdSlide(){
 }
 
 //排行榜数据
-export function getRankData(type, rid, arc_type,day){
-    return http.get('/static/ranking/all.json',{
+//全站、原创、新人排行榜
+export function getRanking(type, rid, arc_type,day){
+    return http.get('/ranking',{
         params: {
             type: type,
             rid: rid,
@@ -133,6 +136,19 @@ export function getRankData(type, rid, arc_type,day){
             day: day
         }
     })
+}
+//新番排行榜
+export function getSeasonRank(day, season_type){
+    return http.get('/ranking',{
+        params: {
+            day: day,
+            season_type: season_type
+        }
+    })
+}
+//影视排行榜
+export function getMoviesRank(day, id){
+    return http.get('/ranking/movies')
 }
 
 //搜索结果

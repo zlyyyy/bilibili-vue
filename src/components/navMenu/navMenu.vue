@@ -333,10 +333,10 @@ export default {
             this.setSignIn({
                 signIn: localStorage.getItem('signIn')
             })
-            //获取个人信息
-            this.setUserInfo()
-            //获取大会员推荐信息
-            this.setVipInfo()
+            // //获取个人信息
+            // this.setUserInfo()
+            // //获取大会员推荐信息
+            // this.setVipInfo()
         }
     }
 }

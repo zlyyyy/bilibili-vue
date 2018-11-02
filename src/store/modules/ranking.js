@@ -1,4 +1,4 @@
-import { getRankData } from '../../api'
+import { getRanking } from '../../api'
 
 const state = {
     //一级导航
@@ -264,7 +264,7 @@ const mutations = {
 
 const actions = {
     setRankData({ commit, state },{ type, rid, arc_type, day }){
-        getRankData(type, rid, arc_type, day).then(res=>{
+        getRanking(type, rid, arc_type, day).then(res=>{
             commit('SET_RANK_ALL',res.data)
         })
     }

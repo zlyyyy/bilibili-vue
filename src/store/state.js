@@ -155,7 +155,7 @@ const state = {
                     name: '一周'
                 }
             ],
-            rankPic: false,
+            rankPic: true,
             rankList: 7,
             rankBangumiData: [],//番剧排行
             rankAllData: [],//全部排行

@@ -86,7 +86,6 @@ export const setNewlist = function({ commit, state },data){
 }
 //排行榜
 export const setRankingRegion = function({ commit, state },data){
-    // console.log(data)
     const params = {
         rid: data.rid,
         day: data.day,
@@ -97,41 +96,61 @@ export const setRankingRegion = function({ commit, state },data){
         original: data.original,
         data: []
     }
+    function jsonChange(res){
+        //将返回的数据设置成json，字符串截取，再利用JSON.parse()将字符串转换成json的形式
+        let num1 = res?res.indexOf('('):null
+        let num2 = res?res.length-2:null
+        // console.log(res.length)
+        // console.log(num1,num2)
+        // console.log(res.substring(num1 + 1, num2))
+        let resultData = JSON.parse(res.substring(num1 + 1, num2))
+        return resultData
+    }
+    function getRank(){
+        getRankingRegion(params).then(res=>{
+            _data.data = res.data
+            commit(types.SET_RANKING_DATA, _data)
+        })
+    }
     switch(data.rid){
         case 13: 
-            if(data.day == 3){
+            if(data.day == 3&&data.tag == 1){
                 getRankingGlobal3().then(res=>{
-                    _data.data = res.result
-                    // console.log(_data)
+                    const _res = jsonChange(res)
+                    _data.data = _res.result
+                    commit(types.SET_RANKING_DATA, _data)
+                })
+            }else if(data.day == 7&&data.tag == 1){
+                getRankingGlobal7().then(res=>{
+                    const _res = jsonChange(res)
+                    _data.data = _res.result
                     commit(types.SET_RANKING_DATA, _data)
                 })
             }else{
-                getRankingGlobal7().then(res=>{
-                    _data.data = res.result
-                    commit(types.SET_RANKING_DATA, _data)
-                })
+                getRank()
             }
             break
         case 168:
-            if(data.day == 3){
+            if(data.day == 3&&data.tag == 1){
                 getRankingCn3().then(res=>{
-                    _data.data = res.result
+                    const _res = jsonChange(res)
+                    _data.data = _res.result
+                    commit(types.SET_RANKING_DATA, _data)
+                })
+            }else if(data.day == 7&&data.tag == 1){
+                getRankingCn7().then(res=>{
+                    const _res = jsonChange(res)
+                    _data.data = _res.result
                     commit(types.SET_RANKING_DATA, _data)
                 })
             }else{
-                getRankingCn7().then(res=>{
-                    _data.data = res.result
-                    commit(types.SET_RANKING_DATA, _data)
-                })
+                getRank()
             }
             break
         default:
             //获取排行榜
             //设置当前排行榜数据
-            getRankingRegion(params).then(res=>{
-                _data.data = res.data
-                commit(types.SET_RANKING_DATA, _data)
-            })
+            getRank()
             break
     }
 }

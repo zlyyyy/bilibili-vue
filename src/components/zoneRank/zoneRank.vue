@@ -8,8 +8,8 @@
                 </div>
                 <dropdown :dropdownData="zoneRank.rankdropdown" @selectClick='selectClick'></dropdown>
             </div>
-            <div class="rank-list-wrap" :class="{'show-origin' : tab===1}">
-                <ul class="rank-list" :class="zoneRank.rid==13||zoneRank.rid==168&&tag===1? 'bangumi-rank-list' : 'hot-lists'" >
+            <div class="rank-list-wrap" :class="{'show-origin' : tab==1}">
+                <ul class="rank-list" :class="(zoneRank.rid==13&&tag==1) || (zoneRank.rid==168&&tag==1)? 'bangumi-rank-list' : 'hot-lists'" >
                     <li class="rank-item" v-for="(item,index) in rankData" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&zoneRank.rankPic==true&&tag===0}]" v-if="index<zoneRank.rankList">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
@@ -18,14 +18,14 @@
                             </div>
                             <div class="ri-detail">
                                 <p class="ri-title">{{ item.title }}</p>
-                                <p class="ri-point" v-if="rankPic">综合评分：{{ count2(item.pts) }}</p>
+                                <p class="ri-point" v-if="rankPic==true&&tag==0">综合评分：{{ count2(item.pts) }}</p>
                                 <span class="ri-total" v-else>更新至第{{ item.newest_ep_index }}话</span>
                             </div>
                             <div class="watch-later-trigger w-later" v-if="rankPic&&index===0"></div>
                         </a>
                     </li>             
                 </ul>
-                <ul class="rank-list origin-list"  v-if="rankPic==true">
+                <ul class="rank-list origin-list"  v-if="rankPic==true&&tag==0">
                     <li class="rank-item" v-for="(item,index) in zoneRank.rankOriginalData" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&zoneRank.rankPic==true}]" v-if="index<zoneRank.rankList">
                         <i class="ri-num">{{ index+1 }}</i>
                         <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
@@ -77,7 +77,11 @@ export default {
     },
     computed: {
         rankData(){
-            return this.zoneRank.rid==13? (this.zoneRank.rankBangumiData?this.zoneRank.rankBangumiData.list:null) : this.zoneRank.rankAllData
+            if(this.zoneRank.rid==13||(this.zoneRank.rid==168&&this.tag==1)){
+                    return this.zoneRank.rankBangumiData.list
+            }else{
+                return this.zoneRank.rankAllData
+            }
         },
         moreUrl(){
             const url = `${this.zoneRank.rid}/1/${this.selectDay}`
@@ -124,11 +128,17 @@ export default {
             const _data = {
                 id: this.zoneRank.id,
                 rid: this.zoneRank.rid,
-                day: day
+                day: day,
+                tag: this.tag
             }
             // id，rid模块ID，day天数，original是否原创
-            if(this.zoneRank.rid==13){
+            if((this.zoneRank.rid==13 &&this.tag ==1)||(this.zoneRank.rid==168 &&this.tag ==1)){
                 this.$emit('setRankingRegion',_data)
+            }else if(this.zoneRank.rid==168 && this.tag ==0){
+                for(let i =0;i<2;i++){
+                    _data.original = i
+                    this.$emit('setRankingRegion',_data)
+                }
             }else{
                 for(let i =0;i<2;i++){
                     _data.original = i

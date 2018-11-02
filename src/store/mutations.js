@@ -27,6 +27,7 @@ const mutations = {
         state.module[data.id].data = data.data
     },
     [types.SET_RANKING_DATA](state,data){
+        console.log(data)
         // console.log(data)
         //相关排行榜
         switch(data.original){
@@ -36,8 +37,9 @@ const mutations = {
             case 1: 
                 state.module[data.id].rankOriginalData = data.data
                 break
-            default:
+            case undefined:
                 state.module[data.id].rankBangumiData = data.data
+            default:
                 break
         }
     },

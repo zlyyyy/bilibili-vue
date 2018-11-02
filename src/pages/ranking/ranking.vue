@@ -29,8 +29,8 @@
                             </li>
                         </ul>
                         <div class="rank-type-dropdown">
-                            <dropdown :dropdownData="rankDropdown"  :selected="rankSelect" @dropselected='postRankSelect'></dropdown>
-                            <dropdown :dropdownData="rankDropdown2"  :selected="rankSelect2" @dropselected='postRankSelect2'></dropdown>
+                            <dropdown :dropdownData="rankDropdown"  :selected="rankSelect" @selectClick='postRankSelect'></dropdown>
+                            <dropdown :dropdownData="rankDropdown2"  :selected="rankSelect2" @selectClick='postRankSelect2'></dropdown>
                         </div>
                     </div>
                     <div class="rank-list-head">

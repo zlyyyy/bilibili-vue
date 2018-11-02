@@ -2,7 +2,7 @@
     <div class="app-header">
         <nav-menu :leftNav="leftNav" :headBanner="headBanner" :menuShow="menuShow"></nav-menu>
         <template v-if="menuShow">
-            <div class="head-banner" :style="{background:'url('+headBanner.pic+')'}">
+            <div class="head-banner" :style="{'background-image':'url('+headBanner.pic+')'}">
                 <div class="bili-wrapper head-content">
                     <div class="search">
                         <div class="searchform">

@@ -614,6 +614,12 @@ export default {
 			}
 		}
 	}
+	.gc{
+		.slide{
+			margin-top: 15px;
+			height: 90px;
+		}
+	}
 	.slide {
 		overflow: hidden;
 		@include wh(100%, 268px);

@@ -1,6 +1,6 @@
 <template>
     <div class="timing-box">
-        <div class="card-timing-module clearfix card-timing" v-for="(item,index) in timelineNew" v-if="nowtab==0">
+        <div class="card-timing-module clearfix card-timing" v-for="(item,index) in timelineNew" v-if="activetab==0">
             <a :href="'https://www.bilibili.com/bangumi/play/ss'+item.season_id+'/'" target="_blank" :title="item.title" class="pic">
             <div class="lazy-img">
                 <img :alt="item.title" v-lazy="item.square_cover">
@@ -17,7 +17,7 @@
                 </p>
             </div>
         </div>
-        <div class="card-timing-module clearfix card-timing" v-for="(item,index) in timelineSort" v-if="item.weekday==nowtab&&nowtab!==0">
+        <div class="card-timing-module clearfix card-timing" v-for="(item,index) in timelineSort" v-if="item.weekday==activetab&&activetab!==0">
             <a :href="'https://www.bilibili.com/bangumi/play/ss'+item.season_id+'/'" target="_blank" :title="item.title" class="pic">
             <div class="lazy-img">
                 <img :alt="item.title" v-lazy="item.square_cover">
@@ -34,7 +34,7 @@
                 </p>
             </div>
         </div>
-        <div class="card-timing-module clearfix card-timing" v-for="(item,index) in timelineSort" v-if="item.weekday==0&&nowtab==7">
+        <div class="card-timing-module clearfix card-timing" v-for="(item,index) in timelineSort" v-if="item.weekday==0&&activetab==7">
             <a :href="'https://www.bilibili.com/bangumi/play/ss'+item.season_id+'/'" target="_blank" :title="item.title" class="pic">
             <div class="lazy-img">
                 <img :alt="item.title" v-lazy="item.square_cover">
@@ -62,7 +62,7 @@ export default {
             type: [Object,Array],
             default: () => []
         },
-        nowtab: {
+        activetab: {
             type: Number,
             default: 0
         }
@@ -88,7 +88,7 @@ export default {
         },
         //根据favorites排序返回数组
         timelineSort(){
-            let now = this.nowtab
+            let now = this.activetab
             if(now>6){
                 now = 0
             }

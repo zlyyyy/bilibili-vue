@@ -28,10 +28,10 @@
                 @setNewlist="setNewlist"
             />
             <div class="r-con">
-                <div class="ad-title">
-                    <h3>特别推荐</h3>
-                </div>
-                <ad-slide :slidedata="guochuang.ad.data" :slidetimedata="guochuang.ad.time" :pagation="guochuang.ad.pagation"></ad-slide>
+                <zone-rank 
+                    :zoneRank="guochuang" 
+                    @setRankingRegion="setRankingRegion"
+                /> 
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@ export default {
         this.setAdSlide({
             id: this.guochuang.id,
             rid: this.guochuang.rid,
-            position_id: 104
+            position_id: 101
         })
     },
     components: {
