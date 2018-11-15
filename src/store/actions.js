@@ -1,6 +1,5 @@
 import * as types from './mutation-types'
 import { 
-    test,
     getAdSlide,
     getLocs,
     getRankingIndex,
@@ -32,9 +31,6 @@ export const setAdSlide = function({commit}, data) {
 }
 //轮播图，推广模块
 export const setSlide = function({commit}, data) {
-    test().then(res=>{
-        console.log(res.market_cap_by_available_supply)
-    })
     getLocs(data).then(res=>{
         commit(types.SET_SLIDE, res.data['23'])
         commit(types.SET_POPULARIZE, res.data['34'])
