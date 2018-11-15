@@ -1,6 +1,9 @@
 import http from '../utils/http'
 
 //登录获取个人信息
+export function test(){
+    return http.get('/test')
+}
 export function getUserInfo(){
     return http.get('/static/login.json')
 }
