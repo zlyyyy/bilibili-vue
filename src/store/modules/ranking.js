@@ -1,4 +1,4 @@
-import { getRanking } from '../../api'
+import { getRanking, getSeasonRank, getMoviesRank } from '../../api'
 
 const state = {
     //一级导航
@@ -8,6 +8,34 @@ const state = {
             name: 'all',
             icon: 'all',
             path: '/ranking/all',
+            select: [
+                {
+                    name: '全部投稿'
+                },
+                {
+                    name: '近期投稿'
+                }
+            ],
+            selectActive: 0,
+            select2: [
+                {
+                    name: '日排行',
+                    num: 1
+                },
+                {
+                    name: '三日排行',
+                    num: 3
+                },
+                {
+                    name: '周排行',
+                    num: 7
+                },
+                {
+                    name: '月排行',
+                    num: 30
+                }
+            ],
+            select2Active: 1,
             children: [
                 {
                     name: '全站',
@@ -64,6 +92,34 @@ const state = {
             name: 'origin',
             icon: 'origin',
             path: '/ranking/origin',
+            select: [
+                {
+                    name: '全部投稿'
+                },
+                {
+                    name: '近期投稿'
+                }
+            ],
+            selectActive: 0,
+            select2: [
+                {
+                    name: '日排行',
+                    num: 1
+                },
+                {
+                    name: '三日排行',
+                    num: 3
+                },
+                {
+                    name: '周排行',
+                    num: 7
+                },
+                {
+                    name: '月排行',
+                    num: 30
+                }
+            ],
+            select2Active: 1,
             children: [
                 {
                     name: '全站',
@@ -120,14 +176,25 @@ const state = {
             name: 'bangumi',
             icon: 'bangumi',
             path: '/ranking/bangumi',
+            select2: [
+                {
+                    name: '三日排行',
+                    num: 3
+                },
+                {
+                    name: '周排行',
+                    num: 7
+                },
+            ],
+            select2Active: 0,
             children: [
                 {
                     name: '番剧',
-                    rid:'13'
+                    rid:'1'
                 },
                 {
                     name: '国产动画',
-                    rid:'167'
+                    rid:'4'
                 }
             ]
         },
@@ -136,6 +203,34 @@ const state = {
             name: 'cinema',
             icon: 'cinema',
             path: '/ranking/cinema',
+            select: [
+                {
+                    name: '全部投稿'
+                },
+                {
+                    name: '近期投稿'
+                }
+            ],
+            selectActive: 0,
+            select2: [
+                {
+                    name: '日排行',
+                    num: 1
+                },
+                {
+                    name: '三日排行',
+                    num: 3
+                },
+                {
+                    name: '周排行',
+                    num: 7
+                },
+                {
+                    name: '月排行',
+                    num: 30
+                }
+            ],
+            select2Active: 1,
             children: [
                 {
                     name: '纪录片',
@@ -156,6 +251,25 @@ const state = {
             name: 'rookie',
             icon: 'rookie',
             path: '/ranking/rookie',
+            select2: [
+                {
+                    name: '日排行',
+                    num: 1
+                },
+                {
+                    name: '三日排行',
+                    num: 3
+                },
+                {
+                    name: '周排行',
+                    num: 7
+                },
+                {
+                    name: '月排行',
+                    num: 30
+                }
+            ],
+            select2Active: 1,
             children: [
                 {
                     name: '全站',
@@ -164,10 +278,6 @@ const state = {
                 {
                     name: '动画',
                     rid:'1'
-                },
-                {
-                    name: '国创相关',
-                    rid:'168'
                 },
                 {
                     name: '音乐',
@@ -211,62 +321,87 @@ const state = {
     firstMenuActive: 0,
     secondMenuActive: 0,
     rankTips: '',
-    rankDropdown: [
-        {
-            name: '全部投稿'
-        },
-        {
-            name: '近期投稿'
-        }
-    ],
-    rankSelect: 0,
-    rankDropdown2: [
-        {
-            name: '日排行',
-            num: 1
-        },
-        {
-            name: '三日排行',
-            num: 3
-        },
-        {
-            name: '周排行',
-            num: 7
-        },
-        {
-            name: '月排行',
-            num: 30
-        }
-    ],
-    rankSelect2: 0,
-    rankAll: [] 
+    rankAll: [] ,
+    loading: true
 }
 
 const getters = {}
 
 const mutations = {
     SET_RANK_ALL: (state, data) => {
+        console.log(data)
+        //排行榜数据
         state.rankAll = Object.assign({},data)
     },
-    SET_RANK_SELECT: (state, data) => {
-        state.rankSelect = data
+    SET_SELECT_ACTIVE: (state, data) => {
+        //一级select设置
+        state.rankMenu[state.firstMenuActive].selectActive = data 
     },
-    SET_RANK_SELECT2: (state, data) => {
-        state.rankSelect2 = data
+    SET_SELECT2_ACTIVE: (state, data) => {
+        //二级select设置
+        state.rankMenu[state.firstMenuActive].select2Active = data
     },
     SET_FIRST_MENU_ACTIVE: (state, data) => {
+        //一级路由设置
+        console.log(data)
         state.firstMenuActive = data
     },
     SET_SECOND_MENU_ACTIVE: (state, data) => {
+        //二级路由设置
         state.secondMenuActive = data
+    },
+    SET_LOADING: (state, data) => {
+        if(data){
+            state.loading = data
+        }else{
+            state.loading = !state.loading
+        }
     }
 }
 
 const actions = {
     setRankData({ commit, state },{ type, rid, arc_type, day }){
-        getRanking(type, rid, arc_type, day).then(res=>{
-            commit('SET_RANK_ALL',res.data)
-        })
+        let _type;
+        switch(state.firstMenuActive){
+            case 0:
+                //全站
+                _type = 1
+                getRankData()
+                break
+            case 1:
+                //原创
+                _type = 2
+                getRankData()
+                break
+            case 2:
+                //新番
+                getSeasonRank(day,rid).then(res=>{
+                    commit('SET_RANK_ALL',res.result)
+                    commit('SET_LOADING')
+                })
+                break
+            case 3:
+                //影视
+                getMoviesRank(day,rid).then(res=>{
+                    commit('SET_RANK_ALL',res.rank)
+                    commit('SET_LOADING')
+                })
+                break
+            case 4:
+                //新人
+                _type = 3
+                getRankData()
+                break
+            default:
+                break
+        }
+        function getRankData(){
+            getRanking(_type,rid,arc_type,day).then(res=>{
+                commit('SET_RANK_ALL',res.data)
+                commit('SET_LOADING')
+            })
+        }
+        
     }
 }
 

@@ -3,7 +3,7 @@
         <span class="selected">{{ dropdownData[selected].name }}</span>
         <i class="icon icon-arrow-down"></i>
         <ul class="dropdown-list">
-            <li v-for="(item,index) in dropdownData" @click="selectClick(index)" class="dropdown-item" v-show="index===selected? false : true">{{ item.name }}</li>
+            <li v-for="(item,index) in dropdownData" @click="selectClick(index)" class="dropdown-item" v-show="index==selected? false : true">{{ item.name }}</li>
         </ul>
     </div>
 </template>
@@ -14,6 +14,10 @@ export default {
         dropdownData: {
             type: Array,
             default: []
+		},
+		selected: {
+            type: [Number,String],
+            default: 0
         }
     },
     computed:{
@@ -21,13 +25,11 @@ export default {
     },
     data () {
         return {
-			selected: 0
         }
     },
     methods: {
         selectClick(index){
 			//通知父组件来操作
-			this.selected = index
             this.$emit('selectClick',index)
         }
     }

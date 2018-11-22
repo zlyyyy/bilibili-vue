@@ -127,19 +127,19 @@ export function getCnAdSlide(){
 
 //排行榜数据
 //全站、原创、新人排行榜
-export function getRanking(type, rid, arc_type,day){
+export function getRanking(type, rid, arc_type=0,day){
     return http.get('/ranking',{
         params: {
-            type: type,
-            rid: rid,
-            arc_type: arc_type,
-            day: day
+            rid,
+            day,
+            type,
+            arc_type
         }
     })
 }
 //新番排行榜
 export function getSeasonRank(day, season_type){
-    return http.get('/ranking',{
+    return http.get('/season/rank/list',{
         params: {
             day: day,
             season_type: season_type
@@ -147,8 +147,9 @@ export function getSeasonRank(day, season_type){
     })
 }
 //影视排行榜
-export function getMoviesRank(day, id){
-    return http.get('/ranking/movies')
+export function getMoviesRank(day, rid){
+    return http.get(`/ranking/movies/all-${day}-${rid}.json`
+    )
 }
 
 //搜索结果

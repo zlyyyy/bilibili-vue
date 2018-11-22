@@ -14,6 +14,63 @@ const state = {
     popularize: [],
     //当前在线
     online: [],
+    //右侧悬浮导航
+    elevator: [
+        {
+            name: '直播'
+        },
+        {
+            name: '动画'
+        },
+        {
+            name: '番剧'
+        },
+        {
+            name: '国创'
+        },
+        {
+            name: '音乐'
+        },
+        {
+            name: '音频'
+        },
+        {
+            name: '舞蹈'
+        },
+        {
+            name: '游戏'
+        },
+        {
+            name: '科技'
+        },
+        {
+            name: '生活'
+        },
+        {
+            name: '鬼畜'
+        },
+        {
+            name: '时尚'
+        },
+        {
+            name: '广告'
+        },
+        {
+            name: '娱乐'
+        },
+        {
+            name: '电影'
+        },
+        {
+            name: 'TV剧'
+        },
+        {
+            name: '影视'
+        },
+        {
+            name: '纪录片'
+        }
+    ],
     //主要模块
     module: [
         {

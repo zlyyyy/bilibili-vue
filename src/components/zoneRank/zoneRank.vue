@@ -6,7 +6,7 @@
                 <div class="bili-tab rank-tab" v-if="tag===0">
                     <div class="bili-tab-item" v-for="(item,index) in zoneRank.ranktab" :class="{'on' : index===tab}" @mousemove="tabMove(index)">{{item.name }}</div>
                 </div>
-                <dropdown :dropdownData="zoneRank.rankdropdown" @selectClick='selectClick'></dropdown>
+                <dropdown :dropdownData="zoneRank.rankdropdown" :selected="selectIndex" @selectClick='selectClick'></dropdown>
             </div>
             <div class="rank-list-wrap" :class="{'show-origin' : tab==1}">
                 <ul class="rank-list" :class="(zoneRank.rid==13&&tag==1) || (zoneRank.rid==168&&tag==1)? 'bangumi-rank-list' : 'hot-lists'" >
@@ -101,7 +101,8 @@ export default {
     data () {
         return {
             tab: 0,
-            selectDay: 3
+            selectDay: 3,
+            selectIndex: 0
         }
     },
     methods: {
@@ -111,6 +112,7 @@ export default {
         },
         selectClick(index){
             //时间筛选设置
+            this.selectIndex = index
             switch(index){
                 case 0: 
                     this.selectDay = 3

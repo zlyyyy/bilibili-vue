@@ -4,6 +4,7 @@
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
+        <elevator v-if="elevatorShow"></elevator>
         <div class="go-top-m" v-show="gotop" @click="goTop()">
             <div title="返回顶部" class="go-top icon">
             </div>
@@ -15,6 +16,7 @@
 
 <script>
 import AppHeader from './components/head/header'
+import Elevator from './components/home/elevator/elevator'
 import AppFooter from './components/foot/footer'
 import Login from './components/loginIn/login'
 
@@ -22,10 +24,12 @@ export default {
     components: {
         AppHeader,
         AppFooter,
+        Elevator,
         Login
     },
     data () {
         return {
+            elevatorShow: true,
             gotop: false,
             step: 100
         }
@@ -42,6 +46,7 @@ export default {
         }
     },
     created() {
+        console.log(this.$root)
         let vm = this
         window.onscroll=function(){
                 if (document.documentElement.scrollTop>60) {

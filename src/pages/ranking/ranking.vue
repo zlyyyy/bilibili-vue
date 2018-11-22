@@ -29,8 +29,8 @@
                             </li>
                         </ul>
                         <div class="rank-type-dropdown">
-                            <dropdown :dropdownData="rankDropdown"  :selected="rankSelect" @selectClick='postRankSelect'></dropdown>
-                            <dropdown :dropdownData="rankDropdown2"  :selected="rankSelect2" @selectClick='postRankSelect2'></dropdown>
+                            <dropdown v-if="menuData.select" :dropdownData="menuData.select"  :selected="menuData.selectActive" @selectClick="getSelectActive"></dropdown>
+                            <dropdown v-if="menuData.select2" :dropdownData="menuData.select2"  :selected="menuData.select2Active" @selectClick="getSelect2Active"></dropdown>
                         </div>
                     </div>
                     <div class="rank-list-head">
@@ -39,11 +39,9 @@
                             <span class="tip-txt">{{ rankAll.note }}</span>
                         </div>
                     </div>
-                    <div class="rank-list-wrap">
-                        <keep-alive>
-                            <router-view :rankAll='rankAll' :key='key'></router-view>
-                        </keep-alive>
-                    </div>
+                    <keep-alive>
+                        <router-view :rankAll='rankAll' :key='key' :type='firstMenuActive' :loading='loading'></router-view>
+                    </keep-alive>
                 </div>
             </div>
         </div>
@@ -58,26 +56,21 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('ranking'
 export default {
     created() { 
         //地址栏读取params参数，设置对应的参数
-        //二级类目
-        let num,num2;
-        for(let i=0;i<this.rankMenu[this.firstMenuActive].children.length;i++){
-            if(this.rankMenu[this.firstMenuActive].children[i].rid==this.$route.params.rid){
-                num = i
-                // console.log(i)
-            }
-        }
-        // console.log(num)
-        this.setSecondMenuActive(num)
+        //一级菜单
+        const _routes = ['all','origin','bangumi','cinema','rookie']
+        _routes.forEach((el,index) => {
+            el == this.$route.params.type? this.setFirstMenuActive(index) : null
+        })
+        //二级菜单
+        this.menuData.children.forEach((el,index) => {
+            el.rid == this.$route.params.rid? this.setSecondMenuActive(index) : null
+        });
         //一级筛选
-        this.setRankSelect(this.$route.params.rankselect)
+        this.setSelectActive(this.$route.params.rankselect)
         //二级筛选
-        for(let i=0;i<this.rankDropdown2.length;i++){
-            if(this.rankDropdown2[i].num==this.$route.params.rankselect2){
-                num2 = i
-                // console.log(i)
-            }
-        }
-        this.setRankSelect2(this.$route.params.rankselect2)
+        this.menuData.select2.forEach((el,index) => {
+            el.num == this.$route.params.rankselect2? this.setSelect2Active(index) : null
+        })
         //数据获取
         this.refreshData()
     },
@@ -90,27 +83,27 @@ export default {
             'firstMenuActive',
             'secondMenuActive',
             'rankTips',
-            'rankDropdown',
-            'rankSelect',
-            'rankDropdown2',
-            'rankSelect2',
-            'rankAll'
+            'rankAll',
+            'loading'
         ]),
+        menuData(){
+            return this.rankMenu[this.firstMenuActive]
+        },
         key() {
             return this.$route.name !== undefined? this.$route.name +new Date(): this.$route +new Date()
         }
     },
     data () {
         return {
-           
         }
     },
     methods: {
         ...mapMutations({
-            setRankSelect: 'SET_RANK_SELECT',
-            setRankSelect2: 'SET_RANK_SELECT2',
+            setSelectActive: 'SET_SELECT_ACTIVE',
+            setSelect2Active: 'SET_SELECT2_ACTIVE',
             setFirstMenuActive: 'SET_FIRST_MENU_ACTIVE',
-            setSecondMenuActive: 'SET_SECOND_MENU_ACTIVE'
+            setSecondMenuActive: 'SET_SECOND_MENU_ACTIVE',
+            setLoading: 'SET_LOADING'
         }),
         ...mapActions([
             'setRankData',
@@ -122,26 +115,29 @@ export default {
         },
         two(index) {
             this.setSecondMenuActive(index);//同步修改state二级菜单高亮
-            this.$route.params.rid = this.rankMenu[this.firstMenuActive].children[index].rid//修改路由rid参数
+            this.$route.params.rid = this.menuData.children[index].rid//修改路由rid参数
             this.RouterPush()//刷新路由
         },
         refreshData(){
+            const _loading = true
+            this.setLoading(_loading)
             this.setRankData({
-                type: this.firstMenuActive+1,//一级类目
-                rid: this.rankMenu[this.firstMenuActive].children[this.secondMenuActive].rid,//二级类目
-                arc_type: this.rankSelect,//全部近期筛选
-                day: this.rankDropdown2[this.rankSelect2].num//时间筛选
+                type: this.firstMenuActive,//一级类目
+                rid: this.menuData.children[this.secondMenuActive].rid,//二级类目
+                arc_type: this.menuData.selectActive,//全部近期筛选
+                day: this.menuData.select2[this.menuData.select2Active].num//时间筛选
             })
         },
-        postRankSelect(index) {
-            this.setRankSelect(index)//同步修改一级多选
-            this.$route.params.rankselect = index//修改路由rankselect参数
+        getSelectActive(index) {
+            //一级select选择获取并设置
+            this.setSelectActive(index)//同步修改一级多选
+            this.$route.params.rankselect = index + ""//修改路由rankselect参数
             this.RouterPush()//刷新路由
         },
-        postRankSelect2(index) {
-            console.log(index)
-            this.setRankSelect2(index)//同步修改二级多选
-            this.$route.params.rankselect2 = this.rankDropdown2[index].num//修改路由rankselect2参数
+        getSelect2Active(index) {
+            //二级select选择获取并设置
+            this.setSelect2Active(index)//同步修改二级多选
+            this.$route.params.rankselect2 = this.menuData.select2[index].num+""//修改路由rankselect2参数
             this.RouterPush()//刷新路由
         },
         RouterPush() {
@@ -269,108 +265,161 @@ export default {
         }
     }
 }
-.rank-item {
-    @include transition(.2s);
-    overflow: hidden;
-    border-bottom: 1px solid #e5e9ef;
+.rank-list-wrap{
     position: relative;
-    &:hover {
-        -webkit-box-shadow: 0 2px 5px #ccc;
-        box-shadow: 0 2px 5px #ccc;
-    }
-    .num {
-        @include wh(70px, 70px);
-        position: absolute;
-        top: 20px;
-        left: 0;
-        line-height: 70px;
-        text-align: center;
-        @include sc(36px, #b8c0cc);
-        font-weight: 700;
-        font-family: simhei;
-    }
-    .content {
-        padding: 20px 0 0 70px;
+    min-height: 600px;
+}
+.rank-list {
+    .rank-item {
+        @include transition(.2s);
         overflow: hidden;
-        .img {
-            position: relative;
-            float: left;
-            a {
-                display: inline-block;
-            }
-            .cover {
-                @include wh(114px, 70px);
-            }
-            &:hover {
-                .w-later {
-                    display: block;
+        border-bottom: 1px solid #e5e9ef;
+        position: relative;
+        &:hover {
+            -webkit-box-shadow: 0 2px 5px #ccc;
+            box-shadow: 0 2px 5px #ccc;
+        }
+        .num {
+            @include wh(70px, 70px);
+            position: absolute;
+            top: 20px;
+            left: 0;
+            line-height: 70px;
+            text-align: center;
+            @include sc(36px, #b8c0cc);
+            font-weight: 700;
+            font-family: simhei;
+        }
+        .content {
+            padding: 20px 0 0 70px;
+            overflow: hidden;
+            .img {
+                position: relative;
+                float: left;
+                a {
+                    cursor: pointer;
+                    display: inline-block;
+                }
+                .cover {
+                    @include wh(114px, 70px);
+                    img{
+                        display: block;
+                        @include wh(100%, 100%);
+                    }
+                }
+                &:hover {
+                    .w-later {
+                        display: block;
+                    }
                 }
             }
-        }
-        .info {
-            padding-bottom: 20px;
-            margin-left: 130px;
-            height: 70px;
-            position: relative;
-            .title {
-                height: 20px;
-                line-height: 20px;
-                font-weight: 700;
-                @include sc(14px, $black);
-            }
-            .detail {
-                margin-top: 20px;
-                color: $grau;
-                a {
-                    color: $grau;
+            .info {
+                padding-bottom: 20px;
+                margin-left: 130px;
+                height: 70px;
+                position: relative;
+                .title {
+                    cursor: pointer;
+                    height: 20px;
+                    line-height: 20px;
+                    font-weight: 700;
+                    @include sc(14px, $black);
                     &:hover {
-                        span {
-                            color: $blue;
+                        color: $blue;
+                    }
+                }
+                .detail {
+                    margin-top: 20px;
+                    color: $grau;
+                    a {
+                        color: $grau;
+                        &:hover {
+                            span {
+                                color: $blue;
+                            }
+                        }
+                    }
+                    .data-box {
+                        width: 80px;
+                        margin-right: 20px;
+                        white-space: nowrap;
+                        -o-text-overflow: ellipsis;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                    .b-icon {
+                        @include wh(12px, 12px);
+                        margin-right: 5px;
+                        display: inline-block;
+                        vertical-align: text-top;
+                        background: url(../../assets/icons.png) no-repeat;
+                        &.play {
+                            background-position: -282px -90px;
+                        }
+                        &.view {
+                            background-position: -282px -218px;
+                        }
+                        &.author {
+                            background-position: -282px -154px;
                         }
                     }
                 }
-                .data-box {
-                    width: 80px;
-                    margin-right: 20px;
-                    white-space: nowrap;
-                    -o-text-overflow: ellipsis;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
-                .b-icon {
-                    @include wh(12px, 12px);
-                    margin-right: 5px;
-                    display: inline-block;
-                    vertical-align: text-top;
-                    background: url(../../assets/icons.png) no-repeat;
-                    &.play {
-                        background-position: -282px -90px;
+                .pts {
+                    height: 20px;
+                    color: #b8c0cc;
+                    line-height: 20px;
+                    position: absolute;
+                    bottom: 40px;
+                    right: 20px;
+                    text-align: center;
+                    div {
+                        font-weight: 700;
+                        @include sc(16px, $blue);
+                        margin-bottom: 12px;
                     }
-                    &.view {
-                        background-position: -282px -218px;
-                    }
-                    &.author {
-                        background-position: -282px -154px;
-                    }
-                }
-            }
-            .pts {
-                height: 20px;
-                color: #b8c0cc;
-                line-height: 20px;
-                position: absolute;
-                bottom: 40px;
-                right: 20px;
-                text-align: center;
-                div {
-                    font-weight: 700;
-                    @include sc(16px, $blue);
-                    margin-bottom: 12px;
                 }
             }
         }
     }
+    &.bangumi {
+        li {
+            .num {
+                height: 120px;
+                line-height: 120px;
+            }
+            .content {
+                .img {
+                    .cover {
+                        @include wh(90px, 120px);
+                        img{
+                                border-radius: 4px;
+                        }
+                    }
+                }
+                .info {
+                    height: 120px;
+                    margin-left: 106px;
+                    .title {
+                        height: 42px;
+                        line-height: 42px;
+                        font-size: 18px;
+                    }
+                    .bangumi-info {
+                        color: $grau;
+                    }
+                    .bangumi-num {
+                        color: $pink;
+                    }
+                    .pts {
+                        bottom: 90px;
+                    }
+                }
+            }
+            
+        }
+    }
 }
+
 .watch-later-trigger {
     display: none;
     @include wh(22px, 22px);
