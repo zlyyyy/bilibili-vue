@@ -13,6 +13,8 @@
         <popularize :popularize="popularize" :online="online"></popularize>
         <!--  动画 --> 
         <donghua 
+			:ref="donghua.ref"
+			:id="donghua.ref"
 			:donghua="donghua" 
 			@setDynamicRegion="setDynamicRegion"
 			@setNewlist="setNewlist"
@@ -20,6 +22,8 @@
 			/>
         <!--  番剧 --> 
 		<bangumi
+			:scrollTop="scrollTop"
+			:ref="bangumi.ref"
 			:bangumi="bangumi" 
 			@setAdSlide="setAdSlide"
 			@setTimeline="setTimeline"
@@ -29,9 +33,23 @@
 			/>
         <!--  国创 -->
         <guochuang
+			:scrollTop="scrollTop"
+			:ref="guochuang.ref"
 			:guochuang="guochuang" 
 			@setAdSlide="setAdSlide"
 			@setTimeline="setTimeline"
+			@setDynamicRegion="setDynamicRegion"
+			@setNewlist="setNewlist"
+			@setRankingRegion="setRankingRegion"
+			/>
+		<donghua 
+			:scrollTop="scrollTop"
+			v-for="(item,index) in module"
+			v-if="index>2"
+			:key="item.ref"
+			:ref="item.ref"
+			:id="item.ref"
+			:donghua="item" 
 			@setDynamicRegion="setDynamicRegion"
 			@setNewlist="setNewlist"
 			@setRankingRegion="setRankingRegion"
@@ -72,7 +90,19 @@ import 	{ mapState, mapGetters, mapMutations, mapActions } 	from 'vuex'
 export default {
     created() {
         this.setData()
-    },
+	},
+	mounted() {
+		this.module.forEach((ele,index) => {
+			const _ref = this.$refs[ele.ref]
+			setTimeout(()=>{
+				this.setEleOffsetTop({
+					index: index,
+					data: _ref.length? _ref[0].$el.offsetTop : _ref.$el.offsetTop
+				})
+			},2000)
+		});
+		console.log(this.$refs)
+	},
     components:{
         Slide,
         Recommend,
@@ -83,13 +113,15 @@ export default {
     },
     computed: {
         ...mapGetters([
+			'scrollTop',//滚动条距离顶部高度
             'slide',//轮播图
             'recommend',//推荐模块
             'popularize',//推广模块
 			'online',//当前在线
 			'donghua',//动画
 			'bangumi',//番剧
-			'guochuang'//国创
+			'guochuang',//国创
+			'module'
 		])
     },
     data () {
@@ -100,6 +132,9 @@ export default {
         }
     },
     methods: {
+		...mapMutations({
+			setEleOffsetTop: 'SET_ELE_OFFSETTOP'
+		}),
         ...mapActions([
 			'setAdSlide',
             'setSlide',

@@ -38,6 +38,14 @@ export function getLocs(data) {
 export function getSearchDefaultWords(){
     return http.get('/search_value')
 }
+//搜索框搜索建议
+export function getSuggest(term){
+    return http.get('/suggest',{
+        params: {
+            term
+        }
+    })
+}
 //菜单右侧gif
 export function getMenuIcon(){
     return http.get('/menu_gif')
@@ -154,16 +162,16 @@ export function getMoviesRank(day, rid){
 
 //搜索结果
 export function getSearchResult(highlight, keyword){
-    return http.get('/static/search/all.json',{
+    return http.get('/search/all',{
         params: {
-            highlight: highlight,
-            keyword: keyword
+            highlight,
+            keyword
         }
     })
 }
 //根据media_id获取详细信息
-export function getSeason(index, id){
-    return http.get('/static/search/season'+index+'.json',{
+export function getSeason(id){
+    return http.get('/search/season',{
         params: {
             media_id: id
         }

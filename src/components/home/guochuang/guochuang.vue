@@ -17,6 +17,7 @@
                     <timing-box :timelineData="timeline.data" :activetab="activeTab"></timing-box>
                 </div>
                 <zone-rank 
+                    :scrollTop="scrollTop"
                     :zoneRank="guochuang" 
                     :tag="1"
                     @setRankingRegion="setRankingRegion"
@@ -29,6 +30,7 @@
             />
             <div class="r-con">
                 <zone-rank 
+                    :scrollTop="scrollTop"
                     :zoneRank="guochuang" 
                     @setRankingRegion="setRankingRegion"
                 /> 
@@ -45,15 +47,14 @@ import 	AdSlide	 from '../../ad/adSlide'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
     created() {
-        this.setTimeline({
-            id: this.guochuang.id,
-            rid: this.guochuang.rid
-        })
-        this.setAdSlide({
-            id: this.guochuang.id,
-            rid: this.guochuang.rid,
-            position_id: 101
-        })
+    },
+    watch: {
+        offsetTop: function(newVal, oldVal){
+            this.getData()
+        },
+        scrollTop: function (newVal, oldVal) {
+            this.getData()
+        }
     },
     components: {
         TimingBox,
@@ -62,6 +63,10 @@ export default {
         AdSlide
     },
     props: {
+        scrollTop: {
+            type: Number,
+            default: 0
+        },
         guochuang: {
             type: [Object,Array],
             default: () => []
@@ -74,10 +79,26 @@ export default {
     },
     data () {
         return {
+            loading: false,
             activeTab: 0
         }
     },
     methods: {
+        getData(num){
+            if(this.guochuang.offsetTop - this.scrollTop > 400 && this.guochuang.offsetTop - this.scrollTop < 1200 && this.loading==false){
+                console.log(this.guochuang.title)
+                this.loading=true
+                this.setTimeline({
+                    id: this.guochuang.id,
+                    rid: this.guochuang.rid
+                })
+                this.setAdSlide({
+                    id: this.guochuang.id,
+                    rid: this.guochuang.rid,
+                    position_id: 101
+                })
+            }
+        },
         setActiveTab(index){
             this.activeTab = index
         },

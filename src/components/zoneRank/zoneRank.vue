@@ -53,11 +53,21 @@ import { count, count2 } from '../../utils/utils'
 import Dropdown from '../dropdown/dropdown'
 import AdSlide from '../ad/adSlide'
 export default {
-    created() {
-        // 默认三日排行
-        this.setData(3)
+    mounted() {
+    },
+    watch: {
+        offsetTop: function(newVal, oldVal){
+            this.getData()
+        },
+        scrollTop: function (newVal, oldVal) {
+            this.getData()
+        }
     },
     props: {
+        scrollTop: {
+            type: Number,
+            default: 0
+        },
         zoneRank: {
             type: [Object,Array],
             default: () => []
@@ -76,6 +86,9 @@ export default {
         AdSlide
     },
     computed: {
+        offsetTop(){
+            return this.zoneRank.offsetTop
+        },
         rankData(){
             if(this.zoneRank.rid==13||(this.zoneRank.rid==168&&this.tag==1)){
                     return this.zoneRank.rankBangumiData.list
@@ -100,12 +113,21 @@ export default {
     },
     data () {
         return {
+            loading: false,
             tab: 0,
             selectDay: 3,
             selectIndex: 0
         }
     },
     methods: {
+        getData(){
+            // console.log("scrollTop:"+this.scrollTop+";offsetTop:"+this.zoneRank.offsetTop)
+            if(this.zoneRank.offsetTop - this.scrollTop > 400 && this.zoneRank.offsetTop - this.scrollTop < 1200 && this.loading==false){
+                console.log(this.zoneRank.title)
+                this.loading=true
+                this.setData(3)
+            }
+        },
         tabMove(index){
             //tab鼠标move
             this.tab = index

@@ -1,4 +1,5 @@
 const state = {
+    scrollTop: 0,
     //轮播图模块
     slide: {
         time: 2000,
@@ -17,16 +18,24 @@ const state = {
     //右侧悬浮导航
     elevator: [
         {
-            name: '直播'
+            id: 'bili_live',
+            name: '直播',
+            offsetTop: 0
         },
         {
-            name: '动画'
+            id: 'bili_donghua',
+            name: '动画',
+            offsetTop: 0
         },
         {
-            name: '番剧'
+            id: 'bili_bangumi',
+            name: '番剧',
+            offsetTop: 0
         },
         {
-            name: '国创'
+            id: 'bili_guochuang',
+            name: '国创',
+            offsetTop: 0
         },
         {
             name: '音乐'
@@ -79,6 +88,7 @@ const state = {
             rid: 1,
             title: '动画', //模型名称
             icon: 'icon-donghua',//模型图标
+            offsetTop: 0,
             tab:[
                 {
                     name: '有新动态'
@@ -115,8 +125,10 @@ const state = {
             id: 1,
             ref: 'bili_bangumi',
             rid: 13,
-            title: '番剧动态',
+            title: '番剧',
+            title2: '番剧动态',
             icon: 'icon-bangumi',
+            offsetTop: 0,
             tab:[
                 {
                     name: '有新动态'
@@ -143,7 +155,6 @@ const state = {
             rankAllData: [],//全部排行
             rankOriginalData: [],//原创排行
             timeline: {
-                title: '番剧',
                 tab:[
                     {
                         name: '最新'
@@ -183,8 +194,10 @@ const state = {
             id: 2,
             ref: 'bili_guochuang',
             rid: 168,
-            title: '国产原创相关',
+            title: '国创',
+            title2: '国产原创相关',
             icon: 'icon-guochuang',
+            offsetTop: 0,
             tab:[
                 {
                     name: '有新动态'
@@ -218,7 +231,6 @@ const state = {
             rankAllData: [],//全部排行
             rankOriginalData: [],//原创排行
             timeline: {
-                title: '国创',
                 tab:[
                     {
                         name: '最新'
@@ -253,7 +265,85 @@ const state = {
                 time: 3000,
                 pagation: false
             }
-        }
+        },
+        {
+            id: 3,
+            ref: 'bili_music',//模型id
+            rid: 3,
+            title: '音乐', //模型名称
+            icon: 'icon-music',//模型图标
+            offsetTop: 0,
+            tab:[
+                {
+                    name: '有新动态'
+                },
+                {
+                    name: '最新投稿'
+                }
+            ],
+            dynamic: 27989,//模型新动态数
+            moreUrl: '/v/donghua',//模型更多链接
+            data: [],//动态区域数据
+            ranktab: [
+                {
+                    name: '全部'
+                },
+                {
+                    name: '原创'
+                }
+            ],
+            rankdropdown:[
+                {
+                    name: '三日'
+                },
+                {
+                    name: '一周'
+                }
+            ],
+            rankPic: true,
+            rankList: 7,
+            rankAllData: [],//全部排行
+            rankOriginalData: []//原创排行
+        },
+        {
+            id: 4,
+            ref: 'bili_dance',//模型id
+            rid: 129,
+            title: '舞蹈', //模型名称
+            icon: 'icon-dance',//模型图标
+            offsetTop: 0,
+            tab:[
+                {
+                    name: '有新动态'
+                },
+                {
+                    name: '最新投稿'
+                }
+            ],
+            dynamic: 27989,//模型新动态数
+            moreUrl: '/v/donghua',//模型更多链接
+            data: [],//动态区域数据
+            ranktab: [
+                {
+                    name: '全部'
+                },
+                {
+                    name: '原创'
+                }
+            ],
+            rankdropdown:[
+                {
+                    name: '三日'
+                },
+                {
+                    name: '一周'
+                }
+            ],
+            rankPic: true,
+            rankList: 7,
+            rankAllData: [],//全部排行
+            rankOriginalData: []//原创排行
+        },
     ]
 }
 export default state

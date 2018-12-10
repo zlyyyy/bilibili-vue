@@ -5,16 +5,16 @@
             </div>
         </div>
         <div class="nav-list">
-            <div v-for="(item, index) in elevator" :sortindex="index" class="item sortable">
-                {{ item.name }}
+            <div v-for="(item, index) in module" :sortindex="index" class="item sortable" @click="goPosition(index)" :class="{'on':index==activeTab}">
+                {{ item.title }}
             </div>
             <div class="item customize">
                 <i class="icon"></i>排序
             </div>
         </div>
-        <div class="s-line">
+        <div class="s-line">  
         </div>
-        <div class="back-top icon">
+        <div class="back-top icon" @click="goTop">
         </div>
         <div class="app-download">
             <a href="//app.bilibili.com/?channel=home_recommend" target="_blank">
@@ -31,34 +31,49 @@
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
     created() {
+        let vm = this
+        window.onscroll=function(){
+            var scrollTop = document.documentElement.scrollTop||document.body.scrollTop
+            vm.scrollTop = scrollTop
+            vm.setScrollTop(scrollTop)
+        }
     },
     components: {
     },
     props: {
-    },
+	},
     computed: {
         ...mapGetters([
-            'elevator',
+            'module',
         ]),
+        activeTab(){
+            //遍历返回符合条件的值
+            let one = this.module.map((v,index) => {
+                return this.scrollTop+100>v.offsetTop? index : null
+            })
+            //filter去掉null
+            let two = one.filter(item => item)
+            return two.length>0? two.length : 0     
+        },
         elTop(){
-            return window.onscroll=function(){
-                if (document.documentElement.scrollTop<60) {
-                    return 88
-                }else {
-                    return 232
-                }
-            }()
-            
+            return this.scrollTop>60? 88:232
         }
     },
     data () {
         return {
-            activeTab: 0
+            scrollTop: 0
         }
     },
     methods: {
-        setActiveTab(index){
-            this.activeTab = index
+        ...mapMutations({
+            setScrollTop: 'SET_SCROLL_TOP'
+        }),
+        goTop(){
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
+        },
+        goPosition(index){
+            document.documentElement.scrollTop = this.module[index].offsetTop - 30
         }
     }
 }

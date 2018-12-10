@@ -1,4 +1,4 @@
-import { getLoc, getSearchDefaultWords, getMenuIcon } from '../../api'
+import { getLoc, getSearchDefaultWords, getSuggest, getMenuIcon } from '../../api'
 
 const state = {
 	leftNav: [ //顶部左侧导航栏
@@ -42,6 +42,7 @@ const state = {
 	headBanner: [],//顶部背景、LOGO
 	searchValue:'',//搜索框输入值
 	searchWord:[],//默认搜索关键字
+	suggest: [],//建议搜索
 	menuLeft: [
 		{
 			name: '首页',
@@ -572,6 +573,10 @@ const mutations = {
 	},
 	SET_SEARCH_WORD: (state, data) => {
 		state.searchValue = data
+	},
+	SET_SUGGEST: (state, data) => {
+		console.log(data)
+		state.suggest = data
 	}	
 }
 
@@ -585,6 +590,13 @@ const actions = {
 		getSearchDefaultWords().then(res=>{
 			commit('SET_SEARCH_DEFAULT_WORDS',res.data)
 		})
+	},
+	setSuggest({ commit, state }){
+		if(state.searchValue.length>0){
+			getSuggest(state.searchValue).then(res=>{
+				commit('SET_SUGGEST',res.result)
+			})
+		}
 	},
 	setMenuIcon({ commit, state }){
 		getMenuIcon().then(res=>{

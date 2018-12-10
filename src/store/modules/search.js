@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { getSearchResult, getSeason } from '../../api'
+import { getSearchResult, getSuggest, getSeason } from '../../api'
 
 const state = {
     //分类导航
@@ -9,57 +9,67 @@ const state = {
             title: '综合',
             path: '/search/all',
             resultNum: 0,
+            type: 'all',
             data: []
         },
         {
             title: '视频',
             path: '/search/video',
             resultNum: 0,
+            type: 'video',
             data: []
         },
         {
             title: '番剧',
             path: '/search/bangumi',
             resultNum: 0,
+            type: 'media_bangumi',
             data: []
         },
         {
             title: '影视',
             path: '/search/pgc',
             resultNum: 0,
+            type: 'media_ft',
             data: []
         },
         {
             title: '直播',
             path: '/search/live',
             resultNum: 0,
+            type: 'live',
             data: []
         },
         {
             title: '专栏',
             path: '/search/article',
             resultNum: 0,
+            type: 'article',
             data: []
         },
         {
             title: '话题',
             path: '/search/topic',
             resultNum: 0,
+            type: 'topic',
             data: []
         },
         {
             title: '用户',
             path: '/search/upuser',
             resultNum: 0,
+            type: 'bili_user',
             data: []
         },
         {
             title: '相簿',
             path: '/search/photo',
             resultNum: 0,
+            type: 'photo',
             data: []
         }
     ],
+    suggest: [],//建议搜索
     hoverBar: 0,
     hoverIndex: 0,
     allResult: [],
@@ -92,6 +102,10 @@ const mutations = {
     SET_SEARCH_VALUE: (state, data) => {
         state.searchWord = data
     },
+    SET_SUGGEST: (state, data) => {
+		console.log(data)
+		state.suggest = data
+	},
     SET_HOVER_BAR: (state, data) => {
         state.hoverBar = data
     },
@@ -115,7 +129,7 @@ const mutations = {
 }
 
 const actions = {
-    getAllResult({commit,state},{ highlight, keyword }) {
+    setAllResult({commit,state},{ highlight, keyword }) {
         getSearchResult(highlight, keyword ).then(res=>{
             commit('SET_ALL_RESULT',res.data)
             let season = state.allResult.result.media_bangumi;
@@ -123,7 +137,7 @@ const actions = {
             commit('SET_TOP_NUM',toplist)
             //根据media_id番剧ID查询详细信息
             for(let i = 0; i<season.length;i++){
-                getSeason(i, season[i].media_id).then(res=>{
+                getSeason(season[i].media_id).then(res=>{
                     commit('SET_SEASON',{
                         id: i,
                         result: res.result
@@ -132,7 +146,14 @@ const actions = {
             }
         })
     },
-    getSeason({commit,state},msg) {
+    setSuggest({ commit, state }){
+		if(state.searchValue.length>0){
+			getSuggest(state.searchValue).then(res=>{
+				commit('SET_SUGGEST',res.result)
+			})
+		}
+	},
+    setSeason({commit,state},msg) {
         commit('SET_SEASON',msg)
     }
 }

@@ -3,7 +3,7 @@
         <div class="zone-title">
             <div class="headline" :class="{'fj' : storeydata.rid == 13 || storeydata.rid == 168}">
                 <i class="icon icon_t" :class="storeydata.icon"></i>
-                <a :href=storeydata.moreUrl class="name">{{ storeydata.title }}</a>
+                <a :href=storeydata.moreUrl class="name">{{ title }}</a>
                 <div class="bili-tab">
                     <div class="bili-tab-item" v-for="(item,index) in storeydata.tab" :class="{'on' : index === nowtab }" @click="nowtabclick(index)">{{ item.name }}</div>
                 </div>
@@ -78,6 +78,9 @@ export default {
         
     },
     computed:{
+        title(){
+            return this.storeydata.rid == 13 || this.storeydata.rid == 168? this.storeydata.title2 : this.storeydata.title
+        }
     },
     data () {
         return {

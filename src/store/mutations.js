@@ -1,6 +1,10 @@
 import * as types from './mutation-types'
 
 const mutations = {
+    [types.SET_SCROLL_TOP](state,data){
+        //滚动条距离顶部高度
+        state.scrollTop = data
+    },
     [types.SET_AD_SLIDE](state,data){
         //广告位轮播图
         state.module[data.id].ad.data = data.data
@@ -47,5 +51,10 @@ const mutations = {
         //更新时间表
         state.module[id].timeline.data = data.data
     },
+    [types.SET_ELE_OFFSETTOP](state,data){
+        //设置浮动导航栏各个模块定位
+        state.module[data.index].offsetTop = data.data
+        // console.log(data.data)
+    }
 }
 export default mutations

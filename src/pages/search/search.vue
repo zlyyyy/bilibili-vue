@@ -7,8 +7,17 @@
 						<a href="javascript:;" class="search-logo"></a>
 						<div class="search-block">
 							<div class="input-wrap">
-								<input v-model="searchValue" type="text" id="search-keyword" maxlength="100" autocomplete="off">
-								<div class="suggest-wrap" style="display: none;">
+								<input 
+                                    v-model="searchValue" 
+                                    type="text" 
+                                    @keyup.enter="setAllResult(1,searchValue)" 
+                                    v-on:input="setSuggest"
+                                    @focus="setSuggestShow"
+                                    @blur="setSuggestHide"
+                                    id="search-keyword" 
+                                    maxlength="100" 
+                                    autocomplete="off">
+								<div class="suggest-wrap" v-if="suggestShow">
 									<div class="hotword-wrap" style="display: none;">
 										<ul class="horizontal">
 											<li>
@@ -63,6 +72,12 @@
 											</li>
 										</ul>
 									</div>
+                                    <ul class="keyword-wrap" v-if="suggestShow">
+                                        <li>
+                                            <a class="vt-text keyword">
+                                            </a>
+                                        </li>
+                                        </ul>
 									<ul class="history-wrap" style="display: none;">
 										<li class="title"><span>搜索历史</span></li>
 										<li class="history-li"><a class="vt-text history">我的英雄学院</a><i class="clear"></i></li>
@@ -113,13 +128,13 @@ const { mapState, mapGetters, mapMutations, mapActions } = createNamespacedHelpe
 
 export default {
     created() {
-        this.getAllResult({
-            highlight: 1,
-            keyword: '我的英雄学院'
-        })
         //根据地址栏修改当前搜索条件
         const keyword = this.$route.query.keyword
         this.setSearchValue(keyword)
+        keyword==null? null : this.setAllResult({
+                                            highlight: 1,
+                                            keyword: keyword
+                                        })
         //路由判断设置头部菜单栏显示隐藏
         const path = this.$route.matched[0].path === '/search'? false : true
         this.setMenuShow(path)
@@ -146,6 +161,7 @@ export default {
     },
     data () {
         return {
+            suggestShow: false
         }
     },
     methods: {
@@ -156,9 +172,15 @@ export default {
             setMenuShow: 'SET_MENU_SHOW'
         }),
 		...mapActions([
-            'getAllResult',
-            'getSeason'
-		]),
+            'setAllResult',
+            'setSeason'
+        ]),
+        setSuggestShow(){
+            this.searchValue.length>0? this.suggestShow = true : this.suggestShow = false
+        },
+        setSuggestHide(){
+            this.suggestShow = false
+        },
 		hoverBarLeft(index){
             this.setHoverBar(index*114)
         },

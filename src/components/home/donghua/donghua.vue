@@ -1,5 +1,5 @@
 <template>
-    <div class="zone-wrap-module" id="bili_donghua">
+    <div class="zone-wrap-module">
         <div class="zone-module">
             <storey-box 
                 :storeydata="donghua"
@@ -7,6 +7,7 @@
                 @setNewlist="setNewlist"
             ></storey-box>
             <zone-rank 
+                :scrollTop="scrollTop"
                 :zoneRank="donghua" 
                 :tag="0" 
                 @setRankingRegion="setRankingRegion"
@@ -26,6 +27,10 @@ export default {
         ZoneRank
     },
     props: {
+        scrollTop: {
+            type: Number,
+            default: 0
+        },
         donghua: {
             type: [Object,Array],
             default: () => []

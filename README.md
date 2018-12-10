@@ -1,7 +1,7 @@
 # bilibili仿站vue
 
 目前B站也是用的vue框架，自己试试用vue搭建B站，巩固一下学习的vue知识
-> 木有api是比较难受的事，数据都是自己一个个接口手动扒的假数据拿来测试用
+> 更新 接口替换为[Easy Mock](https://github.com/easy-mock/easy-mock)代理真实数据接口
 
 ## 如何安装与使用
 
