@@ -24,6 +24,7 @@
                 /> 
             </div>
             <storey-box 
+                :scrollTop="scrollTop"
                 :storeydata="guochuang" 
                 @setDynamicRegion="setDynamicRegion"
                 @setNewlist="setNewlist"
@@ -46,7 +47,8 @@ import 	StoreyBox 	from '../../storeyBox/storeyBox'
 import 	AdSlide	 from '../../ad/adSlide'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
-    created() {
+    mounted() {
+        // this.getData()
     },
     watch: {
         offsetTop: function(newVal, oldVal){
@@ -73,21 +75,24 @@ export default {
         }
     },
     computed: {
+        offsetTop(){
+            return this.guochuang.offsetTop
+        },
         timeline(){
             return this.guochuang.timeline
         }
     },
     data () {
         return {
-            loading: false,
+            loading: true,
             activeTab: 0
         }
     },
     methods: {
-        getData(num){
-            if(this.guochuang.offsetTop - this.scrollTop > 400 && this.guochuang.offsetTop - this.scrollTop < 1200 && this.loading==false){
-                console.log(this.guochuang.title)
-                this.loading=true
+        getData(){
+            if(this.scrollTop + 900 > this.guochuang.offsetTop && this.loading==true){
+                console.log("时间轴+广告位："+this.guochuang.title)
+                this.loading = false
                 this.setTimeline({
                     id: this.guochuang.id,
                     rid: this.guochuang.rid

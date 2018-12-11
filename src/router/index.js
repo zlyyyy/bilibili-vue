@@ -151,10 +151,11 @@ export default new VueRouter({
             ]
         },
         {
+            name: 'video',
             path: '/video/:aid',
             component: Videopage,
             meta: {
-                title: 'VUE视频播放 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+                title: ':aid - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
             }
         },
         {

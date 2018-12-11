@@ -12,7 +12,7 @@
                 <ul class="rank-list" :class="(zoneRank.rid==13&&tag==1) || (zoneRank.rid==168&&tag==1)? 'bangumi-rank-list' : 'hot-lists'" >
                     <li class="rank-item" v-for="(item,index) in rankData" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&zoneRank.rankPic==true&&tag===0}]" v-if="index<zoneRank.rankList">
                         <i class="ri-num">{{ index+1 }}</i>
-                        <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
+                        <a :href="'/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
                                 <img :alt="item.title" v-lazy="item.pic">
                             </div>
@@ -28,7 +28,7 @@
                 <ul class="rank-list origin-list"  v-if="rankPic==true&&tag==0">
                     <li class="rank-item" v-for="(item,index) in zoneRank.rankOriginalData" :class="[{ highlight: index<3 }, {'show-detail first':index===0&&zoneRank.rankPic==true}]" v-if="index<zoneRank.rankList">
                         <i class="ri-num">{{ index+1 }}</i>
-                        <a :href="'https://www.bilibili.com/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
+                        <a :href="'/video/av'+item.aid" target="_blank" :title="item.title" class="ri-info-wrap clearfix">
                             <div class="lazy-img ri-preview" v-if="rankPic">
                                 <img :alt="item.title" v-lazy="item.pic">
                             </div>
@@ -54,9 +54,10 @@ import Dropdown from '../dropdown/dropdown'
 import AdSlide from '../ad/adSlide'
 export default {
     mounted() {
+        // this.getData()
     },
     watch: {
-        offsetTop: function(newVal, oldVal){
+        offsetTop: function (newVal, oldVal) {
             this.getData()
         },
         scrollTop: function (newVal, oldVal) {
@@ -113,7 +114,7 @@ export default {
     },
     data () {
         return {
-            loading: false,
+            loading: true,
             tab: 0,
             selectDay: 3,
             selectIndex: 0
@@ -122,9 +123,9 @@ export default {
     methods: {
         getData(){
             // console.log("scrollTop:"+this.scrollTop+";offsetTop:"+this.zoneRank.offsetTop)
-            if(this.zoneRank.offsetTop - this.scrollTop > 400 && this.zoneRank.offsetTop - this.scrollTop < 1200 && this.loading==false){
-                console.log(this.zoneRank.title)
-                this.loading=true
+            if(this.scrollTop + 900 > this.zoneRank.offsetTop && this.loading==true){
+                console.log("排行："+this.zoneRank.title)
+                this.loading = false
                 this.setData(3)
             }
         },

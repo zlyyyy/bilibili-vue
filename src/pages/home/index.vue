@@ -92,17 +92,16 @@ export default {
         this.setData()
 	},
 	mounted() {
-		this.module.forEach((ele,index) => {
-			const _ref = this.$refs[ele.ref]
-			setTimeout(()=>{
-				this.setEleOffsetTop({
-					index: index,
-					data: _ref.length? _ref[0].$el.offsetTop : _ref.$el.offsetTop
-				})
-			},2000)
-		});
+		this.checkEleOffsetTop()
 		console.log(this.$refs)
 	},
+	watch: {
+        scrollTop: function (newVal, oldVal) {
+			//校正各模块offsetTop
+			this.checkEleOffsetTop()
+			this.loading = false
+        }
+    },
     components:{
         Slide,
         Recommend,
@@ -126,6 +125,7 @@ export default {
     },
     data () {
         return {
+			loading: true,
             videodata: [],
             videoinforShow: false,
             videoinforitem: []
@@ -145,6 +145,19 @@ export default {
 			'setRankingRegion',
 			'setTimeline'
 		]),
+		checkEleOffsetTop(){
+			if(this.loading==true){
+				this.module.forEach((ele,index) => {
+					const _ref = this.$refs[ele.ref]
+					setTimeout(()=>{
+						this.setEleOffsetTop({
+							index: index,
+							data: _ref.length? _ref[0].$el.offsetTop : _ref.$el.offsetTop
+						})
+					},2000)
+				});
+			}
+		},
         setData(){
             //轮播图推广模块
             this.setSlide({

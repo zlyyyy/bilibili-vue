@@ -7,7 +7,7 @@
                 </div>
                 <div class="content">
                     <div class="img">
-                        <a :href=item.aid target="_blank">
+                        <a :href="'/video/av'+item.aid" target="_blank">
                             <div class="cover">
                                 <img :alt="item.title" v-lazy="type==2? item.cover : item.pic">
                             </div>
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="info">
-                        <a :href=item.aid target="_blank" class="title">{{ item.title }}</a>
+                        <a :href="'/video/av'+item.aid" target="_blank" class="title">{{ item.title }}</a>
                         <div class="bangumi-info" v-if="type==2">
                             连载中，更新至第
                             <span class="bangumi-num">{{item.newest_ep_index}}</span> 

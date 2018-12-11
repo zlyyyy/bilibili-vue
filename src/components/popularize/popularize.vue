@@ -6,10 +6,10 @@
             </div>
             <div class="storey-box clearfix">
                 <div class="spread-module" v-for="item in popularize">
-                    <a target="_blank" :href=item.url>
+                    <a target="_blank" :href=stringChange(item.url)>
                         <div class="pic">
                             <div class="lazy-img">
-                                <img :alt=item.name v-lazy=item.pic>
+                                <img :alt=item.name v-lazy=item.pic width="160" height="100">
                             </div>
                             <div class="cover-preview-module">
                                 <div class="progress-bar">
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { count } from '../../utils/utils'
+import { count, stringChange } from '../../utils/utils'
 export default {
 	props: {
         //推广数据
@@ -70,11 +70,13 @@ export default {
     methods: {
         count(num){
             return count(num)
+        },
+        stringChange(str){
+            return stringChange(str)
         }
     }  
 }
 </script>
 
-<style scoped>
-
+<style>
 </style>

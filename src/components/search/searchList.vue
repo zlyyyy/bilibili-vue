@@ -88,7 +88,7 @@
 				</ul>
 				<ul class="video-contain clearfix" v-if="allResult.result">
 					<li class="video matrix" v-for="(item,index) in allResult.result.video">
-						<a :href="'https://www.bilibili.com/video/av'+item.aid+'/'" target="_blank" title="">
+						<a :href="'/video/av'+item.aid+'/'" target="_blank" title="">
 							<div class="img">
 								<div class="lazy-img">
 									<img alt="" v-lazy="item.pic">
@@ -104,7 +104,7 @@
 							<div class="headline clearfix">
 								<span class="type avid">{{'av'+item.aid}}</span>
                                 <span class="type hide">综合</span>
-                                <a title="" :href="'https://www.bilibili.com/video/av'+item.aid+'/'" target="_blank" class="title" v-html="item.title">
+                                <a title="" :href="'/video/av'+item.aid+'/'" target="_blank" class="title" v-html="item.title">
                                 </a>
 							</div>
 							<div class="des hide">

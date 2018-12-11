@@ -38,6 +38,11 @@ export default {
             default: false
         }
     },
+    watch: {
+        slidedata: function(newVal, oldVal){
+            newVal.length>0?this.runInv():null
+        }
+    },
     computed: {
         prevIndex(){
             if(this.nowIndex === 0){
@@ -56,6 +61,7 @@ export default {
     },
     data () {
         return {
+            loading: true,
             nowIndex: 0,
             isShow: true
         }
@@ -69,16 +75,19 @@ export default {
             },10)
         },
         runInv() {
-            this.inVld = setInterval(()=>{
-                this.goto(this.nextIndex)
-            },this.slidetimedata)
+            if(this.loading){
+                this.loading = false
+                this.inVld = setInterval(()=>{
+                    this.goto(this.nextIndex)
+                },this.slidetimedata)
+            }
         },
         clearInv(){
             clearInterval(this.inVld)
         }
     },
     mounted() {
-        this.runInv()
+        this.slidedata.length>0?this.runInv():null
     }
 }
 </script>

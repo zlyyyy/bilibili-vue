@@ -21,7 +21,7 @@
         </div>
         <div class="storey-box" v-if="storeydata.data">
             <div class="spread-module" v-for="(item,index) in storeydata.data.archives" v-if="index<10">
-                <a :href="'https://www.bilibili.com/video/av'+item.aid+'/'" target="_blank" :title=item.title>
+                <a :href="'/video/av'+item.aid+'/'" target="_blank" :title=item.title>
                     <div class="pic">
                         <div class="lazy-img">
                             <img :alt=item.title v-lazy=item.pic>
@@ -60,34 +60,55 @@
 <script>
 import { count, count2 } from '../../utils/utils'
 export default {
-    created() {
-        // 默认显示新动态
-        this.$emit('setDynamicRegion',{
-            id: this.storeydata.id,
-            ps: 10,
-            rid: this.storeydata.rid
-        })
+    mounted() {
+    },
+    watch: {
+        offsetTop: function (newVal, oldVal) {
+            this.getData()
+        },
+        scrollTop: function (newVal, oldVal) {
+            this.getData()
+        }
     },
     props: {
+        scrollTop: {
+            type: Number,
+            default: 0
+        },
         storeydata: {
             type: [Object,Array],
             default: () => []
         }
     },
     components: {
-        
     },
     computed:{
+        offsetTop(){
+            return this.storeydata.offsetTop
+        },
         title(){
             return this.storeydata.rid == 13 || this.storeydata.rid == 168? this.storeydata.title2 : this.storeydata.title
         }
     },
     data () {
         return {
+            loading: true,
             nowtab: 0
         }
     },
     methods: {
+        getData(){
+            if(this.scrollTop + 900 > this.storeydata.offsetTop && this.loading==true){
+                console.log("动态："+this.storeydata.title)
+                this.loading = false
+                // 默认显示新动态
+                this.$emit('setDynamicRegion',{
+                    id: this.storeydata.id,
+                    ps: 10,
+                    rid: this.storeydata.rid
+                })
+            }
+        },
         nowtabclick(index) {
             this.nowtab =index
             switch(index){

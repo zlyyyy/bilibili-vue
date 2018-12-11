@@ -24,6 +24,7 @@
                 /> 
             </div>
             <storey-box 
+                :scrollTop="scrollTop"
                 :storeydata="bangumi" 
                 @setDynamicRegion="setDynamicRegion"
                 @setNewlist="setNewlist"
@@ -45,7 +46,8 @@ import 	StoreyBox 	from '../../storeyBox/storeyBox'
 import 	AdSlide	 from '../../ad/adSlide'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
-    created() {
+    mounted() {
+        // this.getData()
     },
     watch: {
         offsetTop: function(newVal, oldVal){
@@ -72,21 +74,24 @@ export default {
         }
     },
     computed: {
+        offsetTop(){
+            return this.bangumi.offsetTop
+        },
         timeline(){
             return this.bangumi.timeline
         }
     },
     data () {
         return {
-            loading: false,
+            loading: true,
             activeTab: 0
         }
     },
     methods: {
         getData(){
-            if(this.bangumi.offsetTop - this.scrollTop > 400 && this.bangumi.offsetTop - this.scrollTop < 1200 && this.loading==false){
-                console.log(this.bangumi.title)
-                this.loading=true
+            if(this.scrollTop + 900 > this.bangumi.offsetTop && this.loading==true){
+                console.log("时间轴+广告位："+this.bangumi.title)
+                this.loading = false
                 this.setTimeline({
                     id: this.bangumi.id,
                     rid: this.bangumi.rid

@@ -2,6 +2,7 @@
     <div class="zone-wrap-module">
         <div class="zone-module">
             <storey-box 
+                :scrollTop="scrollTop"
                 :storeydata="donghua"
                 @setDynamicRegion="setDynamicRegion"
                 @setNewlist="setNewlist"
