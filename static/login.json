@@ -5,7 +5,7 @@
   "data":{
       "isLogin":true,
       "email_verified":1,
-      "face":"http://localhost:8080/static/face.jpg",
+      "face":"http://bilibili.zhaoly.cn/static/face.jpg",
       "level_info":{
           "current_level":4,
           "current_min":4500,
