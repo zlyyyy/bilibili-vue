@@ -10,7 +10,13 @@
 <script>
 export default {
     created() {
-        
+        router.afterEach((to, from, next) => {
+            /* 路由发生变化修改页面 title */
+            if (to.meta.title) {
+                document.title = to.meta.title;
+            }
+            next();
+        })
         //地址栏读取params参数，设置对应的参数
         this.aid = this.$route.params.aid
     },
