@@ -48,7 +48,7 @@ module.exports = {
 
     build: {
         // Template for index.html
-        index: path.resolve(__dirname, '../dist/index.html'),
+        index: path.resolve(__dirname, '../bilibili-vue/dist/index.html'),
 
         // Paths
         assetsRoot: path.resolve(__dirname, '../bilibili-vue/dist'),
