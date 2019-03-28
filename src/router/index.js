@@ -13,7 +13,7 @@ const Ranking = resolve => require(['@/pages/ranking/ranking'], resolve),
 Vue.use(VueRouter)
 
 export default new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     routes: [
         {
             name: 'home',
