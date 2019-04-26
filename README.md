@@ -1,10 +1,10 @@
 # bilibili仿站vue
 
+
 目前B站也是用的vue框架，自己试试用vue搭建B站，巩固一下学习的vue知识
-> 更新 接口替换为[Easy Mock](https://github.com/easy-mock/easy-mock)代理真实数据接口
+> 更新 接口替换为[Easy Mock](https://github.com/easy-mock/easy-mock)代理真实数据接口，[线上地址](http://bilibili.zhaoly.cn/)
 
 ## 如何安装与使用
-
 
 ```
 git clone https://github.com/zlyyyy/zly-vue-project.git  //下载项目

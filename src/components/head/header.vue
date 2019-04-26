@@ -28,9 +28,9 @@
                                 <!-- <div class="cancel"></div> -->
                             </li>
                         </ul>
-                        <a href="/ranking"  class="link-ranking">
+                        <router-link class="link-ranking" :to="{ path: 'ranking' }">
                             <span>排行榜</span>
-                        </a>
+                        </router-link>
                     </div>
                     <a class="head-logo" :style="{background:'url('+headBanner.litpic+')'}"></a>
                 </div>
