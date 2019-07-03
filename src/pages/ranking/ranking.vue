@@ -265,157 +265,157 @@ export default {
         }
     }
 }
-.rank-list-wrap{
+.ranking-list-wrap{
     position: relative;
     min-height: 600px;
-}
-.rank-list {
-    .rank-item {
-        @include transition(.2s);
-        overflow: hidden;
-        border-bottom: 1px solid #e5e9ef;
-        position: relative;
-        &:hover {
-            -webkit-box-shadow: 0 2px 5px #ccc;
-            box-shadow: 0 2px 5px #ccc;
-        }
-        .num {
-            @include wh(70px, 70px);
-            position: absolute;
-            top: 20px;
-            left: 0;
-            line-height: 70px;
-            text-align: center;
-            @include sc(36px, #b8c0cc);
-            font-weight: 700;
-            font-family: simhei;
-        }
-        .content {
-            padding: 20px 0 0 70px;
+    .rank-list {
+        .rank-item {
+            @include transition(.2s);
             overflow: hidden;
-            .img {
-                position: relative;
-                float: left;
-                a {
-                    cursor: pointer;
-                    display: inline-block;
-                }
-                .cover {
-                    @include wh(114px, 70px);
-                    img{
-                        display: block;
-                        @include wh(100%, 100%);
-                    }
-                }
-                &:hover {
-                    .w-later {
-                        display: block;
-                    }
-                }
+            border-bottom: 1px solid #e5e9ef;
+            position: relative;
+            &:hover {
+                -webkit-box-shadow: 0 2px 5px #ccc;
+                box-shadow: 0 2px 5px #ccc;
             }
-            .info {
-                padding-bottom: 20px;
-                margin-left: 130px;
-                height: 70px;
-                position: relative;
-                .title {
-                    cursor: pointer;
-                    height: 20px;
-                    line-height: 20px;
-                    font-weight: 700;
-                    @include sc(14px, $black);
-                    &:hover {
-                        color: $blue;
-                    }
-                }
-                .detail {
-                    margin-top: 20px;
-                    color: $grau;
-                    a {
-                        color: $grau;
-                        &:hover {
-                            span {
-                                color: $blue;
-                            }
-                        }
-                    }
-                    .data-box {
-                        width: 80px;
-                        margin-right: 20px;
-                        white-space: nowrap;
-                        -o-text-overflow: ellipsis;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                    }
-                    .b-icon {
-                        @include wh(12px, 12px);
-                        margin-right: 5px;
-                        display: inline-block;
-                        vertical-align: text-top;
-                        background: url(../../assets/icons.png) no-repeat;
-                        &.play {
-                            background-position: -282px -90px;
-                        }
-                        &.view {
-                            background-position: -282px -218px;
-                        }
-                        &.author {
-                            background-position: -282px -154px;
-                        }
-                    }
-                }
-                .pts {
-                    height: 20px;
-                    color: #b8c0cc;
-                    line-height: 20px;
-                    position: absolute;
-                    bottom: 40px;
-                    right: 20px;
-                    text-align: center;
-                    div {
-                        font-weight: 700;
-                        @include sc(16px, $blue);
-                        margin-bottom: 12px;
-                    }
-                }
-            }
-        }
-    }
-    &.bangumi {
-        li {
             .num {
-                height: 120px;
-                line-height: 120px;
+                @include wh(70px, 70px);
+                position: absolute;
+                top: 20px;
+                left: 0;
+                line-height: 70px;
+                text-align: center;
+                @include sc(36px, #b8c0cc);
+                font-weight: 700;
+                font-family: simhei;
             }
             .content {
+                padding: 20px 0 0 70px;
+                overflow: hidden;
                 .img {
+                    position: relative;
+                    float: left;
+                    a {
+                        cursor: pointer;
+                        display: inline-block;
+                    }
                     .cover {
-                        @include wh(90px, 120px);
+                        @include wh(114px, 70px);
                         img{
-                                border-radius: 4px;
+                            display: block;
+                            @include wh(100%, 100%);
+                        }
+                    }
+                    &:hover {
+                        .w-later {
+                            display: block;
                         }
                     }
                 }
                 .info {
-                    height: 120px;
-                    margin-left: 106px;
+                    padding-bottom: 20px;
+                    margin-left: 130px;
+                    height: 70px;
+                    position: relative;
                     .title {
-                        height: 42px;
-                        line-height: 42px;
-                        font-size: 18px;
+                        cursor: pointer;
+                        height: 20px;
+                        line-height: 20px;
+                        font-weight: 700;
+                        @include sc(14px, $black);
+                        &:hover {
+                            color: $blue;
+                        }
                     }
-                    .bangumi-info {
+                    .detail {
+                        margin-top: 20px;
                         color: $grau;
-                    }
-                    .bangumi-num {
-                        color: $pink;
+                        a {
+                            color: $grau;
+                            &:hover {
+                                span {
+                                    color: $blue;
+                                }
+                            }
+                        }
+                        .data-box {
+                            width: 80px;
+                            margin-right: 20px;
+                            white-space: nowrap;
+                            -o-text-overflow: ellipsis;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                        }
+                        .b-icon {
+                            @include wh(12px, 12px);
+                            margin-right: 5px;
+                            display: inline-block;
+                            vertical-align: text-top;
+                            background: url(../../assets/icons.png) no-repeat;
+                            &.play {
+                                background-position: -282px -90px;
+                            }
+                            &.view {
+                                background-position: -282px -218px;
+                            }
+                            &.author {
+                                background-position: -282px -154px;
+                            }
+                        }
                     }
                     .pts {
-                        bottom: 90px;
+                        height: 20px;
+                        color: #b8c0cc;
+                        line-height: 20px;
+                        position: absolute;
+                        bottom: 40px;
+                        right: 20px;
+                        text-align: center;
+                        div {
+                            font-weight: 700;
+                            @include sc(16px, $blue);
+                            margin-bottom: 12px;
+                        }
                     }
                 }
             }
-            
+        }
+        &.bangumi {
+            li {
+                .num {
+                    height: 120px;
+                    line-height: 120px;
+                }
+                .content {
+                    .img {
+                        .cover {
+                            @include wh(90px, 120px);
+                            img{
+                                    border-radius: 4px;
+                            }
+                        }
+                    }
+                    .info {
+                        height: 120px;
+                        margin-left: 106px;
+                        .title {
+                            height: 42px;
+                            line-height: 42px;
+                            font-size: 18px;
+                        }
+                        .bangumi-info {
+                            color: $grau;
+                        }
+                        .bangumi-num {
+                            color: $pink;
+                        }
+                        .pts {
+                            bottom: 90px;
+                        }
+                    }
+                }
+                
+            }
         }
     }
 }

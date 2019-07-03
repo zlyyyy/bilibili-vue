@@ -1,5 +1,5 @@
 <template>
-    <div class="rank-list-wrap">
+    <div class="ranking-list-wrap">
         <ul v-if="!loading" class="rank-list" :class="{bangumi: type==2}">
             <li class="rank-item" v-for="(item,index) in rankAll.list">
                 <div class="num">
