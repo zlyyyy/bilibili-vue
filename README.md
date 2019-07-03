@@ -2,21 +2,52 @@
 
 目前B站也是用的vue框架，自己试试用vue搭建B站，巩固一下学习的vue知识
 > 更新 接口替换为[Easy Mock](https://github.com/easy-mock/easy-mock)代理真实数据接口
+> 更新 原先版本webpack报错导致无法启动项目的问题，项目迁移至cli3.x构建的项目
 
 ## 如何安装与使用
 
 
 ```
-git clone https://github.com/zlyyyy/zly-vue-project.git  //下载项目
+git clone git@github.com:zlyyyy/bilibili-vue.git  //下载项目
 
-cd zly-vue-project //进入zly-vue-projec目录
-
-npm install //安装依赖
-
-npm run dev //服务端运行
-
-npm run build  //项目打包
+cd bilibili-vue //进入bilibili-vue目录
 ```
+
+## yarn构建安装依赖
+```
+// 外网安装依赖可使用vue ui命令以图形化界面创建和管理项目
+yarn install
+```
+
+### 项目启动
+```
+yarn run serve
+或
+npm run serve
+```
+
+### 项目打包
+```
+yarn run build
+或
+npm run build
+```
+
+
+### 代码格式检查
+```
+yarn run lint
+或
+npm run lint
+```
+
+### 代码格式检查并自动修复
+```
+yarn run lint -- --fix
+或
+npm run lint -- --fix
+```
+
 ## 技术栈
 
 - Vue-Cli（Vue 脚手架工具）
@@ -36,8 +67,7 @@ npm run build  //项目打包
 
 ```
 .
-├── build                                       // webpack配置文件
-├── config                                      // 项目打包路径
+├── public                                      // 静态资源文件目录 
 ├── screenshots                                 // 项目截图
 ├── src                                         // 源码目录
 │   ├── api                                     
@@ -113,8 +143,8 @@ npm run build  //项目打包
 │       └── utils.js                            // 公共方法配置
 │   ├── App.vue                                 // 页面入口文件
 │   ├── main.js                                 // 程序入口文件，加载各种公共组件
-├── static                                      // 静态资源文件目录 
-├── index.html                                  // 入口html文件
+├── vue.config.js                               // vue-cli 配置
+└── package.json                                // package.json
 .
 
 ```

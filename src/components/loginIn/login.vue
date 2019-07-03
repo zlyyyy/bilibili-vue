@@ -150,7 +150,7 @@ export default {
             if(!this.userError.status || !this.passError.status){
                 this.btnErrorText = '部分选项未通过'
             }else{
-                this.$http.get('http://localhost:8080/static/login.json')
+                this.$http.get('http://localhost:8080/public/login.json')
                 .then((res)=>{
                     localStorage.setItem('userName',this.user);//浏览器存入用户名--测试用
                     localStorage.setItem('password',this.password);//浏览器存入密码--测试用

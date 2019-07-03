@@ -2,11 +2,11 @@ import http from '../utils/http'
 
 //登录获取个人信息
 export function getUserInfo(){
-    return http.get('/static/login.json')
+    return http.get('/public/login.json')
 }
 //获取大会员推荐信息
 export function getVipInfo(){
-    return http.get('/static/topInfo.json')
+    return http.get('/public/topInfo.json')
 }
 //头部背景图
 export function getAdSlide(data) {
@@ -124,13 +124,13 @@ export function getRankingCn7(){
 
 //番剧广告位
 export function getGlobalAdSlide(){
-    return http.get('/static/fj_ad_slide.json')
+    return http.get('/public/fj_ad_slide.json')
 }
 
 
 //国创广告位
 export function getCnAdSlide(){
-    return http.get('/static/gc_ad_slide.json')
+    return http.get('/public/gc_ad_slide.json')
 }
 
 //排行榜数据

@@ -1,15 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Indexpage from '../pages/home/index'
-import NotFound from '../pages/notFound/404'
-
-const Ranking = resolve => require(['@/pages/ranking/ranking'], resolve),
-          RankingAllList = resolve => require(['@/components/ranking/allList'], resolve),
-          Search = resolve => require(['@/pages/search/search'], resolve),
-          SearchList = resolve => require(['@/components/search/searchList'], resolve),
-          Videopage = resolve => require(['@/pages/video/video'], resolve)
-
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -18,7 +9,7 @@ export default new VueRouter({
         {
             name: 'home',
             path: '/',
-            component: Indexpage,
+            component: () => import("@/pages/home/index"),
             meta: {
                 title: 'VUE哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
             },
@@ -26,13 +17,13 @@ export default new VueRouter({
         {
             name:'Ranking',
             path: '/ranking',
-            component: Ranking,
+            component:  () => import("@/pages/ranking/ranking"),
             redirect: '/ranking/all/0/0/0',
             children: [
                 {
                     name: 'all',
                     path: ':type/:rid/:rankselect/:rankselect2',
-                    component: RankingAllList,
+                    component: () => import("@/components/ranking/allList"),
                     meta: {
                         title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -40,7 +31,7 @@ export default new VueRouter({
                 {
                     name: 'origin',
                     path: ':type/:rid/:rankselect/:rankselect2',
-                    component: RankingAllList,
+                    component: () => import("@/components/ranking/allList"),
                     meta: {
                         title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -48,7 +39,7 @@ export default new VueRouter({
                 {
                     name: 'bangumi',
                     path: ':type/:rid/:rankselect/:rankselect2',
-                    component: RankingAllList,
+                    component: () => import("@/components/ranking/allList"),
                     meta: {
                         title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -56,7 +47,7 @@ export default new VueRouter({
                 {
                     name: 'cinema',
                     path: ':type/:rid/:rankselect/:rankselect2',
-                    component: RankingAllList,
+                    component: () => import("@/components/ranking/allList"),
                     meta: {
                         title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -64,7 +55,7 @@ export default new VueRouter({
                 {
                     name: 'rookie',
                     path: ':type/:rid/:rankselect/:rankselect2',
-                    component: RankingAllList,
+                    component: () => import("@/components/ranking/allList"),
                     meta: {
                         title: 'VUE热门视频排行榜 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -73,13 +64,13 @@ export default new VueRouter({
         },
         {
             path: '/search',
-            component: Search,
+            component: () => import("@/pages/search/search"),
             redirect: '/search/all',
             children: [
                 {
                     name: 'searchAll',
                     path: 'all',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -87,7 +78,7 @@ export default new VueRouter({
                 {
                     name: 'searchVideo',
                     path: 'video',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -95,7 +86,7 @@ export default new VueRouter({
                 {
                     name: 'searchBangumi',
                     path: 'bangumi',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -103,7 +94,7 @@ export default new VueRouter({
                 {
                     name: 'searchPgc',
                     path: 'pgc',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -111,7 +102,7 @@ export default new VueRouter({
                 {
                     name: 'searchLive',
                     path: 'live',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -119,7 +110,7 @@ export default new VueRouter({
                 {
                     name: 'searchArticle',
                     path: 'article',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -127,7 +118,7 @@ export default new VueRouter({
                 {
                     name: 'searchTopic',
                     path: 'topic',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -135,7 +126,7 @@ export default new VueRouter({
                 {
                     name: 'upuser',
                     path: 'upuser',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -143,7 +134,7 @@ export default new VueRouter({
                 {
                     name: 'photo',
                     path: 'photo',
-                    component: SearchList,
+                    component: () => import("@/components/search/searchList"),
                     meta: {
                         title: 'VUE搜索结果 - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
                     }
@@ -153,14 +144,14 @@ export default new VueRouter({
         {
             name: 'video',
             path: '/video/:aid',
-            component: Videopage,
+            component: () => import("@/pages/notFound/404"),
             meta: {
                 title: ':aid - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
             }
         },
         {
             path: '*',
-            component: NotFound,
+            component: () => import("@/pages/video/video"),
             meta: {
                 title: 'VUE出错啦! - bilibili.com'
             }
