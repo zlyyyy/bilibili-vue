@@ -1,6 +1,6 @@
 <template>
      <div class="bili-loading">
-		 <img src="../../../static/loading.gif">
+		 <img src="../../../public/loading.gif">
 		 <span>加载中...</span>
     </div>
 </template>

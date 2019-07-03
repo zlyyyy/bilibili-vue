@@ -25,9 +25,7 @@ router.beforeEach((to, from, next) => {
   })
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    store,
     router,
-    components: { App },
-    template: '<App/>'
-})
+    store,
+    render: h => h(App)
+  }).$mount("#app");
