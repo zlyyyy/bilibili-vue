@@ -1,38 +1,41 @@
-import axios from 'axios'
-import { Message } from 'element-ui';
+import axios from "axios";
+import { Message } from "element-ui";
 // 创建axios实例
 const service = axios.create({
-    // `withCredentials` 表示跨域请求时是否需要使用凭证
-    withCredentials: true,
-    baseURL: 'https://easy-mock.com/mock/5bd273b32d219744ff849604/bilibili',
-    timeout: 15000 // 请求超时时间
-})
+  // `withCredentials` 表示跨域请求时是否需要使用凭证
+  withCredentials: true,
+  baseURL: "https://easy-mock.com/mock/5bd273b32d219744ff849604/bilibili",
+  timeout: 15000 // 请求超时时间
+});
 //添加请求拦截器
-service.interceptors.request.use(config => {
+service.interceptors.request.use(
+  config => {
     //config.headers['Accept'] = 'application/json'
-    return config
-}, error => {
+    return config;
+  },
+  error => {
     Message({
-        message: '加载超时',
-        type: 'error',
-        center: true
+      message: "加载超时",
+      type: "error",
+      center: true
     });
-    return Promise.reject(error)
-})
+    return Promise.reject(error);
+  }
+);
 
 // 添加响应拦截器
 service.interceptors.response.use(
-    response => {
-        return response.data
-    },
-    error => {
-        Message({
-            message: '加载失败',
-            type: 'error',
-            center: true
-        });
-        return Promise.reject(error)
-    }
-)
+  response => {
+    return response.data;
+  },
+  error => {
+    Message({
+      message: "加载失败",
+      type: "error",
+      center: true
+    });
+    return Promise.reject(error);
+  }
+);
 
-export default service
+export default service;

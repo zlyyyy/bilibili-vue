@@ -37,7 +37,19 @@
       "plugin:vue/essential",
       "@vue/prettier"
     ],
-    "rules": {},
+    "rules": {
+        "generator-star-spacing": "off",
+		"no-tabs": 0,
+		"indent": 0,
+		"eol-last": 0,
+		"space-before-function-paren": [0, "always"],
+		"space-in-parens": [0, "never"],
+		"eqeqeq": "off",
+		"no-unneeded-ternary": 0,
+		"no-unused-expressions": 0,
+		"vue/no-parsing-error": [2, { "x-invalid-end-tag": false }],
+		"no-useless-escape": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
