@@ -4,21 +4,28 @@ on: [push] # 执行时机
 
 jobs:
 
-  build: # 一个名叫build的任务
-    runs-on: ubuntu-latest # 基于最新版Ubuntu系统执行下列任务
+  build:
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@master
 
       - name: install
-        run: npm install
+        run: yarn
 
       - name: build project
-        run: npm run build
+        run: yarn run build
         
       - name: Build the Docker image # 步骤名字
         run: |
-          docker login --username=${{ secrets.DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_PASSWORD }} # 登录docker，并使用Secret里配置的参数
-          docker build -t bilibili-vue:latest . #执行构建
+          docker login --username=${{ secrets.DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_PASSWORD }}
+          docker build -t bilibili-vue:latest . 
           docker tag bilibili-vue registry.cn-hangzhou.aliyuncs.com/zlyyyy/bilibili-vue:latest
           docker push registry.cn-hangzhou.aliyuncs.com/zlyyyy/bilibili-vue:latest # 推送
+      - name: ssh docker login
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: cd ~ && sh bilibili-vue-deploy.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
